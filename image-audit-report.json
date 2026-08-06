@@ -1,0 +1,418 @@
+[
+  {
+    "path": "src/assets/award-vibgyor.png",
+    "basename": "award-vibgyor.png",
+    "sizeKB": 2917.69,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "AwardsSection.jsx"
+  },
+  {
+    "path": "src/assets/program/top-preschool-indore.webp",
+    "basename": "top-preschool-indore.webp",
+    "sizeKB": 2646.08,
+    "format": ".webp",
+    "usages": 1,
+    "usedIn": "programsData.jsx"
+  },
+  {
+    "path": "src/assets/program/kids-workshops-indore.webp",
+    "basename": "kids-workshops-indore.webp",
+    "sizeKB": 2637.17,
+    "format": ".webp",
+    "usages": 1,
+    "usedIn": "programsData.jsx"
+  },
+  {
+    "path": "src/assets/program/best-playgroup-school-indore.webp",
+    "basename": "best-playgroup-school-indore.webp",
+    "sizeKB": 2636.32,
+    "format": ".webp",
+    "usages": 1,
+    "usedIn": "programsData.jsx"
+  },
+  {
+    "path": "src/assets/program/kg1-school-indore-brain-builder-hero.webp",
+    "basename": "kg1-school-indore-brain-builder-hero.webp",
+    "sizeKB": 2627.12,
+    "format": ".webp",
+    "usages": 1,
+    "usedIn": "programsData.jsx"
+  },
+  {
+    "path": "src/assets/program/kg2-school-indore-brain-builder-hero.webp",
+    "basename": "kg2-school-indore-brain-builder-hero.webp",
+    "sizeKB": 2589.99,
+    "format": ".webp",
+    "usages": 1,
+    "usedIn": "programsData.jsx"
+  },
+  {
+    "path": "src/assets/program/top-nursery-school-indore.webp",
+    "basename": "top-nursery-school-indore.webp",
+    "sizeKB": 2569.45,
+    "format": ".webp",
+    "usages": 1,
+    "usedIn": "programsData.jsx"
+  },
+  {
+    "path": "src/assets/program/after-school-activities-indore.webp",
+    "basename": "after-school-activities-indore.webp",
+    "sizeKB": 2565.6,
+    "format": ".webp",
+    "usages": 1,
+    "usedIn": "programsData.jsx"
+  },
+  {
+    "path": "src/assets/program/teacher-training-indore-brain-builder-hero.webp",
+    "basename": "teacher-training-indore-brain-builder-hero.webp",
+    "sizeKB": 2553.48,
+    "format": ".webp",
+    "usages": 1,
+    "usedIn": "programsData.jsx"
+  },
+  {
+    "path": "src/assets/program/best-daycare-center-indore.webp",
+    "basename": "best-daycare-center-indore.webp",
+    "sizeKB": 2548.92,
+    "format": ".webp",
+    "usages": 1,
+    "usedIn": "programsData.jsx"
+  },
+  {
+    "path": "src/assets/program/best-toddler-daycare-indore.webp",
+    "basename": "best-toddler-daycare-indore.webp",
+    "sizeKB": 2451.06,
+    "format": ".webp",
+    "usages": 1,
+    "usedIn": "programsData.jsx"
+  },
+  {
+    "path": "src/assets/brain-builder-preschool-admission-indore-hero.webp",
+    "basename": "brain-builder-preschool-admission-indore-hero.webp",
+    "sizeKB": 2274.47,
+    "format": ".webp",
+    "usages": 1,
+    "usedIn": "AdmissionPage.jsx"
+  },
+  {
+    "path": "src/assets/hero/hero1.png",
+    "basename": "hero1.png",
+    "sizeKB": 2015.18,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "HeroSection.jsx"
+  },
+  {
+    "path": "src/assets/award1.png",
+    "basename": "award1.png",
+    "sizeKB": 1797.5,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "AwardsSection.jsx"
+  },
+  {
+    "path": "src/assets/attandanceImage/teacherAttendance.png",
+    "basename": "teacherAttendance.png",
+    "sizeKB": 1538.14,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "AdminDashboard.jsx"
+  },
+  {
+    "path": "src/assets/kids.png",
+    "basename": "kids.png",
+    "sizeKB": 1142.69,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "CTASection.jsx"
+  },
+  {
+    "path": "src/assets/hero/hero2.png",
+    "basename": "hero2.png",
+    "sizeKB": 1141.31,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "HeroSection.jsx"
+  },
+  {
+    "path": "src/assets/hero/hero4.png",
+    "basename": "hero4.png",
+    "sizeKB": 1126.28,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "HeroSection.jsx"
+  },
+  {
+    "path": "src/assets/hero/hero3.png",
+    "basename": "hero3.png",
+    "sizeKB": 1089.92,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "HeroSection.jsx"
+  },
+  {
+    "path": "src/assets/activity/Dress.png",
+    "basename": "Dress.png",
+    "sizeKB": 1055.43,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "TeacherClassActivities.jsx"
+  },
+  {
+    "path": "src/assets/documenticon/child.png",
+    "basename": "child.png",
+    "sizeKB": 849.01,
+    "format": ".png",
+    "usages": 2,
+    "usedIn": "CertificateCanvas.jsx, templates.js"
+  },
+  {
+    "path": "src/assets/brain-builder-logo.webp",
+    "basename": "brain-builder-logo.webp",
+    "sizeKB": 774.04,
+    "format": ".webp",
+    "usages": 14,
+    "usedIn": "assets.js, CertificateCanvas.jsx, ExperienceCertificateView.jsx, LeavingCertificateView.jsx, Footer.jsx, Navbar.jsx, AdminLayout.jsx, ParentLayout.jsx, TeacherLayout.jsx, LoginPage.jsx, MyInvoices.jsx, ContactPage.jsx, HomePage.jsx, PosterStudio.jsx"
+  },
+  {
+    "path": "public/logo.png",
+    "basename": "logo.png",
+    "sizeKB": 774.04,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "NotificationContext.jsx"
+  },
+  {
+    "path": "src/assets/activity/Sleep.png",
+    "basename": "Sleep.png",
+    "sizeKB": 680.1,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "TeacherClassActivities.jsx"
+  },
+  {
+    "path": "src/assets/documenticon/trophy.png",
+    "basename": "trophy.png",
+    "sizeKB": 615.6,
+    "format": ".png",
+    "usages": 2,
+    "usedIn": "CertificateCanvas.jsx, templates.js"
+  },
+  {
+    "path": "src/assets/activity/FoodSnacks.png",
+    "basename": "FoodSnacks.png",
+    "sizeKB": 608.32,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "TeacherClassActivities.jsx"
+  },
+  {
+    "path": "src/assets/birthday/cake.png",
+    "basename": "cake.png",
+    "sizeKB": 555.31,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "assets.js"
+  },
+  {
+    "path": "src/assets/activity/activity.png",
+    "basename": "activity.png",
+    "sizeKB": 526.97,
+    "format": ".png",
+    "usages": 0,
+    "usedIn": ""
+  },
+  {
+    "path": "src/assets/documenticon/star.png",
+    "basename": "star.png",
+    "sizeKB": 455.29,
+    "format": ".png",
+    "usages": 2,
+    "usedIn": "CertificateCanvas.jsx, templates.js"
+  },
+  {
+    "path": "src/assets/activity/health.png",
+    "basename": "health.png",
+    "sizeKB": 405.34,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "TeacherClassActivities.jsx"
+  },
+  {
+    "path": "src/assets/birthday/multiBalloons.png",
+    "basename": "multiBalloons.png",
+    "sizeKB": 344.81,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "assets.js"
+  },
+  {
+    "path": "src/assets/Squirrel4.png",
+    "basename": "Squirrel4.png",
+    "sizeKB": 308.7,
+    "format": ".png",
+    "usages": 3,
+    "usedIn": "CTASection.jsx, FeaturesSection.jsx, HeroSection.jsx"
+  },
+  {
+    "path": "src/assets/activity/mood.png",
+    "basename": "mood.png",
+    "sizeKB": 306.73,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "TeacherClassActivities.jsx"
+  },
+  {
+    "path": "src/assets/birthday/starBalloon.png",
+    "basename": "starBalloon.png",
+    "sizeKB": 301.92,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "assets.js"
+  },
+  {
+    "path": "src/assets/birthday/orangeBalloon.png",
+    "basename": "orangeBalloon.png",
+    "sizeKB": 300.94,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "assets.js"
+  },
+  {
+    "path": "src/assets/Squirrel2.png",
+    "basename": "Squirrel2.png",
+    "sizeKB": 295.18,
+    "format": ".png",
+    "usages": 3,
+    "usedIn": "EmptyState.jsx, FeaturesSection.jsx, HeroSection.jsx"
+  },
+  {
+    "path": "src/assets/Squirrel3.png",
+    "basename": "Squirrel3.png",
+    "sizeKB": 285.05,
+    "format": ".png",
+    "usages": 2,
+    "usedIn": "FeaturesSection.jsx, HeroSection.jsx"
+  },
+  {
+    "path": "src/assets/Squirrel.png",
+    "basename": "Squirrel.png",
+    "sizeKB": 280.34,
+    "format": ".png",
+    "usages": 8,
+    "usedIn": "Loader.jsx, CTASection.jsx, FeaturesSection.jsx, HeroSection.jsx, AdminLayout.jsx, ParentLayout.jsx, TeacherLayout.jsx, AdminDashboard.jsx"
+  },
+  {
+    "path": "src/assets/birthday/blackboxgift.png",
+    "basename": "blackboxgift.png",
+    "sizeKB": 213.16,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "assets.js"
+  },
+  {
+    "path": "src/assets/birthday/redBalloon.png",
+    "basename": "redBalloon.png",
+    "sizeKB": 155.7,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "assets.js"
+  },
+  {
+    "path": "src/assets/attandanceImage/studentAttendance.png",
+    "basename": "studentAttendance.png",
+    "sizeKB": 136.68,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "AdminDashboard.jsx"
+  },
+  {
+    "path": "src/assets/hero/hero1.jpg",
+    "basename": "hero1.jpg",
+    "sizeKB": 97.76,
+    "format": ".jpg",
+    "usages": 0,
+    "usedIn": ""
+  },
+  {
+    "path": "src/assets/birthday/blueBalloon.png",
+    "basename": "blueBalloon.png",
+    "sizeKB": 95.84,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "assets.js"
+  },
+  {
+    "path": "src/assets/talenGym.png",
+    "basename": "talenGym.png",
+    "sizeKB": 81.04,
+    "format": ".png",
+    "usages": 4,
+    "usedIn": "CertificateCanvas.jsx, ExperienceCertificateView.jsx, LoginPage.jsx, MyInvoices.jsx"
+  },
+  {
+    "path": "src/assets/hero/hero2.jpg",
+    "basename": "hero2.jpg",
+    "sizeKB": 62.31,
+    "format": ".jpg",
+    "usages": 0,
+    "usedIn": ""
+  },
+  {
+    "path": "src/assets/hero/hero4.jpg",
+    "basename": "hero4.jpg",
+    "sizeKB": 61.32,
+    "format": ".jpg",
+    "usages": 0,
+    "usedIn": ""
+  },
+  {
+    "path": "src/assets/hero/hero3.jpg",
+    "basename": "hero3.jpg",
+    "sizeKB": 60.35,
+    "format": ".jpg",
+    "usages": 0,
+    "usedIn": ""
+  },
+  {
+    "path": "src/assets/Principal_sign.png",
+    "basename": "Principal_sign.png",
+    "sizeKB": 59.04,
+    "format": ".png",
+    "usages": 2,
+    "usedIn": "CertificateCanvas.jsx, index.jsx"
+  },
+  {
+    "path": "src/assets/Director_sign.png",
+    "basename": "Director_sign.png",
+    "sizeKB": 44.63,
+    "format": ".png",
+    "usages": 2,
+    "usedIn": "CertificateCanvas.jsx, index.jsx"
+  },
+  {
+    "path": "src/assets/founder.png",
+    "basename": "founder.png",
+    "sizeKB": 33.77,
+    "format": ".png",
+    "usages": 1,
+    "usedIn": "FounderSection.jsx"
+  },
+  {
+    "path": "src/assets/react.svg",
+    "basename": "react.svg",
+    "sizeKB": 4.03,
+    "format": ".svg",
+    "usages": 0,
+    "usedIn": ""
+  },
+  {
+    "path": "public/vite.svg",
+    "basename": "vite.svg",
+    "sizeKB": 1.46,
+    "format": ".svg",
+    "usages": 0,
+    "usedIn": ""
+  }
+]

@@ -1,0 +1,570 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0F4C5C;
+  --color-secondary: #FFFFFF;
+  --color-accent: #D4AF37;
+}
+/* Custom Font Classes */
+.font-heading {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-number {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font-ui {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Dashboard Shell Layout */
+.dashboard-shell {
+  display: grid;
+  min-height: 100vh;
+  /* Sidebar uses sticky positioning, main content scrolls independently */
+}
+
+/* Dashboard Sidebar - Sticky Positioning */
+.dashboard-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  /* Custom scrollbar for sidebar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.dashboard-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dashboard-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.dashboard-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Sidebar Width States */
+.w-72 {
+  width: 18rem;
+}
+
+.w-20 {
+  width: 5rem;
+}
+
+/* Dashboard Main Content */
+.dashboard-main {
+  min-height: 100vh;
+  background: #f8fafc;
+  /* Main content scrolls independently */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Dashboard Content Area */
+.dashboard-content {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Sidebar Item */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.sidebar-item:hover {
+  color: white;
+}
+
+/* Dashboard Panel */
+.dashboard-panel {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Dashboard Stat Card */
+.dashboard-stat {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+/* Dashboard Action Card */
+.dashboard-action {
+  display: block;
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-decoration: none;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+/* Metric Chip */
+.metric-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+}
+
+/* Data Table */
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.data-table thead th {
+  background: #f8fafc;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.data-table tbody td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.data-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Avatar */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.avatar-sm {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+.badge-info {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.badge-success {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* Squirrel Mascot */
+.squirrel-mascot {
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .dashboard-shell {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dashboard-sidebar {
+    position: fixed;
+    width: 280px;
+    height: 100vh;
+    z-index: 50;
+  }
+
+  .dashboard-sidebar.w-20 {
+    width: 280px;
+  }
+}
+
+/* Floating WhatsApp Button */
+.floating-whatsapp {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #25D366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+}
+
+.floating-whatsapp:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.5);
+}
+
+.floating-whatsapp:active {
+  transform: scale(1.05);
+}
+
+@media (max-width: 640px) {
+  .floating-whatsapp {
+    bottom: 16px;
+    right: 16px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .floating-whatsapp svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Certificate Responsive Scaling */
+.cert-preview-container {
+  background: #F4F1E8;
+  border-radius: 1rem;
+  border: 1px solid #EDE8DC;
+  padding: 1rem;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+}
+.cert-scale-wrapper {
+  transform-origin: top left;
+}
+@media (max-width: 640px) {
+  .cert-scale-ach { transform: scale(0.22); width: 1400px; height: 990px; margin-bottom: calc(990px * -0.78); margin-right: calc(1400px * -0.78); }
+  .cert-scale-a4 { transform: scale(0.35); width: 794px; height: 1123px; margin-bottom: calc(1123px * -0.65); margin-right: calc(794px * -0.65); }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .cert-scale-ach { transform: scale(0.4); width: 1400px; height: 990px; margin-bottom: calc(990px * -0.6); margin-right: calc(1400px * -0.6); }
+  .cert-scale-a4 { transform: scale(0.6); width: 794px; height: 1123px; margin-bottom: calc(1123px * -0.4); margin-right: calc(794px * -0.4); }
+}
+@media (min-width: 1025px) {
+  .cert-scale-ach { transform: scale(0.55); width: 1400px; height: 990px; margin-bottom: calc(990px * -0.45); margin-right: calc(1400px * -0.45); }
+  .cert-scale-a4 { transform: scale(0.65); width: 794px; height: 1123px; margin-bottom: calc(1123px * -0.35); margin-right: calc(794px * -0.35); }
+}
+.cert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Custom Cursor Styles */
+.cursor-none { cursor: none !important; }
+.cursor-none * { cursor: none !important; }
+
+/* Hide custom cursor on mobile devices */
+@media (max-width: 768px) {
+  .custom-cursor,
+  .cursor-ripple,
+  .cursor-trail {
+    display: none !important;
+  }
+  .cursor-none,
+  .cursor-none * {
+    cursor: auto !important;
+  }
+}
+
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease-out;
+}
+
+.cursor-outer {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #29A9E1;
+  border-radius: 50%;
+  background: rgba(41, 169, 225, 0.1);
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgba(41, 169, 225, 0.3);
+}
+
+.cursor-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background: #E82928;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #E82928;
+}
+
+.cursor-hover .cursor-outer {
+  width: 50px;
+  height: 50px;
+  background: rgba(41, 169, 225, 0.25);
+  border-color: #E82928;
+  box-shadow: 0 0 25px rgba(41, 169, 225, 0.6), 0 0 50px rgba(232, 41, 40, 0.3);
+}
+
+.cursor-hover .cursor-inner {
+  transform: translate(-50%, -50%) scale(1.3);
+}
+
+.cursor-click .cursor-outer {
+  width: 28px;
+  height: 28px;
+  background: rgba(232, 41, 40, 0.4);
+  border-color: #E82928;
+}
+
+.cursor-click .cursor-inner {
+  transform: translate(-50%, -50%) scale(0.8);
+  background: #fff;
+}
+
+/* Trail SVG */
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+.cursor-trail path {
+  fill: none;
+  stroke: url(#trailGradient);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: trailDraw 2s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(41, 169, 225, 0.8));
+}
+
+@keyframes trailDraw {
+  0% { stroke-dashoffset: 1000; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+/* Water ripple effect on click */
+.cursor-ripple {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-ripple::before,
+.cursor-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid rgba(41, 169, 225, 0.6);
+  animation: rippleExpand 1.5s ease-out infinite;
+}
+
+.cursor-ripple::after {
+  animation-delay: 0.5s;
+}
+
+@keyframes rippleExpand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+    border-color: rgba(41, 169, 225, 0);
+  }
+}
+
+/* ── Footer Social Icons: 3D + Glow + Motion ── */
+.social-icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--icon-bg);
+  color: #fff;
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.35),
+    0 0 0 rgba(0,0,0,0),
+    inset 0 1px 1px rgba(255,255,255,0.4),
+    inset 0 -2px 4px rgba(0,0,0,0.25);
+  transform: translateZ(0) scale(1);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease;
+  text-decoration: none;
+  animation: iconFloat 3.2s ease-in-out infinite;
+}
+
+.social-icon-btn:nth-child(2) { animation-delay: 0.4s; }
+
+.social-icon-btn::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: var(--icon-bg);
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 0.35s ease;
+  z-index: -1;
+}
+
+.social-icon-btn:hover {
+  transform: translateY(-5px) scale(1.14) rotate(-6deg);
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.4),
+    0 0 22px var(--icon-glow),
+    inset 0 1px 1px rgba(255,255,255,0.5),
+    inset 0 -2px 4px rgba(0,0,0,0.25);
+}
+
+.social-icon-btn:hover::before {
+  opacity: 0.85;
+}
+
+.social-icon-btn:active {
+  transform: translateY(-2px) scale(0.96);
+}
+
+.social-icon-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.25));
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.social-icon-btn:hover { animation-play-state: paused; }
+
+/* Contact pill buttons (phone / whatsapp) */
+.contact-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.3);
+}
+.contact-pill.phone {
+  background: linear-gradient(135deg, #29A9E1, #1d7fb0);
+}
+.contact-pill.whatsapp {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+}
+.contact-pill:hover {
+  transform: translateY(-3px) scale(1.04);
+}
+.contact-pill.phone:hover {
+  box-shadow: 0 10px 22px rgba(0,0,0,0.35), 0 0 18px rgba(41,169,225,0.65);
+}
+.contact-pill.whatsapp:hover {
+  box-shadow: 0 10px 22px rgba(0,0,0,0.35), 0 0 18px rgba(37,211,102,0.65);
+}
+
+@media (max-width: 768px) {
+  .social-icon-btn { width: 40px; height: 40px; }
+  .contact-pill { font-size: 12.5px; padding: 8px 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-icon-btn { animation: none; }
+}
+

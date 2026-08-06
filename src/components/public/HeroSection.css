@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Poppins:wght@400;500;600;700&display=swap');
+
+.hero-root { font-family: 'Poppins', sans-serif; }
+.hero-display { font-family: 'Nunito', sans-serif; }
+
+@keyframes floatNum {
+  0%   { transform: translateY(0px) rotate(-5deg) scale(1); }
+  100% { transform: translateY(-18px) rotate(5deg) scale(1.08); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes badgePop {
+  0%   { transform: scale(0.8); opacity: 0; }
+  60%  { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,41,40,0.4); }
+  50%       { box-shadow: 0 0 0 14px rgba(232,41,40,0); }
+}
+@keyframes squirrelBob {
+  0%, 100% { transform: translateY(0px) rotate(-2deg); }
+  50%       { transform: translateY(-12px) rotate(2deg); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.4); }
+}
+
+.slide-enter-right { animation: slideInRight 0.48s cubic-bezier(.22,1,.36,1) forwards; }
+.slide-enter-left  { animation: slideInLeft  0.48s cubic-bezier(.22,1,.36,1) forwards; }
+.text-anim         { animation: fadeSlideUp   0.56s cubic-bezier(.22,1,.36,1) both; }
+.badge-anim        { animation: badgePop       0.5s cubic-bezier(.22,1,.36,1) both; }
+
+.btn-primary {
+  animation: pulseGlow 2.5s infinite;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 200%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 2.5s infinite;
+}
+.squirrel-bob { animation: squirrelBob 3s ease-in-out infinite; }
+
+.dot-active { animation: dotPulse 1s ease-in-out infinite; }
+
+.hero-img-wrap {
+  position: relative;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.18), 0 0 0 6px rgba(255,255,255,0.7);
+}
+.hero-img-glow {
+  position: absolute;
+  inset: -4px;
+  border-radius: 2.2rem;
+  z-index: -1;
+}
+
+.stars-bg {
+  background-image:
+    radial-gradient(circle, #FFD700 1px, transparent 1px),
+    radial-gradient(circle, #FF6B6B 1px, transparent 1px),
+    radial-gradient(circle, #4ECDC4 1px, transparent 1px);
+  background-size: 80px 80px, 120px 120px, 60px 60px;
+  background-position: 0 0, 40px 40px, 20px 20px;
+  opacity: 0.25;
+}

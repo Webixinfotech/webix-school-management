@@ -1,0 +1,277 @@
+{
+  "info": {
+    "name": "BrainBuilder - Firebase Push Notifications",
+    "description": "Complete API testing guide for Firebase Push Notifications",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.brainbuilder.in/api",
+      "type": "string"
+    },
+    {
+      "key": "admin_token",
+      "value": "YOUR_ADMIN_JWT_TOKEN_HERE",
+      "type": "string"
+    },
+    {
+      "key": "user_token",
+      "value": "YOUR_USER_JWT_TOKEN_HERE",
+      "type": "string"
+    },
+    {
+      "key": "user_id",
+      "value": "TARGET_USER_ID_HERE",
+      "type": "string"
+    },
+    {
+      "key": "fcm_token",
+      "value": "YOUR_FCM_DEVICE_TOKEN_HERE",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Register Device Token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{user_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"{{fcm_token}}\",\n  \"deviceType\": \"android\",\n  \"deviceName\": \"Samsung Galaxy S21\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/notifications/register-device",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "notifications",
+            "register-device"
+          ]
+        },
+        "description": "Register a device token for push notifications. Use any authenticated user token."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Remove Device Token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{user_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"{{fcm_token}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/notifications/remove-device",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "notifications",
+            "remove-device"
+          ]
+        },
+        "description": "Remove a device token (typically used on logout)."
+      },
+      "response": []
+    },
+    {
+      "name": "3. Send Notification to Single User (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"{{user_id}}\",\n  \"title\": \"New Enquiry Received\",\n  \"body\": \"You have a new job enquiry from John Doe\",\n  \"data\": {\n    \"type\": \"enquiry\",\n    \"enquiryId\": \"BB000001\",\n    \"action\": \"view_enquiry\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/notifications/send-to-user",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "notifications",
+            "send-to-user"
+          ]
+        },
+        "description": "Send a push notification to a specific user. Requires admin token."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Send Notification to Multiple Users (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userIds\": [\n    \"{{user_id}}\",\n    \"ANOTHER_USER_ID_HERE\"\n  ],\n  \"title\": \"System Maintenance\",\n  \"body\": \"System will be under maintenance tonight at 10 PM\",\n  \"data\": {\n    \"type\": \"announcement\",\n    \"priority\": \"high\",\n    \"scheduledTime\": \"2024-01-01T22:00:00.000Z\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/notifications/send-to-users",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "notifications",
+            "send-to-users"
+          ]
+        },
+        "description": "Send push notifications to multiple users at once. Requires admin token."
+      },
+      "response": []
+    },
+    {
+      "name": "5. Broadcast Notification (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Welcome to BrainBuilder\",\n  \"body\": \"New features are now available! Check out the latest updates.\",\n  \"data\": {\n    \"type\": \"broadcast\",\n    \"feature\": \"new_update\",\n    \"action\": \"open_home\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/notifications/broadcast",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "notifications",
+            "broadcast"
+          ]
+        },
+        "description": "Send broadcast notification to ALL registered devices. Requires admin token."
+      },
+      "response": []
+    },
+    {
+      "name": "6. Get Notification Logs (Admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/notifications/logs?page=1&limit=20",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "notifications",
+            "logs"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1",
+              "description": "Page number (default: 1)"
+            },
+            {
+              "key": "limit",
+              "value": "20",
+              "description": "Items per page (default: 20)"
+            }
+          ]
+        },
+        "description": "Retrieve logs of all sent notifications. Requires admin token."
+      },
+      "response": []
+    },
+    {
+      "name": "7. Test: Send Simple Notification",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"{{user_id}}\",\n  \"title\": \"Test Notification\",\n  \"body\": \"This is a test notification from BrainBuilder API!\",\n  \"data\": {\n    \"type\": \"test\",\n    \"timestamp\": \"2024-01-01T12:00:00.000Z\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/notifications/send-to-user",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "notifications",
+            "send-to-user"
+          ]
+        },
+        "description": "Quick test notification. Replace userId with actual user ID who has registered a device token."
+      },
+      "response": []
+    }
+  ]
+}

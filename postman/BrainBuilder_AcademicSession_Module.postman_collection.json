@@ -1,0 +1,867 @@
+{
+  "info": {
+    "name": "BrainBuilder - Academic Session Module (New Session APIs + Modified Admission/Fee/Attendance)",
+    "description": "Covers the new Academic Session feature: session lifecycle (create/activate), pre-admission into a future session, session-wise tagging on Student/Enrollment/Invoice/Attendance, the Promote Students workflow, and the Mark Left correction action.\n\nRequests are tagged in their names as **[NEW]** (endpoints added by this feature) or **[MODIFIED]** (existing endpoints that now also accept/return `sessionId`).\n\nHOW TO USE:\n1. Import this file into Postman (File > Import).\n2. Open the collection's Variables tab and fill in `base_url` (default http://localhost:5006/api), `admin_email` and `admin_password` for an existing admin account.\n3. Run folders 0 through 6 in order, top to bottom (Collection Runner, or click through manually) — later requests depend on IDs captured by earlier ones via test scripts.\n4. Folder 99 (Cleanup) cancels/closes out the ZZPM-tagged test records this run created. Run it last. Note: there is currently no DELETE endpoint for Academic Sessions or Invoices — the two ZZPM-tagged test sessions and the one test invoice this collection creates are left in place (clearly named, harmless) unless removed directly in the database.\n\nAll test data is tagged with the prefix `ZZPM` and a unique run_tag (timestamp) so repeat runs never collide.\n\nIMPORTANT — known pre-existing issue, unrelated to this feature: on some environments, writes to the `users` collection (i.e. new parent-account creation) can hang. If the \"Admit Student\" request in folder 2 never returns, that is this pre-existing issue, not an Academic Session bug — every other request in this collection avoids creating new Users.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.collectionVariables.get('run_tag')) {",
+          "  pm.collectionVariables.set('run_tag', Date.now().toString());",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5006/api"
+    },
+    {
+      "key": "admin_email",
+      "value": ""
+    },
+    {
+      "key": "admin_password",
+      "value": ""
+    },
+    {
+      "key": "admin_token",
+      "value": ""
+    },
+    {
+      "key": "run_tag",
+      "value": ""
+    },
+    {
+      "key": "parent_password",
+      "value": "ZzPm@12345"
+    },
+    {
+      "key": "class_id",
+      "value": ""
+    },
+    {
+      "key": "session_a_id",
+      "value": ""
+    },
+    {
+      "key": "session_b_id",
+      "value": ""
+    },
+    {
+      "key": "student_id",
+      "value": ""
+    },
+    {
+      "key": "student_id_next_year",
+      "value": ""
+    },
+    {
+      "key": "enrollment_id",
+      "value": ""
+    },
+    {
+      "key": "new_enrollment_id",
+      "value": ""
+    },
+    {
+      "key": "invoice_id",
+      "value": ""
+    },
+    {
+      "key": "attendance_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Auth",
+      "item": [
+        {
+          "name": "Login as Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('Token present', () => pm.expect(json.token).to.be.a('string'));",
+                  "if (json.token) pm.collectionVariables.set('admin_token', json.token);",
+                  "pm.test('Role is admin', () => pm.expect(json.user.role).to.eql('admin'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{admin_email}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/auth/login"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "1. Academic Sessions [NEW]",
+      "item": [
+        {
+          "name": "Create Session A (current year) [NEW]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.test('status defaults to Upcoming', () => pm.expect(json.data.status).to.eql('Upcoming'));",
+                  "pm.collectionVariables.set('session_a_id', json.data._id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ZZPM-{{run_tag}}-A\",\n  \"startDate\": \"2026-06-01\",\n  \"endDate\": \"2027-05-31\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/academic-sessions"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Session B (next year, stays Upcoming) [NEW]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('session_b_id', json.data._id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ZZPM-{{run_tag}}-B\",\n  \"startDate\": \"2027-06-01\",\n  \"endDate\": \"2028-05-31\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/academic-sessions"
+          },
+          "response": []
+        },
+        {
+          "name": "Activate Session A [NEW]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('status is now Active', () => pm.expect(json.data.status).to.eql('Active'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/academic-sessions/{{session_a_id}}/activate"
+          },
+          "response": []
+        },
+        {
+          "name": "List Sessions [NEW]",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/academic-sessions"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Session [NEW]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('active session is Session A', () => pm.expect(json.data._id).to.eql(pm.collectionVariables.get('session_a_id')));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/academic-sessions/active"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Session By Id [NEW]",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/academic-sessions/{{session_a_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Student Admission [MODIFIED]",
+      "item": [
+        {
+          "name": "Get an Active Class (setup helper)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('at least one Active class exists', () => pm.expect(json.data.length).to.be.above(0));",
+                  "if (json.data.length) pm.collectionVariables.set('class_id', json.data[0]._id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/classes?status=Active&limit=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "classes"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "Active"
+                },
+                {
+                  "key": "limit",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Admit Student (defaults to the Active session) [MODIFIED]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('student_id', json.data.student.id);",
+                  "pm.test('student auto-tagged with Session A (the Active one)', () => pm.expect(json.data.student.sessionId).to.eql(pm.collectionVariables.get('session_a_id')));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "description": "sessionId is NOT sent here on purpose — it auto-fills from whichever AcademicSession is currently Active (Session A). NOTE: this request creates a new parent User account; on environments hit by the pre-existing users-collection write-hang issue, this call may not return — see the collection description.",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "firstName",
+                  "value": "ZZPM",
+                  "type": "text"
+                },
+                {
+                  "key": "lastName",
+                  "value": "CurrentYearStudent",
+                  "type": "text"
+                },
+                {
+                  "key": "gender",
+                  "value": "Male",
+                  "type": "text"
+                },
+                {
+                  "key": "dateOfBirth",
+                  "value": "2019-01-01",
+                  "type": "text"
+                },
+                {
+                  "key": "parent",
+                  "value": "{\"primaryName\":\"ZZPM Parent\",\"primaryEmail\":\"zzpm.parent.{{run_tag}}@example.com\",\"primaryPhone\":\"9876500000\",\"password\":\"{{parent_password}}\",\"relation\":\"Father\"}",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "{\"city\":\"Test City\",\"state\":\"Test State\",\"pincode\":\"400001\"}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "{{base_url}}/students"
+          },
+          "response": []
+        },
+        {
+          "name": "Admit Student INTO NEXT YEAR (pre-admission, explicit sessionId) [MODIFIED]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('student_id_next_year', json.data.student.id);",
+                  "pm.test('student tagged with Session B, NOT the Active Session A', () => pm.expect(json.data.student.sessionId).to.eql(pm.collectionVariables.get('session_b_id')));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "description": "Scenario: school takes admissions for next year while the current year is still running. Passing an explicit sessionId (Session B, still Upcoming) overrides the default active-session tagging.",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "firstName",
+                  "value": "ZZPM",
+                  "type": "text"
+                },
+                {
+                  "key": "lastName",
+                  "value": "NextYearStudent",
+                  "type": "text"
+                },
+                {
+                  "key": "gender",
+                  "value": "Female",
+                  "type": "text"
+                },
+                {
+                  "key": "dateOfBirth",
+                  "value": "2019-06-01",
+                  "type": "text"
+                },
+                {
+                  "key": "sessionId",
+                  "value": "{{session_b_id}}",
+                  "type": "text"
+                },
+                {
+                  "key": "parent",
+                  "value": "{\"primaryName\":\"ZZPM Parent 2\",\"primaryEmail\":\"zzpm.parent2.{{run_tag}}@example.com\",\"primaryPhone\":\"9876500001\",\"password\":\"{{parent_password}}\",\"relation\":\"Mother\"}",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "{\"city\":\"Test City\",\"state\":\"Test State\",\"pincode\":\"400001\"}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "{{base_url}}/students"
+          },
+          "response": []
+        },
+        {
+          "name": "List Students By Session [NEW]",
+          "request": {
+            "description": "Admin students list filtered to a single academic session — separates current-year students from next-year pre-admitted students.",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/students?sessionId={{session_a_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Fee - Enrollment & Invoice [MODIFIED]",
+      "item": [
+        {
+          "name": "Enroll Student in Class [MODIFIED]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('enrollment_id', json.data._id);",
+                  "pm.test('enrollment auto-tagged with the Active session', () => pm.expect(json.data.sessionId).to.eql(pm.collectionVariables.get('session_a_id')));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\",\n  \"classId\": \"{{class_id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/fee/enrollments"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Invoice [MODIFIED]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('invoice_id', json.data._id);",
+                  "pm.test('invoice auto-tagged with the Active session', () => pm.expect(json.data.sessionId).to.eql(pm.collectionVariables.get('session_a_id')));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/fee/invoices/generate"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Enrollments For Student (verify sessionId) [MODIFIED]",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/fee/enrollments/{{student_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "List Session Enrollments (Active, for bulk Promote screen) [NEW]",
+          "request": {
+            "description": "Session-wide enrollment list, filterable by sessionId/status/classId. Used to build the bulk Promote Students screen (all Active enrollments for a session) instead of fetching one student at a time.",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/fee/enrollments?sessionId={{session_a_id}}&status=Active"
+          },
+          "response": []
+        },
+        {
+          "name": "List Session Invoices [NEW]",
+          "request": {
+            "description": "Session-wide invoice list/report across all students, filterable by sessionId/status/month/year.",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/fee/invoices?sessionId={{session_a_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. Attendance [MODIFIED]",
+      "item": [
+        {
+          "name": "Mark Attendance Manually [MODIFIED]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('attendance_id', json.data.attendance._id);",
+                  "pm.test('attendance auto-tagged with the Active session', () => pm.expect(json.data.attendance.sessionId).to.eql(pm.collectionVariables.get('session_a_id')));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\",\n  \"status\": \"Present\",\n  \"sessionLabel\": \"FULL_DAY\",\n  \"method\": \"manual\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/attendance/manual"
+          },
+          "response": []
+        },
+        {
+          "name": "List Attendance By Session [NEW]",
+          "request": {
+            "description": "Attendance list filtered by sessionId, alongside existing date/status/class/section filters.",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/attendance?sessionId={{session_a_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "5. Session Promotion & Correction [NEW]",
+      "item": [
+        {
+          "name": "Promote Students (Session A -> Session B) [NEW]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('1 success, 0 failed', () => { pm.expect(json.data.success).to.eql(1); pm.expect(json.data.failed).to.eql(0); });",
+                  "const detail = json.data.results[0];",
+                  "pm.test('per-student result includes newEnrollmentId', () => pm.expect(detail.newEnrollmentId).to.be.a('string'));",
+                  "pm.collectionVariables.set('new_enrollment_id', detail.newEnrollmentId);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "description": "Promotes the student from Session A into Session B, into the same class (newClassId can be a different class for a real grade change). decision can be 'promote' | 'retain' | 'notContinuing'.",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fromSessionId\": \"{{session_a_id}}\",\n  \"toSessionId\": \"{{session_b_id}}\",\n  \"decisions\": [\n    {\n      \"studentId\": \"{{student_id}}\",\n      \"decision\": \"promote\",\n      \"newClassId\": \"{{class_id}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/fee/promotions"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Enrollments For Student (verify Promoted + new Active) [NEW behavior]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "const old = json.data.find(e => e._id === pm.collectionVariables.get('enrollment_id'));",
+                  "const fresh = json.data.find(e => e._id === pm.collectionVariables.get('new_enrollment_id'));",
+                  "pm.test('old (Session A) enrollment is now Promoted', () => pm.expect(old.status).to.eql('Promoted'));",
+                  "pm.test('new (Session B) enrollment is Active and links back via promotedFromEnrollmentId', () => { pm.expect(fresh.status).to.eql('Active'); pm.expect(fresh.promotedFromEnrollmentId).to.eql(pm.collectionVariables.get('enrollment_id')); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/fee/enrollments/{{student_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Mark Enrollment Left (correction / rollback) [NEW]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('enrollment now Left', () => pm.expect(json.data.status).to.eql('Left'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "description": "Use when a promoted student is later found to have actually left the school (e.g. transferred elsewhere) without notice. Only ever touches the NEW-session enrollment passed here — never the old session's history.",
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"ZZPM test — family transferred out\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/fee/enrollments/{{new_enrollment_id}}/mark-left"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Enrollments For Student (verify OLD session untouched) [NEW behavior]",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "const old = json.data.find(e => e._id === pm.collectionVariables.get('enrollment_id'));",
+                  "pm.test('old (Session A) enrollment is still Promoted, unaffected by the correction', () => pm.expect(old.status).to.eql('Promoted'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/fee/enrollments/{{student_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "99. Cleanup",
+      "item": [
+        {
+          "name": "Cancel Enrollment (Session B, promoted-then-left)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/fee/enrollments/{{new_enrollment_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Enrollment (Session A, original)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}"
+              }
+            ],
+            "url": "{{base_url}}/fee/enrollments/{{enrollment_id}}"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

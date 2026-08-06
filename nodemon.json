@@ -1,0 +1,7 @@
+{
+  "events": {
+    "restart": "sleep 1"
+  },
+  "delay": "1000",
+  "restartable": "rs"
+}

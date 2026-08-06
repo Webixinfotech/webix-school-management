@@ -1,0 +1,1328 @@
+{
+  "info": {
+    "name": "BrainBuilder - Fee Module (Installments, Flexi Card, Split Payments, Teacher Gating)",
+    "description": "End-to-end test flow for the new fee module features: annual-fee installments, one-time fees, prepaid Flexi Card, split/partial payment allocation, per-program fee status, and teacher fee-visibility gating.\n\nHOW TO USE:\n1. Import this file into Postman (File > Import).\n2. Open the collection's Variables tab and fill in `base_url` (default http://localhost:5006/api), `admin_email` and `admin_password` for an existing admin account on this server.\n3. Run folder 0 then 1 through 9 in order, top to bottom (use the collection Runner, or just click through manually) — later requests depend on IDs captured by earlier ones via test scripts.\n4. Folder 99 (Cleanup) removes every ZZPM-test-tagged record this run created. Run it last.\n\nAll test data created by this collection is tagged with the prefix `ZZPM` and a unique run_tag (timestamp) so repeat runs never collide and test records are easy to spot/delete manually if needed.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.collectionVariables.get('run_tag')) {",
+          "  pm.collectionVariables.set('run_tag', Date.now().toString());",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:5006/api" },
+    { "key": "admin_email", "value": "" },
+    { "key": "admin_password", "value": "" },
+    { "key": "admin_token", "value": "" },
+    { "key": "run_tag", "value": "" },
+    { "key": "parent_password", "value": "ZzPm@12345" },
+    { "key": "teacher_password", "value": "ZzPm@12345" },
+    { "key": "student_id", "value": "" },
+    { "key": "parent_email", "value": "" },
+    { "key": "parent_token", "value": "" },
+    { "key": "teacher_id", "value": "" },
+    { "key": "teacher_user_id", "value": "" },
+    { "key": "teacher_token", "value": "" },
+    { "key": "installment_class_id", "value": "" },
+    { "key": "onetime_class_id", "value": "" },
+    { "key": "flexi_class_id", "value": "" },
+    { "key": "ordinary_class_id", "value": "" },
+    { "key": "installment_enrollment_id", "value": "" },
+    { "key": "onetime_enrollment_id", "value": "" },
+    { "key": "ordinary_enrollment_id", "value": "" },
+    { "key": "flexi_enrollment_id", "value": "" },
+    { "key": "installment_1_id", "value": "" },
+    { "key": "installment_2_id", "value": "" },
+    { "key": "onetime_installment_id", "value": "" },
+    { "key": "flexi_purchase_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "0. Auth",
+      "item": [
+        {
+          "name": "Login as Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('Token present', () => pm.expect(json.token).to.be.a('string'));",
+                  "if (json.token) pm.collectionVariables.set('admin_token', json.token);",
+                  "pm.test('Role is admin (or sub-admin)', () => pm.expect(['admin','sub-admin']).to.include(json.user.role));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{admin_email}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/auth/login"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "1. Setup - Test Data",
+      "item": [
+        {
+          "name": "Create Test Student",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('student_id', json.data.student.id);",
+                  "pm.collectionVariables.set('parent_email', json.data.parentAccount.email);",
+                  "pm.test('student_id captured', () => pm.expect(json.data.student.id).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "firstName", "value": "ZZPM", "type": "text" },
+                { "key": "lastName", "value": "TestStudent", "type": "text" },
+                { "key": "gender", "value": "Male", "type": "text" },
+                { "key": "dateOfBirth", "value": "2019-01-01", "type": "text" },
+                {
+                  "key": "parent",
+                  "value": "{\"primaryName\":\"ZZPM Test Parent\",\"primaryEmail\":\"zzpm.parent.{{run_tag}}@example.com\",\"primaryPhone\":\"9876500000\",\"password\":\"{{parent_password}}\",\"relation\":\"Father\"}",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "{\"city\":\"Test City\",\"state\":\"Test State\",\"pincode\":\"400001\"}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "{{base_url}}/students"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Class - Installment (ZZPM Nursery)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('installment_class_id', json.data._id);",
+                  "pm.test('feeType is INSTALLMENT', () => pm.expect(json.data.feeType).to.eql('INSTALLMENT'));",
+                  "pm.test('installmentTemplate has 2 rows', () => pm.expect(json.data.installmentTemplate.length).to.eql(2));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ZZPM Nursery\",\n  \"classType\": \"FIXED_TIME\",\n  \"startTime\": \"09:00\",\n  \"endTime\": \"13:00\",\n  \"days\": [\"MON\", \"TUE\", \"WED\", \"THU\", \"FRI\"],\n  \"status\": \"Active\",\n  \"baseFee\": 46200,\n  \"feeType\": \"INSTALLMENT\",\n  \"installmentTemplate\": [\n    { \"seq\": 1, \"amount\": 23100, \"offsetDays\": 0, \"label\": \"Installment 1 (Admission)\" },\n    { \"seq\": 2, \"amount\": 23100, \"offsetDays\": 180, \"label\": \"Installment 2 (October)\" }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/classes"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Class - One-Time (ZZPM Book Writing)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('onetime_class_id', json.data._id);",
+                  "pm.test('feeType is ONE_TIME', () => pm.expect(json.data.feeType).to.eql('ONE_TIME'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ZZPM Book Writing\",\n  \"classType\": \"FIXED_TIME\",\n  \"startTime\": \"18:00\",\n  \"endTime\": \"19:00\",\n  \"days\": [\"THU\", \"FRI\"],\n  \"status\": \"Active\",\n  \"baseFee\": 25000,\n  \"feeType\": \"ONE_TIME\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/classes"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Class - Flexi Card Tier (ZZPM 10hr)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('flexi_class_id', json.data._id);",
+                  "pm.test('isPrepaidHoursCard true', () => pm.expect(json.data.isPrepaidHoursCard).to.eql(true));",
+                  "pm.test('hoursInTier is 10', () => pm.expect(json.data.hoursInTier).to.eql(10));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ZZPM Flexi Card 10hr\",\n  \"classType\": \"HOURS_BASED\",\n  \"status\": \"Active\",\n  \"baseFee\": 1000,\n  \"feeType\": \"ONE_TIME\",\n  \"isPrepaidHoursCard\": true,\n  \"hoursInTier\": 10\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/classes"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Class - Ordinary Hours-Based (legacy, no card)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('ordinary_class_id', json.data._id);",
+                  "pm.test('isPrepaidHoursCard false', () => pm.expect(json.data.isPrepaidHoursCard).to.eql(false));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ZZPM Ordinary Hours Class\",\n  \"classType\": \"HOURS_BASED\",\n  \"status\": \"Active\",\n  \"baseFee\": 0,\n  \"feeType\": \"FREE\",\n  \"monthlyFreeHours\": 20\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/classes"
+          },
+          "response": [],
+          "description": "This class deliberately does NOT set isPrepaidHoursCard, to prove the attendance-deduction routing falls through to the legacy global-pool path unchanged for classes that aren't prepaid cards. There's no HTTP request to directly test the attendance routing helper (it fires internally from the attendance module) — this class exists so you can mark this student's attendance via the existing /api/attendance endpoints afterward and confirm Student.consumedFlexiHours (not a Flexi Card ledger) is what moves."
+        },
+        {
+          "name": "Create Test Teacher",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('teacher_id', json.data.teacher.id);",
+                  "pm.collectionVariables.set('teacher_user_id', json.data.teacher.userId);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "name", "value": "ZZPM Test Teacher", "type": "text" },
+                { "key": "email", "value": "zzpm.teacher.{{run_tag}}@example.com", "type": "text" },
+                { "key": "phone", "value": "9876500001", "type": "text" },
+                { "key": "dateOfJoining", "value": "2026-01-01", "type": "text" },
+                { "key": "password", "value": "{{teacher_password}}", "type": "text" },
+                { "key": "status", "value": "Active", "type": "text" }
+              ]
+            },
+            "url": "{{base_url}}/teachers"
+          },
+          "response": [],
+          "description": "Created with canViewFeeInfo left at its default (false) — folder 8 verifies this teacher is blocked from fee routes until an admin explicitly grants the permission."
+        }
+      ]
+    },
+    {
+      "name": "2. Enrollment",
+      "item": [
+        {
+          "name": "Enroll Student - Installment Class",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('installment_enrollment_id', json.data._id);",
+                  "pm.test('feeType snapshot is INSTALLMENT', () => pm.expect(json.data.feeType).to.eql('INSTALLMENT'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\",\n  \"classId\": \"{{installment_class_id}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/fee/enrollments"
+          },
+          "response": []
+        },
+        {
+          "name": "Enroll Student - One-Time Class",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('onetime_enrollment_id', json.data._id);",
+                  "pm.test('feeType snapshot is ONE_TIME', () => pm.expect(json.data.feeType).to.eql('ONE_TIME'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\",\n  \"classId\": \"{{onetime_class_id}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/fee/enrollments"
+          },
+          "response": []
+        },
+        {
+          "name": "Enroll Student - Ordinary Hours Class",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('ordinary_enrollment_id', json.data._id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\",\n  \"classId\": \"{{ordinary_class_id}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/fee/enrollments"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Enrollments for Student",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('At least 3 active enrollments', () => pm.expect(json.data.length).to.be.at.least(3));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/enrollments/{{student_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Installments",
+      "item": [
+        {
+          "name": "Get Installments for Student",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('3 installment rows total (2 Nursery + 1 Book Writing)', () => pm.expect(json.data.length).to.eql(3));",
+                  "const nursery = json.data.filter(i => i.className === 'ZZPM Nursery').sort((a,b) => a.seq - b.seq);",
+                  "const bookWriting = json.data.find(i => i.className === 'ZZPM Book Writing');",
+                  "pm.test('Nursery has 2 rows of 23100 each', () => {",
+                  "  pm.expect(nursery.length).to.eql(2);",
+                  "  pm.expect(nursery[0].amount).to.eql(23100);",
+                  "  pm.expect(nursery[1].amount).to.eql(23100);",
+                  "});",
+                  "pm.test('Book Writing is a single 25000 row', () => pm.expect(bookWriting.amount).to.eql(25000));",
+                  "if (nursery[0]) pm.collectionVariables.set('installment_1_id', nursery[0]._id);",
+                  "if (nursery[1]) pm.collectionVariables.set('installment_2_id', nursery[1]._id);",
+                  "if (bookWriting) pm.collectionVariables.set('onetime_installment_id', bookWriting._id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/installments/student/{{student_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Installment By Id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('status UNPAID initially', () => pm.expect(json.data.status).to.eql('UNPAID'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/installments/{{installment_1_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Installment (adjustment/waive example)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('notes saved', () => pm.expect(json.data.notes).to.include('Verified via Postman'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notes\": \"Verified via Postman collection\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/fee/installments/{{onetime_installment_id}}"
+          },
+          "response": [],
+          "description": "This just annotates a note without changing money fields, so it doesn't interfere with the payment tests below. To test a real waiver, send { \"adjustmentAmount\": 25000, \"adjustmentReason\": \"Scholarship\" } instead — that will push status to PAID with netDue 0."
+        },
+        {
+          "name": "Get Installment Defaulters Report",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/reports/installment-defaulters"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. Invoices (Regression Check)",
+      "item": [
+        {
+          "name": "Generate Invoice for Student (current month)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201 or 409 (already exists)', () => pm.expect([201,409]).to.include(pm.response.code));",
+                  "if (pm.response.code === 201) {",
+                  "  const json = pm.response.json();",
+                  "  const classNames = (json.data.tuitionLines || []).map(l => l.className);",
+                  "  pm.test('ONE_TIME/INSTALLMENT classes NOT in tuitionLines (the bug fix)', () => {",
+                  "    pm.expect(classNames).to.not.include('ZZPM Nursery');",
+                  "    pm.expect(classNames).to.not.include('ZZPM Book Writing');",
+                  "  });",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/fee/invoices/generate"
+          },
+          "response": [],
+          "description": "This is the key regression check for the ONE_TIME re-billing bug fix: the Nursery (INSTALLMENT) and Book Writing (ONE_TIME) enrollments must NEVER appear in tuitionLines — they're billed exclusively through the Installment collection tested above. If this test ever fails, the fix has regressed."
+        },
+        {
+          "name": "Get Invoices for Student",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/invoices/student/{{student_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "5. Payments (Split / Partial Allocation)",
+      "item": [
+        {
+          "name": "Collect Payment - Partial (Installment 1: pay 15000 of 23100)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.test('1 allocation recorded', () => pm.expect(json.data.allocations.length).to.eql(1));",
+                  "pm.test('amountUsed is 15000', () => pm.expect(json.data.allocations[0].amountUsed).to.eql(15000));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\",\n  \"amount\": 15000,\n  \"paymentMode\": \"cash\",\n  \"allocations\": [\n    { \"billType\": \"INSTALLMENT\", \"billId\": \"{{installment_1_id}}\", \"amount\": 15000 }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/fee/payments"
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Installment 1 is PARTIAL, netDue 8100",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('status PARTIAL', () => pm.expect(json.data.status).to.eql('PARTIAL'));",
+                  "pm.test('netDue is 8100', () => pm.expect(json.data.netDue).to.eql(8100));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/installments/{{installment_1_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Collect Payment - Split (finish Installment 1 + partial Installment 2, one receipt)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.test('2 allocations in one Payment', () => pm.expect(json.data.allocations.length).to.eql(2));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\",\n  \"amount\": 9100,\n  \"paymentMode\": \"upi\",\n  \"remarks\": \"Split payment covering 2 programs in one receipt\",\n  \"allocations\": [\n    { \"billType\": \"INSTALLMENT\", \"billId\": \"{{installment_1_id}}\", \"amount\": 8100 },\n    { \"billType\": \"INSTALLMENT\", \"billId\": \"{{installment_2_id}}\", \"amount\": 1000 }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/fee/payments"
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Installment 1 is fully PAID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('status PAID, netDue 0', () => {",
+                  "  pm.expect(json.data.status).to.eql('PAID');",
+                  "  pm.expect(json.data.netDue).to.eql(0);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/installments/{{installment_1_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Collect Payment - Over-Allocation (expect 400, must reject)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400 (rejected)', () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\",\n  \"amount\": 100000,\n  \"paymentMode\": \"cash\",\n  \"allocations\": [\n    { \"billType\": \"INSTALLMENT\", \"billId\": \"{{installment_2_id}}\", \"amount\": 100000 }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/fee/payments"
+          },
+          "response": [],
+          "description": "Installment 2's outstanding due is only 22100 at this point (23100 - 1000 paid above). Allocating 100000 against it must be rejected with 400 and must NOT partially mutate the installment — the next request confirms the rollback."
+        },
+        {
+          "name": "Verify Installment 2 unchanged after rejected over-allocation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('netDue still 22100 (no partial mutation / rollback worked)', () => pm.expect(json.data.netDue).to.eql(22100));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/installments/{{installment_2_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Payments for Student",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/payments/student/{{student_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "6. Flexi Card (Prepaid Hours)",
+      "item": [
+        {
+          "name": "Purchase Flexi Card (partial payment: 600 of 1000)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('flexi_purchase_id', json.data.purchase._id);",
+                  "pm.collectionVariables.set('flexi_enrollment_id', json.data.purchase.enrollmentId);",
+                  "pm.test('Full 10 hours activated despite partial payment', () => pm.expect(json.data.purchase.hoursRemaining).to.eql(10));",
+                  "pm.test('amountDue is 400', () => pm.expect(json.data.purchase.amountDue).to.eql(400));",
+                  "pm.test('Payment receipt created with FLEXI_CARD allocation', () => {",
+                  "  pm.expect(json.data.payment).to.not.be.null;",
+                  "  pm.expect(json.data.payment.allocations[0].billType).to.eql('FLEXI_CARD');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\",\n  \"classId\": \"{{flexi_class_id}}\",\n  \"amountPaidNow\": 600,\n  \"paymentMode\": \"cash\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/fee/flexi-card/purchase"
+          },
+          "response": [],
+          "description": "Matches the client doc's example exactly: parent pays 600 of 1000 for the Flexi Card now, owes 500 later — but the card activates with the full hour bundle immediately regardless."
+        },
+        {
+          "name": "Get Flexi Card Balance",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('activeHoursRemaining is 10', () => pm.expect(json.data.activeHoursRemaining).to.eql(10));",
+                  "pm.test('totalAmountDue is 400', () => pm.expect(json.data.totalAmountDue).to.eql(400));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/flexi-card/balance/{{student_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Flexi Card Purchases List",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/flexi-card/purchases/{{student_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Flexi Card Purchase By Id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/flexi-card/purchases/detail/{{flexi_purchase_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Collect Payment - Pay Off Remaining Flexi Card Due (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.test('1 FLEXI_CARD allocation of 400', () => {",
+                  "  pm.expect(json.data.allocations.length).to.eql(1);",
+                  "  pm.expect(json.data.allocations[0].amountUsed).to.eql(400);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"{{student_id}}\",\n  \"amount\": 400,\n  \"paymentMode\": \"cash\",\n  \"allocations\": [\n    { \"billType\": \"FLEXI_CARD\", \"billId\": \"{{flexi_purchase_id}}\", \"amount\": 400 }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/fee/payments"
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Flexi Card amountDue is 0",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('amountDue 0, hoursRemaining still 10', () => {",
+                  "  pm.expect(json.data.amountDue).to.eql(0);",
+                  "  pm.expect(json.data.hoursRemaining).to.eql(10);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/flexi-card/purchases/detail/{{flexi_purchase_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "7. Fee Status (per-program due/paid view)",
+      "item": [
+        {
+          "name": "Get Student Fee Status (Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('programs array covers all enrollments', () => pm.expect(json.data.programs.length).to.be.at.least(4));",
+                  "pm.test('flexiCard balance included', () => pm.expect(json.data.flexiCard).to.have.property('activeHoursRemaining'));",
+                  "pm.test('grandTotalDue is a number', () => pm.expect(json.data.grandTotalDue).to.be.a('number'));",
+                  "console.log('Fee status:', JSON.stringify(json.data, null, 2));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/status/{{student_id}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "8. Teacher Fee Visibility Gating",
+      "item": [
+        {
+          "name": "Login as Teacher",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('teacher_token', json.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"zzpm.teacher.{{run_tag}}@example.com\",\n  \"password\": \"{{teacher_password}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/auth/login"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Fee Status as Teacher (expect 403, canViewFeeInfo=false by default)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 403 (blocked)', () => pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{teacher_token}}" }],
+            "url": "{{base_url}}/fee/status/{{student_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Enrollments as Teacher (expect 403)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 403 (blocked)', () => pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{teacher_token}}" }],
+            "url": "{{base_url}}/fee/enrollments/{{student_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Grant canViewFeeInfo Permission (Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('canViewFeeInfo is now true', () => pm.expect(json.data.permissions.canViewFeeInfo).to.eql(true));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"permissions\": { \"canViewFeeInfo\": true }\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/teachers/{{teacher_id}}/permissions"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Fee Status as Teacher (expect 200 now)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200 (allowed after permission grant)', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{teacher_token}}" }],
+            "url": "{{base_url}}/fee/status/{{student_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Revoke canViewFeeInfo Permission (Admin) - optional re-check",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.test('canViewFeeInfo is false again', () => pm.expect(json.data.permissions.canViewFeeInfo).to.eql(false));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"permissions\": { \"canViewFeeInfo\": false }\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/teachers/{{teacher_id}}/permissions"
+          },
+          "response": [],
+          "description": "Optional: flips it back off and you can re-run the 403 request above to confirm the guard reacts live (no re-login needed — permission is read fresh from the DB on every request, not baked into the JWT)."
+        }
+      ]
+    },
+    {
+      "name": "9. Parent Routes",
+      "item": [
+        {
+          "name": "Login as Parent",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('parent_token', json.token);",
+                  "pm.test('Role is parent', () => pm.expect(json.user.role).to.eql('parent'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{parent_email}}\",\n  \"password\": \"{{parent_password}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/auth/login"
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Installments",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{parent_token}}" }],
+            "url": "{{base_url}}/fee/my-installments"
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Flexi Card",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{parent_token}}" }],
+            "url": "{{base_url}}/fee/my-flexi-card"
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Fee Status",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{parent_token}}" }],
+            "url": "{{base_url}}/fee/my-status"
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Invoices",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{parent_token}}" }],
+            "url": "{{base_url}}/fee/my-invoices"
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Wallet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('Status 200', () => pm.response.to.have.status(200));"]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{parent_token}}" }],
+            "url": "{{base_url}}/fee/my-wallet"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "99. Cleanup (optional, run last)",
+      "item": [
+        {
+          "name": "Cancel Installment Enrollment",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/enrollments/{{installment_enrollment_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel One-Time Enrollment",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/enrollments/{{onetime_enrollment_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Ordinary Hours Enrollment",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/enrollments/{{ordinary_enrollment_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Flexi Card Enrollment",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/fee/enrollments/{{flexi_enrollment_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Test Class - Installment (Nursery)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/classes/{{installment_class_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Test Class - One-Time (Book Writing)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/classes/{{onetime_class_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Test Class - Flexi Card",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/classes/{{flexi_class_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Test Class - Ordinary Hours",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/classes/{{ordinary_class_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Test Teacher",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/teachers/{{teacher_id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Test Student",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": "{{base_url}}/students/{{student_id}}"
+          },
+          "response": [],
+          "description": "Note: this deletes the Student and Class documents, but does not cascade-delete the Installment/FlexiCardPurchase/Payment/StudentWallet/Invoice records this run created (the app has no cascade-delete for those, by design — they're a financial audit trail). If you want the database fully clean, remove those manually by studentId, or just leave them — they're clearly tagged (studentName starts with 'ZZPM') and harmless."
+        }
+      ]
+    }
+  ]
+}

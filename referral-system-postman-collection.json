@@ -1,0 +1,765 @@
+{
+  "info": {
+    "name": "Brain Builder - Referral System API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Complete Postman collection for Referral & Referral Tracking APIs. Base URL configured via 'baseUrl' environment variable.",
+    "_exporter_id": "brainbuilder-referral-system"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string",
+      "description": "Backend base URL — set to http://localhost:5000 for local, or https://your-api.onrender.com for production."
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string",
+      "description": "JWT access token. Paste after logging in via Auth API."
+    },
+    {
+      "key": "parentId",
+      "value": "",
+      "type": "string",
+      "description": "Auto-filled by tests — _id of the logged-in parent."
+    },
+    {
+      "key": "referralCode",
+      "value": "BBA1A2B3",
+      "type": "string",
+      "description": "Referral code used for link referral submission."
+    },
+    {
+      "key": "referralId",
+      "value": "",
+      "type": "string",
+      "description": "Auto-filled by tests — _id of the referral just created."
+    },
+    {
+      "key": "testAdminToken",
+      "value": "",
+      "type": "string",
+      "description": "JWT token of an admin/sub-admin user."
+    },
+    {
+      "key": "testParentToken",
+      "value": "",
+      "type": "string",
+      "description": "JWT token of a parent user."
+    }
+  ],
+  "item": [
+    {
+      "name": "📋 Setup — Pre-requisites",
+      "description": "Run these first to get valid tokens and a referral code before testing referral flows.",
+      "item": [
+        {
+          "name": "1. Login as Parent → Get Parent Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"parent@brainbuilder.com\",\n  \"password\": \"YourPassword123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "if (data.success && data.data.token) {",
+                  "    pm.environment.set('testParentToken', data.data.token);",
+                  "    pm.environment.set('accessToken', data.data.token);",
+                  "    pm.test('Token received', function () { pm.expect(data.data.token).to.be.a('string'); });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "✅ Test Mode — Using Pre-filled Tokens",
+      "description": "If Postman collection tests fail due to CORS issues on a browser-based setup, use these endpoints directly to verify the referral system.",
+      "item": [
+        {
+          "name": "Test Database Connection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🚀 REFERRAL MODULE — Reviews",
+      "description": "All referral endpoints including check-mobile, manual referral, link referral, parent-self referral listing, and stats.",
+      "item": [
+        {
+          "name": "1. Check if Mobile is Already Referred",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('Response has success flag', function () { pm.expect(data.success).to.be.true); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testParentToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobile\": \"9876543210\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/referrals/check-mobile",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referrals", "check-mobile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Create Manual Referral (Parent)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 201', function () { pm.expect(pm.response.code).to.eql(201); });",
+                  "pm.test('Referral created', function () { pm.expect(data.success).to.be.true); });",
+                  "if (data.data && data.data.referralId) {",
+                  "    pm.environment.set('referralId', data.data.referralId);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testParentToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"friendName\": \"Rahul Sharma\",\n  \"friendMobile\": \"9876543210\",\n  \"childName\": \"Aarav Sharma\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/referrals/manual",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referrals", "manual"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Submit Link Referral (Public — no auth needed)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 201', function () { pm.expect(pm.response.code).to.eql(201); });",
+                  "pm.test('Referral submitted successfully', function () { pm.expect(data.success).to.be.true); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referralCode\": \"BBA1A2B3\",\n  \"friendName\": \"Priya Gupta\",\n  \"friendMobile\": \"9123456780\",\n  \"childName\": \"Nisha Gupta\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/referrals/link",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referrals", "link"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "4. Validate Referral Code (Public)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('Code is valid', function () { pm.expect(data.success).to.be.true); });",
+                  "pm.test('referralCode present', function () { pm.expect(data.data.referralCode).to.be.a('string'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/referrals/validate/BBA1A2B3",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referrals", "validate", "BBA1A2B3"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "5. Get My Referrals (Parent Self)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('Has data array', function () { pm.expect(data.data).to.be.an('array').to.be.ok); });",
+                  "pm.test('Has count', function () { pm.expect(data.count).to.be.a('number'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testParentToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/referrals/my",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referrals", "my"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "6. Get My Referral Stats (Parent Self)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('Has stats object', function () { pm.expect(data.data.stats).to.be.an('object').to.be.ok); });",
+                  "pm.test('Has referralCode', function () { pm.expect(data.data.referralCode).to.be.a('string'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testParentToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/referrals/my/stats",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referrals", "my", "stats"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "7. Get All Referrals (Admin/Sub-admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('Has data array', function () { pm.expect(data.data).to.be.an('array'); });",
+                  "pm.test('Has pagination', function () {",
+                  "    pm.expect(data.count, 'count field').to.be.a('number');",
+                  "    pm.expect(data.total, 'total field').to.be.a('number');",
+                  "    pm.expect(data.page,   'page field').to.be.a('number');",
+                  "    pm.expect(data.pages,  'pages field').to.be.a('number');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/referrals?status=pending&source=manual&page=1&limit=25",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referrals"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending"
+                },
+                {
+                  "key": "source",
+                  "value": "manual"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "25"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "8. Get Single Referral by ID (Admin/Sub-admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('referralId matches', function () { pm.expect(data.data.referralId).to.eql(pm.environment.get('referralId')); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/referrals/{{referralId}}",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referrals", "{{referralId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "9. Update Referral Status → 'joined' (Admin Only)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('Status updated', function () { pm.expect(data.success).to.be.true); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testAdminToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"joined\",\n  \"note\": \"Friend admitted child - tutorial-running run confirmed\",\n  \"childName\": \"Aarav Sharma\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/referrals/{{referralId}}/status",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referrals", "{{referralId}}", "status"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "10. Update Referral Status → 'rewarded' (Admin Only)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('Status is rewarded', function () { pm.expect(data.data.status).to.eql('rewarded'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testAdminToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"rewarded\",\n  \"rewardPoints\": 500,\n  \"note\": \"Reward points credited on admission\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/referrals/{{referralId}}/status",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referrals", "{{referralId}}", "status"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "11. Get Referral Stats (Admin/Sub-admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('Has stats', function () {",
+                  "    pm.expect(data.data.stats.total).to.be.a('number');",
+                  "    pm.expect(data.data.stats.pending).to.be.a('number');",
+                  "    pm.expect(data.data.stats.joined).to.be.a('number');",
+                  "    pm.expect(data.data.stats.rewarded).to.be.a('number');",
+                  "    pm.expect(data.data.sourceBreakdown).to.be.an('object');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/referrals/stats",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referrals", "stats"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📊 REFERRAL TRACKING MODULE",
+      "description": "Referral tracking — admin dashboard, parent referral view, student referral check, referrer profile.",
+      "item": [
+        {
+          "name": "1. Admin Referral Dashboard",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('Dashboard has overview', function () { pm.expect(data.data.overview).to.be.an('object'); });",
+                  "pm.test('Has topReferrers', function () { pm.expect(data.data.topReferrers).to.be.an('array'); });",
+                  "pm.test('Has monthlyStats', function () { pm.expect(data.data.monthlyStats).to.be.an('array'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/referral-tracking/dashboard",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referral-tracking", "dashboard"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2. Parent My Referral Tracking",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('Has referralCode', function () { pm.expect(data.data.referralCode).to.be.a('string'); });",
+                  "pm.test('Has referralLink', function () { pm.expect(data.data.referralLink).to.be.a('string'); });",
+                  "pm.test('Has referrals array', function () { pm.expect(data.data.referrals).to.be.an('array'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testParentToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/referral-tracking/my",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referral-tracking", "my"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "3. Get Student Referral Info",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/referral-tracking/student/68f2b1c4d5a8e3f100000001",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referral-tracking", "student", "68f2b1c4d5a8e3f100000001"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "4. Get Referrer Profile (Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var data = pm.response.json();",
+                  "pm.test('Status is 200', function () { pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('Has parent details', function () { pm.expect(data.data.parentName).to.be.a('string'); });",
+                  "pm.test('Has stats', function () { pm.expect(data.data.stats).to.be.an('object'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testAdminToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/referral-tracking/referrer/{{parentId}}",
+              "protocol": "http",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "referral-tracking", "referrer", "{{parentId}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔑 Required Environment Variables",
+      "description": "Complete list of env vars needed.",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "protocol": "http",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// pm.info is not available pre-request; reference docs only",
+              "console.log('Make sure these environment variables are set:');",
+              "console.log('  baseUrl       — http://localhost:5000');",
+              "console.log('  accessToken   — JWT from /api/auth/login');",
+              "console.log('  testAdminToken — JWT for admin account');",
+              "console.log('  referralId    — _id of a referral record');"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ]
+}

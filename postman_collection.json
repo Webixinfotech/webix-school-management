@@ -1,0 +1,1526 @@
+{
+  "info": {
+    "name": "Brain Builder Backend API",
+    "description": "Complete API collection for student, teacher, classes, attendance management with step-by-step flow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register Admin - Public",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\", // optional\n  \"section\": \"\", // optional\n  \"classType\": \"FIXED_TIME\", // optional, enum: FIXED_TIME, FLEX_TIME, HOURS_BASED\n  \"startTime\": \"09:00\", // optional\n  \"endTime\": \"10:00\", // optional\n  \"days\": [\"MON\", \"WED\", \"FRI\"], // optional, array of: MON, TUE, WED, THU, FRI, SAT, SUN\n  \"level\": 1, // optional, 0-100\n  \"status\": \"Active\" // optional, enum: Active, Inactive\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register-admin",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "register-admin"]
+            }
+          }
+        },
+        {
+          "name": "Login - Public",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"\", // or phone\n  \"phone\": \"\", // or email\n  \"password\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get My Profile - Authenticated",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "me"]
+            }
+          }
+        },
+        {
+          "name": "Register User - Admin/Sub-admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"password\": \"\",\n  \"phone\": \"\",\n  \"role\": \"teacher\" // enum: sub-admin, teacher, parent\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teacher Management - Admin",
+      "item": [
+        {
+          "name": "Get All Teachers - Admin/Sub-admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/teachers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers"]
+            }
+          }
+        },
+        {
+          "name": "Get Teacher by ID - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/teachers/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Create Teacher - Admin/Sub-admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"dateOfJoining\": \"\", // ISO date string\n  \"status\": \"Active\" // optional, enum: Active, Inactive, On Leave\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/teachers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers"]
+            }
+          }
+        },
+        {
+          "name": "Update Teacher - Admin/Sub-admin",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\", // optional\n  \"phone\": \"\", // optional\n  \"status\": \"Active\" // optional, enum: Active, Inactive, On Leave\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/teachers/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Update Teacher Permissions - Admin",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"permissions\": {\n    \"canViewStudentMobile\": true,\n    \"canMarkAttendance\": true,\n    \"canUploadPhotos\": true,\n    \"canViewReports\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/teachers/:id/permissions",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers", ":id", "permissions"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Update Teacher Photo - Admin/Sub-admin",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "photo",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/teachers/:id/photo",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers", ":id", "photo"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Delete Teacher - Admin",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/teachers/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Teacher Notes - Admin/Sub-admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/teachers/:id/notes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers", ":id", "notes"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Add Teacher Note - Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"note\": \"\",\n  \"type\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/teachers/:id/notes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers", ":id", "notes"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Update Teacher Note - Admin",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"note\": \"\",\n  \"type\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/teachers/:id/notes/:noteId",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers", ":id", "notes", ":noteId"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              },
+              {
+                "key": "noteId",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Delete Teacher Note - Admin",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/teachers/:id/notes/:noteId",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers", ":id", "notes", ":noteId"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              },
+              {
+                "key": "noteId",
+                "value": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Student Management - Admin",
+      "item": [
+        {
+          "name": "Get All Students - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/students",
+              "host": ["{{base_url}}"],
+              "path": ["api", "students"]
+            }
+          }
+        },
+        {
+          "name": "Get Student by ID - Admin/Sub-admin/Teacher/Parent",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/students/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "students", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Create Student - Admin/Sub-admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"address\": \"\",\n  \"dateOfBirth\": \"\",\n  \"classId\": \"\",\n  \"parentId\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/students",
+              "host": ["{{base_url}}"],
+              "path": ["api", "students"]
+            }
+          }
+        },
+        {
+          "name": "Update Student - Admin/Sub-admin",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"address\": \"\",\n  \"dateOfBirth\": \"\",\n  \"classId\": \"\",\n  \"parentId\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/students/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "students", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Update Student Photo - Admin/Sub-admin",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "photo",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/students/:id/photo",
+              "host": ["{{base_url}}"],
+              "path": ["api", "students", ":id", "photo"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Delete Student - Admin",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/students/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "students", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Admin Students - Admin/Sub-admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/students",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "students"]
+            }
+          }
+        },
+        {
+          "name": "Get Admin Student Stats - Admin/Sub-admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/students/stats",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "students", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Export Students - Admin/Sub-admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/students/export",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "students", "export"]
+            }
+          }
+        },
+        {
+          "name": "Get Red Flagged Students - Admin/Sub-admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/students/red-flagged",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "students", "red-flagged"]
+            }
+          }
+        },
+        {
+          "name": "Get Student Free Days Report - Admin/Sub-admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/students/free-days-report",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "students", "free-days-report"]
+            }
+          }
+        },
+        {
+          "name": "Get Students Attendance Ranking - Admin/Sub-admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/students/attendance-ranking",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "students", "attendance-ranking"]
+            }
+          }
+        },
+        {
+          "name": "Assign Class to Student - Admin/Sub-admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"classId\": \"\" // required\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/students/:id/assign-class",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "students", ":id", "assign-class"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Class Management - Admin",
+      "item": [
+        {
+          "name": "Get All Classes - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/classes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "classes"]
+            }
+          }
+        },
+        {
+          "name": "Get Class by ID - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/classes/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "classes", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Create Class - Admin/Sub-admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"type\": \"\",\n  \"day\": \"\",\n  \"time\": \"\",\n  \"capacity\": 0,\n  \"description\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/classes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "classes"]
+            }
+          }
+        },
+        {
+          "name": "Update Class - Admin/Sub-admin",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"type\": \"\",\n  \"day\": \"\",\n  \"time\": \"\",\n  \"capacity\": 0,\n  \"description\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/classes/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "classes", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Delete Class - Admin",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/classes/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "classes", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Classes by Type - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/classes/type/:classType",
+              "host": ["{{base_url}}"],
+              "path": ["api", "classes", "type", ":classType"]
+            },
+            "variable": [
+              {
+                "key": "classType",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Classes by Day - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/classes/day/:day",
+              "host": ["{{base_url}}"],
+              "path": ["api", "classes", "day", ":day"]
+            },
+            "variable": [
+              {
+                "key": "day",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Class Students - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/classes/:id/students",
+              "host": ["{{base_url}}"],
+              "path": ["api", "classes", ":id", "students"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Class Teachers - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/classes/:id/teachers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "classes", ":id", "teachers"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Assign Teacher to Class - Admin",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teacherId\": \"\" // optional, can be null to unassign\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/classes/:id/assign-teacher",
+              "host": ["{{base_url}}"],
+              "path": ["api", "classes", ":id", "assign-teacher"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendance Management",
+      "item": [
+        {
+          "name": "Scan Attendance - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qrCode\": \"\",\n  \"attendanceDate\": \"2023-10-01T00:00:00.000Z\", // optional, ISO date\n  \"sessionLabel\": \"FULL_DAY\" // optional, enum: FULL_DAY, MORNING, AFTERNOON, EVENING\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/attendance/scan",
+              "host": ["{{base_url}}"],
+              "path": ["api", "attendance", "scan"]
+            }
+          }
+        },
+        {
+          "name": "Manual Mark Attendance - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentId\": \"\", // or admission number\n  \"attendanceDate\": \"2023-10-01T00:00:00.000Z\", // optional, ISO date\n  \"status\": \"Present\", // enum: Present, Absent, Late, Leave\n  \"sessionLabel\": \"FULL_DAY\", // optional, enum: FULL_DAY, MORNING, AFTERNOON, EVENING\n  \"method\": \"manual\", // optional, enum: qr, manual, system\n  \"remarks\": \"\" // optional, max 500 chars\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/attendance/manual",
+              "host": ["{{base_url}}"],
+              "path": ["api", "attendance", "manual"]
+            }
+          }
+        },
+        {
+          "name": "Get Daily Attendance Summary - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/attendance/summary/daily",
+              "host": ["{{base_url}}"],
+              "path": ["api", "attendance", "summary", "daily"]
+            }
+          }
+        },
+        {
+          "name": "Get Student Attendance - Admin/Sub-admin/Teacher/Parent",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/attendance/student/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "attendance", "student", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Attendance List - Admin/Sub-admin/Teacher/Parent",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/attendance",
+              "host": ["{{base_url}}"],
+              "path": ["api", "attendance"]
+            }
+          }
+        },
+        {
+          "name": "Update Attendance - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attendanceDate\": \"2023-10-01T00:00:00.000Z\", // optional, ISO date\n  \"status\": \"Present\", // optional, enum: Present, Absent, Late, Leave\n  \"sessionLabel\": \"FULL_DAY\", // optional, enum: FULL_DAY, MORNING, AFTERNOON, EVENING\n  \"method\": \"manual\", // optional, enum: qr, manual, system\n  \"remarks\": \"\" // optional, max 500 chars\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/attendance/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "attendance", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Center Check In - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qrCode\": \"\", // or studentId\n  \"studentId\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/attendance/center-in",
+              "host": ["{{base_url}}"],
+              "path": ["api", "attendance", "center-in"]
+            }
+          }
+        },
+        {
+          "name": "Center Check Out - Admin/Sub-admin/Teacher",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qrCode\": \"\", // or studentId\n  \"studentId\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/attendance/center-out",
+              "host": ["{{base_url}}"],
+              "path": ["api", "attendance", "center-out"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teacher Dashboard",
+      "item": [
+        {
+          "name": "Get My Profile - Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/teachers/my-profile",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers", "my-profile"]
+            }
+          }
+        },
+        {
+          "name": "Get My Classes - Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/classes/my-classes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "classes", "my-classes"]
+            }
+          }
+        },
+        {
+          "name": "Get Teacher Dashboard Stats - Teacher",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/teachers/dashboard/stats",
+              "host": ["{{base_url}}"],
+              "path": ["api", "teachers", "dashboard", "stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Parent Dashboard",
+      "item": [
+        {
+          "name": "Get My Profile - Parent",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/parents/my-profile",
+              "host": ["{{base_url}}"],
+              "path": ["api", "parents", "my-profile"]
+            }
+          }
+        },
+        {
+          "name": "Update My Profile - Parent",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\", // optional\n  \"phone\": \"\", // optional\n  \"address\": {\n    \"street\": \"\", // optional\n    \"city\": \"\", // optional\n    \"state\": \"\", // optional\n    \"pincode\": \"\" // optional\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/parents/my-profile",
+              "host": ["{{base_url}}"],
+              "path": ["api", "parents", "my-profile"]
+            }
+          }
+        },
+        {
+          "name": "Get My Children - Parent",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/students/my-children",
+              "host": ["{{base_url}}"],
+              "path": ["api", "students", "my-children"]
+            }
+          }
+        },
+        {
+          "name": "Get Parent Children - Admin/Sub-admin/Teacher/Parent",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/parents/:id/children",
+              "host": ["{{base_url}}"],
+              "path": ["api", "parents", ":id", "children"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Student Attendance Diff - Parent",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/parents/student/:studentId/attendance-diff",
+              "host": ["{{base_url}}"],
+              "path": ["api", "parents", "student", ":studentId", "attendance-diff"]
+            },
+            "variable": [
+              {
+                "key": "studentId",
+                "value": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Parent Management - Admin",
+      "item": [
+        {
+          "name": "Get All Parents - Admin/Sub-admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/parents",
+              "host": ["{{base_url}}"],
+              "path": ["api", "parents"]
+            }
+          }
+        },
+        {
+          "name": "Get Parent by ID - Admin/Sub-admin/Parent",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/parents/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "parents", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Update Parent - Admin/Sub-admin",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\", // optional\n  \"phone\": \"\", // optional\n  \"address\": {\n    \"street\": \"\", // optional\n    \"city\": \"\", // optional\n    \"state\": \"\", // optional\n    \"pincode\": \"\" // optional\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/parents/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "parents", ":id"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Deactivate Parent - Admin",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/parents/:id/deactivate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "parents", ":id", "deactivate"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Activate Parent - Admin",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/parents/:id/activate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "parents", ":id", "activate"]
+            },
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get Parent Stats - Admin/Sub-admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/parents/stats",
+              "host": ["{{base_url}}"],
+              "path": ["api", "parents", "stats"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://brain-builder-backend-pro.onrender.com",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

@@ -1,0 +1,3258 @@
+{
+  "info": {
+    "name": "BrainBuilder - Inventory & Library Module",
+    "description": "End-to-end test flow for the Inventory & Library module: item master, categories, stock in/out with approval workflow, borrow/buy/return, security deposits, wishlist, and reports.\n\nHOW TO USE:\n1. Import this file into Postman (File > Import).\n2. Open the collection's Variables tab and fill in `base_url` (default http://localhost:5006/api), `admin_email` and `admin_password` for an EXISTING admin account on this server.\n3. Run folders in order, top to bottom: 0 -> 1 -> 2 -> ... -> 9 (use the collection Runner, or click through manually). Later requests depend on IDs captured by earlier ones via test scripts (collection variables) — do not skip around on a first run.\n4. One manual step, in Folder 3: \"Preview Bulk Upload\" needs you to attach a real .xlsx file (download the template first) — Postman collection exports can't carry real binary attachments. Everything else (including parent_user_id, teacher tokens, etc.) is captured automatically by test scripts as you go.\n5. Folder 99 (Cleanup) retires test items/categories. Optional — every name is tagged with a unique `run_tag`, so re-running with a fresh one never collides with old test data.\n\nEvery API a folder groups together is explained in that folder's own description, and every individual request has a description of what it does, who's allowed to call it, and what to expect.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.collectionVariables.get('run_tag')) {",
+          "  pm.collectionVariables.set('run_tag', Date.now().toString());",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5006/api"
+    },
+    {
+      "key": "admin_email",
+      "value": ""
+    },
+    {
+      "key": "admin_password",
+      "value": ""
+    },
+    {
+      "key": "admin_token",
+      "value": ""
+    },
+    {
+      "key": "run_tag",
+      "value": ""
+    },
+    {
+      "key": "teacher_password",
+      "value": "ZzIL@12345"
+    },
+    {
+      "key": "parent_password",
+      "value": "ZzIL@12345"
+    },
+    {
+      "key": "teacher_id",
+      "value": ""
+    },
+    {
+      "key": "teacher_user_id",
+      "value": ""
+    },
+    {
+      "key": "teacher_token",
+      "value": ""
+    },
+    {
+      "key": "parent_email",
+      "value": ""
+    },
+    {
+      "key": "parent_user_id",
+      "value": "",
+      "description": "Auto-captured from the \"Create Test Student\" response (data.parentAccount.id) — used as the parentId body field on Borrow/Purchase requests."
+    },
+    {
+      "key": "parent_token",
+      "value": ""
+    },
+    {
+      "key": "student_id",
+      "value": ""
+    },
+    {
+      "key": "class_id",
+      "value": ""
+    },
+    {
+      "key": "category_books_id",
+      "value": ""
+    },
+    {
+      "key": "category_stationery_id",
+      "value": ""
+    },
+    {
+      "key": "item_pencil_id",
+      "value": ""
+    },
+    {
+      "key": "item_marker_id",
+      "value": ""
+    },
+    {
+      "key": "item_book_id",
+      "value": ""
+    },
+    {
+      "key": "item_uniform_id",
+      "value": ""
+    },
+    {
+      "key": "stock_issue_direct_id",
+      "value": ""
+    },
+    {
+      "key": "stock_issue_pending_id",
+      "value": ""
+    },
+    {
+      "key": "stock_issue_reject_id",
+      "value": ""
+    },
+    {
+      "key": "lending_borrow_id",
+      "value": ""
+    },
+    {
+      "key": "lending_borrow_2_id",
+      "value": ""
+    },
+    {
+      "key": "lending_purchase_id",
+      "value": ""
+    },
+    {
+      "key": "deposit_id",
+      "value": ""
+    },
+    {
+      "key": "deposit_2_id",
+      "value": ""
+    },
+    {
+      "key": "due_date_plus7",
+      "value": ""
+    },
+    {
+      "key": "due_date_plus14",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "id": "il-2",
+      "name": "0. Auth",
+      "item": [
+        {
+          "id": "il-1",
+          "name": "Login as Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "description": "Logs in with an EXISTING admin account on this server (fill admin_email / admin_password in the collection Variables tab first). Captures admin_token, used for everything Admin-only in this collection (approvals, refunds, reports, granting teacher permissions).",
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{admin_email}}\",\n  \"password\": \"{{admin_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('admin_token', json.token);",
+                  "pm.test('Role is admin', () => pm.expect(json.user.role).to.eql('admin'));"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Run this first. Everything else in the collection either reuses admin_token or logs in as a teacher/parent created in Folder 1."
+    },
+    {
+      "id": "il-10",
+      "name": "1. Setup - Test Data",
+      "item": [
+        {
+          "id": "il-3",
+          "name": "Create Test Class",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "A class used to demonstrate Section 4.6 (class-wise free/chargeable items) — the test student below gets assigned to this class.",
+            "url": {
+              "raw": "{{base_url}}/classes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "classes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ZZIL Test Class {{run_tag}}\",\n  \"classType\": \"FIXED_TIME\",\n  \"startTime\": \"09:00\",\n  \"endTime\": \"12:00\",\n  \"days\": [\n    \"MON\",\n    \"TUE\",\n    \"WED\",\n    \"THU\",\n    \"FRI\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('class_id', json.data.id || json.data._id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-4",
+          "name": "Create Test Teacher",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Creates a fresh teacher account. Its inventory/library permissions are OFF by default — the next request turns them ON so this collection can exercise every guarded endpoint.",
+            "url": {
+              "raw": "{{base_url}}/teachers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "teachers"
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "ZZIL Test Teacher",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "zzil.teacher.{{run_tag}}@example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "phone",
+                  "value": "9876500001",
+                  "type": "text"
+                },
+                {
+                  "key": "dateOfJoining",
+                  "value": "2026-01-01",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "{{teacher_password}}",
+                  "type": "text"
+                },
+                {
+                  "key": "status",
+                  "value": "Active",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('teacher_id', json.data.teacher.id);",
+                  "pm.collectionVariables.set('teacher_user_id', json.data.teacher.userId);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-5",
+          "name": "Grant Teacher Inventory + Library Permissions",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "THIS is the admin action described in the proposal doc's Section 4.11 — Admin delegating Library/Inventory access to a teacher, permission-by-permission. Here we grant all 7 for testing convenience; in real use you would only enable what that specific staff member needs (e.g. only canManageLibraryIssue for someone who just handles the library counter).",
+            "url": {
+              "raw": "{{base_url}}/teachers/{{teacher_id}}/permissions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "teachers",
+                "{{teacher_id}}",
+                "permissions"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"permissions\": {\n    \"canManageLibraryCatalog\": true,\n    \"canManageLibraryIssue\": true,\n    \"canViewLibraryReports\": true,\n    \"canManageInventoryStockIn\": true,\n    \"canManageInventoryStockOut\": true,\n    \"canManageInventoryCatalog\": true,\n    \"canViewInventoryReports\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('canManageInventoryStockOut is true', () => pm.expect(pm.response.json().data.permissions.canManageInventoryStockOut).to.eql(true));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-6",
+          "name": "Login as Test Teacher",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "description": "Captures teacher_token — used for every \"teacher does X\" request below (Stock Out requests, Borrow/Buy/Return, etc.), so you can see the permission guard actually working (not just admin bypassing everything).",
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"zzil.teacher.{{run_tag}}@example.com\",\n  \"password\": \"{{teacher_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('teacher_token', json.token);",
+                  "pm.test('Role is teacher', () => pm.expect(json.user.role).to.eql('teacher'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-7",
+          "name": "Create Test Student (+ Parent Account)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Creates a student AND a linked parent account in one call (existing BrainBuilder behaviour). This is the parent who will borrow/buy library items and hold a security deposit in the folders below.",
+            "url": {
+              "raw": "{{base_url}}/students",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "students"
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "firstName",
+                  "value": "ZZIL",
+                  "type": "text"
+                },
+                {
+                  "key": "lastName",
+                  "value": "TestStudent",
+                  "type": "text"
+                },
+                {
+                  "key": "gender",
+                  "value": "Male",
+                  "type": "text"
+                },
+                {
+                  "key": "dateOfBirth",
+                  "value": "2019-01-01",
+                  "type": "text"
+                },
+                {
+                  "key": "parent",
+                  "value": "{\"primaryName\":\"ZZIL Test Parent\",\"primaryEmail\":\"zzil.parent.{{run_tag}}@example.com\",\"primaryPhone\":\"9876500002\",\"password\":\"{{parent_password}}\",\"relation\":\"Father\"}",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "{\"city\":\"Test City\",\"state\":\"Test State\",\"pincode\":\"400001\"}",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('student_id', json.data.student.id);",
+                  "pm.collectionVariables.set('parent_email', json.data.parentAccount.email);",
+                  "pm.collectionVariables.set('parent_user_id', json.data.parentAccount.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-8",
+          "name": "Assign Test Class to Test Student",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Puts the test student in the test class, so the \"class-wise free item\" demo in Folder 2 (Categories) actually resolves isFree=true for this student when borrowing/buying.",
+            "url": {
+              "raw": "{{base_url}}/admin/students/{{student_id}}/assign-class",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "students",
+                "{{student_id}}",
+                "assign-class"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"classId\": \"{{class_id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-9",
+          "name": "Login as Test Parent",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "description": "Captures parent_token — used for every parent-facing request (My Items, Wishlist, My Deposits).",
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{parent_email}}\",\n  \"password\": \"{{parent_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('parent_token', json.token);",
+                  "pm.test('Role is parent', () => pm.expect(json.user.role).to.eql('parent'));"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Self-contained: creates its own ZZIL-tagged test teacher, student + parent, and class — you do NOT need to already have these in your database. Run top to bottom once per test run."
+    },
+    {
+      "id": "il-16",
+      "name": "2. Categories",
+      "item": [
+        {
+          "id": "il-11",
+          "name": "Create Category - Books (free for test class)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Books stay approval-required by default for Stock Out (directIssueAllowed:false) — matches the doc's \"Books category is NOT blanket-exempt\" example. freeForClasses demonstrates Section 4.6's category-wide free pricing: every item in this category is free for the test class unless a specific item overrides it.",
+            "url": {
+              "raw": "{{base_url}}/inventory/categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "categories"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ZZIL Books {{run_tag}}\",\n  \"description\": \"Story books, lendable + sellable\",\n  \"directIssueAllowed\": false,\n  \"freeForClasses\": [\n    \"{{class_id}}\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('category_books_id', json.data._id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-12",
+          "name": "Create Category - Stationery",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Category-level default is approval-required. The Pencil item created in Folder 3 gets an ITEM-LEVEL override instead (Section 4.3's actual example: single-item exemption, not a whole category) — Marker will correctly still require approval.",
+            "url": {
+              "raw": "{{base_url}}/inventory/categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "categories"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ZZIL Stationery {{run_tag}}\",\n  \"description\": \"Pencils, erasers, markers\",\n  \"directIssueAllowed\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('category_stationery_id', json.data._id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-13",
+          "name": "List Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Admin / sub-admin / any teacher can list categories (read-only, used to populate dropdowns).",
+            "url": {
+              "raw": "{{base_url}}/inventory/categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-14",
+          "name": "Get Category by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/categories/{{category_books_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "categories",
+                "{{category_books_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-15",
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Requires canManageInventoryCatalog OR canManageLibraryCatalog (admin/sub-admin always allowed).",
+            "url": {
+              "raw": "{{base_url}}/inventory/categories/{{category_stationery_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "categories",
+                "{{category_stationery_id}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Pencils, erasers, markers, glue sticks\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "ItemCategory CRUD. Category is a grouping label (Books, Toys, Stationery, Uniform) that also carries two DEFAULTS an item can override: direct-issue-allowed (Section 4.3) and free-for-class list (Section 4.6)."
+    },
+    {
+      "id": "il-28",
+      "name": "3. Items (Item Master)",
+      "item": [
+        {
+          "id": "il-17",
+          "name": "Create Item - Pencil (item-level direct-issue exempt)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "itemTypes/unit/etc are plain form fields — \"photo\" (file) is optional, attach one manually in Postman if you want to test image upload. directIssueOverride:true means a teacher with canManageInventoryStockOut can issue this WITHOUT admin approval, even though its category is not exempt (Section 4.3).",
+            "url": {
+              "raw": "{{base_url}}/inventory/items",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items"
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "ZZIL Pencil {{run_tag}}",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "{{category_stationery_id}}",
+                  "type": "text"
+                },
+                {
+                  "key": "itemTypes",
+                  "value": "consumable",
+                  "type": "text"
+                },
+                {
+                  "key": "unit",
+                  "value": "piece",
+                  "type": "text"
+                },
+                {
+                  "key": "sellingPrice",
+                  "value": "5",
+                  "type": "text"
+                },
+                {
+                  "key": "minStockLevel",
+                  "value": "20",
+                  "type": "text"
+                },
+                {
+                  "key": "directIssueOverride",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('item_pencil_id', json.data._id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-18",
+          "name": "Create Item - Marker (requires approval)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "No directIssueOverride set, and its category (Stationery) is not exempt either -> Stock Out requests for this item will sit \"pending\" until Admin approves (Folder 5).",
+            "url": {
+              "raw": "{{base_url}}/inventory/items",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items"
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "ZZIL Marker {{run_tag}}",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "{{category_stationery_id}}",
+                  "type": "text"
+                },
+                {
+                  "key": "itemTypes",
+                  "value": "consumable",
+                  "type": "text"
+                },
+                {
+                  "key": "unit",
+                  "value": "piece",
+                  "type": "text"
+                },
+                {
+                  "key": "sellingPrice",
+                  "value": "15",
+                  "type": "text"
+                },
+                {
+                  "key": "minStockLevel",
+                  "value": "10",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('item_marker_id', json.data._id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-19",
+          "name": "Create Item - Storybook (lendable + sellable, free for test class)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "This is the \"Library core\" item (Section 4.4). itemTypes has BOTH lendable and sellable — it can be borrowed with a due date OR bought outright. securityDepositAmount here is informational only; the deposit actually collected is entered per-borrow in Folder 6 and validated against sellingPrice (Section 4.4's deposit safety check). isPublic:true makes it show up on the public catalog (Folder 3's last request) with no login.",
+            "url": {
+              "raw": "{{base_url}}/inventory/items",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items"
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "ZZIL Storybook {{run_tag}}",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "{{category_books_id}}",
+                  "type": "text"
+                },
+                {
+                  "key": "itemTypes",
+                  "value": "lendable,sellable",
+                  "type": "text"
+                },
+                {
+                  "key": "unit",
+                  "value": "piece",
+                  "type": "text"
+                },
+                {
+                  "key": "sellingPrice",
+                  "value": "250",
+                  "type": "text"
+                },
+                {
+                  "key": "securityDepositAmount",
+                  "value": "250",
+                  "type": "text"
+                },
+                {
+                  "key": "availableForSale",
+                  "value": "true",
+                  "type": "text"
+                },
+                {
+                  "key": "isPublic",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('item_book_id', json.data._id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-20",
+          "name": "Create Item - Summer Uniform (sellable only)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Section 4.5 — availableForSale defaults to false on every item; we explicitly turn it ON here so Folder 6's \"Purchase\" request succeeds. (Category reused for simplicity — in real use you'd likely have a separate \"Uniform\" category.)",
+            "url": {
+              "raw": "{{base_url}}/inventory/items",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items"
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "ZZIL Uniform Set {{run_tag}}",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "{{category_books_id}}",
+                  "type": "text"
+                },
+                {
+                  "key": "itemTypes",
+                  "value": "sellable",
+                  "type": "text"
+                },
+                {
+                  "key": "unit",
+                  "value": "set",
+                  "type": "text"
+                },
+                {
+                  "key": "sellingPrice",
+                  "value": "900",
+                  "type": "text"
+                },
+                {
+                  "key": "availableForSale",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.collectionVariables.set('item_uniform_id', json.data._id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-21",
+          "name": "List Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Filters: search, category, itemType, isActive, availableForSale, page, limit.",
+            "url": {
+              "raw": "{{base_url}}/inventory/items?search=ZZIL",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "ZZIL",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-22",
+          "name": "Get Item by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/items/{{item_book_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items",
+                "{{item_book_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-23",
+          "name": "Update Item (toggle isPublic)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Same field set as Create; multipart so you can also swap the photo. All fields optional on update.",
+            "url": {
+              "raw": "{{base_url}}/inventory/items/{{item_uniform_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items",
+                "{{item_uniform_id}}"
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "isPublic",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-24",
+          "name": "Public Catalog (No Auth)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "Section 4.7 — no token needed. Only returns items with isPublic:true, and only safe fields (name, category, photo, price IF availableForSale, itemTypes) — never stock quantity, vendor or cost. This is what a prospective parent sees on the school website before submitting an Enquiry.",
+            "url": {
+              "raw": "{{base_url}}/inventory/items/public?search=ZZIL",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items",
+                "public"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "ZZIL",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-25",
+          "name": "Download Bulk Upload Template (.xlsx)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Section 4.10. Returns a binary .xlsx file (Postman will show \"Save Response\" / preview as a file, not JSON). Columns: name, categoryName, itemTypes, unit, currentStock, minStockLevel, storageLocation, sellingPrice, securityDepositAmount, availableForSale, vendorName, vendorContact — plus a second sheet listing valid existing category names.",
+            "url": {
+              "raw": "{{base_url}}/inventory/items/bulk/template",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items",
+                "bulk",
+                "template"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-26",
+          "name": "Preview Bulk Upload",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "MANUAL STEP: in Postman, click the \"file\" field's value and attach a filled-in copy of the downloaded template (or any .xlsx with the same columns) before sending — collection files can't embed real binary attachments on import. Returns each row with isValid + errors, WITHOUT saving anything, so Admin can review/fix mistakes on screen first (per the doc's bulk-upload flow).",
+            "url": {
+              "raw": "{{base_url}}/inventory/items/bulk/preview",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items",
+                "bulk",
+                "preview"
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": null
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-27",
+          "name": "Commit Bulk Upload",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Normally you POST the exact `rows` array that came back from Preview (after the admin fixes any bad rows on screen). This example skips Preview and hand-crafts one valid row so you can see Commit work standalone. Any row with isValid:false is skipped (not rejected) and reported back under `skipped`.",
+            "url": {
+              "raw": "{{base_url}}/inventory/items/bulk/commit",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items",
+                "bulk",
+                "commit"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rows\": [\n    {\n      \"rowNumber\": 2,\n      \"name\": \"ZZIL Bulk Glue Stick {{run_tag}}\",\n      \"categoryName\": \"ZZIL Stationery {{run_tag}}\",\n      \"categoryExists\": true,\n      \"categoryId\": \"{{category_stationery_id}}\",\n      \"itemTypes\": [\n        \"consumable\"\n      ],\n      \"unit\": \"piece\",\n      \"currentStock\": 30,\n      \"minStockLevel\": 5,\n      \"storageLocation\": \"\",\n      \"sellingPrice\": 20,\n      \"securityDepositAmount\": 0,\n      \"availableForSale\": false,\n      \"vendorName\": \"\",\n      \"vendorContact\": \"\",\n      \"isValid\": true,\n      \"errors\": []\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Item Master — Sections 4.1, 4.5, 4.6, 4.7, 4.10. Every item belongs to a category and carries its own price / deposit / availability / visibility settings."
+    },
+    {
+      "id": "il-34",
+      "name": "4. Stock In",
+      "item": [
+        {
+          "id": "il-29",
+          "name": "Record Stock In - Pencil",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Section 4.2. quantityAdded defaults to packetCount * piecesPerPacket (here: 20) if not given directly. Requires canManageInventoryStockIn — this uses teacher_token to prove the permission granted in Folder 1 actually works. Stock updates immediately; totalCost feeds the Monthly Expense report (Folder 9).",
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-in",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-in"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_pencil_id}}\",\n  \"packetCount\": 2,\n  \"piecesPerPacket\": 10,\n  \"vendorName\": \"ZZIL Test Vendor\",\n  \"totalCost\": 100\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "pm.test('quantityAdded is 20', () => pm.expect(pm.response.json().data.quantityAdded).to.eql(20));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-30",
+          "name": "Record Stock In - Marker",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-in",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-in"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_marker_id}}\",\n  \"quantityAdded\": 15,\n  \"vendorName\": \"ZZIL Test Vendor\",\n  \"totalCost\": 225\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-31",
+          "name": "Record Stock In - Storybook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Puts stock on the shelf so the Borrow/Buy requests in Folder 6 have something to issue.",
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-in",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-in"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_book_id}}\",\n  \"quantityAdded\": 5,\n  \"vendorName\": \"ZZIL Book Distributor\",\n  \"totalCost\": 1000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-32",
+          "name": "Record Stock In - Uniform Set",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-in",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-in"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_uniform_id}}\",\n  \"quantityAdded\": 10,\n  \"vendorName\": \"ZZIL Uniform Supplier\",\n  \"totalCost\": 6000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-33",
+          "name": "List Stock In Entries",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-in?itemId={{item_pencil_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-in"
+              ],
+              "query": [
+                {
+                  "key": "itemId",
+                  "value": "{{item_pencil_id}}",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Recording new stock arriving — packet/piece math, vendor, bill, cost. Requires canManageInventoryStockIn (or admin/sub-admin)."
+    },
+    {
+      "id": "il-43",
+      "name": "5. Stock Out / Issue (Approval Workflow)",
+      "item": [
+        {
+          "id": "il-35",
+          "name": "Request Issue - Pencil (direct, no approval needed)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Pencil has directIssueOverride:true (Folder 3), so this is issued IMMEDIATELY (status: \"issued\") — no Admin approval step, stock is deducted right away. This is the doc's Section 4.3 example.",
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-out",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-out"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_pencil_id}}\",\n  \"quantity\": 5,\n  \"issuedToTeacherId\": \"{{teacher_user_id}}\",\n  \"purpose\": \"Class activity\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "pm.test('status is issued (no approval needed)', () => pm.expect(pm.response.json().data.status).to.eql('issued'));",
+                  "pm.collectionVariables.set('stock_issue_direct_id', pm.response.json().data._id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-36",
+          "name": "Request Issue - Marker (requires approval)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Marker has NO item override and its category is not exempt -> this sits \"pending\" with stock UNTOUCHED until Admin approves or rejects it below. This is the \"by-default Admin approval required\" behaviour from Section 4.3.",
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-out",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-out"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_marker_id}}\",\n  \"quantity\": 3,\n  \"issuedToTeacherId\": \"{{teacher_user_id}}\",\n  \"purpose\": \"Craft activity\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "pm.test('status is pending', () => pm.expect(pm.response.json().data.status).to.eql('pending'));",
+                  "pm.collectionVariables.set('stock_issue_pending_id', pm.response.json().data._id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-37",
+          "name": "List Stock Out Requests (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-out?status=pending",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-out"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-38",
+          "name": "My Issued Items (Teacher \"My Items\")",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Section 4.9 — the teacher's personal panel: everything actually issued to them (not pending requests).",
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-out/my-items",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-out",
+                "my-items"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-39",
+          "name": "My Pending Requests (Teacher)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-out/my-requests",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-out",
+                "my-requests"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-40",
+          "name": "Approve Issue Request (Marker)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Admin-only (even sub-admin can't approve — matches \"Admin approve karta hai\" from the doc). Stock is deducted only now, at approval time, not at request time.",
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-out/{{stock_issue_pending_id}}/approve",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-out",
+                "{{stock_issue_pending_id}}",
+                "approve"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"note\": \"Approved for craft activity\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('status is issued', () => pm.expect(pm.response.json().data.status).to.eql('issued'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-41",
+          "name": "Reject Issue Request (demo)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Creates a second pending Marker request so the NEXT request (Reject) has something to act on — run these two back to back.",
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-out",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-out"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_marker_id}}\",\n  \"quantity\": 1,\n  \"issuedToTeacherId\": \"{{teacher_user_id}}\",\n  \"purpose\": \"Reject-me demo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set('stock_issue_reject_id', pm.response.json().data._id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-42",
+          "name": "Reject Issue Request",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Stock stays untouched — nothing was ever deducted for a pending request.",
+            "url": {
+              "raw": "{{base_url}}/inventory/stock-out/{{stock_issue_reject_id}}/reject",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "stock-out",
+                "{{stock_issue_reject_id}}",
+                "reject"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"note\": \"Not needed right now\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is rejected', () => pm.expect(pm.response.json().data.status).to.eql('rejected'));"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Internal issue to a teacher/class. Section 4.3: by DEFAULT every item needs Admin approval; Admin can exempt a whole category or a single item (see Folder 2/3) so a trusted teacher can issue it directly."
+    },
+    {
+      "id": "il-50",
+      "name": "6. Lending — Borrow / Buy / Return / Renew",
+      "item": [
+        {
+          "id": "il-44",
+          "name": "Borrow WITHOUT Sufficient Deposit (expect 400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "THE DEPOSIT SAFETY CHECK (Section 4.4): the Storybook is worth ₹250 but only ₹100 deposit is offered here -> expect a 400 error blocking the issue. (parent_user_id is captured automatically from Folder 1's \"Create Test Student\" response.)",
+            "url": {
+              "raw": "{{base_url}}/inventory/lending/borrow",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "lending",
+                "borrow"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_book_id}}\",\n  \"parentId\": \"{{parent_user_id}}\",\n  \"studentId\": \"{{student_id}}\",\n  \"dueDate\": \"{{due_date_plus7}}\",\n  \"depositCollected\": 100,\n  \"depositPaymentMode\": \"cash\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set('due_date_plus7', new Date(Date.now() + 7*24*60*60*1000).toISOString());"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400 - deposit too low', () => pm.response.to.have.status(400));",
+                  "pm.test('error mentions deposit', () => pm.expect(pm.response.json().message).to.include('deposit'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-45",
+          "name": "Borrow Storybook (sufficient deposit)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Deposit (₹250) now covers the item's ₹250 selling price, so this succeeds. Because the test student is in the test class, and the Books category is free for that class (Folder 2), priceCharged will show as free/₹0 logic (isFree true) even though this is a borrow, not a purchase, so isFree here just reflects the resolved pricing rule for reference. Creates BOTH the LendingTransaction and a SecurityDeposit record (receipt, \"held\" status) in one call.",
+            "url": {
+              "raw": "{{base_url}}/inventory/lending/borrow",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "lending",
+                "borrow"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_book_id}}\",\n  \"parentId\": \"{{parent_user_id}}\",\n  \"studentId\": \"{{student_id}}\",\n  \"dueDate\": \"{{due_date_plus7}}\",\n  \"depositCollected\": 250,\n  \"depositPaymentMode\": \"cash\",\n  \"notes\": \"ZZIL test borrow\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set('due_date_plus7', new Date(Date.now() + 7*24*60*60*1000).toISOString());"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.test('status is active', () => pm.expect(json.data.status).to.eql('active'));",
+                  "pm.test('a SecurityDeposit was created', () => pm.expect(json.data.securityDeposit).to.not.be.null);",
+                  "pm.collectionVariables.set('lending_borrow_id', json.data._id);",
+                  "pm.collectionVariables.set('deposit_id', json.data.securityDeposit._id || json.data.securityDeposit);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-46",
+          "name": "Purchase Uniform Set (Available For Sale)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Succeeds because availableForSale:true was set on this item (Section 4.5). Try this against an item with availableForSale:false and you should get a 400 \"not available for sale\".",
+            "url": {
+              "raw": "{{base_url}}/inventory/lending/purchase",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "lending",
+                "purchase"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_uniform_id}}\",\n  \"parentId\": \"{{parent_user_id}}\",\n  \"studentId\": \"{{student_id}}\",\n  \"notes\": \"ZZIL test purchase\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('lending_purchase_id', pm.response.json().data._id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-47",
+          "name": "List Lending Transactions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/lending?status=active",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "lending"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "active",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-48",
+          "name": "Renew Borrow (extend due date)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/lending/{{lending_borrow_id}}/renew",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "lending",
+                "{{lending_borrow_id}}",
+                "renew"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newDueDate\": \"{{due_date_plus14}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set('due_date_plus14', new Date(Date.now() + 14*24*60*60*1000).toISOString());"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-49",
+          "name": "Return Borrowed Item (good condition)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Stock goes back up. The linked deposit is NOT auto-refunded here — it stays \"held\" until Folder 8's explicit Refund request, since handing cash back is a separate real-world action.",
+            "url": {
+              "raw": "{{base_url}}/inventory/lending/{{lending_borrow_id}}/return",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "lending",
+                "{{lending_borrow_id}}",
+                "return"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returnCondition\": \"good\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status is returned', () => pm.expect(pm.response.json().data.status).to.eql('returned'));"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Section 4.4 — the Library core. Staff (teacher/admin) records this on the parent's behalf; parents only VIEW via My Items (Folder 7), they don't call these directly."
+    },
+    {
+      "id": "il-55",
+      "name": "7. My Items & Wishlist (Parent)",
+      "item": [
+        {
+          "id": "il-51",
+          "name": "My Lending History (Parent)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{parent_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Sections 4.7/4.9 — the parent's own borrow/buy history AND wishlist, in one response. Parent-only (roleGuard) — staff use Folder 6's /lending list instead.",
+            "url": {
+              "raw": "{{base_url}}/inventory/lending/my-history",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "lending",
+                "my-history"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-52",
+          "name": "Add Item to Wishlist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{parent_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Section 4.8. When this item's stock next goes from 0 to positive (a Stock In or a return), this parent gets an in-app notification automatically.",
+            "url": {
+              "raw": "{{base_url}}/inventory/wishlist",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "wishlist"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_uniform_id}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-53",
+          "name": "My Wishlist",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{parent_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/wishlist/my-list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "wishlist",
+                "my-list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-54",
+          "name": "Remove Item from Wishlist",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{parent_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/wishlist/{{item_uniform_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "wishlist",
+                "{{item_uniform_id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Parent-facing, self-service: viewing history and managing a wishlist. Everything else in the Library flow (borrow/buy/return) is staff-recorded — see Folder 6's description."
+    },
+    {
+      "id": "il-64",
+      "name": "8. Security Deposits",
+      "item": [
+        {
+          "id": "il-56",
+          "name": "List All Deposits (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/deposits?status=held",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "deposits"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "held",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-57",
+          "name": "Deposit Summary (kiska kitna deposit hai)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Answers \"kiska kitna deposit hamare paas hai\" directly: total held + a per-parent breakdown.",
+            "url": {
+              "raw": "{{base_url}}/inventory/deposits/summary",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "deposits",
+                "summary"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-58",
+          "name": "My Deposits (Parent)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{parent_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/deposits/my",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "deposits",
+                "my"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-59",
+          "name": "Refund Deposit (after return)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Only works once the linked item has actually been returned (try it before Folder 6's Return request and you'll get a 400). Supports an optional deductionAmount + deductionReason (e.g. \"Damaged, deduct ₹50 for repair\") — omit both for a full refund like this example.",
+            "url": {
+              "raw": "{{base_url}}/inventory/deposits/{{deposit_id}}/refund",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "deposits",
+                "{{deposit_id}}",
+                "refund"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mode\": \"upi\",\n  \"transactionRef\": \"ZZIL-TEST-REFUND-001\",\n  \"note\": \"Refunded at counter\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('status is refunded', () => pm.expect(pm.response.json().data.status).to.eql('refunded'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-60",
+          "name": "Borrow Storybook #2 (for lost/forfeit demo)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/lending/borrow",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "lending",
+                "borrow"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_book_id}}\",\n  \"parentId\": \"{{parent_user_id}}\",\n  \"studentId\": \"{{student_id}}\",\n  \"dueDate\": \"{{due_date_plus7}}\",\n  \"depositCollected\": 250,\n  \"depositPaymentMode\": \"cash\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set('due_date_plus7', new Date(Date.now() + 7*24*60*60*1000).toISOString());"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set('lending_borrow_2_id', pm.response.json().data._id);",
+                  "pm.collectionVariables.set('deposit_2_id', pm.response.json().data.securityDeposit._id || pm.response.json().data.securityDeposit);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-61",
+          "name": "Return Item (lost) — deposit AUTO-forfeits",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{teacher_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "No separate \"forfeit\" call needed for a lost item — returning it as \"lost\" forfeits the linked deposit automatically (no cash physically moves, so no staff action required).",
+            "url": {
+              "raw": "{{base_url}}/inventory/lending/{{lending_borrow_2_id}}/return",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "lending",
+                "{{lending_borrow_2_id}}",
+                "return"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returnCondition\": \"lost\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "il-62",
+          "name": "Get Forfeited Deposit (verify)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "deposit_2_id should now show status:\"forfeited\" with forfeitReason:\"Item reported lost on return\", with zero manual steps taken.",
+            "url": {
+              "raw": "{{base_url}}/inventory/deposits?status=forfeited",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "deposits"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "forfeited",
+                  "disabled": false
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-63",
+          "name": "Manually Forfeit a Deposit (e.g. never returned)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "For scenarios other than \"reported lost\" — this will 400 if you run it against a deposit that's already refunded/forfeited (run Folder 8 top-to-bottom once, this request is just for reference on a fresh deposit).",
+            "url": {
+              "raw": "{{base_url}}/inventory/deposits/{{deposit_id}}/forfeit",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "deposits",
+                "{{deposit_id}}",
+                "forfeit"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"ZZIL demo — manual forfeiture, e.g. item never returned after a long time\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "The money held against a borrow (Section 4.4). Deliberately its OWN ledger — not merged into the fee module's Payment/StudentWallet — so a deposit can never accidentally get spent against a tuition due. See the chat explanation for why."
+    },
+    {
+      "id": "il-69",
+      "name": "9. Reports & Dashboard",
+      "item": [
+        {
+          "id": "il-65",
+          "name": "Dashboard Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Total stock value, category-wise breakdown, pending issue requests, active/overdue borrows, top borrowed + top wishlisted items.",
+            "url": {
+              "raw": "{{base_url}}/inventory/reports/dashboard",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "reports",
+                "dashboard"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-66",
+          "name": "Overdue List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/reports/overdue",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "reports",
+                "overdue"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-67",
+          "name": "Low Stock List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/reports/low-stock",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "reports",
+                "low-stock"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-68",
+          "name": "Monthly Expense Report",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Defaults to the current month/year if month/year query params are omitted. Shows Stock In expense AND sales revenue side by side.",
+            "url": {
+              "raw": "{{base_url}}/inventory/reports/monthly-expense?month=7&year=2026",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "reports",
+                "monthly-expense"
+              ],
+              "query": [
+                {
+                  "key": "month",
+                  "value": "7",
+                  "disabled": true
+                },
+                {
+                  "key": "year",
+                  "value": "2026",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Section 4.13."
+    },
+    {
+      "id": "il-76",
+      "name": "99. Cleanup (optional, run last)",
+      "item": [
+        {
+          "id": "il-70",
+          "name": "Retire Item - Pencil",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Item delete is a SOFT delete (isActive:false) — matches the doc's \"retire, don't erase\" stance, since transaction history points at these items. Not strictly necessary to run this folder: every category/item name in this collection is suffixed with {{run_tag}}, so re-running Folders 1-3 with a fresh run_tag never collides with old test data even if you skip cleanup.",
+            "url": {
+              "raw": "{{base_url}}/inventory/items/{{item_pencil_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items",
+                "{{item_pencil_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-71",
+          "name": "Retire Item - Marker",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/items/{{item_marker_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items",
+                "{{item_marker_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-72",
+          "name": "Retire Item - Storybook",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/items/{{item_book_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items",
+                "{{item_book_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-73",
+          "name": "Retire Item - Uniform Set",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/items/{{item_uniform_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "items",
+                "{{item_uniform_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-74",
+          "name": "Delete Category - Books",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "description": "Will 400 if any active item still points at this category — run the item retires above first.",
+            "url": {
+              "raw": "{{base_url}}/inventory/categories/{{category_books_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "categories",
+                "{{category_books_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "il-75",
+          "name": "Delete Category - Stationery",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/inventory/categories/{{category_stationery_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "inventory",
+                "categories",
+                "{{category_stationery_id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "StockEntry / StockIssue / LendingTransaction / SecurityDeposit / Wishlist rows have NO delete endpoint by design (audit trail — same principle as the rest of this codebase) — only categories/items can be cleaned up here. If you want a fully blank slate, remove those test documents directly in MongoDB, or simplest: just re-run with a new run_tag."
+    }
+  ]
+}

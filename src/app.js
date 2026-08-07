@@ -142,6 +142,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Static file serving for uploads
+app.use('/api/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 // Health check endpoint

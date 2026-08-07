@@ -207,24 +207,27 @@ const AdminLayout = () => {
             textDecoration: "none",
             fontSize: "0.845rem",
             fontWeight: active ? 700 : 500,
-            color: active ? "#ffffff" : "rgba(255,255,255,0.65)",
-            background: active ? "rgba(255,255,255,0.14)" : "transparent",
+            color: active ? "#ffffff" : "rgba(255,255,255,0.62)",
+            background: active
+              ? "linear-gradient(90deg, rgba(226,185,77,0.16) 0%, rgba(226,185,77,0.05) 100%)"
+              : "transparent",
             borderLeft: active
-              ? "3px solid #D4AF37"
+              ? "3px solid #E2B94D"
               : "3px solid transparent",
+            boxShadow: active ? "inset 0 0 0 1px rgba(226,185,77,0.12)" : "none",
             transition: "all 0.18s ease",
             marginBottom: 1,
           }}
           onMouseEnter={(e) => {
             if (!active) {
-              e.currentTarget.style.background = "rgba(255,255,255,0.07)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.06)";
               e.currentTarget.style.color = "#fff";
             }
           }}
           onMouseLeave={(e) => {
             if (!active) {
               e.currentTarget.style.background = "transparent";
-              e.currentTarget.style.color = "rgba(255,255,255,0.65)";
+              e.currentTarget.style.color = "rgba(255,255,255,0.62)";
             }
           }}
         >
@@ -234,6 +237,7 @@ const AdminLayout = () => {
               height: 17,
               flexShrink: 0,
               opacity: active ? 1 : 0.8,
+              color: active ? "#E2B94D" : "currentColor",
             }}
             fill="none"
             stroke="currentColor"
@@ -255,9 +259,9 @@ const AdminLayout = () => {
                     width: 6,
                     height: 6,
                     borderRadius: "50%",
-                    background: "#fff",
+                    background: "#E2B94D",
                     flexShrink: 0,
-                    boxShadow: "0 0 6px rgba(255,255,255,0.7)",
+                    boxShadow: "0 0 6px rgba(226,185,77,0.8)",
                   }}
                 />
               )}
@@ -273,18 +277,18 @@ const AdminLayout = () => {
       <style>{`
 
         @keyframes notifPulse {
-          0%,100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.6); }
-          50%      { box-shadow: 0 0 0 4px rgba(212,175,55,0); }
+          0%,100% { box-shadow: 0 0 0 0 rgba(226,185,77,0.6); }
+          50%      { box-shadow: 0 0 0 4px rgba(226,185,77,0); }
         }
         .notif-dot { animation: notifPulse 2s ease-in-out infinite; }
 
         .sb-scroll::-webkit-scrollbar       { width: 3px; }
         .sb-scroll::-webkit-scrollbar-track { background: transparent; }
-        .sb-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 99px; }
+        .sb-scroll::-webkit-scrollbar-thumb { background: rgba(226,185,77,0.25); border-radius: 99px; }
 
         .search-box:focus {
           background: #fff !important;
-          box-shadow: 0 0 0 2px rgba(15,76,92,0.18);
+          box-shadow: 0 0 0 2px rgba(11,37,64,0.18);
         }
 
         .topbar-shadow {
@@ -315,8 +319,9 @@ const AdminLayout = () => {
           ].join(" ")}
           style={{
             background:
-              "linear-gradient(180deg, #0F4C5C 0%, #0a3540 40%, #051d24 100%)",
-            boxShadow: "4px 0 28px rgba(0,0,0,0.35)",
+              "linear-gradient(180deg, #0C2A47 0%, #081A2E 45%, #030B15 100%)",
+            boxShadow:
+              "4px 0 32px rgba(0,0,0,0.45), inset -1px 0 0 rgba(226,185,77,0.07)",
           }}
         >
           {/* ── Logo Header ── */}
@@ -326,8 +331,8 @@ const AdminLayout = () => {
               display: "flex",
               alignItems: "center",
               padding: sidebarOpen ? "10px 14px" : "10px 8px",
-              borderBottom: "1px solid rgba(255,255,255,0.07)",
-              background: "rgba(0,0,0,0.2)",
+              borderBottom: "1px solid rgba(226,185,77,0.10)",
+              background: "rgba(0,0,0,0.22)",
             }}
           >
             {sidebarOpen ? (
@@ -352,7 +357,7 @@ const AdminLayout = () => {
                     flexShrink: 0,
                     padding: 3,
                     boxShadow:
-                      "0 2px 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1)",
+                      "0 2px 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(226,185,77,0.25)",
                   }}
                 >
                   <img
@@ -382,7 +387,7 @@ const AdminLayout = () => {
                   </p>
                   <p
                     style={{
-                      color: "#D4AF37",
+                      color: "#E2B94D",
                       fontSize: "0.7rem",
                       fontWeight: 600,
                       lineHeight: 1.3,
@@ -396,9 +401,9 @@ const AdminLayout = () => {
                       marginTop: 3,
                       padding: "1px 7px",
                       borderRadius: 99,
-                      background: "rgba(212,175,55,0.22)",
-                      border: "1px solid rgba(212,175,55,0.35)",
-                      color: "#D4AF37",
+                      background: "rgba(226,185,77,0.16)",
+                      border: "1px solid rgba(226,185,77,0.32)",
+                      color: "#E2B94D",
                       fontSize: "9px",
                       fontWeight: 700,
                       letterSpacing: "0.08em",
@@ -430,7 +435,7 @@ const AdminLayout = () => {
                     alignItems: "center",
                     justifyContent: "center",
                     padding: 3,
-                    boxShadow: "0 2px 10px rgba(0,0,0,0.4)",
+                    boxShadow: "0 2px 10px rgba(0,0,0,0.4), 0 0 0 1px rgba(226,185,77,0.25)",
                   }}
                 >
                   <img
@@ -460,7 +465,7 @@ const AdminLayout = () => {
                   fontWeight: 700,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.3)",
+                  color: "rgba(226,185,77,0.45)",
                   padding: "4px 12px",
                   marginBottom: 4,
                 }}
@@ -503,7 +508,7 @@ const AdminLayout = () => {
           <div
             style={{
               padding: "8px",
-              borderTop: "1px solid rgba(255,255,255,0.07)",
+              borderTop: "1px solid rgba(226,185,77,0.10)",
             }}
           >
             {sidebarOpen ? (
@@ -514,8 +519,8 @@ const AdminLayout = () => {
                   gap: 10,
                   padding: "10px 12px",
                   borderRadius: 12,
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.09)",
+                  background: "rgba(226,185,77,0.06)",
+                  border: "1px solid rgba(226,185,77,0.14)",
                 }}
               >
                 <div
@@ -523,15 +528,15 @@ const AdminLayout = () => {
                     width: 34,
                     height: 34,
                     borderRadius: 10,
-                    background: "linear-gradient(135deg, #0F4C5C, #051d24)",
+                    background: "linear-gradient(135deg, #E2B94D, #B8860B)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
                     fontWeight: 900,
                     fontSize: "0.875rem",
-                    color: "#fff",
-                    boxShadow: "0 2px 8px rgba(229,57,53,0.4)",
+                    color: "#0B2540",
+                    boxShadow: "0 2px 8px rgba(226,185,77,0.4)",
                   }}
                 >
                   {user?.name?.charAt(0) || "A"}
@@ -572,8 +577,8 @@ const AdminLayout = () => {
                     transition: "all 0.2s",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.1)";
-                    e.currentTarget.style.color = "#fff";
+                    e.currentTarget.style.background = "rgba(226,185,77,0.14)";
+                    e.currentTarget.style.color = "#E2B94D";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = "transparent";
@@ -609,13 +614,13 @@ const AdminLayout = () => {
                     width: 34,
                     height: 34,
                     borderRadius: 10,
-                    background: "linear-gradient(135deg, #0F4C5C, #051d24)",
+                    background: "linear-gradient(135deg, #E2B94D, #B8860B)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     fontWeight: 900,
                     fontSize: "0.875rem",
-                    color: "#fff",
+                    color: "#0B2540",
                   }}
                 >
                   {user?.name?.charAt(0) || "A"}
@@ -823,8 +828,8 @@ const AdminLayout = () => {
                 <div
                   className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-black text-sm"
                   style={{
-                    background: "linear-gradient(135deg, #0F4C5C, #051d24)",
-                    boxShadow: "0 2px 10px rgba(15,76,92,0.3)",
+                    background: "linear-gradient(135deg, #0C2A47, #030B15)",
+                    boxShadow: "0 2px 10px rgba(11,37,64,0.35), 0 0 0 1px rgba(226,185,77,0.18)",
                   }}
                 >
                   {user?.name?.charAt(0) || "A"}
@@ -870,7 +875,7 @@ const AdminLayout = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    background: "linear-gradient(135deg, #0F4C5C, #051d24)",
+                    background: "linear-gradient(135deg, #0C2A47, #030B15)",
                   }}
                 >
                   <div
@@ -892,7 +897,7 @@ const AdminLayout = () => {
                         style={{
                           margin: "2px 0 0",
                           fontSize: 12,
-                          color: "rgba(255,255,255,0.8)",
+                          color: "rgba(226,185,77,0.85)",
                         }}
                       >
                         {unreadCount} unread
@@ -906,7 +911,7 @@ const AdminLayout = () => {
                       height: 32,
                       borderRadius: 8,
                       border: "none",
-                      background: "rgba(255,255,255,0.2)",
+                      background: "rgba(226,185,77,0.18)",
                       color: "#fff",
                       cursor: "pointer",
                       display: "flex",
@@ -954,7 +959,7 @@ const AdminLayout = () => {
                       style={{
                         padding: "20px",
                         textAlign: "center",
-                        color: "#D4AF37",
+                        color: "#B8860B",
                       }}
                     >
                       {notifError}
@@ -979,19 +984,19 @@ const AdminLayout = () => {
                             index < transformedNotifications.length - 1
                               ? "1px solid #F3F4F6"
                               : "none",
-                          background: notif.unread ? "#F0F9FF" : "#fff",
+                          background: notif.unread ? "#FBF7ED" : "#fff",
                           cursor: "pointer",
                           transition: "all 0.2s",
                         }}
                         onClick={() => handleNotifClick(notif)}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.background = notif.unread
-                            ? "#E0F2FE"
+                            ? "#F5EDD6"
                             : "#F9FAFB";
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.background = notif.unread
-                            ? "#F0F9FF"
+                            ? "#FBF7ED"
                             : "#fff";
                         }}
                       >
@@ -1008,7 +1013,7 @@ const AdminLayout = () => {
                               height: 40,
                               borderRadius: 10,
                               background: notif.unread
-                                ? "linear-gradient(135deg, #667eea, #764ba2)"
+                                ? "linear-gradient(135deg, #0C2A47, #030B15)"
                                 : "#F3F4F6",
                               display: "flex",
                               alignItems: "center",
@@ -1047,7 +1052,7 @@ const AdminLayout = () => {
                                     width: 8,
                                     height: 8,
                                     borderRadius: "50%",
-                                    background: "#D4AF37",
+                                    background: "#E2B94D",
                                     flexShrink: 0,
                                   }}
                                 />
@@ -1134,10 +1139,10 @@ const AdminLayout = () => {
                       padding: "8px 0",
                       borderRadius: 10,
                       border: "none",
-                      background: "linear-gradient(135deg, #667eea, #764ba2)",
-                      color: "#fff",
+                      background: "linear-gradient(135deg, #E2B94D, #B8860B)",
+                      color: "#0B2540",
                       fontSize: 13,
-                      fontWeight: 600,
+                      fontWeight: 700,
                       cursor: "pointer",
                       textDecoration: "none",
                       display: "inline-block",

@@ -45,13 +45,15 @@ const MultiSelectChip = ({ label, selected, onClick }) => (
   </button>
 );
 
+import { toMediaUrl } from '../../utils/photoUtils';
+
 const AdCard = ({ ad, onEdit, onDelete, onToggleStatus }) => {
   const isActive = ad.status === 'active';
   
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full group">
       <div className="relative aspect-[2/1] bg-slate-100 overflow-hidden">
-        <img src={ad.imageUrl} alt={ad.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+        <img src={toMediaUrl(ad.imageUrl)} alt={ad.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
         <div className="absolute top-2 right-2 flex gap-1.5">
           <span className={`px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider rounded-full border backdrop-blur-md ${isActive ? 'bg-emerald-500/90 text-white border-emerald-400' : 'bg-slate-600/90 text-white border-slate-500'}`}>
             {isActive ? 'Active' : 'Inactive'}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toMediaUrl } from '../../utils/photoUtils';
 
 const Ico = ({ d, size = 16, stroke = 'currentColor', sw = 2 }) => (
   <svg width={size} height={size} fill="none" stroke={stroke} strokeWidth={sw}
@@ -88,9 +89,10 @@ export default function AdBannerCarousel({ ads = [] }) {
               onClick={() => handleAdClick(ad)}
               style={{ cursor }}
             >
-              <img
-                src={ad.imageUrl}
-                alt="Advertisement"
+              <img 
+                src={toMediaUrl(ad.imageUrl)}
+                alt={ad.title}
+                className="w-full h-full object-cover rounded-2xl"
                 loading={i === 0 ? "eager" : "lazy"}
               />
             </div>

@@ -50,7 +50,7 @@ export default function DashboardLayout() {
       {sidebarOpen && (
         <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
-      <aside className={`dashboard-sidebar w-64 bg-slate-800 text-white transform transition-transform lg:transform-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+      <aside className={`dashboard-sidebar w-64 text-white transform transition-transform lg:transform-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`} style={{ background: "linear-gradient(180deg, #0C2A47 0%, #081A2E 45%, #030B15 100%)", boxShadow: "4px 0 32px rgba(0,0,0,0.45), inset -1px 0 0 rgba(226,185,77,0.07)" }}>
         <div className="flex items-center justify-between h-16 px-4 border-b border-slate-700">
           <Link to="/dashboard" className="font-bold text-[#29A9E1]">Zorix School Admin</Link>
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden p-2">

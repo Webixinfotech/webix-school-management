@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useNotifications } from '../context/NotificationContext';
@@ -188,18 +188,18 @@ export default function TeacherLayout() {
         .tl-aside {
           position: fixed; top: 0; left: 0; height: 100vh; z-index: 50;
           display: flex; flex-direction: column; overflow: hidden;
-          background: linear-gradient(180deg, #0F4C5C 0%, #0a3540 40%, #051d24 100%);
-          box-shadow: 4px 0 32px rgba(0,0,0,0.38);
+          background: linear-gradient(180deg, #0C2A47 0%, #081A2E 45%, #030B15 100%);
+          box-shadow: 4px 0 32px rgba(0,0,0,0.45), inset -1px 0 0 rgba(226,185,77,0.07);
           transition: width .3s cubic-bezier(.4,0,.2,1), transform .3s cubic-bezier(.4,0,.2,1);
           transform: translateX(0);
         }
         .tl-main { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; transition: margin-left .3s cubic-bezier(.4,0,.2,1); }
         .tl-orb { position: absolute; border-radius: 50%; pointer-events: none; }
-        .tl-logo { height: 68px; flex-shrink: 0; display: flex; align-items: center; padding: 0 14px; gap: 10px; border-bottom: 1px solid rgba(255,255,255,.07); position: relative; z-index: 1; }
+        .tl-logo { height: 68px; flex-shrink: 0; display: flex; align-items: center; padding: 0 14px; gap: 10px; border-bottom: 1px solid rgba(226,185,77,.10); position: relative; z-index: 1; }
         .tl-nav { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 8px 0; position: relative; z-index: 1; }
         .tl-nav::-webkit-scrollbar { width: 3px; }
-        .tl-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 99px; }
-        .tl-section { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.24); padding: 14px 20px 5px; white-space: nowrap; }
+        .tl-nav::-webkit-scrollbar-thumb { background: rgba(226,185,77,.25); border-radius: 99px; }
+        .tl-section { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(226,185,77,.42); padding: 14px 20px 5px; white-space: nowrap; }
                 .tl-item {
             position: relative; display: flex; align-items: center; gap: 10px;
             margin: 1px 12px; padding: 9px 12px; border-radius: 10px;
@@ -209,29 +209,29 @@ export default function TeacherLayout() {
             transition: all 0.18s ease;
         }
         .tl-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
-        .tl-item.active { background: rgba(255,255,255,0.14); color: #fff; font-weight: 700; border-left-color: #D4AF37; border-radius: 10px; }
-        .tl-item.active:hover { background: rgba(255,255,255,0.14); }
+        .tl-item.active { background: linear-gradient(90deg, rgba(226,185,77,0.16) 0%, rgba(226,185,77,0.05) 100%); color: #fff; font-weight: 700; border-left-color: #E2B94D; border-radius: 10px; box-shadow: inset 0 0 0 1px rgba(226,185,77,0.12); }
+        .tl-item.active:hover { background: linear-gradient(90deg, rgba(226,185,77,0.16) 0%, rgba(226,185,77,0.05) 100%); }
 .tl-icon { display: flex; align-items: center; justify-content: center; border-radius: 9px; flex-shrink: 0; transition: background .18s; }
-        .tl-badge { margin-left:auto; min-width:19px; height:19px; padding:0 5px; border-radius:99px; background:#F59E0B; color:#fff; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(245,158,11,.5); flex-shrink:0; }
-        .tl-tip { position:absolute; left:66px; background:rgba(5,27,15,.96); color:#fff; font-size:12px; font-weight:700; padding:5px 11px; border-radius:8px; white-space:nowrap; pointer-events:none; opacity:0; transform:translateX(-4px); transition:opacity .15s,transform .15s; border:1px solid rgba(255,255,255,.1); backdrop-filter:blur(8px); z-index:200; }
+        .tl-badge { margin-left:auto; min-width:19px; height:19px; padding:0 5px; border-radius:99px; background:linear-gradient(135deg, #E2B94D, #B8860B); color:#0B2540; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(226,185,77,.5); flex-shrink:0; }
+        .tl-tip { position:absolute; left:66px; background:rgba(3,11,21,.96); color:#fff; font-size:12px; font-weight:700; padding:5px 11px; border-radius:8px; white-space:nowrap; pointer-events:none; opacity:0; transform:translateX(-4px); transition:opacity .15s,transform .15s; border:1px solid rgba(255,255,255,.1); backdrop-filter:blur(8px); z-index:200; }
         .tl-item:hover .tl-tip { opacity:1; transform:translateX(0); }
-        .tl-user { margin:8px 8px 14px; padding:10px 12px; border-radius:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); display:flex; align-items:center; gap:10px; position:relative; z-index:1; transition:background .2s; overflow:hidden; }
-        .tl-user:hover { background:rgba(255,255,255,.09); }
-        .tl-avatar { width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg, #0F4C5C, #051d24); display:flex; align-items:center; justify-content:center; font-family:'Baloo 2',cursive; font-size:16px; font-weight:800; color:#fff; flex-shrink:0; box-shadow:0 3px 10px rgba(15,76,92,.4); }
+        .tl-user { margin:8px 8px 14px; padding:10px 12px; border-radius:14px; background:rgba(226,185,77,.06); border:1px solid rgba(226,185,77,.14); display:flex; align-items:center; gap:10px; position:relative; z-index:1; transition:background .2s; overflow:hidden; }
+        .tl-user:hover { background:rgba(226,185,77,.10); }
+        .tl-avatar { width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg, #E2B94D, #B8860B); display:flex; align-items:center; justify-content:center; font-family:'Baloo 2',cursive; font-size:16px; font-weight:800; color:#0B2540; flex-shrink:0; box-shadow:0 3px 10px rgba(226,185,77,.4); }
         .tl-toggle { width:26px; height:26px; border-radius:7px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.55); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .2s,color .2s; flex-shrink:0; }
         .tl-toggle:hover { background:rgba(255,255,255,.16); color:#fff; }
         .tl-logout { width:30px; height:30px; border-radius:9px; background:rgba(239,68,68,.14); border:none; color:rgba(239,68,68,.75); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .2s,color .2s,transform .2s; flex-shrink:0; margin-left:auto; }
         .tl-logout:hover { background:rgba(239,68,68,.24); color:#EF4444; transform:scale(1.08); }
         .tl-topbar { height:64px; flex-shrink:0; display:flex; align-items:center; justify-content:space-between; padding:0 22px; background:rgba(255,255,255,.88); backdrop-filter:blur(20px); border-bottom:1px solid rgba(0,0,0,.06); box-shadow:0 4px 20px rgba(0,0,0,.04); position:relative; z-index:30; }
         .tl-search { width:220px; padding:8px 14px 8px 38px; border-radius:11px; border:1.5px solid transparent; background:rgba(0,0,0,.05); font-family:'Nunito',sans-serif; font-size:13px; font-weight:600; color:#111; outline:none; transition:border-color .2s,box-shadow .2s,width .2s; }
-        .tl-search:focus { border-color:rgba(15,76,92,.35); background:#fff; box-shadow:0 0 0 3px rgba(15,76,92,.1); width:260px; }
+        .tl-search:focus { border-color:rgba(12,42,71,.35); background:#fff; box-shadow:0 0 0 3px rgba(12,42,71,.1); width:260px; }
         .tl-search::placeholder { color:#94a3b8; }
 
         /* Bell */
         .tl-bell-wrap { position: relative; }
         .tl-bell { width:38px; height:38px; border-radius:11px; background:rgba(0,0,0,.04); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; color:#64748B; transition:background .2s,color .2s; }
-        .tl-bell:hover, .tl-bell.open { background:rgba(15,76,92,.1); color:#0F4C5C; }
-        .tl-bell-count { position:absolute; top:-4px; right:-4px; min-width:17px; height:17px; padding:0 4px; background:linear-gradient(135deg, #0F4C5C, #051d24); color:#fff; border-radius:99px; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; border:2px solid white; box-shadow:0 2px 6px rgba(15,76,92,.4); }
+        .tl-bell:hover, .tl-bell.open { background:rgba(12,42,71,.12); color:#0C2A47; }
+        .tl-bell-count { position:absolute; top:-4px; right:-4px; min-width:17px; height:17px; padding:0 4px; background:linear-gradient(135deg, #0C2A47, #030B15); color:#fff; border-radius:99px; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; border:2px solid white; box-shadow:0 2px 6px rgba(226,185,77,.45); }
 
         /* Dropdown */
         .tl-notif-dropdown {
@@ -254,11 +254,11 @@ export default function TeacherLayout() {
         .tl-ni:last-child { border-bottom:none; }
         .tl-ni:hover { background:#F8FAFC; }
         .tl-ni.unread { background:#F5FFFA; }
-        .tl-ni.unread::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:linear-gradient(135deg, #0F4C5C, #051d24); border-radius:0 3px 3px 0; }
+        .tl-ni.unread::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:linear-gradient(180deg, #E2B94D, #B8860B); border-radius:0 3px 3px 0; }
 
         .tl-ni-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 
-        .tl-topav { width:36px; height:36px; border-radius:11px; background:linear-gradient(135deg, #0F4C5C, #051d24); display:flex; align-items:center; justify-content:center; font-family:'Baloo 2',cursive; font-size:15px; font-weight:800; color:#fff; box-shadow:0 3px 10px rgba(15,76,92,.3); cursor:pointer; transition:transform .2s; }
+        .tl-topav { width:36px; height:36px; border-radius:11px; background:linear-gradient(135deg, #0C2A47, #030B15); display:flex; align-items:center; justify-content:center; font-family:'Baloo 2',cursive; font-size:15px; font-weight:800; color:#fff; box-shadow:0 3px 10px rgba(12,42,71,.35), 0 0 0 1px rgba(226,185,77,.18); cursor:pointer; transition:transform .2s; }
         .tl-topav:hover { transform:scale(1.06); }
         .tl-content { flex:1; overflow-y:auto; padding:24px; background:#F8FAFC; }
         .tl-content::-webkit-scrollbar { width:6px; }
@@ -297,7 +297,7 @@ export default function TeacherLayout() {
           {open ? (
             <>
               <div style={{ display:'flex',alignItems:'center',gap:10 }}>
-                <div style={{ width:38,height:38,borderRadius:10,background:'linear-gradient(135deg, #0F4C5C, #051d24)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 3px 14px rgba(15,76,92,.4)',flexShrink:0 }}>
+                <div style={{ width:38,height:38,borderRadius:10,background:'linear-gradient(135deg, #0C2A47, #030B15)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 3px 14px rgba(226,185,77,.35), 0 0 0 1px rgba(226,185,77,.2)',flexShrink:0 }}>
                   <img src={logo} alt="" style={{ width:24,height:24,borderRadius:6 }} />
                 </div>
                 <div>
@@ -311,7 +311,7 @@ export default function TeacherLayout() {
             </>
           ) : (
             <div style={{ display:'flex',flexDirection:'column',alignItems:'center',gap:8,width:'100%' }}>
-              <div style={{ width:38,height:38,borderRadius:10,background:'linear-gradient(135deg, #0F4C5C, #051d24)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 3px 14px rgba(15,76,92,.4)' }}>
+              <div style={{ width:38,height:38,borderRadius:10,background:'linear-gradient(135deg, #0C2A47, #030B15)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 3px 14px rgba(226,185,77,.35), 0 0 0 1px rgba(226,185,77,.2)' }}>
                 <img src={logo} alt="" style={{ width:24,height:24,borderRadius:6 }} />
               </div>
               <button className="tl-toggle" onClick={() => setOpen(true)}>
@@ -362,7 +362,7 @@ export default function TeacherLayout() {
                       </svg>
                     {open && <span style={{ flex:1, fontSize: '0.845rem' }}>{item.label}</span>}
                     {itemWithBadge.badge && open  && <span className="tl-badge">{itemWithBadge.badge}</span>}
-                    {itemWithBadge.badge && !open && <span style={{ position:'absolute',top:5,right:5,width:15,height:15,background:'#D4AF37',borderRadius:'50%',fontSize:9,fontWeight:800,color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 2px 6px rgba(212,175,55,.5)' }}>{itemWithBadge.badge}</span>}
+                    {itemWithBadge.badge && !open && <span style={{ position:'absolute',top:5,right:5,width:15,height:15,background:'linear-gradient(135deg, #E2B94D, #B8860B)',borderRadius:'50%',fontSize:9,fontWeight:800,color:'#0B2540',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 2px 6px rgba(226,185,77,.5)' }}>{itemWithBadge.badge}</span>}
                     {!open && <span className="tl-tip">{item.label}</span>}
                   </Link>
                 </li>
@@ -452,13 +452,13 @@ export default function TeacherLayout() {
                   <div className="tl-nd-header">
                     <div>
                       <p style={{ fontFamily:"'Baloo 2',cursive",fontSize:15,fontWeight:800,color:'#0F172A',margin:0 }}>Notifications</p>
-                      {unreadCount > 0 && <p style={{ fontSize:11,color:'#0F4C5C',fontWeight:700,margin:0 }}>{unreadCount} unread</p>}
+                      {unreadCount > 0 && <p style={{ fontSize:11,color:'#B8860B',fontWeight:700,margin:0 }}>{unreadCount} unread</p>}
                     </div>
                     {unreadCount > 0 && (
                       <button onClick={markAllAsRead}
-                        style={{ fontSize:12,fontWeight:700,color:'#0F4C5C',background:'rgba(15,76,92,.08)',border:'none',padding:'5px 10px',borderRadius:8,cursor:'pointer',transition:'background .15s' }}
-                        onMouseEnter={e=>e.currentTarget.style.background='rgba(15,76,92,.14)'}
-                        onMouseLeave={e=>e.currentTarget.style.background='rgba(15,76,92,.08)'}
+                        style={{ fontSize:12,fontWeight:700,color:'#0C2A47',background:'rgba(12,42,71,.08)',border:'none',padding:'5px 10px',borderRadius:8,cursor:'pointer',transition:'background .15s' }}
+                        onMouseEnter={e=>e.currentTarget.style.background='rgba(12,42,71,.14)'}
+                        onMouseLeave={e=>e.currentTarget.style.background='rgba(12,42,71,.08)'}
                       >
                         Mark all read
                       </button>
@@ -503,15 +503,15 @@ export default function TeacherLayout() {
                                  <path d="M6 18L18 6M6 6l12 12" />
                                </svg>
                              </button>
-                             <div className="tl-ni-icon" style={{ background: 'rgba(212,175,55,0.12)' }}>
-                              <svg width="16" height="16" fill="none" stroke="#D4AF37" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                             <div className="tl-ni-icon" style={{ background: 'rgba(226,185,77,0.14)' }}>
+                              <svg width="16" height="16" fill="none" stroke="#B8860B" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                                 <path d={icon} />
                               </svg>
                             </div>
                             <div style={{ flex:1,minWidth:0 }}>
                               <div style={{ display:'flex',alignItems:'center',justifyContent:'space-between',gap:8,marginBottom:2 }}>
                                 <p style={{ fontSize:13,fontWeight:!n.isRead?800:600,color:'#0F172A',margin:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>{n.title}</p>
-                                {!n.isRead && <span style={{ width:7,height:7,background:'#0F4C5C',borderRadius:'50%',flexShrink:0 }} />}
+                                {!n.isRead && <span style={{ width:7,height:7,background:'#B8860B',borderRadius:'50%',flexShrink:0 }} />}
                               </div>
                               <p style={{ fontSize:12,color:'#64748B',margin:0,lineHeight:1.45,display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',overflow:'hidden' }}>{n.body || n.message || 'No description'}</p>
                               <p style={{ fontSize:11,color:'#94A3B8',margin:'4px 0 0',fontWeight:600 }}>{n.createdAt ? new Date(n.createdAt).toLocaleString() : n.time}</p>
@@ -534,7 +534,7 @@ export default function TeacherLayout() {
                         Clear read
                       </button>
                     )}
-                    <button style={{ fontSize:13,fontWeight:700,color:'#0F4C5C',background:'none',border:'none',cursor:'pointer' }} onClick={() => setNotifOpen(false)}>
+                    <button style={{ fontSize:13,fontWeight:700,color:'#0C2A47',background:'none',border:'none',cursor:'pointer' }} onClick={() => setNotifOpen(false)}>
                       View all notifications →
                     </button>
                   </div>

@@ -3,9 +3,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0F4C5C;
+  --color-primary: #0C2A47;
   --color-secondary: #FFFFFF;
-  --color-accent: #D4AF37;
+  --color-accent: #E2B94D;
 }
 /* Custom Font Classes */
 .font-heading {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { toMediaUrl } from '../../../utils/photoUtils';
 
 // ---- tiny inline icons (no new deps) --------------------------------------
 const Icon = {
@@ -67,7 +68,7 @@ export default function ItemCatalogGrid({
             <div className="relative aspect-square bg-slate-50">
               {item.photo || item.imageUrl ? (
                 <img
-                  src={item.photo || item.imageUrl}
+                  src={toMediaUrl(item.photo || item.imageUrl)}
                   alt={item.name}
                   className="w-full h-full object-cover"
                   loading="lazy"

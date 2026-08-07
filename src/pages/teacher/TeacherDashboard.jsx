@@ -24,7 +24,7 @@ const normalizeClass = cls => ({
 const typeTone = type => {
   if (type === 'HOURS_BASED') return { bg: '#FFFBEB', text: '#B45309', border: '#FDE68A' };
   if (type === 'FLEX_TIME') return { bg: '#F0FDFA', text: '#0F766E', border: '#99F6E4' };
-  return { bg: '#EFF6FF', text: '#0F4C5C', border: '#BFDBFE' };
+  return { bg: '#EFF6FF', text: '#0C2A47', border: '#BFDBFE' };
 };
 
 const HEALTH_LABELS = {
@@ -35,7 +35,7 @@ const HEALTH_LABELS = {
   stomach_ache: 'Stomach ache',
 };
 
-const StatCard = ({ icon: Icon, label, value, sub, tone = '#0F4C5C', to }) => {
+const StatCard = ({ icon: Icon, label, value, sub, tone = '#0C2A47', to }) => {
   const content = (
     <>
       <div className="td-stat-top">
@@ -86,13 +86,13 @@ function BirthdayCard({ person }) {
   const getRoleInfo = (role) => {
     switch (role) {
       case 'student':
-        return { label: 'Student', color: '#0F4C5C', bg: '#EFF6FF' };
+        return { label: 'Student', color: '#0C2A47', bg: '#EFF6FF' };
       case 'staff':
         return { label: 'Staff', color: '#16A34A', bg: '#F0FDF4' };
       case 'parent-father':
       case 'parent-mother':
       case 'parent':
-        return { label: 'Parent', color: '#D4AF37', bg: '#FFFBEB' };
+        return { label: 'Parent', color: '#E2B94D', bg: '#FFFBEB' };
       default:
         return { label: 'Guest', color: '#64748B', bg: '#F1F5F9' };
     }
@@ -105,10 +105,10 @@ function BirthdayCard({ person }) {
   let dayColor = '#16A34A';
   if (daysRemaining === 0) {
     dayLabel = 'Today 🎉';
-    dayColor = '#D4AF37';
+    dayColor = '#E2B94D';
   } else if (daysRemaining === 1) {
     dayLabel = 'Tomorrow';
-    dayColor = '#0F4C5C';
+    dayColor = '#0C2A47';
   } else {
     dayLabel = `In ${daysRemaining} days`;
   }
@@ -120,7 +120,7 @@ function BirthdayCard({ person }) {
           {photo ? (
             <img src={photo} alt={name} className="h-full w-full rounded-full object-cover" />
           ) : (
-            <Gift size={20} color={isToday ? '#D4AF37' : '#0F4C5C'} />
+            <Gift size={20} color={isToday ? '#E2B94D' : '#0C2A47'} />
           )}
         </div>
         {isToday && (
@@ -239,12 +239,12 @@ export default function TeacherDashboard() {
   return (
     <div className="td-root">
       <style>{`
-        .td-root { font-family: 'Inter', -apple-system, sans-serif; color: #051d24; }
+        .td-root { font-family: 'Inter', -apple-system, sans-serif; color: #030B15; }
         .td-page { display:flex; flex-direction:column; gap:18px; max-width:1180px; margin:0 auto; }
-        .td-hero { position:relative; overflow:hidden; border-radius:24px; padding:32px; color:#fff; background:linear-gradient(135deg, #0F4C5C, #051d24); box-shadow:0 10px 30px rgba(15,76,92,.15); }
-        .td-hero::after { content:''; position:absolute; width:400px; height:400px; border-radius:999px; background:linear-gradient(135deg, rgba(212,175,55,0.1), rgba(212,175,55,0)); right:-100px; top:-150px; }
+        .td-hero { position:relative; overflow:hidden; border-radius:24px; padding:32px; color:#fff; background:linear-gradient(135deg, #0C2A47, #030B15); box-shadow:0 10px 30px rgba(12,42,71,.15); }
+        .td-hero::after { content:''; position:absolute; width:400px; height:400px; border-radius:999px; background:linear-gradient(135deg, rgba(226,185,77,0.1), rgba(226,185,77,0)); right:-100px; top:-150px; }
         .td-hero > * { position:relative; z-index:1; }
-        .td-eyebrow { font-size:11px; font-weight:800; letter-spacing:.15em; text-transform:uppercase; color: #D4AF37; }
+        .td-eyebrow { font-size:11px; font-weight:800; letter-spacing:.15em; text-transform:uppercase; color: #E2B94D; }
         .td-title { font-size:28px; font-weight:900; line-height:1.2; margin:8px 0 8px; }
         .td-hero p { margin:0; opacity:.85; font-size:14px; font-weight:500; }
         .td-chips { display:flex; gap:8px; flex-wrap:wrap; margin-top:20px; }
@@ -257,17 +257,17 @@ export default function TeacherDashboard() {
         .td-icon { width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; }
         .td-sub { font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px; background:#F8FAFC; color:#64748B; border: 1px solid #E2E8F0; }
         .td-stat-label { margin:14px 0 4px; color:#64748B; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; }
-        .td-stat-value { font-size:32px; font-weight:900; line-height:1; margin:0; color:#051d24; }
+        .td-stat-value { font-size:32px; font-weight:900; line-height:1; margin:0; color:#030B15; }
         .td-actions { grid-template-columns:repeat(4,minmax(0,1fr)); }
-        .td-action { display:flex; flex-direction:column; gap:12px; text-decoration:none; color:#051d24; background:#fff; border:1px solid #F1F5F9; border-radius:20px; padding:20px; box-shadow:0 4px 12px rgba(0,0,0,.03); transition:all .2s ease; }
+        .td-action { display:flex; flex-direction:column; gap:12px; text-decoration:none; color:#030B15; background:#fff; border:1px solid #F1F5F9; border-radius:20px; padding:20px; box-shadow:0 4px 12px rgba(0,0,0,.03); transition:all .2s ease; }
         .td-action:hover { transform:translateY(-3px); box-shadow:0 10px 24px rgba(0,0,0,.06); border-color: #E2E8F0; }
         .td-action-icon { width:46px; height:46px; border-radius:14px; display:flex; align-items:center; justify-content:center; }
         .td-action strong { font-size:15px; font-weight: 800; }
         .td-action span { font-size:13px; color:#64748B; line-height:1.4; }
         .td-panel { background:#fff; border:1px solid #F1F5F9; border-radius:24px; padding:24px; box-shadow:0 4px 16px rgba(0,0,0,.03); }
         .td-panel-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:20px; }
-        .td-panel-title { display:flex; align-items:center; gap:10px; font-size:18px; font-weight: 900; margin:0; color: #051d24; }
-        .td-panel-link { font-size:13px; font-weight:800; color:#0F4C5C; text-decoration:none; background: #EFF6FF; padding: 6px 14px; border-radius: 999px; transition: background 0.2s; }
+        .td-panel-title { display:flex; align-items:center; gap:10px; font-size:18px; font-weight: 900; margin:0; color: #030B15; }
+        .td-panel-link { font-size:13px; font-weight:800; color:#0C2A47; text-decoration:none; background: #EFF6FF; padding: 6px 14px; border-radius: 999px; transition: background 0.2s; }
         .td-panel-link:hover { background: #DBEAFE; }
         .td-class-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
         .td-class { border:1px solid #F1F5F9; border-radius:18px; padding:16px; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.02); transition:transform .2s ease,box-shadow .2s ease; }
@@ -276,7 +276,7 @@ export default function TeacherDashboard() {
         .td-class-name { font-weight:800; font-size:15px; }
         .td-type { font-size:10px; font-weight:800; padding:4px 10px; border-radius:999px; text-transform:uppercase; letter-spacing:0.03em; }
         .td-progress { height:6px; border-radius:999px; background:#F1F5F9; overflow:hidden; }
-        .td-progress > span { display:block; height:100%; border-radius:999px; background:#D4AF37; }
+        .td-progress > span { display:block; height:100%; border-radius:999px; background:#E2B94D; }
         .td-meta { display:flex; justify-content:space-between; gap:8px; margin-top:10px; font-size:12px; font-weight:700; color:#64748B; }
         .td-alerts { display:flex; flex-direction:column; gap:10px; }
         .td-alert { display:grid; grid-template-columns:40px 1fr auto; align-items:center; gap:12px; border:1px solid #FECDD3; background:#FFF1F2; border-radius:16px; padding:12px 14px; }
@@ -287,7 +287,7 @@ export default function TeacherDashboard() {
         .td-alert-time { font-size:12px; font-weight:800; color:#9F1239; white-space:nowrap; }
         .td-empty { text-align:center; padding:32px 12px; color:#94A3B8; font-weight:700; background: #F8FAFC; border-radius: 16px; border: 1px dashed #E2E8F0; }
         .td-loading { min-height:100vh; display: flex; flex-direction: column; align-items:center; justify-content:center; gap:16px; font-weight: 600; color: #64748B; }
-        .td-spinner { width:48px; height:48px; border-radius:999px; border:4px solid #F1F5F9; border-top-color:#0F4C5C; animation:tdSpin .8s linear infinite; }
+        .td-spinner { width:48px; height:48px; border-radius:999px; border:4px solid #F1F5F9; border-top-color:#0C2A47; animation:tdSpin .8s linear infinite; }
         @keyframes tdSpin { to { transform:rotate(360deg); } }
         @media (max-width:980px){ .td-stats,.td-actions,.td-class-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
         @media (max-width:640px){ .td-hero{padding:24px;border-radius:24px}.td-title{font-size:24px}.td-stats,.td-actions,.td-class-grid{grid-template-columns:1fr}.td-alert{grid-template-columns:36px 1fr}.td-alert-time{grid-column:2}.td-panel-head{align-items:flex-start;flex-direction:column}.td-chip{font-size:11px}.td-panel{padding:18px}.td-stat-value{font-size:28px} }
@@ -330,7 +330,7 @@ export default function TeacherDashboard() {
           padding: 8px 16px;
           border-radius: 999px;
           background: #EFF6FF;
-          color: #0F4C5C;
+          color: #0C2A47;
           font-size: 13px;
           font-weight: 800;
           transition: background 0.2s;
@@ -345,9 +345,9 @@ export default function TeacherDashboard() {
           align-items: center;
           justify-content: center;
           background: #FFFBEB;
-          color: #D4AF37;
+          color: #E2B94D;
         }
-        .birthday-section-title { color: #051d24; font-size: 18px; font-weight: 900; margin: 0; }
+        .birthday-section-title { color: #030B15; font-size: 18px; font-weight: 900; margin: 0; }
         .birthday-section-sub { color: #64748B; font-size: 13px; font-weight: 600; margin-top: 2px; }
         .birthday-live-pill {
           display: inline-flex;
@@ -445,7 +445,7 @@ export default function TeacherDashboard() {
           width: 18px;
           height: 18px;
           border-radius: 999px;
-          background: #D4AF37;
+          background: #E2B94D;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -455,7 +455,7 @@ export default function TeacherDashboard() {
         .birthday-card-name {
           font-size: 14px;
           font-weight: 800;
-          color: #051d24;
+          color: #030B15;
           margin: 0;
           white-space: nowrap;
           overflow: hidden;
@@ -535,23 +535,23 @@ export default function TeacherDashboard() {
         )}
 
         <section className="td-grid td-stats">
-          <StatCard to="/teacher/classes" icon={BookOpen} label="My Classes" value={classes.length} tone="#0F4C5C" />
-          <StatCard to="/teacher/manage-students" icon={Users} label="Students" value={totals.students} tone="#0F4C5C" />
-          <StatCard to="/teacher/daily-activity" icon={ClipboardList} label="Reports Filled" value={totals.filled} sub={`${totals.students ? Math.round(totals.filled / totals.students * 100) : 0}%`} tone="#D4AF37" />
-          <StatCard to="/teacher/daily-activity" icon={Clock} label="Pending" value={totals.pending} tone="#D4AF37" />
+          <StatCard to="/teacher/classes" icon={BookOpen} label="My Classes" value={classes.length} tone="#0C2A47" />
+          <StatCard to="/teacher/manage-students" icon={Users} label="Students" value={totals.students} tone="#0C2A47" />
+          <StatCard to="/teacher/daily-activity" icon={ClipboardList} label="Reports Filled" value={totals.filled} sub={`${totals.students ? Math.round(totals.filled / totals.students * 100) : 0}%`} tone="#E2B94D" />
+          <StatCard to="/teacher/daily-activity" icon={Clock} label="Pending" value={totals.pending} tone="#E2B94D" />
         </section>
 
         <section className="td-grid td-actions">
-          <ActionCard to="/teacher/daily-activity" icon={Activity} label="Daily Activity" desc="Mark today's student reports" color="#0F4C5C" />
-          <ActionCard to="/teacher/classes" icon={Users} label="My Classes" desc="Open class-wise student list" color="#0F4C5C" />
-          <ActionCard to="/teacher/attendance" icon={CheckCircle2} label="Attendance" desc="Mark Student attendance" color="#D4AF37" />
-          <ActionCard to="/teacher/my-attendance" icon={CheckCircle2} label="My Attendance" desc="Mark Your attendance" color="#D4AF37" />
+          <ActionCard to="/teacher/daily-activity" icon={Activity} label="Daily Activity" desc="Mark today's student reports" color="#0C2A47" />
+          <ActionCard to="/teacher/classes" icon={Users} label="My Classes" desc="Open class-wise student list" color="#0C2A47" />
+          <ActionCard to="/teacher/attendance" icon={CheckCircle2} label="Attendance" desc="Mark Student attendance" color="#E2B94D" />
+          <ActionCard to="/teacher/my-attendance" icon={CheckCircle2} label="My Attendance" desc="Mark Your attendance" color="#E2B94D" />
         </section>
 
         <section className="td-grid" style={{ gridTemplateColumns: totals.alerts ? '1.2fr .8fr' : '1fr' }}>
           <div className="td-panel">
             <div className="td-panel-head">
-              <h2 className="td-panel-title"><BookOpen size={20} color="#0F4C5C" /> Classes</h2>
+              <h2 className="td-panel-title"><BookOpen size={20} color="#0C2A47" /> Classes</h2>
               <Link className="td-panel-link" to="/teacher/classes">Manage</Link>
             </div>
             {classes.length === 0 ? (

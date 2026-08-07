@@ -34,7 +34,7 @@ const Toast = ({ message, type = 'error', onClose }) => {
     return () => clearTimeout(t);
   }, [message, onClose]);
   if (!message) return null;
-  const s = { error: { bg: '#FEF2F2', border: '#FECACA', text: '#B91C1C' }, success: { bg: '#F0FDF4', border: '#BBF7D0', text: '#15803D' }, warning: { bg: '#FFFBEB', border: '#FCD34D', text: '#B45309' }, info: { bg: '#EFF6FF', border: '#BFDBFE', text: '#0F4C5C' } }[type] || {};
+  const s = { error: { bg: '#FEF2F2', border: '#FECACA', text: '#B91C1C' }, success: { bg: '#F0FDF4', border: '#BBF7D0', text: '#15803D' }, warning: { bg: '#FFFBEB', border: '#FCD34D', text: '#B45309' }, info: { bg: '#EFF6FF', border: '#BFDBFE', text: '#0C2A47' } }[type] || {};
   return (
     <div style={{ position: 'fixed', bottom: 20, right: 20, zIndex: 9999, background: s.bg, border: `1.5px solid ${s.border}`, borderRadius: 12, padding: '11px 16px', display: 'flex', alignItems: 'center', gap: 10, boxShadow: '0 8px 30px rgba(0,0,0,0.12)', maxWidth: 340, animation: 'slideUp .25s ease' }}>
       <AlertCircle size={16} color={s.text} />
@@ -46,7 +46,7 @@ const Toast = ({ message, type = 'error', onClose }) => {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const CLASS_TYPES = {
-  FIXED_TIME:  { id: 'FIXED_TIME',  label: 'Fixed Time',    color: '#0F4C5C', bg: '#EFF6FF', border: '#BFDBFE' },
+  FIXED_TIME:  { id: 'FIXED_TIME',  label: 'Fixed Time',    color: '#0C2A47', bg: '#EFF6FF', border: '#BFDBFE' },
   FLEX_TIME:   { id: 'FLEX_TIME',   label: 'Flexible Time', color: '#0F766E', bg: '#F0FDFA', border: '#99F6E4' },
   HOURS_BASED: { id: 'HOURS_BASED', label: 'Hours Based',   color: '#B45309', bg: '#FFFBEB', border: '#FCD34D' },
 };
@@ -68,9 +68,9 @@ const NEXT_AY = `${CURRENT_START_YR + 1}-${CURRENT_START_YR + 2}`;
 
 // ─── Tokens ───────────────────────────────────────────────────────────────────
 const T = {
-  blue:   { bg: '#EFF6FF', text: '#0F4C5C', border: '#BFDBFE', solid: '#0F4C5C' },
+  blue:   { bg: '#EFF6FF', text: '#0C2A47', border: '#BFDBFE', solid: '#0C2A47' },
   green:  { bg: '#F0FDF4', text: '#15803D', border: '#BBF7D0', solid: '#16A34A' },
-  red:    { bg: '#FFF1F2', text: '#D4AF37', border: '#FECDD3', solid: '#D4AF37' },
+  red:    { bg: '#FFF1F2', text: '#E2B94D', border: '#FECDD3', solid: '#E2B94D' },
   amber:  { bg: '#FFFBEB', text: '#B45309', border: '#FCD34D', solid: '#D97706' },
   teal:   { bg: '#F0FDFA', text: '#0F766E', border: '#99F6E4', solid: '#0D9488' },
   purple: { bg: '#FAF5FF', text: '#7E22CE', border: '#E9D5FF', solid: '#9333EA' },
@@ -176,7 +176,7 @@ const getClassTimingLabel = (student, cls) => {
 };
 
 // ─── Base Styles ──────────────────────────────────────────────────────────────
-const IS = { width: '100%', padding: '9px 12px', borderRadius: 9, border: '1.5px solid #E2E8F0', fontSize: 13, fontWeight: 500, outline: 'none', boxSizing: 'border-box', background: '#fff', fontFamily: 'inherit', color: '#051d24', transition: 'border-color 0.15s' };
+const IS = { width: '100%', padding: '9px 12px', borderRadius: 9, border: '1.5px solid #E2E8F0', fontSize: 13, fontWeight: 500, outline: 'none', boxSizing: 'border-box', background: '#fff', fontFamily: 'inherit', color: '#030B15', transition: 'border-color 0.15s' };
 const LS = { display: 'block', fontSize: 11, fontWeight: 700, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 5 };
 
 // ─── Avatar ───────────────────────────────────────────────────────────────────
@@ -201,7 +201,7 @@ const Modal = ({ open, onClose, title, subtitle, children, maxWidth = 620 }) => 
       <div style={{ width: '100%', maxWidth, background: '#fff', borderRadius: 18, boxShadow: '0 24px 80px rgba(0,0,0,0.25)', display: 'flex', flexDirection: 'column', maxHeight: 'calc(100vh - 40px)', overflow: 'hidden', animation: 'modalIn .22s ease' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', borderBottom: '1px solid #F1F5F9', flexShrink: 0 }}>
           <div>
-            <h2 style={{ margin: 0, fontSize: 16, fontWeight: 800, color: '#051d24' }}>{title}</h2>
+            <h2 style={{ margin: 0, fontSize: 16, fontWeight: 800, color: '#030B15' }}>{title}</h2>
             {subtitle && <p style={{ margin: '2px 0 0', fontSize: 11, color: '#94A3B8' }}>{subtitle}</p>}
           </div>
           <button onClick={onClose} style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid #E2E8F0', background: '#F8FAFC', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94A3B8' }}><X size={15} /></button>
@@ -248,14 +248,14 @@ const QRModal = ({ open, onClose, student, classesData = [] }) => {
                 <div key={label} style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
                   <Icon size={11} color="#94A3B8" style={{ flexShrink: 0 }} />
                   <span style={{ fontSize: 10, color: '#94A3B8', width: 42, flexShrink: 0 }}>{label}</span>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: '#051d24', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{val || '—'}</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: '#030B15', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{val || '—'}</span>
                 </div>
               ))}
             </div>
           </div>
           <div style={{ padding: '8px 12px', background: '#F8FAFC', borderRadius: 9, border: '1px solid #E2E8F0', marginBottom: 12 }}>
             <p style={{ margin: 0, fontSize: 9, color: '#94A3B8', textTransform: 'uppercase', fontWeight: 700 }}>QR Code ID</p>
-            <p style={{ margin: '3px 0 0', fontSize: 10, fontWeight: 700, color: '#0F4C5C', fontFamily: 'monospace', wordBreak: 'break-all' }}>{student.qrCode || `BRAINBUILDER-STU-${student.id}`}</p>
+            <p style={{ margin: '3px 0 0', fontSize: 10, fontWeight: 700, color: '#0C2A47', fontFamily: 'monospace', wordBreak: 'break-all' }}>{student.qrCode || `BRAINBUILDER-STU-${student.id}`}</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             <button onClick={handleDownload} style={{ padding: '9px', borderRadius: 10, border: 'none', background: `linear-gradient(135deg,${from},${to})`, color: '#fff', fontWeight: 700, fontSize: 12, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}><Download size={13} /> Download</button>
@@ -350,14 +350,14 @@ const ParentCredentialsModal = ({ open, onClose, credentials, studentName, paren
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <Phone size={13} color="#7E22CE" style={{ flexShrink: 0 }} />
                     <span style={{ fontSize: 11, color: '#6B21A8', fontWeight: 700, width: 60 }}>Phone:</span>
-                    <span style={{ fontSize: 12, fontWeight: 700, color: '#051d24', flex: 1, fontFamily: 'monospace' }}>{studentPhone}</span>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: '#030B15', flex: 1, fontFamily: 'monospace' }}>{studentPhone}</span>
                   </div>
                 )}
                 {studentEmail && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <Mail size={13} color="#7E22CE" style={{ flexShrink: 0 }} />
                     <span style={{ fontSize: 11, color: '#6B21A8', fontWeight: 700, width: 60 }}>Email:</span>
-                    <span style={{ fontSize: 12, fontWeight: 700, color: '#051d24', flex: 1, fontFamily: 'monospace', wordBreak: 'break-all' }}>{studentEmail}</span>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: '#030B15', flex: 1, fontFamily: 'monospace', wordBreak: 'break-all' }}>{studentEmail}</span>
                   </div>
                 )}
                 {studentPassword && (
@@ -374,30 +374,30 @@ const ParentCredentialsModal = ({ open, onClose, credentials, studentName, paren
           {/* Parent Credentials */}
           <div>
             <label style={{ ...LS, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Users size={13} color="#0F4C5C" />
+              <Users size={13} color="#0C2A47" />
               Parent Login Credentials
             </label>
             <div style={{ background: 'linear-gradient(135deg,#EFF6FF,#DBEAFE)', borderRadius: 12, border: '1.5px solid #BFDBFE', padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <Mail size={13} color="#0F4C5C" style={{ flexShrink: 0 }} />
-                <span style={{ fontSize: 11, color: '#0F4C5C', fontWeight: 700, width: 60 }}>Email:</span>
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#051d24', flex: 1, fontFamily: 'monospace', wordBreak: 'break-all' }}>{credentials.email}</span>
-                <button onClick={() => { navigator.clipboard.writeText(credentials.email); setEmailCopied(true); setTimeout(() => setEmailCopied(false), 2000); }} style={{ padding: '5px 10px', borderRadius: 7, border: 'none', background: emailCopied ? '#DCFCE7' : 'rgba(0,0,0,0.06)', color: emailCopied ? '#16A34A' : '#0F4C5C', fontWeight: 700, fontSize: 11, cursor: 'pointer', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 4 }}>
+                <Mail size={13} color="#0C2A47" style={{ flexShrink: 0 }} />
+                <span style={{ fontSize: 11, color: '#0C2A47', fontWeight: 700, width: 60 }}>Email:</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: '#030B15', flex: 1, fontFamily: 'monospace', wordBreak: 'break-all' }}>{credentials.email}</span>
+                <button onClick={() => { navigator.clipboard.writeText(credentials.email); setEmailCopied(true); setTimeout(() => setEmailCopied(false), 2000); }} style={{ padding: '5px 10px', borderRadius: 7, border: 'none', background: emailCopied ? '#DCFCE7' : 'rgba(0,0,0,0.06)', color: emailCopied ? '#16A34A' : '#0C2A47', fontWeight: 700, fontSize: 11, cursor: 'pointer', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 4 }}>
                   {emailCopied ? <><CheckCircle size={10} /> Copied</> : <><Copy size={10} /> Copy</>}
                 </button>
               </div>
               {primaryPhone && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <Phone size={13} color="#0F4C5C" style={{ flexShrink: 0 }} />
-                  <span style={{ fontSize: 11, color: '#0F4C5C', fontWeight: 700, width: 60 }}>Phone:</span>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#051d24', flex: 1, fontFamily: 'monospace' }}>{primaryPhone}</span>
+                  <Phone size={13} color="#0C2A47" style={{ flexShrink: 0 }} />
+                  <span style={{ fontSize: 11, color: '#0C2A47', fontWeight: 700, width: 60 }}>Phone:</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#030B15', flex: 1, fontFamily: 'monospace' }}>{primaryPhone}</span>
                 </div>
               )}
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <Lock size={13} color="#0F4C5C" style={{ flexShrink: 0 }} />
-                <span style={{ fontSize: 11, color: '#0F4C5C', fontWeight: 700, width: 60 }}>Password:</span>
+                <Lock size={13} color="#0C2A47" style={{ flexShrink: 0 }} />
+                <span style={{ fontSize: 11, color: '#0C2A47', fontWeight: 700, width: 60 }}>Password:</span>
                 <span style={{ fontSize: 12, fontWeight: 700, color: '#DC2626', flex: 1, fontFamily: 'monospace' }}>{credentials.password}</span>
-                <button onClick={() => { navigator.clipboard.writeText(credentials.password); setPassCopied(true); setTimeout(() => setPassCopied(false), 2000); }} style={{ padding: '5px 10px', borderRadius: 7, border: 'none', background: passCopied ? '#DCFCE7' : 'rgba(0,0,0,0.06)', color: passCopied ? '#16A34A' : '#0F4C5C', fontWeight: 700, fontSize: 11, cursor: 'pointer', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 4 }}>
+                <button onClick={() => { navigator.clipboard.writeText(credentials.password); setPassCopied(true); setTimeout(() => setPassCopied(false), 2000); }} style={{ padding: '5px 10px', borderRadius: 7, border: 'none', background: passCopied ? '#DCFCE7' : 'rgba(0,0,0,0.06)', color: passCopied ? '#16A34A' : '#0C2A47', fontWeight: 700, fontSize: 11, cursor: 'pointer', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 4 }}>
                   {passCopied ? <><CheckCircle size={10} /> Copied</> : <><Copy size={10} /> Copy</>}
                 </button>
               </div>
@@ -422,7 +422,7 @@ const ParentCredentialsModal = ({ open, onClose, credentials, studentName, paren
             <p style={{ margin: 0, fontSize: 12, color: '#475569', fontWeight: 700 }}>Send login details to:</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 10 }}>
               {hasFather && (
-                <button onClick={() => sendWhatsApp(fatherPhone)} style={{ padding: '11px 14px', borderRadius: 11, border: '2px solid #0F4C5C', background: '#EFF6FF', color: '#0F4C5C', fontWeight: 700, fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                <button onClick={() => sendWhatsApp(fatherPhone)} style={{ padding: '11px 14px', borderRadius: 11, border: '2px solid #0C2A47', background: '#EFF6FF', color: '#0C2A47', fontWeight: 700, fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
                   <FaWhatsapp size={18} color="#25D366" />
                   Send to Father
                 </button>
@@ -446,8 +446,8 @@ const ParentCredentialsModal = ({ open, onClose, credentials, studentName, paren
               setCopiedAll(true);
               setTimeout(() => setCopiedAll(false), 2000);
             }} style={{ marginTop: 12, padding: '10px 14px', borderRadius: 10, border: '1.5px solid #3B82F6', background: '#EFF6FF', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-              <Copy size={14} color="#0F4C5C" />
-              <span style={{ fontSize: 12, fontWeight: 700, color: '#0F4C5C' }}>
+              <Copy size={14} color="#0C2A47" />
+              <span style={{ fontSize: 12, fontWeight: 700, color: '#0C2A47' }}>
                 {copiedAll ? '✓ Copied to Clipboard!' : 'Copy All Credentials'}
               </span>
             </button>
@@ -463,7 +463,7 @@ const ParentCredentialsModal = ({ open, onClose, credentials, studentName, paren
           </div>
           
           {/* Close Button */}
-          <button onClick={onClose} style={{ width: '100%', padding: '12px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg,#051d24,#051d24)', color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 4px 12px rgba(15,23,42,0.25)' }}>
+          <button onClick={onClose} style={{ width: '100%', padding: '12px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg,#030B15,#030B15)', color: '#fff', fontWeight: 700, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 4px 12px rgba(15,23,42,0.25)' }}>
             <CheckCircle2 size={16} /> Done - Close
           </button>
         </div>
@@ -509,7 +509,7 @@ const TimePicker = ({ value, onChange }) => {
         onClick={() => setOpen(!open)}
         style={{
           ...IS, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          background: '#fff', fontSize: 13, fontWeight: 600, color: '#051d24',
+          background: '#fff', fontSize: 13, fontWeight: 600, color: '#030B15',
         }}
       >
         <span>{value ? (() => { const [h, m] = value.split(':').map(Number); const ampm = h >= 12 ? 'PM' : 'AM'; return `${String(h % 12 || 12)}:${String(m).padStart(2, '0')} ${ampm}`; })() : 'Select time'}</span>
@@ -526,20 +526,20 @@ const TimePicker = ({ value, onChange }) => {
             <div style={{ display: 'flex', gap: 6, marginBottom: 10 }}>
               <button type="button" onClick={() => setMode('hour')} style={{
                 flex: 1, padding: '6px', borderRadius: 8, border: 'none', cursor: 'pointer',
-                background: mode === 'hour' ? '#0F4C5C' : '#F1F5F9',
+                background: mode === 'hour' ? '#0C2A47' : '#F1F5F9',
                 color: mode === 'hour' ? '#fff' : '#475569',
                 fontWeight: 700, fontSize: 12, fontFamily: 'inherit',
               }}>Hour</button>
               <button type="button" onClick={() => setMode('minute')} style={{
                 flex: 1, padding: '6px', borderRadius: 8, border: 'none', cursor: 'pointer',
-                background: mode === 'minute' ? '#0F4C5C' : '#F1F5F9',
+                background: mode === 'minute' ? '#0C2A47' : '#F1F5F9',
                 color: mode === 'minute' ? '#fff' : '#475569',
                 fontWeight: 700, fontSize: 12, fontFamily: 'inherit',
               }}>Minute</button>
               <button type="button" onClick={togglePeriod} style={{
                 flex: 1, padding: '6px', borderRadius: 8, border: 'none', cursor: 'pointer',
                 background: period === 'AM' ? '#EFF6FF' : '#FEF3C7',
-                color: period === 'AM' ? '#0F4C5C' : '#B45309',
+                color: period === 'AM' ? '#0C2A47' : '#B45309',
                 fontWeight: 800, fontSize: 12, fontFamily: 'inherit',
               }}>{period}</button>
             </div>
@@ -549,8 +549,8 @@ const TimePicker = ({ value, onChange }) => {
                 return (
                   <button key={num} type="button" onClick={() => mode === 'hour' ? pickHour(num) : pickMinute(num)} style={{
                     padding: '8px', borderRadius: 8, border: 'none', cursor: 'pointer',
-                    background: isSelected ? '#0F4C5C' : '#FAFAFA',
-                    color: isSelected ? '#fff' : '#051d24',
+                    background: isSelected ? '#0C2A47' : '#FAFAFA',
+                    color: isSelected ? '#fff' : '#030B15',
                     fontWeight: isSelected ? 800 : 600, fontSize: 13, fontFamily: 'inherit',
                   }}>
                     {String(num).padStart(2, '0')}
@@ -581,7 +581,7 @@ const ClassAssignmentWidget = ({ classIds, classTimings, onToggle, onTimingChang
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', gap: 7, alignItems: 'center', flexWrap: 'wrap' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#051d24' }}>{cls.name}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#030B15' }}>{cls.name}</span>
                 <span style={{ fontSize: 10, color: '#94A3B8' }}>§{cls.section}</span>
                 {ct && <span style={{ fontSize: 10, fontWeight: 700, padding: '1px 7px', borderRadius: 99, background: T[tc].bg, color: T[tc].text, border: `1px solid ${T[tc].border}` }}>{ct.label}</span>}
                 {cls.baseFee > 0 && <span style={{ fontSize: 10, fontWeight: 700, padding: '1px 7px', borderRadius: 99, background: '#F0FDF4', color: '#15803D', border: '1px solid #BBF7D0' }}>₹{cls.baseFee} {cls.feeType === 'MONTHLY' ? '/mo' : ''}</span>}
@@ -597,7 +597,7 @@ const ClassAssignmentWidget = ({ classIds, classTimings, onToggle, onTimingChang
                   <AlarmClock size={14} color={T.blue.text} />
                   <div>
                     <p style={{ margin: 0, fontSize: 11, fontWeight: 700, color: T.blue.text }}>Fixed — auto applied</p>
-                    <p style={{ margin: '2px 0 0', fontSize: 13, fontWeight: 800, color: '#051d24' }}>{cls.startTime && cls.endTime ? `${fmt12(cls.startTime)} – ${fmt12(cls.endTime)}` : 'Not set'}</p>
+                    <p style={{ margin: '2px 0 0', fontSize: 13, fontWeight: 800, color: '#030B15' }}>{cls.startTime && cls.endTime ? `${fmt12(cls.startTime)} – ${fmt12(cls.endTime)}` : 'Not set'}</p>
                   </div>
                   <CheckCircle size={14} color={T.green.text} style={{ marginLeft: 'auto' }} />
                 </div>
@@ -685,13 +685,13 @@ const FlexiAddOn = ({ cls, timing, onHoursChange }) => {
 };
 
 // ─── Section ──────────────────────────────────────────────────────────────────
-const Section = ({ title, icon: Icon, color = '#0F4C5C', children, bg = '#F8FAFC' }) => (
+const Section = ({ title, icon: Icon, color = '#0C2A47', children, bg = '#F8FAFC' }) => (
   <div style={{ background: bg, borderRadius: 14, padding: '16px', border: '1px solid #E2E8F0' }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, paddingBottom: 10, borderBottom: '1px solid #E2E8F0' }}>
       <div style={{ width: 28, height: 28, borderRadius: 8, background: `${color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Icon size={14} color={color} />
       </div>
-      <h3 style={{ margin: 0, fontSize: 13, fontWeight: 800, color: '#051d24' }}>{title}</h3>
+      <h3 style={{ margin: 0, fontSize: 13, fontWeight: 800, color: '#030B15' }}>{title}</h3>
     </div>
     {children}
   </div>
@@ -739,7 +739,7 @@ const StudentForm = ({ initial, onSave, onCancel, saveLoading, classesData = [] 
   const [photoPreview, setPhotoPreview] = useState(initial?.photo ? getPhotoUrl(initial.photo) : null);
   const fileRef = useRef();
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
-  const Err = ({ k }) => errors[k] ? <p style={{ margin: '4px 0 0', fontSize: 11, color: '#D4AF37', fontWeight: 600 }}>{errors[k]}</p> : null;
+  const Err = ({ k }) => errors[k] ? <p style={{ margin: '4px 0 0', fontSize: 11, color: '#E2B94D', fontWeight: 600 }}>{errors[k]}</p> : null;
   const handlePhoto = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -809,13 +809,13 @@ const StudentForm = ({ initial, onSave, onCancel, saveLoading, classesData = [] 
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       {/* AY */}
       <div style={{ background: 'linear-gradient(135deg,#EFF6FF,#F0FDFA)', border: '1px solid #BFDBFE', borderRadius: 12, padding: '13px 16px' }}>
-        <p style={{ margin: '0 0 10px', fontSize: 11, fontWeight: 700, color: '#0F4C5C', textTransform: 'uppercase' }}>Admission Session</p>
+        <p style={{ margin: '0 0 10px', fontSize: 11, fontWeight: 700, color: '#0C2A47', textTransform: 'uppercase' }}>Admission Session</p>
         <div style={{ display: 'flex', gap: 8 }}>
           {[CURRENT_AY, NEXT_AY].map(ay => {
             const active = form.admissionAY === ay;
             return (
               <button key={ay} type="button" onClick={() => setForm(f => ({ ...f, admissionAY: ay, admissionYear: parseInt(ay.split('-')[0]) }))}
-                style={{ flex: 1, padding: '9px', borderRadius: 9, border: `2px solid ${active ? '#1E88E5' : '#E2E8F0'}`, background: active ? 'linear-gradient(135deg,#0F4C5C,#051d24)' : '#fff', color: active ? '#fff' : '#475569', fontWeight: 700, fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}>
+                style={{ flex: 1, padding: '9px', borderRadius: 9, border: `2px solid ${active ? '#1E88E5' : '#E2E8F0'}`, background: active ? 'linear-gradient(135deg,#0C2A47,#030B15)' : '#fff', color: active ? '#fff' : '#475569', fontWeight: 700, fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}>
                 {ay} <span style={{ fontSize: 10, opacity: 0.8 }}>{ay === NEXT_AY ? '(Next)' : '(Current)'}</span>
               </button>
             );
@@ -823,7 +823,7 @@ const StudentForm = ({ initial, onSave, onCancel, saveLoading, classesData = [] 
         </div>
       </div>
       {/* Photo + Basic */}
-      <Section title="Student Details" icon={GraduationCap} color="#0F4C5C">
+      <Section title="Student Details" icon={GraduationCap} color="#0C2A47">
         <div style={{ display: 'flex', gap: 14, marginBottom: 14, alignItems: 'center' }}>
           <div onClick={() => fileRef.current?.click()} style={{ width: 72, height: 72, borderRadius: 14, overflow: 'hidden', border: '2px solid #E9D5FF', background: photoPreview ? 'transparent' : 'linear-gradient(135deg,#E9D5FF,#DDD6FE)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}>
             {photoPreview ? <img src={photoPreview} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <Camera size={20} color="#7E22CE" />}
@@ -839,7 +839,7 @@ const StudentForm = ({ initial, onSave, onCancel, saveLoading, classesData = [] 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
           <div style={{ gridColumn: '1/-1' }}>
             <label style={LS}>Full Name *</label>
-            <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="Student's full name" style={{ ...IS, borderColor: errors.name ? '#D4AF37' : '#E2E8F0' }} />
+            <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="Student's full name" style={{ ...IS, borderColor: errors.name ? '#E2B94D' : '#E2E8F0' }} />
             <Err k="name" />
           </div>
           <div>
@@ -860,22 +860,22 @@ const StudentForm = ({ initial, onSave, onCancel, saveLoading, classesData = [] 
           </div>
           <div style={{ gridColumn: '1/-1' }}>
             <label style={LS}>Phone *</label>
-            <input value={form.phone} onChange={e => { const v = e.target.value.replace(/\D/g,''); if (v.length <= 10) set('phone', v); }} placeholder="9876543210" maxLength={10} style={{ ...IS, borderColor: errors.phone ? '#D4AF37' : '#E2E8F0' }} />
+            <input value={form.phone} onChange={e => { const v = e.target.value.replace(/\D/g,''); if (v.length <= 10) set('phone', v); }} placeholder="9876543210" maxLength={10} style={{ ...IS, borderColor: errors.phone ? '#E2B94D' : '#E2E8F0' }} />
             <Err k="phone" />
           </div>
         </div>
       </Section>
       {/* Father */}
-      <Section title="Father's Info & Parent Login" icon={User} color="#0F4C5C">
+      <Section title="Father's Info & Parent Login" icon={User} color="#0C2A47">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
           <div>
             <label style={LS}>Name *</label>
-            <input value={form.fatherName} onChange={e => set('fatherName', e.target.value)} placeholder="Father's name" style={{ ...IS, borderColor: errors.fatherName ? '#D4AF37' : '#E2E8F0' }} />
+            <input value={form.fatherName} onChange={e => set('fatherName', e.target.value)} placeholder="Father's name" style={{ ...IS, borderColor: errors.fatherName ? '#E2B94D' : '#E2E8F0' }} />
             <Err k="fatherName" />
           </div>
           <div>
             <label style={LS}>Mobile *</label>
-            <input value={form.fatherMobile} onChange={e => { const v = e.target.value.replace(/\D/g,''); if (v.length <= 10) set('fatherMobile', v); }} placeholder="Mobile" maxLength={10} style={{ ...IS, borderColor: errors.fatherMobile ? '#D4AF37' : '#E2E8F0' }} />
+            <input value={form.fatherMobile} onChange={e => { const v = e.target.value.replace(/\D/g,''); if (v.length <= 10) set('fatherMobile', v); }} placeholder="Mobile" maxLength={10} style={{ ...IS, borderColor: errors.fatherMobile ? '#E2B94D' : '#E2E8F0' }} />
             <Err k="fatherMobile" />
           </div>
           <div>
@@ -884,17 +884,17 @@ const StudentForm = ({ initial, onSave, onCancel, saveLoading, classesData = [] 
           </div>
           <div>
             <label style={LS}>Email {!initial && '*'}</label>
-            <input type="email" value={form.fatherEmail} onChange={e => set('fatherEmail', e.target.value)} placeholder="For parent login" style={{ ...IS, borderColor: errors.fatherEmail ? '#D4AF37' : '#E2E8F0' }} />
+            <input type="email" value={form.fatherEmail} onChange={e => set('fatherEmail', e.target.value)} placeholder="For parent login" style={{ ...IS, borderColor: errors.fatherEmail ? '#E2B94D' : '#E2E8F0' }} />
             <Err k="fatherEmail" />
           </div>
         </div>
         {!initial && (
           <div style={{ marginTop: 12, background: 'linear-gradient(135deg,#EFF6FF,#F0FDFA)', border: '1.5px solid #BFDBFE', borderRadius: 12, padding: '13px' }}>
             <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 10 }}>
-              <Key size={13} color="#0F4C5C" />
-              <p style={{ margin: 0, fontSize: 12, fontWeight: 800, color: '#0F4C5C' }}>Parent Login Password</p>
+              <Key size={13} color="#0C2A47" />
+              <p style={{ margin: 0, fontSize: 12, fontWeight: 800, color: '#0C2A47' }}>Parent Login Password</p>
             </div>
-            <input type="text" value={form.parentPassword || ''} onChange={e => set('parentPassword', e.target.value)} placeholder="Min 6 characters" style={{ ...IS, fontFamily: 'monospace', borderColor: errors.parentPassword ? '#D4AF37' : '#BFDBFE' }} />
+            <input type="text" value={form.parentPassword || ''} onChange={e => set('parentPassword', e.target.value)} placeholder="Min 6 characters" style={{ ...IS, fontFamily: 'monospace', borderColor: errors.parentPassword ? '#E2B94D' : '#BFDBFE' }} />
             <Err k="parentPassword" />
             <p style={{ margin: '5px 0 0', fontSize: 11, color: '#64748B' }}>💡 Share this with the parent after registration</p>
           </div>
@@ -908,12 +908,12 @@ const StudentForm = ({ initial, onSave, onCancel, saveLoading, classesData = [] 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <div>
                 <label style={{ ...LS, marginBottom: 4 }}>Student Email (Optional)</label>
-                <input type="email" value={form.studentEmail || ''} onChange={e => set('studentEmail', e.target.value)} placeholder="student@example.com" style={{ ...IS, borderColor: errors.studentEmail ? '#D4AF37' : '#E2E8F0' }} />
+                <input type="email" value={form.studentEmail || ''} onChange={e => set('studentEmail', e.target.value)} placeholder="student@example.com" style={{ ...IS, borderColor: errors.studentEmail ? '#E2B94D' : '#E2E8F0' }} />
                 <p style={{ margin: '3px 0 0', fontSize: 10, color: '#64748B' }}>💡 If empty, parent email will be used</p>
               </div>
               <div>
                 <label style={{ ...LS, marginBottom: 4 }}>Student Password</label>
-                <input type="text" value={form.studentPassword || ''} onChange={e => set('studentPassword', e.target.value)} placeholder="Min 6 characters" style={{ ...IS, fontFamily: 'monospace', borderColor: errors.studentPassword ? '#D4AF37' : '#E2E8F0' }} />
+                <input type="text" value={form.studentPassword || ''} onChange={e => set('studentPassword', e.target.value)} placeholder="Min 6 characters" style={{ ...IS, fontFamily: 'monospace', borderColor: errors.studentPassword ? '#E2B94D' : '#E2E8F0' }} />
                 {errors.studentPassword && <Err k="studentPassword" />}
                 <p style={{ margin: '3px 0 0', fontSize: 10, color: '#64748B' }}>💡 Share with student after registration</p>
               </div>
@@ -934,7 +934,7 @@ const StudentForm = ({ initial, onSave, onCancel, saveLoading, classesData = [] 
           <div><label style={LS}>Mobile</label><input value={form.motherMobile} onChange={e => { const v = e.target.value.replace(/\D/g,''); if (v.length <= 10) set('motherMobile', v); }} placeholder="Mobile" maxLength={10} style={IS} /></div>
           <div style={{ gridColumn: '2 / 3', marginTop: -6 }}><Err k="motherMobile" /></div>
           <div><label style={LS}>Date of Birth</label><input type="date" value={form.motherDob} onChange={e => set('motherDob', e.target.value)} style={IS} /></div>
-          <div><label style={LS}>Email</label><input type="email" value={form.motherEmail} onChange={e => set('motherEmail', e.target.value)} placeholder="Email" style={{ ...IS, borderColor: errors.motherEmail ? '#D4AF37' : '#E2E8F0' }} /><Err k="motherEmail" /></div>
+          <div><label style={LS}>Email</label><input type="email" value={form.motherEmail} onChange={e => set('motherEmail', e.target.value)} placeholder="Email" style={{ ...IS, borderColor: errors.motherEmail ? '#E2B94D' : '#E2E8F0' }} /><Err k="motherEmail" /></div>
         </div>
       </Section>
       {/* Address */}
@@ -977,17 +977,17 @@ const StudentForm = ({ initial, onSave, onCancel, saveLoading, classesData = [] 
       <div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            <div style={{ width: 28, height: 28, borderRadius: 8, background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><BookOpen size={14} color="#0F4C5C" /></div>
-            <h3 style={{ margin: 0, fontSize: 13, fontWeight: 800, color: '#051d24' }}>Assign Classes *</h3>
+            <div style={{ width: 28, height: 28, borderRadius: 8, background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><BookOpen size={14} color="#0C2A47" /></div>
+            <h3 style={{ margin: 0, fontSize: 13, fontWeight: 800, color: '#030B15' }}>Assign Classes *</h3>
           </div>
           {form.classIds.length > 0 && <span style={{ fontSize: 11, fontWeight: 700, background: T.blue.bg, color: T.blue.text, padding: '2px 9px', borderRadius: 99, border: `1px solid ${T.blue.border}` }}>{form.classIds.length} selected</span>}
         </div>
-        {errors.classIds && <p style={{ margin: '0 0 8px', fontSize: 11, color: '#D4AF37', fontWeight: 600 }}>{errors.classIds}</p>}
+        {errors.classIds && <p style={{ margin: '0 0 8px', fontSize: 11, color: '#E2B94D', fontWeight: 600 }}>{errors.classIds}</p>}
         <ClassAssignmentWidget classIds={form.classIds} classTimings={form.classTimings} onToggle={toggleClass} onTimingChange={setTiming} onHoursChange={setHours} classesData={classesData} />
       </div>
       {/* Buttons */}
       <div style={{ display: 'flex', gap: 10, paddingTop: 4 }}>
-        <button onClick={() => { if (!saveLoading && validate()) onSave(normalizeStudentForm(form)); }} disabled={saveLoading} style={{ flex: 2, padding: '11px', borderRadius: 11, border: 'none', background: saveLoading ? '#93C5FD' : 'linear-gradient(135deg,#0F4C5C,#051d24)', color: '#fff', fontWeight: 700, fontSize: 13, cursor: saveLoading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7 }}>
+        <button onClick={() => { if (!saveLoading && validate()) onSave(normalizeStudentForm(form)); }} disabled={saveLoading} style={{ flex: 2, padding: '11px', borderRadius: 11, border: 'none', background: saveLoading ? '#93C5FD' : 'linear-gradient(135deg,#0C2A47,#030B15)', color: '#fff', fontWeight: 700, fontSize: 13, cursor: saveLoading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7 }}>
           {saveLoading ? <><Loader2 size={15} style={{ animation: 'spin 1s linear infinite' }} /> {initial ? 'Updating…' : 'Registering…'}</> : <>{initial ? '✅ Update Student' : '🎓 Register Student'}</>}
         </button>
         <button onClick={onCancel} style={{ flex: 1, padding: '11px', borderRadius: 11, border: '1.5px solid #E2E8F0', background: '#fff', color: '#64748B', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>Cancel</button>
@@ -1058,16 +1058,16 @@ const StudentProfileView = ({ student, onClose, onEdit, classesData = [] }) => {
       {/* Parent Login */}
       <div style={{ background: 'linear-gradient(135deg,#EFF6FF,#DBEAFE)', borderRadius: 12, padding: '13px', border: '1.5px solid #BFDBFE' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 10 }}>
-          <Key size={14} color="#0F4C5C" /><p style={{ margin: 0, fontSize: 12, fontWeight: 800, color: '#0F4C5C' }}>Parent Login</p>
+          <Key size={14} color="#0C2A47" /><p style={{ margin: 0, fontSize: 12, fontWeight: 800, color: '#0C2A47' }}>Parent Login</p>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
           <div style={{ background: '#fff', borderRadius: 9, padding: '9px 11px', border: '1px solid #BFDBFE' }}>
-            <p style={{ margin: 0, fontSize: 9, color: '#0F4C5C', fontWeight: 700, textTransform: 'uppercase' }}>Email</p>
-            <p style={{ margin: '2px 0 0', fontSize: 11, fontWeight: 700, color: '#051d24', fontFamily: 'monospace', wordBreak: 'break-all' }}>{student.fatherEmail || '—'}</p>
+            <p style={{ margin: 0, fontSize: 9, color: '#0C2A47', fontWeight: 700, textTransform: 'uppercase' }}>Email</p>
+            <p style={{ margin: '2px 0 0', fontSize: 11, fontWeight: 700, color: '#030B15', fontFamily: 'monospace', wordBreak: 'break-all' }}>{student.fatherEmail || '—'}</p>
           </div>
           <div style={{ background: '#fff', borderRadius: 9, padding: '9px 11px', border: '1px solid #BFDBFE' }}>
-            <p style={{ margin: 0, fontSize: 9, color: '#0F4C5C', fontWeight: 700, textTransform: 'uppercase' }}>Parent</p>
-            <p style={{ margin: '2px 0 0', fontSize: 11, fontWeight: 700, color: '#051d24' }}>{student.fatherName || '—'}</p>
+            <p style={{ margin: 0, fontSize: 9, color: '#0C2A47', fontWeight: 700, textTransform: 'uppercase' }}>Parent</p>
+            <p style={{ margin: '2px 0 0', fontSize: 11, fontWeight: 700, color: '#030B15' }}>{student.fatherName || '—'}</p>
           </div>
         </div>
       </div>
@@ -1081,7 +1081,7 @@ const StudentProfileView = ({ student, onClose, onEdit, classesData = [] }) => {
         ].map(({ icon: Icon, label, val, color }) => (
           <div key={label} style={{ background: T[color].bg, borderRadius: 10, padding: '10px 12px', border: `1px solid ${T[color].border}` }}>
             <div style={{ display: 'flex', gap: 5, alignItems: 'center', marginBottom: 4 }}><Icon size={11} color={T[color].text} /><span style={{ fontSize: 9, fontWeight: 700, color: T[color].text, textTransform: 'uppercase' }}>{label}</span></div>
-            <p style={{ margin: 0, fontSize: 12, fontWeight: 700, color: '#051d24' }}>{val || '—'}</p>
+            <p style={{ margin: 0, fontSize: 12, fontWeight: 700, color: '#030B15' }}>{val || '—'}</p>
           </div>
         ))}
       </div>
@@ -1089,11 +1089,11 @@ const StudentProfileView = ({ student, onClose, onEdit, classesData = [] }) => {
       {student.fatherName && (
         <div style={{ background: '#EFF6FF', borderRadius: 12, padding: '12px 14px', border: '1px solid #BFDBFE' }}>
           <div style={{ display: 'flex', gap: 7, alignItems: 'center', marginBottom: 9 }}>
-            <User size={13} color="#0F4C5C" /><span style={{ fontSize: 12, fontWeight: 800, color: '#0F4C5C' }}>Father</span>
+            <User size={13} color="#0C2A47" /><span style={{ fontSize: 12, fontWeight: 800, color: '#0C2A47' }}>Father</span>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             {[{ label: 'Name', val: student.fatherName }, { label: 'Mobile', val: student.fatherMobile }, student.fatherEmail && { label: 'Email', val: student.fatherEmail }, student.fatherDob && { label: 'DOB', val: formatDate(student.fatherDob) }].filter(Boolean).map(({ label, val }) => (
-              <div key={label}><p style={{ margin: 0, fontSize: 9, color: '#64748B', textTransform: 'uppercase', fontWeight: 700 }}>{label}</p><p style={{ margin: '2px 0 0', fontSize: 12, fontWeight: 700, color: '#051d24' }}>{val || '—'}</p></div>
+              <div key={label}><p style={{ margin: 0, fontSize: 9, color: '#64748B', textTransform: 'uppercase', fontWeight: 700 }}>{label}</p><p style={{ margin: '2px 0 0', fontSize: 12, fontWeight: 700, color: '#030B15' }}>{val || '—'}</p></div>
             ))}
           </div>
         </div>
@@ -1106,7 +1106,7 @@ const StudentProfileView = ({ student, onClose, onEdit, classesData = [] }) => {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             {[{ label: 'Name', val: student.motherName }, { label: 'Mobile', val: student.motherMobile }, student.motherEmail && { label: 'Email', val: student.motherEmail }, student.motherDob && { label: 'DOB', val: formatDate(student.motherDob) }].filter(Boolean).map(({ label, val }) => (
-              <div key={label}><p style={{ margin: 0, fontSize: 9, color: '#64748B', textTransform: 'uppercase', fontWeight: 700 }}>{label}</p><p style={{ margin: '2px 0 0', fontSize: 12, fontWeight: 700, color: '#051d24' }}>{val || '—'}</p></div>
+              <div key={label}><p style={{ margin: 0, fontSize: 9, color: '#64748B', textTransform: 'uppercase', fontWeight: 700 }}>{label}</p><p style={{ margin: '2px 0 0', fontSize: 12, fontWeight: 700, color: '#030B15' }}>{val || '—'}</p></div>
             ))}
           </div>
         </div>
@@ -1125,7 +1125,7 @@ const StudentProfileView = ({ student, onClose, onEdit, classesData = [] }) => {
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                     <div style={{ width: 26, height: 26, borderRadius: 7, background: T[tc].solid, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><TIcon size={12} color="#fff" /></div>
-                    <div><p style={{ margin: 0, fontSize: 13, fontWeight: 800, color: '#051d24' }}>{cls.name}</p><p style={{ margin: 0, fontSize: 9, color: '#94A3B8' }}>§{cls.section}</p></div>
+                    <div><p style={{ margin: 0, fontSize: 13, fontWeight: 800, color: '#030B15' }}>{cls.name}</p><p style={{ margin: 0, fontSize: 9, color: '#94A3B8' }}>§{cls.section}</p></div>
                   </div>
                   <span style={{ padding: '2px 8px', borderRadius: 99, fontSize: 10, fontWeight: 700, background: '#fff', color: T[tc].text, border: `1px solid ${T[tc].border}` }}>{CLASS_TYPES[cls.classType]?.label}</span>
                 </div>
@@ -1136,7 +1136,7 @@ const StudentProfileView = ({ student, onClose, onEdit, classesData = [] }) => {
                   </div>
                   <div style={{ background: 'rgba(255,255,255,0.7)', borderRadius: 7, padding: '7px 9px' }}>
                     <p style={{ margin: 0, fontSize: 9, color: '#94A3B8', textTransform: 'uppercase', fontWeight: 700 }}>Schedule</p>
-                    <p style={{ margin: '2px 0 0', fontSize: 11, fontWeight: 700, color: '#051d24' }}>{formatDays(cls.days)}</p>
+                    <p style={{ margin: '2px 0 0', fontSize: 11, fontWeight: 700, color: '#030B15' }}>{formatDays(cls.days)}</p>
                   </div>
                 </div>
                 {/* Flexi hours are tracked per-class in classTimings regardless of classType,
@@ -1184,11 +1184,11 @@ const StudentProfileView = ({ student, onClose, onEdit, classesData = [] }) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
             {student.siblings.map((sib, i) => (
               <div key={i} style={{ background: '#F8FAFC', borderRadius: 10, padding: '10px 12px', border: '1px solid #E2E8F0', display: 'flex', gap: 10, alignItems: 'center' }}>
-                <div style={{ width: 30, height: 30, borderRadius: 8, flexShrink: 0, background: sib.relation === 'Sister' ? 'linear-gradient(135deg,#EC4899,#DB2777)' : 'linear-gradient(135deg,#0F4C5C,#051d24)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 12 }}>
+                <div style={{ width: 30, height: 30, borderRadius: 8, flexShrink: 0, background: sib.relation === 'Sister' ? 'linear-gradient(135deg,#EC4899,#DB2777)' : 'linear-gradient(135deg,#0C2A47,#030B15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: 12 }}>
                   {sib.name?.charAt(0) || (sib.relation === 'Sister' ? '♀' : '♂')}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <p style={{ margin: 0, fontSize: 12, fontWeight: 700, color: '#051d24' }}>{sib.name || `Sibling ${i + 1}`}</p>
+                  <p style={{ margin: 0, fontSize: 12, fontWeight: 700, color: '#030B15' }}>{sib.name || `Sibling ${i + 1}`}</p>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 2 }}>
                     {[sib.relation, sib.class && `Class ${sib.class}`, sib.school, sib.dob && formatDate(sib.dob)].filter(Boolean).map(v => <span key={v} style={{ fontSize: 10, color: '#64748B' }}>{v}</span>)}
                   </div>
@@ -1357,7 +1357,7 @@ const StudentCard = ({ student, onView, onEdit, onDelete, onQR, onToggleStatus, 
                 const TIcon = cls.classType === 'FIXED_TIME' ? AlarmClock : cls.classType === 'FLEX_TIME' ? Clock : Hourglass;
                 return (
                   <div key={cls.id} style={{ borderRadius: 8, border: `1px solid ${T[tc].border}`, background: T[tc].bg, padding: '6px 9px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: '#051d24' }}>{cls.name}{cls.section ? ` (${cls.section})` : ''}</span>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: '#030B15' }}>{cls.name}{cls.section ? ` (${cls.section})` : ''}</span>
                     <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}><TIcon size={9} color={T[tc].text} /><span style={{ fontSize: 10, color: T[tc].text, fontWeight: 600 }}>{ti.label}</span></div>
                   </div>
                 );
@@ -1369,11 +1369,11 @@ const StudentCard = ({ student, onView, onEdit, onDelete, onQR, onToggleStatus, 
         {/* Actions */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, paddingTop: 8, borderTop: '1px solid #F1F5F9', marginTop: 'auto' }}>
           {[
-            { label: 'View', icon: Eye, bg: '#EFF6FF', color: '#0F4C5C', hoverBg: '#0F4C5C', action: () => onView(student) },
+            { label: 'View', icon: Eye, bg: '#EFF6FF', color: '#0C2A47', hoverBg: '#0C2A47', action: () => onView(student) },
             { label: 'Edit', icon: Edit2, bg: '#FFFBEB', color: '#B45309', hoverBg: '#D97706', action: () => onEdit(student) },
             { label: 'QR', icon: QrCode, bg: '#FAF5FF', color: '#7E22CE', hoverBg: '#9333EA', action: () => onQR(student) },
             { label: 'Flex', icon: Hourglass, bg: '#F0FDFA', color: '#0F766E', hoverBg: '#0D9488', action: () => onFlexReport(student) },
-            { label: student.status === 'Active' ? 'Disable' : 'Enable', icon: Activity, bg: student.status === 'Active' ? '#FFF1F2' : '#F0FDF4', color: student.status === 'Active' ? '#D4AF37' : '#15803D', hoverBg: student.status === 'Active' ? '#D4AF37' : '#16A34A', action: () => onToggleStatus(student) },
+            { label: student.status === 'Active' ? 'Disable' : 'Enable', icon: Activity, bg: student.status === 'Active' ? '#FFF1F2' : '#F0FDF4', color: student.status === 'Active' ? '#E2B94D' : '#15803D', hoverBg: student.status === 'Active' ? '#E2B94D' : '#16A34A', action: () => onToggleStatus(student) },
           ].map(({ label, icon: Icon, bg, color, hoverBg, action }) => (
             <button key={label} onClick={action} style={{ flex: 1, padding: '7px', borderRadius: 9, border: 'none', background: bg, color, fontWeight: 700, fontSize: 11, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4, transition: 'all .15s' }}
               onMouseEnter={e => { e.currentTarget.style.background = hoverBg; e.currentTarget.style.color = '#fff'; }}
@@ -1381,9 +1381,9 @@ const StudentCard = ({ student, onView, onEdit, onDelete, onQR, onToggleStatus, 
               <Icon size={12} /> {label}
             </button>
           ))}
-          <button onClick={() => onDelete(student)} style={{ width: 32, borderRadius: 9, border: 'none', background: '#FFF1F2', color: '#D4AF37', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all .15s', flexShrink: 0 }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#D4AF37'; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#FFF1F2'; e.currentTarget.style.color = '#D4AF37'; }}>
+          <button onClick={() => onDelete(student)} style={{ width: 32, borderRadius: 9, border: 'none', background: '#FFF1F2', color: '#E2B94D', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all .15s', flexShrink: 0 }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#E2B94D'; e.currentTarget.style.color = '#fff'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = '#FFF1F2'; e.currentTarget.style.color = '#E2B94D'; }}>
             <Trash2 size={13} />
           </button>
         </div>
@@ -1756,7 +1756,7 @@ const AdminStudentsPage = () => {
   }, [studentData, statsFilter]);
 
   const stats = [
-    { label: 'Total', filterKey: null, val: pagination.total || studentData.length, icon: Users, color: '#0F4C5C', bg: '#EFF6FF', border: '#BFDBFE' },
+    { label: 'Total', filterKey: null, val: pagination.total || studentData.length, icon: Users, color: '#0C2A47', bg: '#EFF6FF', border: '#BFDBFE' },
     // { label: 'Active', val: studentData.filter(s => s.status === 'Active').length, icon: CheckCircle, color: '#16A34A', bg: '#F0FDF4', border: '#BBF7D0' },
     { label: 'Low Hours', filterKey: 'Low Hours', val: studentData.filter(s => s.status === 'Active' && isHoursCritical(s)).length, icon: AlertTriangle, color: '#DC2626', bg: '#FFF1F2', border: '#FECDD3' },
     // { label: 'Classes', val: classesData.length, icon: BookOpen, color: '#7E22CE', bg: '#FAF5FF', border: '#E9D5FF' },
@@ -1769,7 +1769,7 @@ const AdminStudentsPage = () => {
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes slideUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
         @keyframes modalIn { from { opacity:0; transform:scale(.96) translateY(8px); } to { opacity:1; transform:none; } }
-        input:focus, select:focus, textarea:focus { border-color: #0F4C5C !important; box-shadow: 0 0 0 3px rgba(37,99,235,0.07); }
+        input:focus, select:focus, textarea:focus { border-color: #0C2A47 !important; box-shadow: 0 0 0 3px rgba(37,99,235,0.07); }
         ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 99px; }
         @media (max-width: 768px) {
           .filt { flex-direction: column !important; align-items: stretch !important; }
@@ -1793,7 +1793,7 @@ const AdminStudentsPage = () => {
       {/* Header */}
       <div className="hdr" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 20, gap: 12, flexWrap: 'wrap' }}>
         <div>
-          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 900, color: '#051d24', letterSpacing: '-0.02em' }}>Student Management</h1>
+          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 900, color: '#030B15', letterSpacing: '-0.02em' }}>Student Management</h1>
           <p style={{ margin: '4px 0 0', fontSize: 12, color: '#64748B' }}>Register students, assign  s</p>
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'flex-end' }}>
@@ -1808,7 +1808,7 @@ const AdminStudentsPage = () => {
           <button onClick={() => navigate('/admin/flexi-hours-history')} title="Flexi hours history - view consumption by date & time" style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 18px', background: '#fff', color: '#B45309', border: '1.5px solid #FCD34D', borderRadius: 11, fontWeight: 700, fontSize: 13, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}>
             <Hourglass size={15} /> Flexi Report
           </button>
-          <button onClick={handleNavigateToRegister} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 18px', background: 'linear-gradient(135deg,#0F4C5C,#051d24)', color: '#fff', border: 'none', borderRadius: 11, fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: '0 4px 14px rgba(30,136,229,0.3)', whiteSpace: 'nowrap', flexShrink: 0 }}>
+          <button onClick={handleNavigateToRegister} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 18px', background: 'linear-gradient(135deg,#0C2A47,#030B15)', color: '#fff', border: 'none', borderRadius: 11, fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: '0 4px 14px rgba(30,136,229,0.3)', whiteSpace: 'nowrap', flexShrink: 0 }}>
             <UserPlus size={15} /> Register Student
           </button>
         </div>
@@ -1816,9 +1816,9 @@ const AdminStudentsPage = () => {
       {/* Error */}
       {error && (
         <div style={{ background: '#FFF1F2', border: '1px solid #FECDD3', borderRadius: 12, padding: '11px 16px', display: 'flex', gap: 10, alignItems: 'center', marginBottom: 16 }}>
-          <AlertTriangle size={15} color="#D4AF37" style={{ flexShrink: 0 }} />
-          <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: '#D4AF37', flex: 1 }}>{error}</p>
-          <button onClick={() => setError('')} style={{ width: 24, height: 24, borderRadius: 6, border: 'none', background: '#FECDD3', color: '#D4AF37', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={12} /></button>
+          <AlertTriangle size={15} color="#E2B94D" style={{ flexShrink: 0 }} />
+          <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: '#E2B94D', flex: 1 }}>{error}</p>
+          <button onClick={() => setError('')} style={{ width: 24, height: 24, borderRadius: 6, border: 'none', background: '#FECDD3', color: '#E2B94D', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={12} /></button>
         </div>
       )}
       {/* Stats */}
@@ -1843,7 +1843,7 @@ const AdminStudentsPage = () => {
               }}
             >
               <div style={{ width: 38, height: 38, borderRadius: 10, background: bg, border: `1px solid ${border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><Icon size={18} color={color} /></div>
-              <div><p style={{ margin: 0, fontSize: 10, color: isActive ? color : '#94A3B8', fontWeight: 700, textTransform: 'uppercase' }}>{label}</p><p style={{ margin: '2px 0 0', fontSize: 22, fontWeight: 900, color: '#051d24', lineHeight: 1 }}>{val}</p></div>
+              <div><p style={{ margin: 0, fontSize: 10, color: isActive ? color : '#94A3B8', fontWeight: 700, textTransform: 'uppercase' }}>{label}</p><p style={{ margin: '2px 0 0', fontSize: 22, fontWeight: 900, color: '#030B15', lineHeight: 1 }}>{val}</p></div>
             </div>
           );
         })}
@@ -1917,7 +1917,7 @@ const AdminStudentsPage = () => {
             onClick={() => setViewMode('grid')}
             style={{ 
               padding: '9px 12px', 
-              background: viewMode === 'grid' ? 'linear-gradient(135deg,#0F4C5C,#051d24)' : '#fff', 
+              background: viewMode === 'grid' ? 'linear-gradient(135deg,#0C2A47,#030B15)' : '#fff', 
               color: viewMode === 'grid' ? '#fff' : '#64748B', 
               border: 'none', 
               fontWeight: 700, 
@@ -1936,7 +1936,7 @@ const AdminStudentsPage = () => {
             onClick={() => setViewMode('table')}
             style={{ 
               padding: '9px 12px', 
-              background: viewMode === 'table' ? 'linear-gradient(135deg,#0F4C5C,#051d24)' : '#fff', 
+              background: viewMode === 'table' ? 'linear-gradient(135deg,#0C2A47,#030B15)' : '#fff', 
               color: viewMode === 'table' ? '#fff' : '#64748B', 
               border: 'none', 
               borderLeft: '1px solid #E2E8F0',
@@ -1957,26 +1957,26 @@ const AdminStudentsPage = () => {
       {/* Grid/Table View */}
       {pageLoading
         ? <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '64px 0', gap: 12, color: '#94A3B8' }}>
-          <div style={{ width: 36, height: 36, borderRadius: '50%', border: '3px solid #EFF6FF', borderTopColor: '#0F4C5C', animation: 'spin .8s linear infinite' }} />
+          <div style={{ width: 36, height: 36, borderRadius: '50%', border: '3px solid #EFF6FF', borderTopColor: '#0C2A47', animation: 'spin .8s linear infinite' }} />
           <span style={{ fontSize: 13, fontWeight: 600 }}>Loading students…</span>
         </div>
         : filteredStudentData.length === 0
           ? <div style={{ background: '#fff', borderRadius: 18, padding: '48px 20px', textAlign: 'center', border: '1.5px dashed #E2E8F0' }}>
             <div style={{ width: 64, height: 64, borderRadius: 16, background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px' }}><Users size={28} color="#BFDBFE" /></div>
-            <p style={{ margin: '0 0 6px', fontSize: 16, fontWeight: 800, color: '#051d24' }}>No students found</p>
+            <p style={{ margin: '0 0 6px', fontSize: 16, fontWeight: 800, color: '#030B15' }}>No students found</p>
             <p style={{ margin: '0 0 20px', fontSize: 12, color: '#94A3B8' }}>Register your first student to get started</p>
-            <button onClick={handleNavigateToRegister} style={{ padding: '10px 20px', borderRadius: 10, border: 'none', background: 'linear-gradient(135deg,#0F4C5C,#051d24)', color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 7 }}><UserPlus size={14} /> Register</button>
+            <button onClick={handleNavigateToRegister} style={{ padding: '10px 20px', borderRadius: 10, border: 'none', background: 'linear-gradient(135deg,#0C2A47,#030B15)', color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 7 }}><UserPlus size={14} /> Register</button>
           </div>
           : viewMode === 'grid'
             ? pageLoading
               ? <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '64px 0', gap: 12, color: '#94A3B8' }}>
-                  <div style={{ width: 36, height: 36, borderRadius: '50%', border: '3px solid #EFF6FF', borderTopColor: '#0F4C5C', animation: 'spin .8s linear infinite' }} />
+                  <div style={{ width: 36, height: 36, borderRadius: '50%', border: '3px solid #EFF6FF', borderTopColor: '#0C2A47', animation: 'spin .8s linear infinite' }} />
                   <span style={{ fontSize: 13, fontWeight: 600 }}>Loading students…</span>
                 </div>
               : filteredStudentData.length === 0
                 ? <div style={{ background: '#fff', borderRadius: 18, padding: '48px 20px', textAlign: 'center', border: '1.5px dashed #E2E8F0' }}>
                     <div style={{ width: 64, height: 64, borderRadius: 16, background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px' }}><Users size={28} color="#BFDBFE" /></div>
-                    <p style={{ margin: '0 0 6px', fontSize: 16, fontWeight: 800, color: '#051d24' }}>No students found</p>
+                    <p style={{ margin: '0 0 6px', fontSize: 16, fontWeight: 800, color: '#030B15' }}>No students found</p>
                     <p style={{ margin: '0 0 20px', fontSize: 12, color: '#94A3B8' }}>Try adjusting your filters or register a new student</p>
                   </div>
                 : <div className="stu-grid" style={{ display: 'grid', gap: 16 }}>
@@ -1984,13 +1984,13 @@ const AdminStudentsPage = () => {
                   </div>
             : pageLoading
               ? <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '64px 0', gap: 12, color: '#94A3B8' }}>
-                  <div style={{ width: 36, height: 36, borderRadius: '50%', border: '3px solid #EFF6FF', borderTopColor: '#0F4C5C', animation: 'spin .8s linear infinite' }} />
+                  <div style={{ width: 36, height: 36, borderRadius: '50%', border: '3px solid #EFF6FF', borderTopColor: '#0C2A47', animation: 'spin .8s linear infinite' }} />
                   <span style={{ fontSize: 13, fontWeight: 600 }}>Loading students…</span>
                 </div>
               : filteredStudentData.length === 0
                 ? <div style={{ background: '#fff', borderRadius: 18, padding: '48px 20px', textAlign: 'center', border: '1.5px dashed #E2E8F0' }}>
                     <div style={{ width: 64, height: 64, borderRadius: 16, background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px' }}><Users size={28} color="#BFDBFE" /></div>
-                    <p style={{ margin: '0 0 6px', fontSize: 16, fontWeight: 800, color: '#051d24' }}>No students found</p>
+                    <p style={{ margin: '0 0 6px', fontSize: 16, fontWeight: 800, color: '#030B15' }}>No students found</p>
                     <p style={{ margin: '0 0 20px', fontSize: 12, color: '#94A3B8' }}>Try adjusting your filters or register a new student</p>
                   </div>
                 : <div style={{ background: '#fff', borderRadius: 14, border: '1px solid #F1F5F9', overflow: 'hidden', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
@@ -2018,7 +2018,7 @@ const AdminStudentsPage = () => {
                                   <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                                     <Avatar name={s.name} photo={s.photo} size={38} radius={10} />
                                     <div>
-                                      <p style={{ margin: 0, fontSize: 12, fontWeight: 800, color: '#051d24' }}>{s.name}</p>
+                                      <p style={{ margin: 0, fontSize: 12, fontWeight: 800, color: '#030B15' }}>{s.name}</p>
                                       <p style={{ margin: '2px 0 0', fontSize: 10, color: '#94A3B8', fontFamily: 'monospace' }}>{s.enrollmentId || '—'}</p>
                                     </div>
                                   </div>
@@ -2044,7 +2044,7 @@ const AdminStudentsPage = () => {
                                 </td>
                                 <td style={{ padding: '10px 14px' }}>
                                   <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                                    <span style={{ fontSize: 11, fontWeight: 700, color: '#051d24' }}>{s.fatherName || '—'}</span>
+                                    <span style={{ fontSize: 11, fontWeight: 700, color: '#030B15' }}>{s.fatherName || '—'}</span>
                                     {s.fatherMobile && <span style={{ fontSize: 10, color: '#64748B' }}>{s.fatherMobile}</span>}
                                   </div>
                                 </td>
@@ -2064,7 +2064,7 @@ const AdminStudentsPage = () => {
                                 </td>
                                 <td style={{ padding: '10px 14px' }}>
                                   <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                                    <span style={{ fontSize: 11, fontWeight: 700, color: '#051d24' }}>{enrolled.length} class{enrolled.length !== 1 ? 'es' : ''}</span>
+                                    <span style={{ fontSize: 11, fontWeight: 700, color: '#030B15' }}>{enrolled.length} class{enrolled.length !== 1 ? 'es' : ''}</span>
                                     {enrolled.length > 0 && (
                                       <span style={{ fontSize: 10, color: '#64748B', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                         {enrolled.slice(0, 2).map(c => c.name).join(', ')}
@@ -2075,7 +2075,7 @@ const AdminStudentsPage = () => {
                                 </td>
                                 <td style={{ padding: '10px 14px' }}>
                                   <div style={{ display: 'flex', gap: 5, justifyContent: 'center' }}>
-                                    <button onClick={() => open('view', s)} style={{ width: 28, height: 28, borderRadius: 7, border: 'none', background: '#EFF6FF', color: '#0F4C5C', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="View">
+                                    <button onClick={() => open('view', s)} style={{ width: 28, height: 28, borderRadius: 7, border: 'none', background: '#EFF6FF', color: '#0C2A47', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="View">
                                       <Eye size={13} />
                                     </button>
                                     <button onClick={() => open('edit', s)} style={{ width: 28, height: 28, borderRadius: 7, border: 'none', background: '#FFFBEB', color: '#B45309', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="Edit">
@@ -2084,10 +2084,10 @@ const AdminStudentsPage = () => {
                                     <button onClick={() => open('qr', s)} style={{ width: 28, height: 28, borderRadius: 7, border: 'none', background: '#FAF5FF', color: '#7E22CE', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="QR Code">
                                       <QrCode size={13} />
                                     </button>
-                                    <button onClick={() => handleStatusToggle(s)} style={{ width: 28, height: 28, borderRadius: 7, border: 'none', background: s.status === 'Active' ? '#FFF1F2' : '#F0FDF4', color: s.status === 'Active' ? '#D4AF37' : '#15803D', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title={s.status === 'Active' ? 'Mark Inactive' : 'Mark Active'}>
+                                    <button onClick={() => handleStatusToggle(s)} style={{ width: 28, height: 28, borderRadius: 7, border: 'none', background: s.status === 'Active' ? '#FFF1F2' : '#F0FDF4', color: s.status === 'Active' ? '#E2B94D' : '#15803D', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title={s.status === 'Active' ? 'Mark Inactive' : 'Mark Active'}>
                                       <Activity size={13} />
                                     </button>
-                                    <button onClick={() => handleDelete(s)} style={{ width: 28, height: 28, borderRadius: 7, border: 'none', background: '#FFF1F2', color: '#D4AF37', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="Delete">
+                                    <button onClick={() => handleDelete(s)} style={{ width: 28, height: 28, borderRadius: 7, border: 'none', background: '#FFF1F2', color: '#E2B94D', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} title="Delete">
                                       <Trash2 size={13} />
                                     </button>
                                   </div>
@@ -2104,7 +2104,7 @@ const AdminStudentsPage = () => {
       {pagination.pages > 1 && (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, padding: '24px 0' }}>
           <button onClick={() => setPagination(p => ({ ...p, page: p.page - 1 }))} disabled={pagination.page === 1} style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '8px 14px', borderRadius: 9, border: '1px solid #E2E8F0', background: '#fff', color: '#64748B', fontWeight: 700, fontSize: 12, cursor: 'pointer', opacity: pagination.page === 1 ? 0.4 : 1 }}><ChevronLeft size={13} /> Prev</button>
-          <span style={{ padding: '8px 16px', borderRadius: 9, background: 'linear-gradient(135deg,#0F4C5C,#051d24)', color: '#fff', fontWeight: 700, fontSize: 12 }}>{pagination.page} / {pagination.pages}</span>
+          <span style={{ padding: '8px 16px', borderRadius: 9, background: 'linear-gradient(135deg,#0C2A47,#030B15)', color: '#fff', fontWeight: 700, fontSize: 12 }}>{pagination.page} / {pagination.pages}</span>
           <button onClick={() => setPagination(p => ({ ...p, page: p.page + 1 }))} disabled={pagination.page === pagination.pages} style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '8px 14px', borderRadius: 9, border: '1px solid #E2E8F0', background: '#fff', color: '#64748B', fontWeight: 700, fontSize: 12, cursor: 'pointer', opacity: pagination.page === pagination.pages ? 0.4 : 1 }}>Next <ChevronRight size={13} /></button>
         </div>
       )}

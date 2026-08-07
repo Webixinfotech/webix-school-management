@@ -32,14 +32,14 @@ const serviceMap = {
 // ── Full Service Display Map (includes all frontend form service IDs) ───────
 const fullServiceDisplayMap = {
   // KIDS services - Multicolour tags (Gradient rainbow colors)
-  school:           { label: 'School',           color: 'linear-gradient(135deg,#D4AF37,#B8860B)', icon: '🏫', isKids: true },
+  school:           { label: 'School',           color: 'linear-gradient(135deg,#E2B94D,#B8860B)', icon: '🏫', isKids: true },
   daycare:          { label: 'Daycare',          color: 'linear-gradient(135deg, #F28E3A, #FBBF24)', icon: '🧸', isKids: true },
-  evening_club:     { label: 'Evening Kids Club',color: 'linear-gradient(135deg,#0F4C5C,#051d24)', icon: '🎨', isKids: true },
+  evening_club:     { label: 'Evening Kids Club',color: 'linear-gradient(135deg,#0C2A47,#030B15)', icon: '🎨', isKids: true },
   book_writing:     { label: 'Book Writing',     color: 'linear-gradient(135deg, #16a34a, #10B981)', icon: '📖', isKids: true },
   drawing:          { label: 'Drawing/Art & Craft',color: 'linear-gradient(135deg, #8B5CF6, #A855F7)', icon: '✏️', isKids: true },
   workshops_kids:   { label: 'Workshops',        color: 'linear-gradient(135deg, #EC4899, #F472B6)', icon: '🎭', isKids: true },
   others_kids:      { label: 'Others',           color: 'linear-gradient(135deg, #0B3A64, #3B82F6)', icon: '✨', isKids: true },
-  english_speaking_kids: { label: 'English Speaking Course', color: 'linear-gradient(135deg,#0F4C5C,#051d24)', icon: '🗣️', isKids: true },
+  english_speaking_kids: { label: 'English Speaking Course', color: 'linear-gradient(135deg,#0C2A47,#030B15)', icon: '🗣️', isKids: true },
   phonics_vocab:    { label: 'Phonics and English Vocab', color: 'linear-gradient(135deg, #10B981, #34D399)', icon: '🔤', isKids: true },
   personality_dev:   { label: 'Personality Development', color: 'linear-gradient(135deg, #F59E0B, #FBBF24)', icon: '🌟', isKids: true },
   library:          { label: 'Library',          color: 'linear-gradient(135deg, #0EA5E9, #38BDF8)', icon: '🏛️', isKids: true },
@@ -55,7 +55,7 @@ const fullServiceDisplayMap = {
 
 // ── Status config (added Rejected) ───────────────────────────────────────────
 const statusConfig = {
-  New:       { bg: '#dbeafe', color: '#0F4C5C', dot: '#3b82f6' },
+  New:       { bg: '#dbeafe', color: '#0C2A47', dot: '#3b82f6' },
   Contacted: { bg: '#fef9c3', color: '#92400e', dot: '#f59e0b' },
   Visited:   { bg: '#dcfce7', color: '#166534', dot: '#22c55e' },
   Admitted:  { bg: '#f0fdf4', color: '#14532d', dot: '#16a34a' },
@@ -209,7 +209,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
         ) : (
           <>
             {/* Header */}
-            <div style={{ background: 'linear-gradient(135deg,#D4AF37,#B8860B)', padding: '24px', color: 'white', flexShrink: 0 }}>
+            <div style={{ background: 'linear-gradient(135deg,#E2B94D,#B8860B)', padding: '24px', color: 'white', flexShrink: 0 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' }}>
                 <div style={{ flex: 1 }}>
                   <p style={{ fontSize: '11px', fontWeight: '700', opacity: 0.85, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Enquiry Detail</p>
@@ -299,7 +299,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                 <>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 14px', background: 'linear-gradient(135deg, rgba(232,41,40,0.05), rgba(242,142,58,0.05))', borderRadius: '12px', border: '1px solid rgba(232,41,40,0.2)' }}>
                     <span style={{ fontSize: '16px' }}>✏️</span>
-                    <span style={{ fontSize: '13px', fontWeight: '800', color: '#051d24' }}>Editing Enquiry</span>
+                    <span style={{ fontSize: '13px', fontWeight: '800', color: '#030B15' }}>Editing Enquiry</span>
                     <span style={{ fontSize: '11px', color: '#64748b', marginLeft: 'auto' }}>Fill fields below and click Save</span>
                   </div>
 
@@ -308,7 +308,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                     <select 
                       value={editData.status || 'New'} 
                       onChange={e => handleEditChange('status', e.target.value)}
-                      style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24', background: 'white' }}
+                      style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15', background: 'white' }}
                     >
                       {ALL_STATUSES.filter(s => s !== 'All').map(s => (
                         <option key={s} value={s}>{s}</option>
@@ -319,7 +319,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                   {/* Contact */}
                   <DrawerSection title="📞 Contact">
                     <div style={{ padding: '10px', background: '#f1f5f9', borderRadius: '8px' }}>
-                      <span style={{ fontSize: '14px', fontWeight: '700', color: '#051d24' }}>{enquiry.mobile}</span>
+                      <span style={{ fontSize: '14px', fontWeight: '700', color: '#030B15' }}>{enquiry.mobile}</span>
                     </div>
                   </DrawerSection>
 
@@ -334,7 +334,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             value={editData.childName || ''}
                             onChange={e => handleEditChange('childName', e.target.value)}
                             placeholder="Child's full name"
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -343,7 +343,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             type="date"
                             value={editData.childDob || ''}
                             onChange={e => handleEditChange('childDob', e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -351,7 +351,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                           <select
                             value={editData.childGender || ''}
                             onChange={e => handleEditChange('childGender', e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           >
                             <option value="">Select Gender</option>
                             <option value="Boy">👦 Boy</option>
@@ -388,7 +388,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             value={editData.applicantName || ''}
                             onChange={e => handleEditChange('applicantName', e.target.value)}
                             placeholder="Full name"
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -396,7 +396,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                           <select
                             value={editData.position || ''}
                             onChange={e => handleEditChange('position', e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           >
                             <option value="">Select Position</option>
                             <option value="Teaching">Teaching</option>
@@ -410,7 +410,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             value={editData.qualification || ''}
                             onChange={e => handleEditChange('qualification', e.target.value)}
                             placeholder="e.g. B.Ed, M.A."
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -420,7 +420,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             value={editData.experience || ''}
                             onChange={e => handleEditChange('experience', e.target.value)}
                             placeholder="e.g. 5 years"
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -430,7 +430,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             value={editData.currentSalary || ''}
                             onChange={e => handleEditChange('currentSalary', e.target.value)}
                             placeholder="e.g. 25000"
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -440,7 +440,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             value={editData.expectedSalary || ''}
                             onChange={e => handleEditChange('expectedSalary', e.target.value)}
                             placeholder="e.g. 35000"
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                       </div>
@@ -458,7 +458,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             value={editData.fatherName || ''} 
                             onChange={e => handleEditChange('fatherName', e.target.value)}
                             placeholder="Father's name"
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -469,7 +469,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             onChange={e => handleEditChange('fatherMobile', e.target.value)}
                             placeholder="Mobile number"
                             maxLength={10}
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -478,7 +478,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             type="date" 
                             value={editData.fatherDob || ''} 
                             onChange={e => handleEditChange('fatherDob', e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -488,7 +488,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             value={editData.fatherEmail || ''} 
                             onChange={e => handleEditChange('fatherEmail', e.target.value)}
                             placeholder="email@example.com"
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div style={{ height: '1px', background: '#e2e8f0', margin: '8px 0' }} />
@@ -499,7 +499,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             value={editData.motherName || ''} 
                             onChange={e => handleEditChange('motherName', e.target.value)}
                             placeholder="Mother's name"
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -510,7 +510,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             onChange={e => handleEditChange('motherMobile', e.target.value)}
                             placeholder="Mobile number"
                             maxLength={10}
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -519,7 +519,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             type="date" 
                             value={editData.motherDob || ''} 
                             onChange={e => handleEditChange('motherDob', e.target.value)}
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                         <div>
@@ -529,7 +529,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                             value={editData.motherEmail || ''} 
                             onChange={e => handleEditChange('motherEmail', e.target.value)}
                             placeholder="email@example.com"
-                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                            style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                           />
                         </div>
                       </div>
@@ -543,7 +543,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                       onChange={e => handleEditChange('address', e.target.value)}
                       placeholder="Full address"
                       rows={2}
-                      style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24', resize: 'vertical' }}
+                      style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15', resize: 'vertical' }}
                     />
                   </DrawerSection>
 
@@ -555,7 +555,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                         <select 
                           value={editData.visitPreference || 'visit'} 
                           onChange={e => handleEditChange('visitPreference', e.target.value)}
-                          style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24', background: 'white' }}
+                          style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15', background: 'white' }}
                         >
                           <option value="visit">Visit Center</option>
                           <option value="callback">Request Callback</option>
@@ -569,7 +569,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                               type="date" 
                               value={editData.preferredDate || ''} 
                               onChange={e => handleEditChange('preferredDate', e.target.value)}
-                              style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                              style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                             />
                           </div>
                            <div>
@@ -646,7 +646,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                               type="date" 
                               value={editData.callbackPreferredDate || ''} 
                               onChange={e => handleEditChange('callbackPreferredDate', e.target.value)}
-                              style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                              style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                             />
                           </div>
                           <div>
@@ -656,7 +656,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                               value={Array.isArray(editData.callbackPreferredTime) ? editData.callbackPreferredTime.join(', ') : ''} 
                               onChange={e => handleEditChange('callbackPreferredTime', e.target.value.split(',').map(t => t.trim()).filter(Boolean))}
                               placeholder="Morning 9am to 12pm, Afternoon 3pm to 6pm"
-                              style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24' }}
+                              style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15' }}
                             />
                           </div>
                         </>
@@ -668,7 +668,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                           onChange={e => handleEditChange('message', e.target.value)}
                           placeholder="Additional notes"
                           rows={2}
-                          style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24', resize: 'vertical' }}
+                          style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15', resize: 'vertical' }}
                         />
                       </div>
                       <div>
@@ -678,7 +678,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                           onChange={e => handleEditChange('adminNotes', e.target.value)}
                           placeholder="Internal admin notes"
                           rows={3}
-                          style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#051d24', resize: 'vertical' }}
+                          style={{ width: '100%', padding: '10px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', color: '#030B15', resize: 'vertical' }}
                         />
                       </div>
                     </div>
@@ -814,7 +814,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
               {/* Admin Notes */}
               <DrawerSection title="📝 Admin Notes">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <span style={{ fontSize: '13px', color: enquiry.adminNotes ? '#051d24' : '#94a3b8', fontWeight: '600', flex: 1 }}>
+                  <span style={{ fontSize: '13px', color: enquiry.adminNotes ? '#030B15' : '#94a3b8', fontWeight: '600', flex: 1 }}>
                     {enquiry.adminNotes || 'No notes added yet'}
                   </span>
                 </div>
@@ -833,7 +833,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
                       <div key={entry._id || idx} style={{ padding: '12px', background: 'white', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
                         {/* Entry header */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                          <span style={{ fontSize: '12px', fontWeight: '800', color: '#051d24' }}>
+                          <span style={{ fontSize: '12px', fontWeight: '800', color: '#030B15' }}>
                             {entry.note || 'Updated'}
                           </span>
                           <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: '600' }}>
@@ -882,7 +882,7 @@ function EnquiryDrawer({ enquiry, onClose, onStatusChange, onUpdate, onDeleteReq
             <div style={{ padding: '16px 20px', borderTop: '1px solid #f1f5f9', display: 'flex', flexDirection: 'column', gap: '10px', flexShrink: 0 }}>
               {canConvert && (
                 <button onClick={() => onConvert(enquiry)}
-                  style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg,#0F4C5C,#051d24)', border: 'none', borderRadius: '12px', color: 'white', fontSize: '14px', fontWeight: '800', cursor: 'pointer', fontFamily: 'Nunito, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 4px 16px rgba(139,92,246,0.3)' }}>
+                  style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg,#0C2A47,#030B15)', border: 'none', borderRadius: '12px', color: 'white', fontSize: '14px', fontWeight: '800', cursor: 'pointer', fontFamily: 'Nunito, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 4px 16px rgba(139,92,246,0.3)' }}>
                   <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>
                   Convert to Student
                 </button>
@@ -907,7 +907,7 @@ function DrawerSection({ title, children }) {
   return (
     <div style={{ background: '#f8fafc', borderRadius: '14px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
       <div style={{ padding: '10px 14px', background: 'white', borderBottom: '1px solid #f1f5f9' }}>
-        <span style={{ fontSize: '13px', fontWeight: '800', color: '#051d24' }}>{title}</span>
+        <span style={{ fontSize: '13px', fontWeight: '800', color: '#030B15' }}>{title}</span>
       </div>
       <div style={{ padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>{children}</div>
     </div>
@@ -921,7 +921,7 @@ function Row({ label, value, isPhone }) {
   return (
     <div style={{ display: 'flex', gap: '8px', fontSize: '13px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
       <span style={{ color: '#94a3b8', fontWeight: '600', minWidth: '110px', flexShrink: 0, marginTop: '4px' }}>{label}</span>
-      <span style={{ color: '#051d24', fontWeight: '700', wordBreak: 'break-word', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', flex: 1 }}>
+      <span style={{ color: '#030B15', fontWeight: '700', wordBreak: 'break-word', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', flex: 1 }}>
         <span style={{ marginTop: '4px' }}>{value || '—'}</span>
         {isPhone && value && value !== '—' && (
           <>
@@ -1030,7 +1030,7 @@ function ConvertModal({ enquiry, onClose, onConvert }) {
               <div style={{ width: '72px', height: '72px', borderRadius: '50%', background: 'linear-gradient(135deg, #22c55e, #16a34a)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', boxShadow: '0 8px 24px rgba(34,197,94,0.3)' }}>
                 <svg width="32" height="32" fill="none" stroke="white" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
               </div>
-              <h2 style={{ fontSize: '24px', fontWeight: '900', color: '#051d24', margin: '0 0 6px', fontFamily: 'Nunito, sans-serif' }}>Student Created!</h2>
+              <h2 style={{ fontSize: '24px', fontWeight: '900', color: '#030B15', margin: '0 0 6px', fontFamily: 'Nunito, sans-serif' }}>Student Created!</h2>
               <p style={{ fontSize: '13px', color: '#64748b', margin: '0', fontFamily: 'Nunito, sans-serif' }}>{studentFullName}</p>
               <p style={{ fontSize: '12px', color: '#94a3b8', margin: '4px 0 0', fontFamily: 'monospace' }}>Admission No: {admissionNo}</p>
             </div>
@@ -1056,7 +1056,7 @@ function ConvertModal({ enquiry, onClose, onConvert }) {
                     onMouseLeave={e => { e.currentTarget.style.background = '#fff'; }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                     <div style={{ textAlign: 'left', flex: 1 }}>
-                      <p style={{ margin: 0, fontSize: '12px', fontWeight: '700', color: '#051d24' }}>Father</p>
+                      <p style={{ margin: 0, fontSize: '12px', fontWeight: '700', color: '#030B15' }}>Father</p>
                       <p style={{ margin: 0, fontSize: '11px', color: '#64748B' }}>{fatherName} · {fatherMobile}</p>
                     </div>
                   </a>
@@ -1067,7 +1067,7 @@ function ConvertModal({ enquiry, onClose, onConvert }) {
                     onMouseLeave={e => { e.currentTarget.style.background = '#fff'; }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                     <div style={{ textAlign: 'left', flex: 1 }}>
-                      <p style={{ margin: 0, fontSize: '12px', fontWeight: '700', color: '#051d24' }}>Mother</p>
+                      <p style={{ margin: 0, fontSize: '12px', fontWeight: '700', color: '#030B15' }}>Mother</p>
                       <p style={{ margin: 0, fontSize: '11px', color: '#64748B' }}>{motherName} · {motherMobile}</p>
                     </div>
                   </a>
@@ -1078,7 +1078,7 @@ function ConvertModal({ enquiry, onClose, onConvert }) {
                     onMouseEnter={e => { e.currentTarget.style.background = '#EFF6FF'; }}
                     onMouseLeave={e => { e.currentTarget.style.background = '#fff'; }}>
                     <svg width="18" height="18" fill="none" stroke="#EA4335" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    <span style={{ fontSize: '12px', fontWeight: '700', color: '#051d24' }}>Send via Email</span>
+                    <span style={{ fontSize: '12px', fontWeight: '700', color: '#030B15' }}>Send via Email</span>
                   </a>
                 )}
               </div>
@@ -1092,7 +1092,7 @@ function ConvertModal({ enquiry, onClose, onConvert }) {
                 <Row label="Login Email" value={loginEmail} />
                 <div style={{ display: 'flex', gap: '8px', fontSize: '13px' }}>
                   <span style={{ color: '#94a3b8', fontWeight: '600', minWidth: '110px', flexShrink: 0 }}>Password</span>
-                  <span style={{ color: '#051d24', fontWeight: '700' }}>As set by admin</span>
+                  <span style={{ color: '#030B15', fontWeight: '700' }}>As set by admin</span>
                 </div>
                 {result.referralTracking?.found && (
                   <div style={{ padding: '8px 14px', background: '#f0fdf4', borderRadius: '10px', border: '1px solid #bbf7d0', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
@@ -1103,7 +1103,7 @@ function ConvertModal({ enquiry, onClose, onConvert }) {
               </div>
             </div>
 
-            <button onClick={onClose} style={{ width: '100%', padding: '12px', background: 'linear-gradient(135deg,#051d24,#051d24)', border: 'none', borderRadius: '12px', color: 'white', fontSize: '13px', fontWeight: '800', cursor: 'pointer', fontFamily: 'Nunito, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+            <button onClick={onClose} style={{ width: '100%', padding: '12px', background: 'linear-gradient(135deg,#030B15,#030B15)', border: 'none', borderRadius: '12px', color: 'white', fontSize: '13px', fontWeight: '800', cursor: 'pointer', fontFamily: 'Nunito, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
               <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
               Done
             </button>
@@ -1114,7 +1114,7 @@ function ConvertModal({ enquiry, onClose, onConvert }) {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
               <div>
                 <p style={{ fontSize: '11px', fontWeight: '700', color: '#8B5CF6', letterSpacing: '0.1em', textTransform: 'uppercase', margin: 0 }}>Convert Enquiry</p>
-                <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#051d24', margin: '4px 0 0', fontFamily: 'Nunito, sans-serif' }}>Convert to Student</h2>
+                <h2 style={{ fontSize: '20px', fontWeight: '900', color: '#030B15', margin: '4px 0 0', fontFamily: 'Nunito, sans-serif' }}>Convert to Student</h2>
               </div>
               <button onClick={onClose} style={{ background: '#f1f5f9', border: 'none', borderRadius: '10px', padding: '8px', cursor: 'pointer' }}>
                 <svg width="18" height="18" fill="none" stroke="#64748b" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
@@ -1140,7 +1140,7 @@ function ConvertModal({ enquiry, onClose, onConvert }) {
                     value={password}
                     onChange={e => { setPassword(e.target.value); setError(''); }}
                     placeholder="Min. 6 characters"
-                    style={{ width: '100%', padding: '11px 42px 11px 14px', border: '2px solid #e2e8f0', borderRadius: '12px', fontSize: '14px', fontFamily: 'Nunito, sans-serif', outline: 'none', color: '#051d24', boxSizing: 'border-box' }}
+                    style={{ width: '100%', padding: '11px 42px 11px 14px', border: '2px solid #e2e8f0', borderRadius: '12px', fontSize: '14px', fontFamily: 'Nunito, sans-serif', outline: 'none', color: '#030B15', boxSizing: 'border-box' }}
                   />
                   <button
                     type="button"
@@ -1168,7 +1168,7 @@ function ConvertModal({ enquiry, onClose, onConvert }) {
                     const cls = classes.find(c => c.id === val);
                     if (cls) setSection(cls.section || '');
                   }}
-                  style={{ width: '100%', padding: '11px 14px', border: '2px solid #e2e8f0', borderRadius: '12px', fontSize: '14px', fontFamily: 'Nunito, sans-serif', outline: 'none', color: '#051d24', background: 'white', cursor: 'pointer', boxSizing: 'border-box', appearance: 'none' }}
+                  style={{ width: '100%', padding: '11px 14px', border: '2px solid #e2e8f0', borderRadius: '12px', fontSize: '14px', fontFamily: 'Nunito, sans-serif', outline: 'none', color: '#030B15', background: 'white', cursor: 'pointer', boxSizing: 'border-box', appearance: 'none' }}
                 >
                   <option value="">Select class (optional)</option>
                   {classesLoading ? (
@@ -1186,11 +1186,11 @@ function ConvertModal({ enquiry, onClose, onConvert }) {
               {/* <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#475569', marginBottom: '6px' }}>Section</label>
-                  <input value={section} onChange={e => setSection(e.target.value)} placeholder="Auto-filled or type" style={{ width: '100%', padding: '11px 14px', border: '2px solid #e2e8f0', borderRadius: '12px', fontSize: '14px', fontFamily: 'Nunito, sans-serif', outline: 'none', color: '#051d24', boxSizing: 'border-box' }} />
+                  <input value={section} onChange={e => setSection(e.target.value)} placeholder="Auto-filled or type" style={{ width: '100%', padding: '11px 14px', border: '2px solid #e2e8f0', borderRadius: '12px', fontSize: '14px', fontFamily: 'Nunito, sans-serif', outline: 'none', color: '#030B15', boxSizing: 'border-box' }} />
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#475569', marginBottom: '6px' }}>Roll Number</label>
-                  <input value={rollNo} onChange={e => setRollNo(e.target.value)} placeholder="Optional" style={{ width: '100%', padding: '11px 14px', border: '2px solid #e2e8f0', borderRadius: '12px', fontSize: '14px', fontFamily: 'Nunito, sans-serif', outline: 'none', color: '#051d24', boxSizing: 'border-box' }} />
+                  <input value={rollNo} onChange={e => setRollNo(e.target.value)} placeholder="Optional" style={{ width: '100%', padding: '11px 14px', border: '2px solid #e2e8f0', borderRadius: '12px', fontSize: '14px', fontFamily: 'Nunito, sans-serif', outline: 'none', color: '#030B15', boxSizing: 'border-box' }} />
                 </div>
               </div> */}
             </div>
@@ -1202,7 +1202,7 @@ function ConvertModal({ enquiry, onClose, onConvert }) {
             <button
               onClick={handleConvert}
               disabled={submitting}
-              style={{ width: '100%', marginTop: '20px', padding: '14px', background: 'linear-gradient(135deg,#0F4C5C,#051d24)', border: 'none', borderRadius: '12px', color: 'white', fontSize: '14px', fontWeight: '800', cursor: submitting ? 'not-allowed' : 'pointer', fontFamily: 'Nunito, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', opacity: submitting ? 0.7 : 1, boxShadow: '0 4px 16px rgba(139,92,246,0.3)' }}
+              style={{ width: '100%', marginTop: '20px', padding: '14px', background: 'linear-gradient(135deg,#0C2A47,#030B15)', border: 'none', borderRadius: '12px', color: 'white', fontSize: '14px', fontWeight: '800', cursor: submitting ? 'not-allowed' : 'pointer', fontFamily: 'Nunito, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', opacity: submitting ? 0.7 : 1, boxShadow: '0 4px 16px rgba(139,92,246,0.3)' }}
             >
               {submitting ? (
                 <>
@@ -1603,8 +1603,8 @@ export default function AdminEnquiries() {
       ) : stats && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px', marginBottom: '12px' }}>
           {[
-            { label: 'Total',     value: stats.total ?? 0,      bg: 'linear-gradient(135deg,#D4AF37,#B8860B)', color: 'white', status: 'All' },
-            { label: 'New',       value: stats.New ?? 0,   bg: '#dbeafe', color: '#0F4C5C', status: 'New' },
+            { label: 'Total',     value: stats.total ?? 0,      bg: 'linear-gradient(135deg,#E2B94D,#B8860B)', color: 'white', status: 'All' },
+            { label: 'New',       value: stats.New ?? 0,   bg: '#dbeafe', color: '#0C2A47', status: 'New' },
             { label: 'Contacted', value: stats.Contacted ?? 0, bg: '#fef9c3', color: '#92400e', status: 'Contacted' },
             { label: 'Visited',   value: stats.Visited ?? 0,   bg: '#dcfce7', color: '#166534', status: 'Visited' },
             { label: 'Admitted',  value: stats.Admitted ?? 0,  bg: '#f0fdf4', color: '#14532d', status: 'Admitted' },
@@ -1655,7 +1655,7 @@ export default function AdminEnquiries() {
             >
               <span style={{ fontSize: '24px' }}>{c.icon}</span>
               <div>
-                <span style={{ fontSize: '22px', fontWeight: '900', color: '#051d24', lineHeight: 1 }}>{c.value}</span>
+                <span style={{ fontSize: '22px', fontWeight: '900', color: '#030B15', lineHeight: 1 }}>{c.value}</span>
                 <span style={{ fontSize: '12px', fontWeight: '700', color: '#64748b', display: 'block' }}>{c.label}</span>
               </div>
             </div>
@@ -1682,7 +1682,7 @@ export default function AdminEnquiries() {
                   setPage(1); 
                 }}
                 style={{
-                  padding: '5px 14px', borderRadius: '20px', border: isActive ? '2px solid #051d24' : 'none', cursor: 'pointer',
+                  padding: '5px 14px', borderRadius: '20px', border: isActive ? '2px solid #030B15' : 'none', cursor: 'pointer',
                   fontSize: '12px', fontWeight: '700', fontFamily: 'Nunito, sans-serif',
                   background: sv.color,
                   color: 'white',
@@ -1712,7 +1712,7 @@ export default function AdminEnquiries() {
           <input
             value={search} onChange={handleSearchChange}
             placeholder="Search name, mobile, ID…"
-            style={{ width: '100%', padding: '9px 12px 9px 36px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', outline: 'none', color: '#051d24', boxSizing: 'border-box' }}
+            style={{ width: '100%', padding: '9px 12px 9px 36px', border: '2px solid #e2e8f0', borderRadius: '10px', fontSize: '13px', fontFamily: 'Nunito, sans-serif', outline: 'none', color: '#030B15', boxSizing: 'border-box' }}
           />
         </div>
 
@@ -1722,7 +1722,7 @@ export default function AdminEnquiries() {
             const c = s === 'All' ? { dot: '#64748b' } : statusConfig[s];
             return (
               <button key={s} onClick={() => { setFilterStatus(s); setPage(1); }}
-                style={{ padding: '7px 14px', borderRadius: '20px', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: '700', fontFamily: 'Nunito, sans-serif', background: filterStatus === s ? 'linear-gradient(135deg,#D4AF37,#B8860B)' : '#f1f5f9', color: filterStatus === s ? 'white' : '#64748b', transition: 'all 0.15s' }}>
+                style={{ padding: '7px 14px', borderRadius: '20px', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: '700', fontFamily: 'Nunito, sans-serif', background: filterStatus === s ? 'linear-gradient(135deg,#E2B94D,#B8860B)' : '#f1f5f9', color: filterStatus === s ? 'white' : '#64748b', transition: 'all 0.15s' }}>
                 {s}
               </button>
             );
@@ -1823,14 +1823,14 @@ export default function AdminEnquiries() {
           <div style={{ display: 'flex', background: '#f1f5f9', borderRadius: '8px', padding: '4px' }}>
             <button
               onClick={() => setViewMode('table')}
-              style={{ padding: '6px 10px', border: 'none', borderRadius: '6px', background: viewMode === 'table' ? 'white' : 'transparent', boxShadow: viewMode === 'table' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none', color: viewMode === 'table' ? '#051d24' : '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' }}
+              style={{ padding: '6px 10px', border: 'none', borderRadius: '6px', background: viewMode === 'table' ? 'white' : 'transparent', boxShadow: viewMode === 'table' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none', color: viewMode === 'table' ? '#030B15' : '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' }}
               title="Table View"
             >
               <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
             </button>
             <button
               onClick={() => setViewMode('grid')}
-              style={{ padding: '6px 10px', border: 'none', borderRadius: '6px', background: viewMode === 'grid' ? 'white' : 'transparent', boxShadow: viewMode === 'grid' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none', color: viewMode === 'grid' ? '#051d24' : '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' }}
+              style={{ padding: '6px 10px', border: 'none', borderRadius: '6px', background: viewMode === 'grid' ? 'white' : 'transparent', boxShadow: viewMode === 'grid' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none', color: viewMode === 'grid' ? '#030B15' : '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' }}
               title="Grid View"
             >
               <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
@@ -1905,7 +1905,7 @@ export default function AdminEnquiries() {
                     <div style={{ fontSize: '48px', marginBottom: '12px' }}>📭</div>
                     <div style={{ color: '#94a3b8', fontSize: '14px', fontWeight: '700' }}>No enquiries found</div>
                     {hasActiveFilters && (
-                      <button onClick={clearFilters} style={{ marginTop: '12px', padding: '8px 20px', background: 'linear-gradient(135deg,#D4AF37,#B8860B)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '13px', fontWeight: '700', cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }}>
+                      <button onClick={clearFilters} style={{ marginTop: '12px', padding: '8px 20px', background: 'linear-gradient(135deg,#E2B94D,#B8860B)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '13px', fontWeight: '700', cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }}>
                         Clear Filters
                       </button>
                     )}
@@ -1957,7 +1957,7 @@ export default function AdminEnquiries() {
                         height: '32px',
                         padding: '0 10px',
                         borderRadius: '8px',
-                        background: 'linear-gradient(135deg,#D4AF37,#B8860B)',
+                        background: 'linear-gradient(135deg,#E2B94D,#B8860B)',
                         color: 'white',
                         fontSize: '13px', 
                         fontWeight: '900',
@@ -1972,11 +1972,11 @@ export default function AdminEnquiries() {
                     {/* Enquirer */}
                     <td style={{ padding: '14px 16px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: e.type === 'job' ? 'linear-gradient(135deg,#0F4C5C,#051d24)' : 'linear-gradient(135deg,#D4AF37,#B8860B)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: '900', fontSize: '14px', flexShrink: 0 }}>
+                        <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: e.type === 'job' ? 'linear-gradient(135deg,#0C2A47,#030B15)' : 'linear-gradient(135deg,#E2B94D,#B8860B)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: '900', fontSize: '14px', flexShrink: 0 }}>
                           {name.charAt(0)}
                         </div>
                         <div>
-                          <div style={{ fontSize: '13px', fontWeight: '800', color: '#051d24' }}>{name}</div>
+                          <div style={{ fontSize: '13px', fontWeight: '800', color: '#030B15' }}>{name}</div>
                           <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '1px' }}>{sub}</div>
                           {e.type === 'child' && e.fatherName && (
                             <div style={{ fontSize: '11px', color: '#64748b', marginTop: '1px' }}>👨 {e.fatherName}</div>
@@ -2011,13 +2011,13 @@ export default function AdminEnquiries() {
 
                     {/* Contact */}
                     <td style={{ padding: '14px 16px' }}>
-                      <div style={{ fontSize: '13px', fontWeight: '700', color: '#051d24' }}>📱 {e.mobile}</div>
+                      <div style={{ fontSize: '13px', fontWeight: '700', color: '#030B15' }}>📱 {e.mobile}</div>
                       {e.fatherEmail && <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>✉️ {e.fatherEmail}</div>}
                     </td>
 
                     {/* Visit */}
                     <td style={{ padding: '14px 16px' }}>
-                      <div style={{ fontSize: '12px', fontWeight: '700', color: '#051d24' }}>{e.preferredDate ? formatDate(e.preferredDate) : '—'}</div>
+                      <div style={{ fontSize: '12px', fontWeight: '700', color: '#030B15' }}>{e.preferredDate ? formatDate(e.preferredDate) : '—'}</div>
                       <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>🕐 {Array.isArray(e.preferredTime) ? e.preferredTime.join(', ') : e.preferredTime || '—'}</div>
                     </td>
 
@@ -2040,7 +2040,7 @@ export default function AdminEnquiries() {
                     <td style={{ padding: '14px 16px' }}>
                       <button
                         onClick={ev => { ev.stopPropagation(); handleRowClick(e); }}
-                        style={{ padding: '6px 14px', background: 'linear-gradient(135deg,#D4AF37,#B8860B)', border: 'none', borderRadius: '8px', color: 'white', fontSize: '11px', fontWeight: '800', cursor: 'pointer', fontFamily: 'Nunito, sans-serif', whiteSpace: 'nowrap' }}
+                        style={{ padding: '6px 14px', background: 'linear-gradient(135deg,#E2B94D,#B8860B)', border: 'none', borderRadius: '8px', color: 'white', fontSize: '11px', fontWeight: '800', cursor: 'pointer', fontFamily: 'Nunito, sans-serif', whiteSpace: 'nowrap' }}
                       >
                         View →
                       </button>
@@ -2062,7 +2062,7 @@ export default function AdminEnquiries() {
                <div style={{ fontSize: '48px', marginBottom: '12px' }}>📭</div>
                <div style={{ color: '#94a3b8', fontSize: '14px', fontWeight: '700' }}>No enquiries found</div>
                {hasActiveFilters && (
-                 <button onClick={clearFilters} style={{ marginTop: '12px', padding: '8px 20px', background: 'linear-gradient(135deg,#D4AF37,#B8860B)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '13px', fontWeight: '700', cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }}>
+                 <button onClick={clearFilters} style={{ marginTop: '12px', padding: '8px 20px', background: 'linear-gradient(135deg,#E2B94D,#B8860B)', border: 'none', borderRadius: '10px', color: 'white', fontSize: '13px', fontWeight: '700', cursor: 'pointer', fontFamily: 'Nunito, sans-serif' }}>
                    Clear Filters
                  </button>
                )}
@@ -2102,11 +2102,11 @@ export default function AdminEnquiries() {
                >
                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                     <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: e.type === 'job' ? 'linear-gradient(135deg,#0F4C5C,#051d24)' : 'linear-gradient(135deg,#D4AF37,#B8860B)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: '900', fontSize: '16px', flexShrink: 0 }}>
+                     <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: e.type === 'job' ? 'linear-gradient(135deg,#0C2A47,#030B15)' : 'linear-gradient(135deg,#E2B94D,#B8860B)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: '900', fontSize: '16px', flexShrink: 0 }}>
                        {name.charAt(0)}
                      </div>
                      <div>
-                       <div style={{ fontSize: '14px', fontWeight: '800', color: '#051d24', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                       <div style={{ fontSize: '14px', fontWeight: '800', color: '#030B15', display: 'flex', alignItems: 'center', gap: '6px' }}>
                          {name}
                        </div>
                        <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>{sub}</div>
@@ -2136,7 +2136,7 @@ export default function AdminEnquiries() {
                  </div>
 
                  <div style={{ background: '#f8fafc', borderRadius: '10px', padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                   <div style={{ fontSize: '13px', fontWeight: '700', color: '#051d24' }}>📱 {e.mobile}</div>
+                   <div style={{ fontSize: '13px', fontWeight: '700', color: '#030B15' }}>📱 {e.mobile}</div>
                    {e.fatherEmail && <div style={{ fontSize: '11px', color: '#64748b' }}>✉️ {e.fatherEmail}</div>}
                  </div>
 
@@ -2173,7 +2173,7 @@ export default function AdminEnquiries() {
           <button
             disabled={page <= 1}
             onClick={() => setPage(p => Math.max(1, p - 1))}
-            style={{ padding: '8px 16px', borderRadius: '10px', border: '1.5px solid #e2e8f0', background: 'white', fontSize: '13px', fontWeight: '700', cursor: page <= 1 ? 'not-allowed' : 'pointer', fontFamily: 'Nunito, sans-serif', color: page <= 1 ? '#cbd5e1' : '#051d24' }}
+            style={{ padding: '8px 16px', borderRadius: '10px', border: '1.5px solid #e2e8f0', background: 'white', fontSize: '13px', fontWeight: '700', cursor: page <= 1 ? 'not-allowed' : 'pointer', fontFamily: 'Nunito, sans-serif', color: page <= 1 ? '#cbd5e1' : '#030B15' }}
           >
             ← Previous
           </button>
@@ -2183,7 +2183,7 @@ export default function AdminEnquiries() {
           <button
             disabled={page >= totalPages}
             onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-            style={{ padding: '8px 16px', borderRadius: '10px', border: '1.5px solid #e2e8f0', background: 'white', fontSize: '13px', fontWeight: '700', cursor: page >= totalPages ? 'not-allowed' : 'pointer', fontFamily: 'Nunito, sans-serif', color: page >= totalPages ? '#cbd5e1' : '#051d24' }}
+            style={{ padding: '8px 16px', borderRadius: '10px', border: '1.5px solid #e2e8f0', background: 'white', fontSize: '13px', fontWeight: '700', cursor: page >= totalPages ? 'not-allowed' : 'pointer', fontFamily: 'Nunito, sans-serif', color: page >= totalPages ? '#cbd5e1' : '#030B15' }}
           >
             Next →
           </button>

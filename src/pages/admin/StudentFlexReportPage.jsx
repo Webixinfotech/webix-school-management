@@ -29,7 +29,7 @@ const Toast = ({ message, type = 'error', onClose }) => {
   const styles = {
     error: { bg: '#FEF2F2', border: '#FECACA', text: '#B91C1C' },
     success: { bg: '#F0FDF4', border: '#BBF7D0', text: '#15803D' },
-    info: { bg: '#EFF6FF', border: '#BFDBFE', text: '#0F4C5C' },
+    info: { bg: '#EFF6FF', border: '#BFDBFE', text: '#0C2A47' },
   }[type] || {};
   return (
     <div style={{
@@ -53,9 +53,9 @@ const Toast = ({ message, type = 'error', onClose }) => {
 
 // ─── Tokens ───────────────────────────────────────────────────────────────────
 const T = {
-  blue: { bg: '#EFF6FF', text: '#0F4C5C', border: '#BFDBFE', from: '#60A5FA', to: '#0F4C5C' },
+  blue: { bg: '#EFF6FF', text: '#0C2A47', border: '#BFDBFE', from: '#60A5FA', to: '#0C2A47' },
   green: { bg: '#F0FDF4', text: '#15803D', border: '#BBF7D0', from: '#4ADE80', to: '#16A34A' },
-  red: { bg: '#FFF1F2', text: '#D4AF37', border: '#FECDD3', from: '#D4AF37', to: '#D4AF37' },
+  red: { bg: '#FFF1F2', text: '#E2B94D', border: '#FECDD3', from: '#E2B94D', to: '#E2B94D' },
   amber: { bg: '#FFFBEB', text: '#B45309', border: '#FCD34D', from: '#FBBF24', to: '#D97706' },
   teal: { bg: '#F0FDFA', text: '#0F766E', border: '#99F6E4', from: '#2DD4BF', to: '#0D9488' },
   purple: { bg: '#FAF5FF', text: '#7E22CE', border: '#E9D5FF', from: '#C084FC', to: '#9333EA' },
@@ -104,9 +104,9 @@ const todayKey = () => {
 const StatusBadge = ({ status }) => {
   const config = {
     Present: { bg: '#F0FDF4', text: '#15803D', label: 'Present' },
-    Absent: { bg: '#FFF1F2', text: '#D4AF37', label: 'Absent' },
+    Absent: { bg: '#FFF1F2', text: '#E2B94D', label: 'Absent' },
     Late: { bg: '#FFFBEB', text: '#B45309', label: 'Late' },
-    Leave: { bg: '#EFF6FF', text: '#0F4C5C', label: 'Leave' },
+    Leave: { bg: '#EFF6FF', text: '#0C2A47', label: 'Leave' },
   }[status] || { bg: '#F8FAFC', text: '#475569', label: status || '—' };
   return (
     <span style={{ display: 'inline-block', padding: '3px 10px', borderRadius: 99, fontSize: 11, fontWeight: 700, background: config.bg, color: config.text, whiteSpace: 'nowrap' }}>
@@ -144,7 +144,7 @@ const StatCard = ({ icon, label, hours, color, sublabel }) => {
       <IconBubble icon={icon} color={color} />
       <div style={{ minWidth: 0 }}>
         <p style={{ margin: 0, fontSize: 11, fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{label}</p>
-        <p style={{ margin: '3px 0 0', fontSize: 21, fontWeight: 900, color: '#051d24', whiteSpace: 'nowrap' }}>
+        <p style={{ margin: '3px 0 0', fontSize: 21, fontWeight: 900, color: '#030B15', whiteSpace: 'nowrap' }}>
           {formatHoursMinutes(hours, { showZeroHours: true })}
         </p>
         {sublabel && <p style={{ margin: '2px 0 0', fontSize: 10.5, fontWeight: 600, color: '#94A3B8' }}>{sublabel}</p>}
@@ -179,7 +179,7 @@ const StayBreakdownBar = ({ scheduledHours, beforeClassHours, afterClassHours, t
 
   const segments = [
     { key: 'before', hours: before, color: '#FBBF24', darkColor: '#D97706', label: 'Before class' },
-    { key: 'class', hours: sched, color: '#60A5FA', darkColor: '#0F4C5C', label: 'Class time' },
+    { key: 'class', hours: sched, color: '#60A5FA', darkColor: '#0C2A47', label: 'Class time' },
     { key: 'after', hours: after, color: '#FB923C', darkColor: '#EA580C', label: 'After class' },
   ].filter(s => s.hours > 0);
 
@@ -205,7 +205,7 @@ const StayBreakdownBar = ({ scheduledHours, beforeClassHours, afterClassHours, t
             {s.label}: {formatHoursMinutes(s.hours)}
           </span>
         ))}
-        <span style={{ marginLeft: 'auto', color: '#051d24', fontWeight: 800 }}>Total: {formatHoursMinutes(total, { showZeroHours: true })}</span>
+        <span style={{ marginLeft: 'auto', color: '#030B15', fontWeight: 800 }}>Total: {formatHoursMinutes(total, { showZeroHours: true })}</span>
       </div>
     </div>
   );
@@ -224,13 +224,13 @@ const DayDetailPanel = ({ dateKey, day, onClose }) => {
         borderBottom: '1.5px solid #BFDBFE', flexWrap: 'wrap',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
-          <CalendarDays size={18} color="#0F4C5C" style={{ flexShrink: 0 }} />
-          <p style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>{formatDateFull(dateKey)}</p>
+          <CalendarDays size={18} color="#0C2A47" style={{ flexShrink: 0 }} />
+          <p style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>{formatDateFull(dateKey)}</p>
         </div>
         <button onClick={onClose} style={{
           width: 28, height: 28, borderRadius: 8, border: 'none', background: 'rgba(29,78,216,0.1)',
           cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-        }}><X size={14} color="#0F4C5C" /></button>
+        }}><X size={14} color="#0C2A47" /></button>
       </div>
 
       {!day ? (
@@ -247,25 +247,25 @@ const DayDetailPanel = ({ dateKey, day, onClose }) => {
               display: 'flex', flexDirection: 'column', gap: 10,
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
-                <span style={{ fontSize: 13, fontWeight: 800, color: '#051d24' }}>{rec.className}</span>
+                <span style={{ fontSize: 13, fontWeight: 800, color: '#030B15' }}>{rec.className}</span>
                 <StatusBadge status={rec.status} />
               </div>
 
               <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <LogIn size={14} color="#16A34A" />
-                  <span style={{ fontSize: 12, color: '#475569', fontWeight: 600 }}>In: <strong style={{ color: '#051d24' }}>{fmt12(rec.checkInTime) || '—'}</strong></span>
+                  <span style={{ fontSize: 12, color: '#475569', fontWeight: 600 }}>In: <strong style={{ color: '#030B15' }}>{fmt12(rec.checkInTime) || '—'}</strong></span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   <LogOut size={14} color="#DC2626" />
                   <span style={{ fontSize: 12, color: '#475569', fontWeight: 600 }}>
-                    Out: <strong style={{ color: '#051d24' }}>{rec.checkOutTime ? fmt12(rec.checkOutTime) : (rec.stillCheckedIn ? 'Still inside' : '—')}</strong>
+                    Out: <strong style={{ color: '#030B15' }}>{rec.checkOutTime ? fmt12(rec.checkOutTime) : (rec.stillCheckedIn ? 'Still inside' : '—')}</strong>
                   </span>
                 </div>
                 {rec.stayHours != null && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Timer size={14} color="#0F4C5C" />
-                    <span style={{ fontSize: 12, color: '#475569', fontWeight: 600 }}>Stayed: <strong style={{ color: '#051d24' }}>{formatHoursMinutes(rec.stayHours)}</strong></span>
+                    <Timer size={14} color="#0C2A47" />
+                    <span style={{ fontSize: 12, color: '#475569', fontWeight: 600 }}>Stayed: <strong style={{ color: '#030B15' }}>{formatHoursMinutes(rec.stayHours)}</strong></span>
                   </div>
                 )}
               </div>
@@ -451,7 +451,7 @@ const StudentFlexReportPage = () => {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F8FAFC' }}>
         <div style={{ textAlign: 'center' }}>
-          <Loader2 size={40} style={{ animation: 'spin 1s linear infinite', margin: '0 auto 16px', color: '#0F4C5C' }} />
+          <Loader2 size={40} style={{ animation: 'spin 1s linear infinite', margin: '0 auto 16px', color: '#0C2A47' }} />
           <p style={{ fontSize: 14, fontWeight: 600, color: '#64748B' }}>Loading flex report...</p>
         </div>
       </div>
@@ -504,10 +504,10 @@ const StudentFlexReportPage = () => {
         }}
           onMouseEnter={e => { e.currentTarget.style.background = '#EFF6FF'; }}
           onMouseLeave={e => { e.currentTarget.style.background = '#fff'; }}>
-          <ChevronLeft size={20} color="#0F4C5C" />
+          <ChevronLeft size={20} color="#0C2A47" />
         </button>
         <div style={{ flex: 1, minWidth: 200 }}>
-          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 900, color: '#051d24' }}>Flex Hours Report</h1>
+          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 900, color: '#030B15' }}>Flex Hours Report</h1>
           <p style={{ margin: '4px 0 0', fontSize: 12, color: '#64748B', fontWeight: 600 }}>Full check-in / check-out history & flexi hour usage</p>
         </div>
         <button onClick={downloadCsv} style={{
@@ -525,7 +525,7 @@ const StudentFlexReportPage = () => {
         {/* Student Card */}
         <div style={{ background: '#fff', borderRadius: 16, padding: '18px', border: '1px solid #E2E8F0', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
           <div style={{
-            width: 60, height: 60, borderRadius: 14, background: 'linear-gradient(150deg,#60A5FA,#0F4C5C)',
+            width: 60, height: 60, borderRadius: 14, background: 'linear-gradient(150deg,#60A5FA,#0C2A47)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 900, fontSize: 22,
             boxShadow: '0 10px 18px -6px rgba(37,99,235,0.5), inset 0 -4px 6px rgba(0,0,0,0.18), inset 0 2px 3px rgba(255,255,255,0.45)',
             flexShrink: 0,
@@ -533,7 +533,7 @@ const StudentFlexReportPage = () => {
             {(student.fullName || 'S').charAt(0).toUpperCase()}
           </div>
           <div style={{ flex: 1, minWidth: 160 }}>
-            <h2 style={{ margin: 0, fontSize: 17, fontWeight: 800, color: '#051d24' }}>{student.fullName}</h2>
+            <h2 style={{ margin: 0, fontSize: 17, fontWeight: 800, color: '#030B15' }}>{student.fullName}</h2>
             <div style={{ display: 'flex', gap: 14, marginTop: 6, fontSize: 12, color: '#64748B', fontWeight: 600, flexWrap: 'wrap' }}>
               <span>ID: {student.admissionNo}</span>
               <span>Status: {student.status}</span>
@@ -562,14 +562,14 @@ const StudentFlexReportPage = () => {
             <div className="flex-toolbar" style={{ background: '#fff', borderRadius: 14, padding: '12px 14px', border: '1px solid #E2E8F0' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <button onClick={() => goToMonth(-1)} style={navBtnStyle}><ChevronLeft size={17} /></button>
-                <span style={{ fontSize: 15, fontWeight: 800, color: '#051d24', minWidth: 140, textAlign: 'center' }}>
+                <span style={{ fontSize: 15, fontWeight: 800, color: '#030B15', minWidth: 140, textAlign: 'center' }}>
                   {MONTH_NAMES[calMonth - 1]} {calYear}
                 </span>
                 <button onClick={() => goToMonth(1)} style={navBtnStyle}><ChevronRight size={17} /></button>
               </div>
               <button onClick={goToToday} style={{
                 padding: '7px 12px', borderRadius: 8, border: '1.5px solid #BFDBFE', background: '#EFF6FF',
-                color: '#0F4C5C', fontWeight: 700, fontSize: 12, cursor: 'pointer',
+                color: '#0C2A47', fontWeight: 700, fontSize: 12, cursor: 'pointer',
               }}>Today</button>
 
               <div className="flex-view-toggle" style={{ display: 'flex', gap: 6, background: '#F1F5F9', borderRadius: 10, padding: 4 }}>
@@ -626,8 +626,8 @@ const StudentFlexReportPage = () => {
                               onMouseEnter={e => { if (!isSelected) e.currentTarget.style.background = '#F8FAFC'; }}
                               onMouseLeave={e => { if (!isSelected) e.currentTarget.style.background = dayData ? '#fff' : '#FAFBFC'; }}>
                               <span style={{
-                                fontSize: 12, fontWeight: isToday ? 900 : 700, color: isToday ? '#fff' : (dayData ? '#051d24' : '#CBD5E1'),
-                                background: isToday ? 'linear-gradient(150deg,#60A5FA,#0F4C5C)' : 'transparent',
+                                fontSize: 12, fontWeight: isToday ? 900 : 700, color: isToday ? '#fff' : (dayData ? '#030B15' : '#CBD5E1'),
+                                background: isToday ? 'linear-gradient(150deg,#60A5FA,#0C2A47)' : 'transparent',
                                 width: 20, height: 20, borderRadius: 6,
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 boxShadow: isToday ? '0 3px 8px -2px rgba(37,99,235,0.7)' : 'none',
@@ -667,7 +667,7 @@ const StudentFlexReportPage = () => {
                   {monthlyGroups.map((monthData) => (
                     <div key={monthData.monthKey} style={{ background: '#fff', borderRadius: 14, overflow: 'hidden', border: '1px solid #E2E8F0', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
                       <div style={{ padding: '12px 16px', background: '#F8FAFC', borderBottom: '1.5px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
-                        <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>{monthData.monthName}</h3>
+                        <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>{monthData.monthName}</h3>
                         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                           <span style={{ fontSize: 11, fontWeight: 700, color: '#475569', background: '#F1F5F9', padding: '4px 10px', borderRadius: 99 }}>
                             {formatHoursMinutes(monthData.totalScheduledHours, { showZeroHours: true })} class
@@ -686,7 +686,7 @@ const StudentFlexReportPage = () => {
                         {monthData.days.map((dayData) => (
                           <div key={dayData.date} style={{ padding: '12px', marginBottom: 8, borderRadius: 10, background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
-                              <p style={{ margin: 0, fontSize: 13, fontWeight: 800, color: '#051d24' }}>{formatDateFull(dayData.date)}</p>
+                              <p style={{ margin: 0, fontSize: 13, fontWeight: 800, color: '#030B15' }}>{formatDateFull(dayData.date)}</p>
                               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                                 <span style={{ fontSize: 11, fontWeight: 700, color: '#475569' }}>{formatHoursMinutes(dayData.totalScheduledHours, { showZeroHours: true })} class</span>
                                 <span style={{ fontSize: 11, fontWeight: 700, color: '#059669' }}>{formatHoursMinutes(dayData.totalStayHours)} stay</span>
@@ -748,7 +748,7 @@ const StudentFlexReportPage = () => {
               ) : monthlyGroups.map(month => (
                 <button key={month.monthKey} onClick={() => { setCalYear(month.year); setCalMonth(month.month); setSelectedDateKey(null); }} style={{
                   padding: '8px 12px', borderRadius: 8, border: 'none',
-                  background: (calYear === month.year && calMonth === month.month) ? '#0F4C5C' : '#F8FAFC',
+                  background: (calYear === month.year && calMonth === month.month) ? '#0C2A47' : '#F8FAFC',
                   color: (calYear === month.year && calMonth === month.month) ? '#fff' : '#64748B',
                   fontWeight: 700, fontSize: 12, cursor: 'pointer', textAlign: 'left', transition: 'all .15s',
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8,
@@ -762,9 +762,9 @@ const StudentFlexReportPage = () => {
             {/* Info Card */}
             <div style={{ background: 'linear-gradient(135deg,#EFF6FF,#DBEAFE)', borderRadius: 14, padding: 14, border: '1.5px solid #BFDBFE', display: 'flex', flexDirection: 'column', gap: 8 }}>
               <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                <Info size={14} color="#0F4C5C" style={{ marginTop: 2, flexShrink: 0 }} />
+                <Info size={14} color="#0C2A47" style={{ marginTop: 2, flexShrink: 0 }} />
                 <div>
-                  <p style={{ margin: 0, fontSize: 11, fontWeight: 700, color: '#0F4C5C' }}>About Flex Hours</p>
+                  <p style={{ margin: 0, fontSize: 11, fontWeight: 700, color: '#0C2A47' }}>About Flex Hours</p>
                   <ul style={{ margin: '6px 0 0', paddingLeft: 16, fontSize: 10.5, color: '#0F766E', fontWeight: 600, lineHeight: 1.6 }}>
                     <li>Free / Paid: hours gifted with the plan or purchased separately</li>
                     <li>Consumed: total flexi hours billed so far, from the student's wallet</li>
@@ -789,7 +789,7 @@ const navBtnStyle = {
 
 const toggleBtnStyle = (active) => ({
   padding: '7px 12px', borderRadius: 8, border: 'none', cursor: 'pointer',
-  background: active ? '#fff' : 'transparent', color: active ? '#0F4C5C' : '#64748B',
+  background: active ? '#fff' : 'transparent', color: active ? '#0C2A47' : '#64748B',
   fontWeight: 700, fontSize: 12, display: 'flex', alignItems: 'center', gap: 6,
   boxShadow: active ? '0 1px 4px rgba(0,0,0,0.08)' : 'none', transition: 'all .15s',
 });

@@ -56,9 +56,9 @@ const normalizeTimings = (rawTimings, classes) => {
 
 // ─── Color Tokens ─────────────────────────────────────────────────────────────
 const T = {
-  blue:   { bg: '#EFF6FF', text: '#0F4C5C', border: '#BFDBFE', solid: '#0F4C5C' },
+  blue:   { bg: '#EFF6FF', text: '#0C2A47', border: '#BFDBFE', solid: '#0C2A47' },
   green:  { bg: '#F0FDF4', text: '#15803D', border: '#BBF7D0', solid: '#16A34A' },
-  red:    { bg: '#FFF1F2', text: '#D4AF37', border: '#FECDD3', solid: '#D4AF37' },
+  red:    { bg: '#FFF1F2', text: '#E2B94D', border: '#FECDD3', solid: '#E2B94D' },
   amber:  { bg: '#FFFBEB', text: '#B45309', border: '#FCD34D', solid: '#D97706' },
   teal:   { bg: '#F0FDFA', text: '#0F766E', border: '#99F6E4', solid: '#0D9488' },
   purple: { bg: '#FAF5FF', text: '#7E22CE', border: '#E9D5FF', solid: '#9333EA' },
@@ -180,7 +180,7 @@ const IS = {
   width: '100%', padding: '9px 12px', borderRadius: 8,
   border: '1.5px solid #E2E8F0', fontSize: 13, fontWeight: 500,
   outline: 'none', boxSizing: 'border-box', background: '#fff',
-  fontFamily: 'inherit', color: '#051d24',
+  fontFamily: 'inherit', color: '#030B15',
   transition: 'border-color 0.15s, box-shadow 0.15s',
 };
 const LS = {
@@ -191,19 +191,19 @@ const LS = {
 // ─── Sub-components ───────────────────────────────────────────────────────────
 const FieldErr = ({ k, errors }) =>
   errors[k] ? (
-    <p style={{ margin: '4px 0 0', fontSize: 11, color: '#D4AF37', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
+    <p style={{ margin: '4px 0 0', fontSize: 11, color: '#E2B94D', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
       <AlertCircle size={10} />{errors[k]}
     </p>
   ) : null;
 
-const SectionCard = ({ title, icon: Icon, accent = '#0F4C5C', children, extra }) => (
+const SectionCard = ({ title, icon: Icon, accent = '#0C2A47', children, extra }) => (
   <div className="section-card" style={{ background: '#fff', borderRadius: 12, border: '1.5px solid #E9ECF0', overflow: 'hidden' }}>
     <div style={{ padding: '12px 16px', borderBottom: '1.5px solid #F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#FAFBFC', flexWrap: 'wrap', gap: 8 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <div style={{ width: 28, height: 28, borderRadius: 7, background: `${accent}18`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <Icon size={13} color={accent} />
         </div>
-        <span style={{ fontSize: 12, fontWeight: 800, color: '#051d24', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{title}</span>
+        <span style={{ fontSize: 12, fontWeight: 800, color: '#030B15', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{title}</span>
       </div>
       {extra && <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>{extra}</div>}
     </div>
@@ -219,7 +219,7 @@ const Grid = ({ cols = 2, children }) => (
 
 const Field = ({ label, required, children, span }) => (
   <div style={span === 'full' ? { gridColumn: '1/-1' } : {}}>
-    {label && <label style={LS}>{label}{required && <span style={{ color: '#D4AF37', marginLeft: 2 }}>*</span>}</label>}
+    {label && <label style={LS}>{label}{required && <span style={{ color: '#E2B94D', marginLeft: 2 }}>*</span>}</label>}
     {children}
   </div>
 );
@@ -257,7 +257,7 @@ const TimePicker = ({ value, onChange }) => {
         onClick={() => setOpen(!open)}
         style={{
           ...IS, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          background: '#fff', fontSize: 13, fontWeight: 600, color: '#051d24',
+          background: '#fff', fontSize: 13, fontWeight: 600, color: '#030B15',
         }}
       >
         <span>{value ? (() => { const [h, m] = value.split(':').map(Number); const ampm = h >= 12 ? 'PM' : 'AM'; return `${String(h % 12 || 12)}:${String(m).padStart(2, '0')} ${ampm}`; })() : 'Select time'}</span>
@@ -274,20 +274,20 @@ const TimePicker = ({ value, onChange }) => {
             <div style={{ display: 'flex', gap: 6, marginBottom: 10 }}>
               <button type="button" onClick={() => setPanel('hour')} style={{
                 flex: 1, padding: '6px', borderRadius: 8, border: 'none', cursor: 'pointer',
-                background: panel === 'hour' ? '#0F4C5C' : '#F1F5F9',
+                background: panel === 'hour' ? '#0C2A47' : '#F1F5F9',
                 color: panel === 'hour' ? '#fff' : '#475569',
                 fontWeight: 700, fontSize: 12, fontFamily: 'inherit',
               }}>Hour</button>
               <button type="button" onClick={() => setPanel('minute')} style={{
                 flex: 1, padding: '6px', borderRadius: 8, border: 'none', cursor: 'pointer',
-                background: panel === 'minute' ? '#0F4C5C' : '#F1F5F9',
+                background: panel === 'minute' ? '#0C2A47' : '#F1F5F9',
                 color: panel === 'minute' ? '#fff' : '#475569',
                 fontWeight: 700, fontSize: 12, fontFamily: 'inherit',
               }}>Minute</button>
               <button type="button" onClick={togglePeriod} style={{
                 flex: 1, padding: '6px', borderRadius: 8, border: 'none', cursor: 'pointer',
                 background: period === 'AM' ? '#EFF6FF' : '#FEF3C7',
-                color: period === 'AM' ? '#0F4C5C' : '#B45309',
+                color: period === 'AM' ? '#0C2A47' : '#B45309',
                 fontWeight: 800, fontSize: 12, fontFamily: 'inherit',
               }}>{period}</button>
             </div>
@@ -299,8 +299,8 @@ const TimePicker = ({ value, onChange }) => {
                 return (
                   <button key={num} type="button" onClick={() => panel === 'hour' ? pickHour(num) : pickMinute(num)} style={{
                     padding: '8px', borderRadius: 8, border: 'none', cursor: 'pointer',
-                    background: isSelected ? '#0F4C5C' : '#FAFAFA',
-                    color: isSelected ? '#fff' : '#051d24',
+                    background: isSelected ? '#0C2A47' : '#FAFAFA',
+                    color: isSelected ? '#fff' : '#030B15',
                     fontWeight: isSelected ? 800 : 600, fontSize: 13, fontFamily: 'inherit',
                   }}>
                     {String(num).padStart(2, '0')}
@@ -371,7 +371,7 @@ const ClassWidget = ({ classIds, classTimings, onToggle, onTimingChange, onHours
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', gap: 7, alignItems: 'center', flexWrap: 'wrap' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#051d24' }}>{cls.name}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#030B15' }}>{cls.name}</span>
                 {cls.section && <span style={{ fontSize: 10, color: '#94A3B8' }}>§{cls.section}</span>}
                 {ct && (
                   <span style={{ fontSize: 10, fontWeight: 700, padding: '1px 7px', borderRadius: 99, background: T[tc].bg, color: T[tc].text, border: `1.5px solid ${T[tc].border}` }}>
@@ -395,7 +395,7 @@ const ClassWidget = ({ classIds, classTimings, onToggle, onTimingChange, onHours
                   <Calendar size={13} color={T.blue.text} />
                   <div>
                     <p style={{ margin: 0, fontSize: 11, fontWeight: 700, color: T.blue.text }}>Fixed schedule — auto applied</p>
-                    <p style={{ margin: '2px 0 0', fontSize: 12, fontWeight: 800, color: '#051d24' }}>
+                    <p style={{ margin: '2px 0 0', fontSize: 12, fontWeight: 800, color: '#030B15' }}>
                       {cls.startTime && cls.endTime ? `${cls.startTime} – ${cls.endTime}` : 'Time not set in class'}
                     </p>
                   </div>
@@ -414,7 +414,7 @@ const ClassWidget = ({ classIds, classTimings, onToggle, onTimingChange, onHours
                     </div>
                   </div>
                   <div style={{ marginTop: 8, padding: '9px 11px', background: '#fff', borderRadius: 8, border: `1.5px solid ${T.teal.border}` }}>
-                    <label style={LS}>Hours to Assign <span style={{ color: '#D4AF37' }}>*</span></label>
+                    <label style={LS}>Hours to Assign <span style={{ color: '#E2B94D' }}>*</span></label>
                     <input
                       type="number" min="0.5" step="0.5" inputMode="decimal"
                       placeholder="e.g. 3"
@@ -482,7 +482,7 @@ const Toast = ({ message, type = 'error', onClose }) => {
     error:   { bg: '#FEF2F2', border: '#FECACA', text: '#B91C1C', icon: '✕' },
     success: { bg: '#F0FDF4', border: '#BBF7D0', text: '#15803D', icon: '✓' },
     warning: { bg: '#FFFBEB', border: '#FCD34D', text: '#B45309', icon: '!' },
-    info:    { bg: '#EFF6FF', border: '#BFDBFE', text: '#0F4C5C', icon: 'i' },
+    info:    { bg: '#EFF6FF', border: '#BFDBFE', text: '#0C2A47', icon: 'i' },
   }[type] || {};
 
   return (
@@ -1012,7 +1012,7 @@ const StudentRegistrationPage = () => {
         *, *::before, *::after { box-sizing: border-box; }
 
         input:focus, select:focus, textarea:focus {
-          border-color: #0F4C5C !important;
+          border-color: #0C2A47 !important;
           box-shadow: 0 0 0 3px rgba(37,99,235,0.08) !important;
           outline: none;
         }
@@ -1032,7 +1032,7 @@ const StudentRegistrationPage = () => {
           padding: 0 16px;
         }
         .topbar-title { flex: 1; min-width: 0; }
-        .topbar-title h1 { margin: 0; font-size: 15px; font-weight: 800; color: #051d24; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .topbar-title h1 { margin: 0; font-size: 15px; font-weight: 800; color: #030B15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .topbar-title p  { margin: 0; font-size: 10px; color: #94A3B8; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .topbar-actions { display: flex; gap: 8px; flex-shrink: 0; }
         .btn-cancel-top { padding: 7px 12px; border-radius: 8px; border: 1.5px solid #E2E8F0; background: #fff; color: #475569; font-weight: 700; font-size: 12px; cursor: pointer; font-family: inherit; }
@@ -1124,10 +1124,10 @@ const StudentRegistrationPage = () => {
         .cred-box { border-radius: 12px; padding: 12px 14px; }
         .cred-row { display: flex; align-items: center; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
         .cred-label { font-size: 11px; font-weight: 700; width: 54px; flex-shrink: 0; }
-        .cred-value { font-size: 12px; font-weight: 700; color: #051d24; font-family: monospace; flex: 1; word-break: break-all; }
+        .cred-value { font-size: 12px; font-weight: 700; color: #030B15; font-family: monospace; flex: 1; word-break: break-all; }
 
         .btn-wa   { flex: 1; padding: 11px 8px; border-radius: 12px; border: none; background: linear-gradient(135deg,#25D366,#128C7E); color: #fff; font-weight: 700; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-done { width: 100%; padding: 12px; border-radius: 12px; border: none; background: linear-gradient(135deg,#051d24,#051d24); color: #fff; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-done { width: 100%; padding: 12px; border-radius: 12px; border: none; background: linear-gradient(135deg,#030B15,#030B15); color: #fff; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-copy { padding: 4px 8px; border-radius: 6px; border: none; background: #fff; font-weight: 700; font-size: 10px; cursor: pointer; flex-shrink: 0; }
 
         /* ── Mobile overrides ── */
@@ -1177,7 +1177,7 @@ const StudentRegistrationPage = () => {
       {loading ? (
         <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ textAlign: 'center' }}>
-            <Loader2 size={40} style={{ animation: 'spin 1s linear infinite', color: '#0F4C5C' }} />
+            <Loader2 size={40} style={{ animation: 'spin 1s linear infinite', color: '#0C2A47' }} />
             <p style={{ marginTop: 16, fontSize: 14, color: '#64748B', fontWeight: 600 }}>Loading student data...</p>
           </div>
         </div>
@@ -1202,7 +1202,7 @@ const StudentRegistrationPage = () => {
                   className="btn-save-top"
                   onClick={handleSave}
                   disabled={saveLoading}
-                  style={{ background: saveLoading ? '#93C5FD' : '#0F4C5C', cursor: saveLoading ? 'not-allowed' : 'pointer', boxShadow: saveLoading ? 'none' : '0 2px 8px rgba(37,99,235,0.3)' }}
+                  style={{ background: saveLoading ? '#93C5FD' : '#0C2A47', cursor: saveLoading ? 'not-allowed' : 'pointer', boxShadow: saveLoading ? 'none' : '0 2px 8px rgba(37,99,235,0.3)' }}
                 >
                   {saveLoading
                     ? <><Loader2 size={13} style={{ animation: 'spin 1s linear infinite' }} />{isEditMode ? 'Updating...' : 'Saving...'}</>
@@ -1228,8 +1228,8 @@ const StudentRegistrationPage = () => {
                         onClick={() => setForm(f => ({ ...f, admissionAY: ay, admissionYear: parseInt(ay.split('-')[0]) }))}
                         style={{
                           padding: '8px 16px', borderRadius: 8,
-                          border: `2px solid ${active ? '#0F4C5C' : '#E2E8F0'}`,
-                          background: active ? '#0F4C5C' : '#fff',
+                          border: `2px solid ${active ? '#0C2A47' : '#E2E8F0'}`,
+                          background: active ? '#0C2A47' : '#fff',
                           color: active ? '#fff' : '#475569',
                           fontWeight: 700, fontSize: 13, cursor: 'pointer', fontFamily: 'inherit',
                         }}
@@ -1269,13 +1269,13 @@ const StudentRegistrationPage = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
 
                   {/* Student Details */}
-                  <SectionCard title="Student Details" icon={GraduationCap} accent="#0F4C5C"
+                  <SectionCard title="Student Details" icon={GraduationCap} accent="#0C2A47"
                     extra={
                       <div className="photo-area">
                         {photoPreview
                           ? <img src={photoPreview} style={{ width: 36, height: 36, borderRadius: 8, objectFit: 'cover', border: '2px solid #E9D5FF', cursor: 'pointer', flexShrink: 0 }} onClick={() => fileRef.current?.click()} />
                           : form.name
-                            ? <div onClick={() => fileRef.current?.click()} style={{ width: 36, height: 36, borderRadius: 8, background: 'linear-gradient(135deg,#0F4C5C,#051d24)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 16, cursor: 'pointer', flexShrink: 0 }}>{form.name.charAt(0).toUpperCase()}</div>
+                            ? <div onClick={() => fileRef.current?.click()} style={{ width: 36, height: 36, borderRadius: 8, background: 'linear-gradient(135deg,#0C2A47,#030B15)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 16, cursor: 'pointer', flexShrink: 0 }}>{form.name.charAt(0).toUpperCase()}</div>
                             : <button type="button" onClick={() => fileRef.current?.click()} style={{ width: 36, height: 36, borderRadius: 8, border: '2px dashed #CBD5E1', background: '#F8FAFC', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><Camera size={14} color="#94A3B8" /></button>
                         }
                         <button type="button" onClick={() => fileRef.current?.click()} style={{ fontSize: 11, fontWeight: 700, color: '#7E22CE', background: '#FAF5FF', border: '1.5px solid #E9D5FF', padding: '5px 9px', borderRadius: 7, cursor: 'pointer', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>
@@ -1285,7 +1285,7 @@ const StudentRegistrationPage = () => {
                         {isEditMode && studentId && (
                           <div className="student-id-badge">
                             <span style={{ fontSize: 10, color: '#64748B', fontWeight: 700 }}>Adm No:</span>
-                            <span style={{ fontSize: 11, color: '#051d24', fontWeight: 800, fontFamily: 'monospace' }}>{studentId}</span>
+                            <span style={{ fontSize: 11, color: '#030B15', fontWeight: 800, fontFamily: 'monospace' }}>{studentId}</span>
                           </div>
                         )}
                       </div>
@@ -1293,7 +1293,7 @@ const StudentRegistrationPage = () => {
                   >
                     <div className="form-grid">
                       <Field label="Full Name" required span="full">
-                        <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="Student's full name" style={{ ...IS, borderColor: errors.name ? '#D4AF37' : '#E2E8F0' }} />
+                        <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="Student's full name" style={{ ...IS, borderColor: errors.name ? '#E2B94D' : '#E2E8F0' }} />
                         <FieldErr k="name" errors={errors} />
                       </Field>
                       <Field label="Gender">
@@ -1316,21 +1316,21 @@ const StudentRegistrationPage = () => {
                   </SectionCard>
 
                   {/* Father's Info */}
-                  <SectionCard title="Father's Info & Parent Login" icon={User} accent="#0F4C5C">
+                  <SectionCard title="Father's Info & Parent Login" icon={User} accent="#0C2A47">
                     <div className="form-grid">
                       <Field label="Father's Name">
-                        <input value={form.fatherName} onChange={e => set('fatherName', e.target.value)} placeholder="Father's full name" style={{ ...IS, borderColor: errors.fatherName ? '#D4AF37' : '#E2E8F0' }} />
+                        <input value={form.fatherName} onChange={e => set('fatherName', e.target.value)} placeholder="Father's full name" style={{ ...IS, borderColor: errors.fatherName ? '#E2B94D' : '#E2E8F0' }} />
                         <FieldErr k="fatherName" errors={errors} />
                       </Field>
                       <Field label="Mobile Number" required>
-                        <input value={form.fatherMobile} onChange={e => { const v = e.target.value.replace(/\D/g, ''); if (v.length <= 10) set('fatherMobile', v); }} placeholder="10-digit mobile" maxLength={10} style={{ ...IS, borderColor: errors.fatherMobile ? '#D4AF37' : '#E2E8F0' }} />
+                        <input value={form.fatherMobile} onChange={e => { const v = e.target.value.replace(/\D/g, ''); if (v.length <= 10) set('fatherMobile', v); }} placeholder="10-digit mobile" maxLength={10} style={{ ...IS, borderColor: errors.fatherMobile ? '#E2B94D' : '#E2E8F0' }} />
                         <FieldErr k="fatherMobile" errors={errors} />
                       </Field>
                       <Field label="Date of Birth">
                         <input type="date" value={form.fatherDob} onChange={e => set('fatherDob', e.target.value)} style={IS} />
                       </Field>
                       <Field label="Email Address" required>
-                        <input type="email" value={form.fatherEmail} onChange={e => set('fatherEmail', e.target.value)} placeholder="Used for parent login" style={{ ...IS, borderColor: errors.fatherEmail ? '#D4AF37' : '#E2E8F0' }} />
+                        <input type="email" value={form.fatherEmail} onChange={e => set('fatherEmail', e.target.value)} placeholder="Used for parent login" style={{ ...IS, borderColor: errors.fatherEmail ? '#E2B94D' : '#E2E8F0' }} />
                         <FieldErr k="fatherEmail" errors={errors} />
                       </Field>
                     </div>
@@ -1340,10 +1340,10 @@ const StudentRegistrationPage = () => {
                       </div>
                     )} */}
                     <div style={{ marginTop: 12, background: '#EFF6FF', borderRadius: 9, padding: '12px 13px', border: '1.5px solid #BFDBFE' }}>
-                      <label style={{ ...LS, color: '#0F4C5C', marginBottom: 6 }}>
-                        Parent Login Password {!isEditMode && <span style={{ color: '#D4AF37' }}>*</span>}
+                      <label style={{ ...LS, color: '#0C2A47', marginBottom: 6 }}>
+                        Parent Login Password {!isEditMode && <span style={{ color: '#E2B94D' }}>*</span>}
                       </label>
-                      <input type="text" value={form.parentPassword || ''} onChange={e => set('parentPassword', e.target.value)} placeholder={isEditMode ? 'Leave blank to keep current' : 'Min 6 characters'} style={{ ...IS, fontFamily: 'monospace', borderColor: errors.parentPassword ? '#D4AF37' : '#BFDBFE', background: '#fff' }} />
+                      <input type="text" value={form.parentPassword || ''} onChange={e => set('parentPassword', e.target.value)} placeholder={isEditMode ? 'Leave blank to keep current' : 'Min 6 characters'} style={{ ...IS, fontFamily: 'monospace', borderColor: errors.parentPassword ? '#E2B94D' : '#BFDBFE', background: '#fff' }} />
                       <FieldErr k="parentPassword" errors={errors} />
                       <p style={{ margin: '6px 0 0', fontSize: 11, color: '#3B82F6', fontWeight: 500 }}>💡 Share this password with the parent after registration</p>
                     </div>
@@ -1353,18 +1353,18 @@ const StudentRegistrationPage = () => {
                   <SectionCard title="Mother's Info" icon={Heart} accent="#9333EA">
                     <div className="form-grid">
                       <Field label="Mother's Name">
-                        <input value={form.motherName} onChange={e => set('motherName', e.target.value)} placeholder="Mother's full name" style={{ ...IS, borderColor: errors.motherName ? '#D4AF37' : '#E2E8F0' }} />
+                        <input value={form.motherName} onChange={e => set('motherName', e.target.value)} placeholder="Mother's full name" style={{ ...IS, borderColor: errors.motherName ? '#E2B94D' : '#E2E8F0' }} />
                         <FieldErr k="motherName" errors={errors} />
                       </Field>
                       <Field label="Mobile Number">
-                        <input value={form.motherMobile} onChange={e => { const v = e.target.value.replace(/\D/g, ''); if (v.length <= 10) set('motherMobile', v); }} placeholder="10-digit mobile" maxLength={10} style={{ ...IS, borderColor: errors.motherMobile ? '#D4AF37' : '#E2E8F0' }} />
+                        <input value={form.motherMobile} onChange={e => { const v = e.target.value.replace(/\D/g, ''); if (v.length <= 10) set('motherMobile', v); }} placeholder="10-digit mobile" maxLength={10} style={{ ...IS, borderColor: errors.motherMobile ? '#E2B94D' : '#E2E8F0' }} />
                         <FieldErr k="motherMobile" errors={errors} />
                       </Field>
                       <Field label="Date of Birth">
                         <input type="date" value={form.motherDob} onChange={e => set('motherDob', e.target.value)} style={IS} />
                       </Field>
                       <Field label="Email Address">
-                        <input type="email" value={form.motherEmail} onChange={e => set('motherEmail', e.target.value)} placeholder="Optional" style={{ ...IS, borderColor: errors.motherEmail ? '#D4AF37' : '#E2E8F0' }} />
+                        <input type="email" value={form.motherEmail} onChange={e => set('motherEmail', e.target.value)} placeholder="Optional" style={{ ...IS, borderColor: errors.motherEmail ? '#E2B94D' : '#E2E8F0' }} />
                         <FieldErr k="motherEmail" errors={errors} />
                       </Field>
                     </div>
@@ -1456,7 +1456,7 @@ const StudentRegistrationPage = () => {
                   <SectionCard
                     title="Assign Classes"
                     icon={BookOpen}
-                    accent="#0F4C5C"
+                    accent="#0C2A47"
                     extra={
                       form.classIds.length > 0 && (
                         <span style={{ fontSize: 10, fontWeight: 800, background: T.blue.bg, color: T.blue.text, padding: '2px 8px', borderRadius: 99, border: `1.5px solid ${T.blue.border}` }}>
@@ -1514,7 +1514,7 @@ const StudentRegistrationPage = () => {
                     disabled={saveLoading}
                     style={{
                       padding: '9px 20px', borderRadius: 9, border: 'none',
-                      background: saveLoading ? '#93C5FD' : '#0F4C5C',
+                      background: saveLoading ? '#93C5FD' : '#0C2A47',
                       color: '#fff', fontWeight: 700, fontSize: 13,
                       cursor: saveLoading ? 'not-allowed' : 'pointer',
                       display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'inherit',
@@ -1565,7 +1565,7 @@ const StudentRegistrationPage = () => {
 
               {feeEnrollSummary && (feeEnrollSummary.enrolled.length > 0 || feeEnrollSummary.failed.length > 0) && (
                 <div style={{ marginTop: 10, background: feeEnrollSummary.failed.length > 0 ? '#FFFBEB' : '#EFF6FF', border: `1.5px solid ${feeEnrollSummary.failed.length > 0 ? '#FDE68A' : '#BFDBFE'}`, borderRadius: 12, padding: '12px 14px' }}>
-                  <p style={{ margin: 0, fontSize: 11, color: feeEnrollSummary.failed.length > 0 ? '#92400E' : '#0F4C5C', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <p style={{ margin: 0, fontSize: 11, color: feeEnrollSummary.failed.length > 0 ? '#92400E' : '#0C2A47', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
                     <GraduationCap size={13} /> Fee Enrollment:
                   </p>
                   {feeEnrollSummary.enrolled.length > 0 && (
@@ -1591,9 +1591,9 @@ const StudentRegistrationPage = () => {
                       flex: 1,
                       minWidth: 120,
                       borderRadius: 10,
-                      border: selectedRecipient === 'Father' ? '2px solid #0F4C5C' : '1.5px solid #CBD5E1',
+                      border: selectedRecipient === 'Father' ? '2px solid #0C2A47' : '1.5px solid #CBD5E1',
                       background: selectedRecipient === 'Father' ? '#EFF6FF' : '#fff',
-                      color: selectedRecipient === 'Father' ? '#0F4C5C' : '#475569',
+                      color: selectedRecipient === 'Father' ? '#0C2A47' : '#475569',
                       padding: '10px 12px',
                       fontSize: 12,
                       fontWeight: 700,
@@ -1631,20 +1631,20 @@ const StudentRegistrationPage = () => {
 
               {/* Parent Credentials */}
               <div className="cred-box" style={{ background: 'linear-gradient(135deg,#EFF6FF,#DBEAFE)', border: '1.5px solid #BFDBFE' }}>
-                <p style={{ margin: 0, fontSize: 11, fontWeight: 700, color: '#0F4C5C', marginBottom: 4 }}>Parent Credentials</p>
+                <p style={{ margin: 0, fontSize: 11, fontWeight: 700, color: '#0C2A47', marginBottom: 4 }}>Parent Credentials</p>
                 <div className="cred-row">
-                  <span className="cred-label" style={{ color: '#0F4C5C' }}>Email:</span>
+                  <span className="cred-label" style={{ color: '#0C2A47' }}>Email:</span>
                   <span className="cred-value">{createdCredentials.email}</span>
-                  <button className="btn-copy" style={{ color: '#0F4C5C' }} onClick={() => navigator.clipboard.writeText(createdCredentials.email)}>Copy</button>
+                  <button className="btn-copy" style={{ color: '#0C2A47' }} onClick={() => navigator.clipboard.writeText(createdCredentials.email)}>Copy</button>
                 </div>
                 {createdCredentials.fatherPhone && (
                   <div className="cred-row">
-                    <span className="cred-label" style={{ color: '#0F4C5C' }}>Phone:</span>
+                    <span className="cred-label" style={{ color: '#0C2A47' }}>Phone:</span>
                     <span className="cred-value">{createdCredentials.fatherPhone}</span>
                   </div>
                 )}
                 <div className="cred-row">
-                  <span className="cred-label" style={{ color: '#0F4C5C' }}>Password:</span>
+                  <span className="cred-label" style={{ color: '#0C2A47' }}>Password:</span>
                   <span className="cred-value" style={{ color: '#DC2626' }}>{createdCredentials.password}</span>
                   <button className="btn-copy" style={{ color: '#DC2626' }} onClick={() => navigator.clipboard.writeText(createdCredentials.password)}>Copy</button>
                 </div>

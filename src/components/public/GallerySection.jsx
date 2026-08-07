@@ -8,8 +8,8 @@ const fmtDate = (d) =>
   new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 
 const CAT_COLORS = {
-  Events:     { bg: '#0F4C5C15', text: '#0F4C5C', dot: '#0F4C5C' },
-  Activities: { bg: '#D4AF3715', text: '#B48A14', dot: '#D4AF37' },
+  Events:     { bg: '#0C2A4715', text: '#0C2A47', dot: '#0C2A47' },
+  Activities: { bg: '#E2B94D15', text: '#B48A14', dot: '#E2B94D' },
   Academics:  { bg: '#E5F1F4', text: '#0b3844', dot: '#13677A' },
 };
 
@@ -108,8 +108,8 @@ const Lightbox = ({ items, currentIndex, setIndex, onClose }) => {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 5,
               padding: '6px 12px', borderRadius: 8, fontSize: 12, fontWeight: 700,
-              background: downloading ? 'rgba(212,175,55,0.5)' : '#D4AF37',
-              color: '#0F4C5C', border: 'none', cursor: downloading ? 'default' : 'pointer',
+              background: downloading ? 'rgba(226,185,77,0.5)' : '#E2B94D',
+              color: '#0C2A47', border: 'none', cursor: downloading ? 'default' : 'pointer',
               transition: 'all 0.2s',
             }}
           >
@@ -234,7 +234,7 @@ const Lightbox = ({ items, currentIndex, setIndex, onClose }) => {
             onClick={() => setIndex(i)}
             style={{
               flexShrink: 0, width: 52, height: 40, borderRadius: 7, overflow: 'hidden',
-              border: `2px solid ${i === currentIndex ? '#D4AF37' : 'transparent'}`,
+              border: `2px solid ${i === currentIndex ? '#E2B94D' : 'transparent'}`,
               opacity: i === currentIndex ? 1 : 0.45,
               cursor: 'pointer', padding: 0, background: 'none',
               transition: 'all 0.18s',
@@ -271,11 +271,11 @@ const GalleryCard = ({ item, onClick, index }) => {
         cursor: 'pointer',
         position: 'relative',
         background: '#fff',
-        boxShadow: hovered ? '0 10px 28px rgba(15,76,92,0.15)' : '0 2px 8px rgba(0,0,0,0.04)',
+        boxShadow: hovered ? '0 10px 28px rgba(12,42,71,0.15)' : '0 2px 8px rgba(0,0,0,0.04)',
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
         transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
         animationDelay: `${Math.min(index * 0.04, 0.4)}s`,
-        border: '1px solid rgba(15,76,92,0.05)',
+        border: '1px solid rgba(12,42,71,0.05)',
       }}
     >
       <div style={{ overflow: 'hidden' }}>
@@ -293,7 +293,7 @@ const GalleryCard = ({ item, onClick, index }) => {
 
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
-        background: 'linear-gradient(to top, rgba(15,76,92,0.8) 0%, rgba(15,76,92,0.2) 40%, transparent 65%)',
+        background: 'linear-gradient(to top, rgba(12,42,71,0.8) 0%, rgba(12,42,71,0.2) 40%, transparent 65%)',
         opacity: hovered ? 1 : 0,
         transition: 'opacity 0.3s',
       }} />
@@ -304,20 +304,20 @@ const GalleryCard = ({ item, onClick, index }) => {
         opacity: hovered ? 1 : 0,
         transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
         width: 44, height: 44, borderRadius: 12,
-        background: 'linear-gradient(135deg, #D4AF37, #b59223)',
+        background: 'linear-gradient(135deg, #E2B94D, #b59223)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        boxShadow: '0 4px 15px rgba(212,175,55,0.4)',
+        boxShadow: '0 4px 15px rgba(226,185,77,0.4)',
         pointerEvents: 'none',
       }}>
-        <ZoomIn size={20} color="#0F4C5C" />
+        <ZoomIn size={20} color="#0C2A47" />
       </div>
 
       <span style={{
         position: 'absolute', top: 12, left: 12,
         display: 'inline-flex', alignItems: 'center', gap: 4,
         padding: '4px 8px', borderRadius: 99, fontSize: 10, fontWeight: 700,
-        background: 'rgba(255,255,255,0.9)', color: '#0F4C5C',
-        backdropFilter: 'blur(8px)', border: '1px solid rgba(15,76,92,0.1)',
+        background: 'rgba(255,255,255,0.9)', color: '#0C2A47',
+        backdropFilter: 'blur(8px)', border: '1px solid rgba(12,42,71,0.1)',
         letterSpacing: '0.02em',
         boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
       }}>
@@ -434,7 +434,7 @@ const GallerySection = () => {
 
       {/* ── Hero ── */}
       <div style={{
-        background: 'linear-gradient(135deg, #0F4C5C 0%, #0a3540 50%, #0F4C5C 100%)',
+        background: 'linear-gradient(135deg, #0C2A47 0%, #081A2E 50%, #0C2A47 100%)',
         padding: '60px 20px 48px',
         position: 'relative', overflow: 'hidden',
         textAlign: 'center',
@@ -449,7 +449,7 @@ const GallerySection = () => {
         {[180, 300, 420].map((size, i) => (
           <div key={i} style={{
             position: 'absolute', borderRadius: '50%',
-            border: `1px solid rgba(212, 175, 55, ${0.15 - i*0.03})`,
+            border: `1px solid rgba(226,185,77, ${0.15 - i*0.03})`,
             width: size, height: size,
             top: '50%', left: '50%',
             transform: 'translate(-50%,-50%)',
@@ -461,12 +461,12 @@ const GallerySection = () => {
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 6,
             padding: '6px 16px', borderRadius: 99,
-            background: 'rgba(212,175,55,0.1)',
-            border: '1px solid rgba(212,175,55,0.3)',
+            background: 'rgba(226,185,77,0.1)',
+            border: '1px solid rgba(226,185,77,0.3)',
             marginBottom: 20,
           }}>
-            <Camera size={12} color="#D4AF37" />
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#D4AF37', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            <Camera size={12} color="#E2B94D" />
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#E2B94D', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
               School Gallery
             </span>
           </div>
@@ -478,7 +478,7 @@ const GallerySection = () => {
             fontWeight: 800, color: '#fff',
             lineHeight: 1.15, letterSpacing: '-0.5px',
           }}>
-            Moments That <span style={{ color: '#D4AF37' }}>Matter</span>
+            Moments That <span style={{ color: '#E2B94D' }}>Matter</span>
           </h1>
 
           <p style={{ margin: '16px 0 0', fontSize: 15, color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, fontWeight: 300 }}>
@@ -504,18 +504,18 @@ const GallerySection = () => {
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 6,
                   padding: '8px 20px', borderRadius: 10, fontSize: 13, fontWeight: 600,
-                  border: `1.5px solid ${isActive ? '#0F4C5C' : 'rgba(15,76,92,0.15)'}`,
-                  background: isActive ? '#0F4C5C' : '#fff',
-                  color: isActive ? '#fff' : '#0F4C5C',
+                  border: `1.5px solid ${isActive ? '#0C2A47' : 'rgba(12,42,71,0.15)'}`,
+                  background: isActive ? '#0C2A47' : '#fff',
+                  color: isActive ? '#fff' : '#0C2A47',
                   cursor: 'pointer', transition: 'all 0.2s ease', fontFamily: 'inherit',
-                  boxShadow: isActive ? '0 4px 12px rgba(15,76,92,0.2)' : '0 2px 4px rgba(0,0,0,0.02)',
+                  boxShadow: isActive ? '0 4px 12px rgba(12,42,71,0.2)' : '0 2px 4px rgba(0,0,0,0.02)',
                   whiteSpace: 'nowrap', flexShrink: 0,
                 }}
-                onMouseEnter={e => { if(!isActive) { e.currentTarget.style.background = '#f1f5f9'; e.currentTarget.style.borderColor = '#0F4C5C'; } }}
-                onMouseLeave={e => { if(!isActive) { e.currentTarget.style.background = '#fff'; e.currentTarget.style.borderColor = 'rgba(15,76,92,0.15)'; } }}
+                onMouseEnter={e => { if(!isActive) { e.currentTarget.style.background = '#f1f5f9'; e.currentTarget.style.borderColor = '#0C2A47'; } }}
+                onMouseLeave={e => { if(!isActive) { e.currentTarget.style.background = '#fff'; e.currentTarget.style.borderColor = 'rgba(12,42,71,0.15)'; } }}
               >
                 {cat !== 'All' && cc && (
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: isActive ? '#D4AF37' : cc.dot }} />
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: isActive ? '#E2B94D' : cc.dot }} />
                 )}
                 {cat}
               </button>
@@ -537,11 +537,11 @@ const GallerySection = () => {
           </div>
         ) : error ? (
           <div style={{ textAlign: 'center', padding: '80px 20px' }}>
-            <p style={{ color: '#0F4C5C', fontWeight: 600, fontSize: 16 }}>Failed to load photos</p>
+            <p style={{ color: '#0C2A47', fontWeight: 600, fontSize: 16 }}>Failed to load photos</p>
             <button onClick={loadGalleryItems} style={{
               marginTop: 16, padding: '10px 24px', borderRadius: 10, fontSize: 14, fontWeight: 600,
-              border: 'none', background: '#D4AF37', color: '#0F4C5C', cursor: 'pointer',
-              transition: 'background 0.2s', boxShadow: '0 4px 12px rgba(212,175,55,0.3)'
+              border: 'none', background: '#E2B94D', color: '#0C2A47', cursor: 'pointer',
+              transition: 'background 0.2s', boxShadow: '0 4px 12px rgba(226,185,77,0.3)'
             }}>
               Try Again
             </button>
@@ -549,12 +549,12 @@ const GallerySection = () => {
         ) : filtered.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '80px 20px' }}>
             <div style={{
-              width: 72, height: 72, borderRadius: 20, background: '#0F4C5C10',
+              width: 72, height: 72, borderRadius: 20, background: '#0C2A4710',
               display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px',
             }}>
-              <Camera size={32} color="#0F4C5C" opacity={0.7} />
+              <Camera size={32} color="#0C2A47" opacity={0.7} />
             </div>
-            <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#0F4C5C' }}>
+            <p style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#0C2A47' }}>
               No photos in this category
             </p>
             <p style={{ margin: '8px 0 0', fontSize: 14, color: '#64748b' }}>

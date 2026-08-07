@@ -58,7 +58,7 @@ function BirthdayCard({ person }) {
   const getRoleInfo = (role) => {
     switch (role) {
       case 'student':
-        return { label: 'Student', color: '#0F4C5C', from: '#38BDF8', to: '#0F4C5C', bg: '#EFF6FF' };
+        return { label: 'Student', color: '#0C2A47', from: '#38BDF8', to: '#0C2A47', bg: '#EFF6FF' };
       case 'staff':
         return { label: 'Staff', color: '#059669', from: '#34D399', to: '#059669', bg: '#ECFDF5' };
       case 'parent-father':
@@ -77,7 +77,7 @@ function BirthdayCard({ person }) {
   let dayColor = '#16A34A';
   if (daysRemaining === 0) {
     dayLabel = 'Today';
-    dayColor = '#D4AF37';
+    dayColor = '#E2B94D';
   } else if (daysRemaining === 1) {
     dayLabel = 'Tomorrow';
     dayColor = '#F59E0B';
@@ -243,7 +243,7 @@ function AttendanceCard({
           <div className="flex-1">
             <h2
               className="text-xl font-bold leading-snug mb-2 bg-clip-text text-transparent"
-              style={{ backgroundImage: `linear-gradient(90deg, #051d24, ${gradientTo})` }}
+              style={{ backgroundImage: `linear-gradient(90deg, #030B15, ${gradientTo})` }}
             >
               {title}
             </h2>
@@ -579,7 +579,7 @@ const AdminDashboard = () => {
       {dailyError && <ErrorBanner message={`Daily Activity: ${dailyError}`} onRetry={fetchDailySummary} />}
 
       {/* ── Hero Banner ── */}
-      <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0F4C5C] via-[#0a3540] to-[#051d24] p-6 text-white shadow-[0_28px_60px_-30px_rgba(15,76,92,0.55)] sm:p-8">
+      <section className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0C2A47] via-[#081A2E] to-[#030B15] p-6 text-white shadow-[0_28px_60px_-30px_rgba(12,42,71,0.55)] sm:p-8">
         <div className="absolute inset-y-0 right-0 w-64 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2),transparent_68%)]" />
         <div className="absolute -left-12 -top-12 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
         <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -619,8 +619,8 @@ const AdminDashboard = () => {
           overflow: hidden;
           border-radius: 28px;
           padding: 22px 0;
-          background: linear-gradient(135deg, #0F4C5C 0%, #0a3540 45%, #051d24 100%);
-          box-shadow: 0 20px 50px -24px rgba(15, 76, 92, 0.55), inset 0 1px 0 rgba(255,255,255,0.06);
+          background: linear-gradient(135deg, #0C2A47 0%, #081A2E 45%, #030B15 100%);
+          box-shadow: 0 20px 50px -24px rgba(12,42,71, 0.55), inset 0 1px 0 rgba(255,255,255,0.06);
         }
         .birthday-section::before {
           content: '';
@@ -666,19 +666,19 @@ const AdminDashboard = () => {
           gap: 6px;
           padding: 7px 14px;
           border-radius: 999px;
-          background: linear-gradient(135deg, #D4AF37, #b59223 55%, #8f7218);
+          background: linear-gradient(135deg, #E2B94D, #b59223 55%, #8f7218);
           color: #fff;
           font-size: 0.74rem;
           font-weight: 700;
           letter-spacing: 0.01em;
           white-space: nowrap;
-          box-shadow: 0 6px 16px -6px rgba(212,175,55,0.7), inset 0 1px 0 rgba(255,255,255,0.3);
+          box-shadow: 0 6px 16px -6px rgba(226,185,77,0.7), inset 0 1px 0 rgba(255,255,255,0.3);
           transition: transform 0.25s ease, box-shadow 0.25s ease, gap 0.25s ease;
         }
         .birthday-view-all-btn:hover {
           transform: translateY(-2px);
           gap: 9px;
-          box-shadow: 0 10px 22px -6px rgba(212,175,55,0.85), inset 0 1px 0 rgba(255,255,255,0.4);
+          box-shadow: 0 10px 22px -6px rgba(226,185,77,0.85), inset 0 1px 0 rgba(255,255,255,0.4);
         }
         .birthday-view-all-btn:active { transform: translateY(0) scale(0.97); }
         .birthday-view-all-btn svg { transition: transform 0.25s ease; }
@@ -692,9 +692,9 @@ const AdminDashboard = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(155deg, #D4AF37, #b59223 55%, #8f7218);
+          background: linear-gradient(155deg, #E2B94D, #b59223 55%, #8f7218);
           box-shadow:
-            0 6px 14px -4px rgba(212,175,55,0.7),
+            0 6px 14px -4px rgba(226,185,77,0.7),
             inset 0 1px 0 rgba(255,255,255,0.45),
             inset 0 -3px 6px rgba(0,0,0,0.25);
           transform-style: preserve-3d;
@@ -748,8 +748,8 @@ const AdminDashboard = () => {
           z-index: 3;
           pointer-events: none;
         }
-        .birthday-ticker-fade-left { left: 0; background: linear-gradient(90deg, #0a3540, transparent); }
-        .birthday-ticker-fade-right { right: 0; background: linear-gradient(270deg, #0a3540, transparent); }
+        .birthday-ticker-fade-left { left: 0; background: linear-gradient(90deg, #081A2E, transparent); }
+        .birthday-ticker-fade-right { right: 0; background: linear-gradient(270deg, #081A2E, transparent); }
 
         .birthday-ticker {
           display: flex;
@@ -854,7 +854,7 @@ const AdminDashboard = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          border: 2px solid #0a3540;
+          border: 2px solid #081A2E;
           animation: birthday-star-spin 3s linear infinite;
         }
         @keyframes birthday-star-spin {
@@ -975,12 +975,12 @@ const AdminDashboard = () => {
             to="/admin/attendance"
             icon={<FiUsers size={120} />}
             gradientFrom="#0EA5E9"
-            gradientTo="#0F4C5C"
+            gradientTo="#0C2A47"
             glow="rgba(37,99,235,0.35)"
             badgeBg="#EFF6FF"
-            badgeText="#0F4C5C"
+            badgeText="#0C2A47"
             badgeLabel="Student QR Scan"
-            accentColor="#0F4C5C"
+            accentColor="#0C2A47"
           />
 
           {/* Teacher Attendance */}
@@ -1007,7 +1007,7 @@ const AdminDashboard = () => {
             <h2 className="text-xl font-semibold text-slate-900 font-heading">Daily Activity Snapshot</h2>
             <p className="mt-1 text-sm text-slate-500">Class-wise report completion and health alerts for today.</p>
           </div>
-          <Link to="/admin/daily-activity" className="text-sm font-semibold text-[#D4AF37] hover:underline shrink-0">
+          <Link to="/admin/daily-activity" className="text-sm font-semibold text-[#E2B94D] hover:underline shrink-0">
             Open activity reports →
           </Link>
         </div>
@@ -1060,7 +1060,7 @@ const AdminDashboard = () => {
             <h2 className="text-xl font-semibold text-slate-900 font-heading">All Classes</h2>
             <p className="mt-1 text-sm text-slate-500">Overview of all registered classes and their student strength.</p>
           </div>
-          <Link to="/admin/classes" className="text-sm font-semibold text-[#D4AF37] hover:underline shrink-0">
+          <Link to="/admin/classes" className="text-sm font-semibold text-[#E2B94D] hover:underline shrink-0">
             Manage classes →
           </Link>
         </div>
@@ -1077,7 +1077,7 @@ const AdminDashboard = () => {
           ) : (
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {classes.map((cls) => {
-                const classColor = cls.classColor || cls.color || '#0F4C5C';
+                const classColor = cls.classColor || cls.color || '#0C2A47';
                 const totalStudents = getStudentCountForClass(cls.id || cls._id);
                 return (
                   <div
@@ -1114,7 +1114,7 @@ const AdminDashboard = () => {
             <h2 className="text-xl font-semibold text-slate-900 font-heading">Recent Students</h2>
             <p className="mt-1 text-sm text-slate-500">Latest student registrations and their current class mapping.</p>
           </div>
-          <Link to="/admin/students" className="text-sm font-semibold text-[#D4AF37] hover:underline shrink-0">
+          <Link to="/admin/students" className="text-sm font-semibold text-[#E2B94D] hover:underline shrink-0">
             View all students →
           </Link>
         </div>

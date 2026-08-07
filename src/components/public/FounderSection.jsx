@@ -40,12 +40,12 @@ export default function FounderSection() {
           position: absolute;
           inset: -10px;
           border-radius: 50%;
-          background: radial-gradient(circle, #D4AF3740 0%, transparent 70%);
+          background: radial-gradient(circle, #E2B94D40 0%, transparent 70%);
           pointer-events: none;
         }
 
         .name-shimmer {
-          background: linear-gradient(90deg, #0F4C5C 0%, #D4AF37 40%, #D4AF37 70%, #0F4C5C 100%);
+          background: linear-gradient(90deg, #0C2A47 0%, #E2B94D 40%, #E2B94D 70%, #0C2A47 100%);
           background-size: 200% auto;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -65,12 +65,12 @@ export default function FounderSection() {
           bottom: 0;
           width: 3px;
           border-radius: 99px;
-          background: linear-gradient(180deg, #D4AF37, #D4AF37);
+          background: linear-gradient(180deg, #E2B94D, #E2B94D);
         }
 
         .stat-chip {
           background: linear-gradient(135deg, #EFF9FF, #FFF8F0);
-          border: 1.5px solid #D4AF3722;
+          border: 1.5px solid #E2B94D22;
           transition: transform 0.2s, box-shadow 0.2s;
         }
         .stat-chip:hover {
@@ -84,35 +84,35 @@ export default function FounderSection() {
       >
         {/* Subtle bg blobs */}
         <div className="absolute top-0 left-0 w-72 h-72 rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #D4AF370D, transparent 70%)', transform: 'translate(-30%, -30%)' }} />
+          style={{ background: 'radial-gradient(circle, #E2B94D0D, transparent 70%)', transform: 'translate(-30%, -30%)' }} />
         <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #D4AF370A, transparent 70%)', transform: 'translate(30%, 30%)' }} />
+          style={{ background: 'radial-gradient(circle, #E2B94D0A, transparent 70%)', transform: 'translate(30%, 30%)' }} />
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section label */}
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-3 shadow-sm"
-              style={{ background: 'rgba(255,255,255,0.85)', border: '1.5px solid #D4AF3722', backdropFilter: 'blur(8px)' }}
+              style={{ background: 'rgba(255,255,255,0.85)', border: '1.5px solid #E2B94D22', backdropFilter: 'blur(8px)' }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                  stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  stroke="#E2B94D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#0F4C5C' }}>
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#0C2A47' }}>
                 Meet Our Founder
               </span>
             </div>
-            <h2 className="founder-display font-black text-2xl sm:text-3xl" style={{ color: '#0F4C5C' }}>
-              The Heart Behind <span className="text-[#D4AF37]">Zorix School</span>
+            <h2 className="founder-display font-black text-2xl sm:text-3xl" style={{ color: '#0C2A47' }}>
+              The Heart Behind <span className="text-[#E2B94D]">Zorix School</span>
             </h2>
             {/* Decorative divider */}
             <div className="mt-3 flex items-center justify-center gap-2">
-              <div className="h-px w-12 rounded-full bg-[#D4AF37] opacity-50" />
-              <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-              <div className="h-px w-20 rounded-full bg-[#D4AF37] opacity-50" />
-              <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-              <div className="h-px w-12 rounded-full bg-[#D4AF37] opacity-50" />
+              <div className="h-px w-12 rounded-full bg-[#E2B94D] opacity-50" />
+              <div className="w-2 h-2 rounded-full bg-[#E2B94D]" />
+              <div className="h-px w-20 rounded-full bg-[#E2B94D] opacity-50" />
+              <div className="w-2 h-2 rounded-full bg-[#E2B94D]" />
+              <div className="h-px w-12 rounded-full bg-[#E2B94D] opacity-50" />
             </div>
           </div>
 
@@ -132,8 +132,8 @@ export default function FounderSection() {
                 style={{ background: 'linear-gradient(145deg, #EFF9FF 0%, #FFF8F0 100%)' }}
               >
                 {/* Decorative corner accent */}
-                <div className="absolute top-4 left-4 w-8 h-8 rounded-tl-xl border-t-2 border-l-2 border-[#D4AF37] opacity-40" />
-                <div className="absolute bottom-4 right-4 w-8 h-8 rounded-br-xl border-b-2 border-r-2 border-[#D4AF37] opacity-40" />
+                <div className="absolute top-4 left-4 w-8 h-8 rounded-tl-xl border-t-2 border-l-2 border-[#E2B94D] opacity-40" />
+                <div className="absolute bottom-4 right-4 w-8 h-8 rounded-br-xl border-b-2 border-r-2 border-[#E2B94D] opacity-40" />
 
                 <div className="relative">
                   {/* Glow ring */}
@@ -153,7 +153,7 @@ export default function FounderSection() {
                   {/* Floating badge — Founder */}
                   <div className="founder-badge absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap px-4 py-1.5 rounded-full shadow-lg"
                     style={{
-                      background: 'linear-gradient(135deg, #0F4C5C, #1A5A96)',
+                      background: 'linear-gradient(135deg, #0C2A47, #1A5A96)',
                       border: '2px solid white',
                     }}
                   >
@@ -169,20 +169,20 @@ export default function FounderSection() {
                 <h3 className="founder-display font-black text-2xl sm:text-3xl leading-tight">
                   <span className="name-shimmer">Kavita Jain</span>
                 </h3>
-                <p className="mt-1 text-sm font-semibold tracking-wide uppercase" style={{ color: '#D4AF37' }}>
+                <p className="mt-1 text-sm font-semibold tracking-wide uppercase" style={{ color: '#E2B94D' }}>
                   Zorix School
                 </p>
 
                 {/* Divider */}
-                <div className="mt-4 h-px w-16 rounded-full" style={{ background: 'linear-gradient(90deg, #D4AF37, transparent)' }} />
+                <div className="mt-4 h-px w-16 rounded-full" style={{ background: 'linear-gradient(90deg, #E2B94D, transparent)' }} />
 
                 {/* Bio */}
                 <div className="quote-line mt-4">
-                  <p className="text-sm sm:text-base leading-relaxed" style={{ color: '#0F4C5C' }}>
-                    With a deep passion for early childhood education, <strong style={{ color: '#0F4C5C' }}>Mrs. Kavita Jain</strong> founded Zorix School with a single dream — to give every child the perfect foundation for lifelong learning.
+                  <p className="text-sm sm:text-base leading-relaxed" style={{ color: '#0C2A47' }}>
+                    With a deep passion for early childhood education, <strong style={{ color: '#0C2A47' }}>Mrs. Kavita Jain</strong> founded Zorix School with a single dream — to give every child the perfect foundation for lifelong learning.
                   </p>
                 </div>
-                <p className="mt-3 text-sm sm:text-base leading-relaxed" style={{ color: '#0F4C5C' }}>
+                <p className="mt-3 text-sm sm:text-base leading-relaxed" style={{ color: '#0C2A47' }}>
                   Her nurturing leadership blends play-based Montessori methods with modern pedagogy, creating an environment where children feel safe, loved, and inspired to grow every day.
                 </p>
 
@@ -191,28 +191,28 @@ export default function FounderSection() {
                   {[
                     { icon: (
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                          <circle cx="12" cy="12" r="10" stroke="#D4AF37" strokeWidth="2"/>
-                          <path d="M12 6v6l4 2" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round"/>
+                          <circle cx="12" cy="12" r="10" stroke="#E2B94D" strokeWidth="2"/>
+                          <path d="M12 6v6l4 2" stroke="#E2B94D" strokeWidth="2" strokeLinecap="round"/>
                         </svg>
                       ), value: '15+ Years', label: 'Experience' },
                     { icon: (
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round"/>
-                          <circle cx="9" cy="7" r="4" stroke="#D4AF37" strokeWidth="2"/>
-                          <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round"/>
+                          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#E2B94D" strokeWidth="2" strokeLinecap="round"/>
+                          <circle cx="9" cy="7" r="4" stroke="#E2B94D" strokeWidth="2"/>
+                          <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#E2B94D" strokeWidth="2" strokeLinecap="round"/>
                         </svg>
                       ), value: '10K+', label: 'Happy Kids' },
                     { icon: (
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                            stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            stroke="#E2B94D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       ), value: 'Trusted', label: 'By Families' },
                   ].map(({ icon, value, label }) => (
                     <div key={label} className="stat-chip flex items-center gap-2 px-3 py-2 rounded-xl">
                       {icon}
                       <div>
-                        <div className="founder-display font-black text-sm leading-none" style={{ color: '#0F4C5C' }}>{value}</div>
+                        <div className="founder-display font-black text-sm leading-none" style={{ color: '#0C2A47' }}>{value}</div>
                         <div className="text-xs mt-0.5" style={{ color: '#7A90AA' }}>{label}</div>
                       </div>
                     </div>
@@ -220,13 +220,13 @@ export default function FounderSection() {
                 </div>
 
                 {/* Published Books Button */}
-                <div className="mt-6 pt-6 border-t border-[#D4AF3722]">
+                <div className="mt-6 pt-6 border-t border-[#E2B94D22]">
                   <Link 
                     // to="/books"
                     to="/coming-soon"
                     className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 group"
                     style={{
-                      background: 'linear-gradient(135deg, #0F4C5C 0%, #D4AF37 50%, #D4AF37 100%)',
+                      background: 'linear-gradient(135deg, #0C2A47 0%, #E2B94D 50%, #E2B94D 100%)',
                       border: '2px solid rgba(255,255,255,0.3)',
                     }}
                   >

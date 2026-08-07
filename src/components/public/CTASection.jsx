@@ -24,32 +24,32 @@ export default function CTASection() {
 
         .cta-bg-pattern {
           background-image: 
-            linear-gradient(rgba(15, 76, 92, 0.95), rgba(15, 76, 92, 0.98)),
-            radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 40%);
-          background-color: #0F4C5C;
+            linear-gradient(rgba(12,42,71, 0.95), rgba(12,42,71, 0.98)),
+            radial-gradient(circle at 20% 50%, rgba(226,185,77, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(226,185,77, 0.1) 0%, transparent 40%);
+          background-color: #0C2A47;
         }
 
         .cta-btn-primary {
-          background: #D4AF37;
-          color: #0F4C5C;
+          background: #E2B94D;
+          color: #0C2A47;
           transition: all 0.3s ease;
-          box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.4);
+          box-shadow: 0 10px 25px -5px rgba(226,185,77, 0.4);
         }
         .cta-btn-primary:hover {
           background: #e5c148;
           transform: translateY(-2px);
-          box-shadow: 0 15px 30px -5px rgba(212, 175, 55, 0.5);
+          box-shadow: 0 15px 30px -5px rgba(226,185,77, 0.5);
         }
 
         .cta-btn-secondary {
           background: transparent;
-          color: #D4AF37;
-          border: 2px solid #D4AF37;
+          color: #E2B94D;
+          border: 2px solid #E2B94D;
           transition: all 0.3s ease;
         }
         .cta-btn-secondary:hover {
-          background: rgba(212, 175, 55, 0.1);
+          background: rgba(226,185,77, 0.1);
           transform: translateY(-2px);
         }
 
@@ -61,7 +61,7 @@ export default function CTASection() {
         }
         .info-pill-modern:hover {
           background: rgba(255, 255, 255, 0.1);
-          border-color: rgba(212, 175, 55, 0.4);
+          border-color: rgba(226,185,77, 0.4);
           transform: translateY(-2px);
         }
 
@@ -82,12 +82,12 @@ export default function CTASection() {
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           
           {/* Badge */}
-          <div className="animate-float-up-1 inline-flex items-center gap-2 px-5 py-2 rounded-full mb-8 bg-[#D4AF37]/10 border border-[#D4AF37]/30">
+          <div className="animate-float-up-1 inline-flex items-center gap-2 px-5 py-2 rounded-full mb-8 bg-[#E2B94D]/10 border border-[#E2B94D]/30">
             <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4AF37] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#D4AF37]"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E2B94D] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#E2B94D]"></span>
             </span>
-            <span className="text-sm font-bold tracking-widest uppercase text-[#D4AF37]">
+            <span className="text-sm font-bold tracking-widest uppercase text-[#E2B94D]">
               Admissions Open 2026-27
             </span>
           </div>
@@ -95,7 +95,7 @@ export default function CTASection() {
           {/* Heading */}
           <h2 className="animate-float-up-2 cta-display font-extrabold text-white text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6">
             Empower Your Child's Future at <br className="hidden sm:block" />
-            <span className="text-[#D4AF37]">Zorix School</span>
+            <span className="text-[#E2B94D]">Zorix School</span>
           </h2>
 
           {/* Description */}
@@ -113,7 +113,7 @@ export default function CTASection() {
             ].map(({ text }) => (
               <div key={text} className="info-pill-modern flex items-center gap-2 px-4 py-2 rounded-lg">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 6L9 17L4 12" stroke="#D4AF37" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M20 6L9 17L4 12" stroke="#E2B94D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 <span className="text-sm font-medium text-white/90">{text}</span>
               </div>

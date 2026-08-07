@@ -1021,7 +1021,7 @@ function getInitials(name = "") {
 }
 
 // ─── SPINNER ─────────────────────────────────────────────────────────────────
-function Spinner({ size = "md", color = "#0F4C5C" }) {
+function Spinner({ size = "md", color = "#0C2A47" }) {
   const s = size === "sm" ? 20 : size === "lg" ? 44 : 28;
   return (
     <svg
@@ -1144,7 +1144,7 @@ function DateCell({ date, dateStr, day, time }) {
       <div
         className="flex-shrink-0 w-11 rounded-xl overflow-hidden shadow-sm border border-slate-100"
         style={{
-          background: "linear-gradient(180deg,#0F4C5C 0%,#0F4C5C 35%,#fff 35%)",
+          background: "linear-gradient(180deg,#0C2A47 0%,#0C2A47 35%,#fff 35%)",
         }}
       >
         <div className="text-center py-0.5">
@@ -1287,7 +1287,7 @@ function ParentPicker({
                   style={
                     sel
                       ? {
-                          background: "linear-gradient(135deg,#0F4C5C,#051d24)",
+                          background: "linear-gradient(135deg,#0C2A47,#030B15)",
                         }
                       : {}
                   }
@@ -1321,7 +1321,7 @@ function ParentPicker({
                   style={
                     sel
                       ? {
-                          background: "linear-gradient(135deg,#0F4C5C,#051d24)",
+                          background: "linear-gradient(135deg,#0C2A47,#030B15)",
                         }
                       : {}
                   }
@@ -1389,7 +1389,7 @@ function AssignParentsModal({
         {/* Header */}
         <div
           className="p-5 flex-shrink-0"
-          style={{ background: "linear-gradient(135deg,#0F4C5C,#051d24)" }}
+          style={{ background: "linear-gradient(135deg,#0C2A47,#030B15)" }}
         >
           <div className="flex items-start justify-between gap-3">
             <div>
@@ -1459,7 +1459,7 @@ function AssignParentsModal({
             disabled={loading}
             className="flex-1 rounded-2xl py-2.5 text-sm font-bold text-white flex items-center justify-center gap-2 transition-all disabled:opacity-60"
             style={{
-              background: "linear-gradient(135deg,#0F4C5C,#051d24)",
+              background: "linear-gradient(135deg,#0C2A47,#030B15)",
               boxShadow: "0 4px 14px rgba(99,102,241,0.4)",
             }}
           >
@@ -1716,7 +1716,7 @@ function UploadModal({ onClose, onSuccess }) {
       >
         <div
           className="p-5"
-          style={{ background: "linear-gradient(135deg,#0F4C5C,#051d24)" }}
+          style={{ background: "linear-gradient(135deg,#0C2A47,#030B15)" }}
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -1755,7 +1755,7 @@ function UploadModal({ onClose, onSuccess }) {
             <button
               onClick={onClose}
               className="w-full rounded-2xl py-2.5 font-bold text-white"
-              style={{ background: "linear-gradient(135deg,#0F4C5C,#051d24)" }}
+              style={{ background: "linear-gradient(135deg,#0C2A47,#030B15)" }}
             >
               Done
             </button>
@@ -1766,7 +1766,7 @@ function UploadModal({ onClose, onSuccess }) {
               onClick={() => fileRef.current?.click()}
               className="border-2 border-dashed rounded-2xl p-5 text-center cursor-pointer transition-all hover:border-primary/50 hover:bg-primary/10/50"
               style={{
-                borderColor: file ? "#0F4C5C" : "#cbd5e1",
+                borderColor: file ? "#0C2A47" : "#cbd5e1",
                 background: file ? "#eef2ff" : undefined,
               }}
             >
@@ -1858,7 +1858,7 @@ function UploadModal({ onClose, onSuccess }) {
                 disabled={loading}
                 className="flex-1 rounded-2xl py-2.5 text-sm font-bold text-white flex items-center justify-center gap-2 disabled:opacity-60"
                 style={{
-                  background: "linear-gradient(135deg,#0F4C5C,#051d24)",
+                  background: "linear-gradient(135deg,#0C2A47,#030B15)",
                   boxShadow: "0 4px 14px rgba(99,102,241,0.35)",
                 }}
               >
@@ -2183,7 +2183,7 @@ function EditEventModal({ event, onClose, onSuccess }) {
                   style={
                     form[key]
                       ? {
-                          background: "linear-gradient(135deg,#0F4C5C,#051d24)",
+                          background: "linear-gradient(135deg,#0C2A47,#030B15)",
                         }
                       : {}
                   }
@@ -2218,7 +2218,7 @@ function EditEventModal({ event, onClose, onSuccess }) {
               disabled={loading}
               className="flex-1 rounded-2xl py-2.5 text-sm font-bold text-white flex items-center justify-center gap-2 disabled:opacity-60"
               style={{
-                background: "linear-gradient(135deg,#0F4C5C,#051d24)",
+                background: "linear-gradient(135deg,#0C2A47,#030B15)",
                 boxShadow: "0 4px 14px rgba(99,102,241,0.35)",
               }}
             >
@@ -2299,7 +2299,7 @@ function BatchCard({ batch, onDelete }) {
         </div>
         <div className="grid grid-cols-3 gap-1.5 text-center">
           {[
-            ["Total", batch.count, "#0F4C5C", "#eef2ff"],
+            ["Total", batch.count, "#0C2A47", "#eef2ff"],
             ["School", batch.schoolCalCount, "#4338ca", "#e0e7ff"],
             ["Kids", batch.kidsClubCount, "#059669", "#d1fae5"],
           ].map(([l, v, c, bg]) => (
@@ -2686,7 +2686,7 @@ export default function AdminCalendarPage() {
                 disabled={deleteLoading}
                 className="flex-1 rounded-2xl py-2.5 text-sm font-bold text-white flex items-center justify-center gap-1.5 disabled:opacity-60"
                 style={{
-                  background: "linear-gradient(135deg,#D4AF37,#ef4444)",
+                  background: "linear-gradient(135deg,#E2B94D,#ef4444)",
                   boxShadow: "0 4px 14px rgba(244,63,94,0.35)",
                 }}
               >
@@ -2711,7 +2711,7 @@ export default function AdminCalendarPage() {
           <div className="flex items-center gap-2.5 mb-1">
             <div
               className="w-9 h-9 rounded-2xl flex items-center justify-center"
-              style={{ background: "linear-gradient(135deg,#0F4C5C,#051d24)" }}
+              style={{ background: "linear-gradient(135deg,#0C2A47,#030B15)" }}
             >
               <Calendar size={18} className="text-white" />
             </div>
@@ -2726,8 +2726,8 @@ export default function AdminCalendarPage() {
             onClick={() => setShowBatches((p) => !p)}
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl text-sm font-semibold border transition-all"
             style={{
-              borderColor: showBatches ? "#0F4C5C" : "#e2e8f0",
-              color: showBatches ? "#0F4C5C" : "#64748b",
+              borderColor: showBatches ? "#0C2A47" : "#e2e8f0",
+              color: showBatches ? "#0C2A47" : "#64748b",
               background: showBatches ? "#eef2ff" : "white",
             }}
           >
@@ -2791,7 +2791,7 @@ export default function AdminCalendarPage() {
             onClick={() => setShowUpload(true)}
             className="flex items-center gap-1.5 px-4 py-2 rounded-2xl text-sm font-bold text-white transition-all hover:shadow-lg"
             style={{
-              background: "linear-gradient(135deg,#0F4C5C,#051d24)",
+              background: "linear-gradient(135deg,#0C2A47,#030B15)",
               boxShadow: "0 4px 14px rgba(99,102,241,0.35)",
             }}
           >
@@ -2810,13 +2810,13 @@ export default function AdminCalendarPage() {
           value={total}
           gradient="linear-gradient(135deg,#eef2ff,#e0e7ff)"
           textColor="#4338ca"
-          icon={<Calendar size={18} style={{ color: "#0F4C5C" }} />}
+          icon={<Calendar size={18} style={{ color: "#0C2A47" }} />}
         />
         <StatCard
           label="School Cal"
           value={schoolCount}
           gradient="linear-gradient(135deg,#eff6ff,#dbeafe)"
-          textColor="#0F4C5C"
+          textColor="#0C2A47"
           icon={<GraduationCap size={18} style={{ color: "#3b82f6" }} />}
         />
         <StatCard
@@ -3242,7 +3242,7 @@ export default function AdminCalendarPage() {
                       padding: "7px 8px",
                       textAlign: "left",
                       background: "#8ab4f0",
-                      color: "#051d24",
+                      color: "#030B15",
                       fontWeight: 800,
                     }}
                   >
@@ -3261,7 +3261,7 @@ export default function AdminCalendarPage() {
                     : i % 2 === 0
                       ? "#dbeafe"
                       : "#ffffff";
-                const color = ev.isHoliday || highlighted ? "#ffffff" : "#051d24";
+                const color = ev.isHoliday || highlighted ? "#ffffff" : "#030B15";
                 return (
                   <tr key={ev._id || i} style={{ background: bg }}>
                     <td style={{ border: "1px solid #cbd5e1", padding: "6px 8px", color, fontWeight: 600 }}>

@@ -30,11 +30,11 @@ const getLocalDate = () => {
 const getRecords = data => Array.isArray(data) ? data : Array.isArray(data?.activities) ? data.activities : Array.isArray(data?.data) ? data.data : [];
 
 const QUICK_ACTIONS = [
-  { to: '/parent/my-child-qr', label: 'Child QR',   d: 'M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z', color: '#0F4C5C', bg: 'rgba(15,76,92,0.12)' },
-  { to: '/parent/daily-activity',  label: 'Daily Activity', d: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2', color: '#D4AF37', bg: 'rgba(212,175,55,0.12)' },
-  { to: '/parent/attendance',  label: 'Attendance', d: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',                                                                                                                                                                                                                                                                                                                                                                                  color: '#0F4C5C', bg: 'rgba(15,76,92,0.12)' },
-  { to: '/parent/photos',      label: 'Photos',     d: 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z',                                                                                                                                                                                                                                                                    color: '#D4AF37', bg: 'rgba(212,175,55,0.12)' },
-  { to: '/parent/referrals',   label: 'Refer',      d: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z',                                                                                                                                                                                                                    color: '#0F4C5C', bg: 'rgba(15,76,92,0.12)' },
+  { to: '/parent/my-child-qr', label: 'Child QR',   d: 'M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z', color: '#0C2A47', bg: 'rgba(12,42,71,0.12)' },
+  { to: '/parent/daily-activity',  label: 'Daily Activity', d: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2', color: '#E2B94D', bg: 'rgba(226,185,77,0.12)' },
+  { to: '/parent/attendance',  label: 'Attendance', d: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',                                                                                                                                                                                                                                                                                                                                                                                  color: '#0C2A47', bg: 'rgba(12,42,71,0.12)' },
+  { to: '/parent/photos',      label: 'Photos',     d: 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z',                                                                                                                                                                                                                                                                    color: '#E2B94D', bg: 'rgba(226,185,77,0.12)' },
+  { to: '/parent/referrals',   label: 'Refer',      d: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z',                                                                                                                                                                                                                    color: '#0C2A47', bg: 'rgba(12,42,71,0.12)' },
 ];
 
 export default function ParentDashboard() {
@@ -167,8 +167,8 @@ export default function ParentDashboard() {
   if (loading) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen gap-4" style={{ fontFamily: "'Nunito', sans-serif" }}>
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0F4C5C]"></div>
-        <p className="text-[#0F4C5C] font-bold">Loading dashboard...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0C2A47]"></div>
+        <p className="text-[#0C2A47] font-bold">Loading dashboard...</p>
       </div>
     );
   }
@@ -223,9 +223,9 @@ export default function ParentDashboard() {
         /* ── Hero ── */
         .pd-hero {
           position: relative; overflow: hidden; border-radius: 24px;
-          background: linear-gradient(135deg, #0F4C5C 0%, #0a3540 40%, #051d24 100%);
+          background: linear-gradient(135deg, #0C2A47 0%, #081A2E 40%, #030B15 100%);
           padding: 28px 28px 28px 28px;
-          box-shadow: 0 16px 48px rgba(15, 76, 92,0.35);
+          box-shadow: 0 16px 48px rgba(12,42,71,0.35);
         }
         .pd-hero-orb1 { position:absolute; top:-60px; right:-60px; width:260px; height:260px; background:radial-gradient(circle,rgba(255,255,255,0.14) 0%,transparent 70%); border-radius:50%; pointer-events:none; }
         .pd-hero-orb2 { position:absolute; bottom:-80px; left:-40px; width:200px; height:200px; background:radial-gradient(circle,rgba(236,72,153,0.18) 0%,transparent 70%); border-radius:50%; pointer-events:none; }
@@ -297,7 +297,7 @@ export default function ParentDashboard() {
         /* ── Ad Carousel ── */
         .pd-ad-carousel {
           position: relative; border-radius: 20px; overflow: hidden;
-          border: 1px solid #E8EAF0; box-shadow: 0 8px 28px rgba(15, 76, 92,0.14);
+          border: 1px solid #E8EAF0; box-shadow: 0 8px 28px rgba(12,42,71,0.14);
           aspect-ratio: 2 / 1; background: #F1F5F9;
         }
         .pd-ad-track {
@@ -369,7 +369,7 @@ export default function ParentDashboard() {
               <p style={{ fontFamily:"'Baloo 2',cursive", fontSize: 16, fontWeight: 800, color: '#0F172A', margin: 0 }}>Today's Activity</p>
               <p style={{ fontSize: 12, color: '#64748B', margin: '3px 0 0', fontWeight: 600 }}>Latest update from your child's teacher.</p>
             </div>
-            <Link to="/parent/daily-activity" style={{ fontSize: 12, fontWeight: 800, color: '#0F4C5C', textDecoration: 'none' }}>View full report →</Link>
+            <Link to="/parent/daily-activity" style={{ fontSize: 12, fontWeight: 800, color: '#0C2A47', textDecoration: 'none' }}>View full report →</Link>
           </div>
 
           {dailyActivityLoading ? (
@@ -379,8 +379,8 @@ export default function ParentDashboard() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,minmax(0,1fr))', gap: 12 }} className="pd-grid-4">
                 {dailyActivity.sleep?.quality && (
                   <div style={{ borderRadius: 18, padding: 14, background: '#F5F3FF', border: '1px solid #DDD6FE' }}>
-                    <p style={{ fontSize: 11, fontWeight: 800, color: '#0F4C5C', margin: '0 0 6px', textTransform: 'uppercase' }}>Sleep</p>
-                    <p style={{ fontFamily:"'Baloo 2',cursive", fontSize: 15, fontWeight: 800, color: '#051d24', margin: 0 }}>{dailyActivity.sleep.quality.replace(/_/g, ' ')}</p>
+                    <p style={{ fontSize: 11, fontWeight: 800, color: '#0C2A47', margin: '0 0 6px', textTransform: 'uppercase' }}>Sleep</p>
+                    <p style={{ fontFamily:"'Baloo 2',cursive", fontSize: 15, fontWeight: 800, color: '#030B15', margin: 0 }}>{dailyActivity.sleep.quality.replace(/_/g, ' ')}</p>
                   </div>
                 )}
                 {dailyActivity.food?.quantity && (
@@ -418,8 +418,8 @@ export default function ParentDashboard() {
               )}
               {activityNote && (
                 <div style={{ marginTop: 14, borderRadius: 18, border: '1px solid #DDD6FE', background: '#FAF5FF', padding: 14 }}>
-                  <p style={{ fontSize: 11, fontWeight: 800, color: '#0F4C5C', margin: '0 0 6px', textTransform: 'uppercase' }}>Staff note</p>
-                  <p style={{ fontSize: 13, color: '#051d24', margin: 0, lineHeight: 1.6, fontWeight: 700 }}>"{activityNote}"</p>
+                  <p style={{ fontSize: 11, fontWeight: 800, color: '#0C2A47', margin: '0 0 6px', textTransform: 'uppercase' }}>Staff note</p>
+                  <p style={{ fontSize: 13, color: '#030B15', margin: 0, lineHeight: 1.6, fontWeight: 700 }}>"{activityNote}"</p>
                 </div>
               )}
               {!activityChips.length && !activityNote && (
@@ -468,21 +468,21 @@ export default function ParentDashboard() {
           {/* QR card (Moved here) */}
           <div className="pd-card" style={{ padding: 20 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
-              <div style={{ width: 32, height: 32, borderRadius: 9, background: 'rgba(15, 76, 92,.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Ico d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" size={16} stroke="#0F4C5C" sw={2} />
+              <div style={{ width: 32, height: 32, borderRadius: 9, background: 'rgba(12,42,71,.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Ico d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" size={16} stroke="#0C2A47" sw={2} />
               </div>
               <p style={{ fontFamily:"'Baloo 2',cursive", fontSize: 15, fontWeight: 800, color: '#0F172A', margin: 0 }}>Attendance QR Code</p>
             </div>
 
             {student ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-                <div ref={qrRef} style={{ padding: 8, background: '#fff', borderRadius: 14, border: '2px solid #EDE9FE', boxShadow: '0 4px 14px rgba(15, 76, 92,.12)', flexShrink: 0 }}>
-              <QRCodeCanvas value={child.qrCode || `STUDENT-${child.admissionNo || child._id}`} size={80} bgColor="#ffffff" fgColor="#051d24" level="M" />
+                <div ref={qrRef} style={{ padding: 8, background: '#fff', borderRadius: 14, border: '2px solid #EDE9FE', boxShadow: '0 4px 14px rgba(12,42,71,.12)', flexShrink: 0 }}>
+              <QRCodeCanvas value={child.qrCode || `STUDENT-${child.admissionNo || child._id}`} size={80} bgColor="#ffffff" fgColor="#030B15" level="M" />
                 </div>
                 <div style={{ flex: 1 }}>
                   <p style={{ fontSize: 12, color: '#64748B', fontWeight: 600, margin: '0 0 6px' }}>Show at school gate for instant entry</p>
                   <div style={{ marginTop: 10, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    <Link to="/parent/my-child-qr" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 10, background: 'linear-gradient(135deg,#0F4C5C,#D4AF37)', color: '#fff', fontSize: 12, fontWeight: 800, textDecoration: 'none', boxShadow: '0 4px 12px rgba(15, 76, 92,.3)' }}>
+                    <Link to="/parent/my-child-qr" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 10, background: 'linear-gradient(135deg,#0C2A47,#E2B94D)', color: '#fff', fontSize: 12, fontWeight: 800, textDecoration: 'none', boxShadow: '0 4px 12px rgba(12,42,71,.3)' }}>
                       <Ico d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" size={12} stroke="#fff" sw={2.5} />
                       Full QR
                     </Link>

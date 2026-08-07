@@ -16,7 +16,7 @@ const STATUSES = ['Published', 'Draft', 'Archived'];
 
 
 const CAT_COLORS = {
-  Events:     { bg: '#EEF2FF', text: '#4F46E5', dot: '#0F4C5C' },
+  Events:     { bg: '#EEF2FF', text: '#4F46E5', dot: '#0C2A47' },
   Activities: { bg: '#ECFDF5', text: '#059669', dot: '#10B981' },
   Academics:  { bg: '#FFF7ED', text: '#D97706', dot: '#F59E0B' },
   Classroom:  { bg: '#FAF5FF', text: '#7C3AED', dot: '#9333EA' },
@@ -313,7 +313,7 @@ const GalleryForm = ({ item, onSave, onCancel, targetAudience, loadingTargetAudi
                 style={{
                   padding: '10px 18px',
                   borderRadius: 10,
-                  border: active ? '1.5px solid #0F4C5C' : '1px solid #E5E7EB',
+                  border: active ? '1.5px solid #0C2A47' : '1px solid #E5E7EB',
                   background: active ? '#EEF2FF' : '#fff',
                   color: active ? '#4F46E5' : '#6B7280',
                   fontSize: 14,
@@ -327,7 +327,7 @@ const GalleryForm = ({ item, onSave, onCancel, targetAudience, loadingTargetAudi
               >
                 <div style={{
                   width: 18, height: 18, borderRadius: 4, border: active ? 'none' : '2px solid #D1D5DB',
-                  background: active ? '#0F4C5C' : '#fff',
+                  background: active ? '#0C2A47' : '#fff',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   {active && <Check size={12} color="#fff" />}
@@ -372,7 +372,7 @@ const GalleryForm = ({ item, onSave, onCancel, targetAudience, loadingTargetAudi
           type="submit"
           style={{
             padding: '10px 24px', borderRadius: 10, border: 'none',
-            background: 'linear-gradient(135deg,#0F4C5C,#051d24)',
+            background: 'linear-gradient(135deg,#0C2A47,#030B15)',
             color: '#fff', fontSize: 14, fontWeight: 600,
             cursor: 'pointer', transition: 'all 0.2s',
             boxShadow: '0 4px 14px rgba(99,102,241,0.3)',
@@ -688,7 +688,7 @@ function UserGallery() {
     return (
       <div style={{ minHeight: '75vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
         <div style={{ textAlign: 'center', color: '#334155' }}>
-          <div className="loader" style={{ margin: '0 auto 16px', width: 48, height: 48, border: '4px solid #cbd5e1', borderTopColor: '#0F4C5C', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+          <div className="loader" style={{ margin: '0 auto 16px', width: 48, height: 48, border: '4px solid #cbd5e1', borderTopColor: '#0C2A47', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
           <p style={{ margin: 0, fontSize: 16, fontWeight: 600 }}>Loading gallery items...</p>
         </div>
         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
@@ -745,7 +745,7 @@ function UserGallery() {
         marginBottom: 24 
       }}>
         {[
-          { label: 'Total Items', value: stats.total, icon: Image, color: '#0F4C5C', bg: '#EEF2FF' },
+          { label: 'Total Items', value: stats.total, icon: Image, color: '#0C2A47', bg: '#EEF2FF' },
           { label: 'Published', value: stats.published, icon: Check, color: '#16A34A', bg: '#DCFCE7' },
           { label: 'Drafts', value: stats.drafts, icon: AlertCircle, color: '#D97706', bg: '#FEF3C7' },
           { label: 'Total Views', value: Number(stats.totalViews || 0).toLocaleString(), icon: Eye, color: '#8B5CF6', bg: '#F3E8FF' },
@@ -794,7 +794,7 @@ function UserGallery() {
                 border: '1px solid #E5E7EB', fontSize: 14, outline: 'none',
                 transition: 'all 0.2s', boxSizing: 'border-box',
               }}
-              onFocus={e => { e.currentTarget.style.borderColor = '#0F4C5C'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.1)'; }}
+              onFocus={e => { e.currentTarget.style.borderColor = '#0C2A47'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.1)'; }}
               onBlur={e => { e.currentTarget.style.borderColor = '#E5E7EB'; e.currentTarget.style.boxShadow = 'none'; }}
             />
             <Search size={18} color="#9CA3AF" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)' }} />
@@ -840,7 +840,7 @@ function UserGallery() {
           style={{
             display: 'flex', alignItems: 'center', gap: 8,
             padding: '10px 20px', borderRadius: 10, border: 'none',
-            background: 'linear-gradient(135deg,#0F4C5C,#051d24)',
+            background: 'linear-gradient(135deg,#0C2A47,#030B15)',
             color: '#fff', fontSize: 14, fontWeight: 600,
             cursor: 'pointer', transition: 'all 0.2s',
             boxShadow: '0 4px 14px rgba(99,102,241,0.3)',
@@ -902,7 +902,7 @@ function UserGallery() {
                 marginTop: 16,
                 display: 'inline-flex', alignItems: 'center', gap: 6,
                 padding: '10px 20px', borderRadius: 10, border: 'none',
-                background: '#0F4C5C', color: '#fff', fontSize: 14, fontWeight: 600,
+                background: '#0C2A47', color: '#fff', fontSize: 14, fontWeight: 600,
                 cursor: 'pointer',
               }}
             >
@@ -924,7 +924,7 @@ function UserGallery() {
             return (
               <div key={item.id} style={{
                 background: '#fff', borderRadius: 14, overflow: 'hidden',
-                border: isSelected ? '2px solid #0F4C5C' : '1px solid #E5E7EB',
+                border: isSelected ? '2px solid #0C2A47' : '1px solid #E5E7EB',
                 transition: 'all 0.2s',
                 position: 'relative',
               }}
@@ -937,7 +937,7 @@ function UserGallery() {
                     type="checkbox"
                     checked={isSelected}
                     onChange={() => toggleSelect(item.id)}
-                    style={{ width: 18, height: 18, borderRadius: 5, cursor: 'pointer', accentColor: '#0F4C5C' }}
+                    style={{ width: 18, height: 18, borderRadius: 5, cursor: 'pointer', accentColor: '#0C2A47' }}
                   />
                 </div>
 
@@ -1194,7 +1194,7 @@ function UserGallery() {
               <span style={{
                 padding: '8px 16px', borderRadius: 999,
                 background: CAT_COLORS[selectedItem.category]?.bg || '#EEF2FF',
-                color: CAT_COLORS[selectedItem.category]?.text || '#0F4C5C',
+                color: CAT_COLORS[selectedItem.category]?.text || '#0C2A47',
                 fontWeight: 700, fontSize: 13,
               }}>
                 {selectedItem.category || 'Uncategorized'}
@@ -1246,24 +1246,24 @@ function UserGallery() {
               {selectedItem.uploadedBy && (
                 <div style={{ background: '#fff', borderRadius: 16, padding: 20, border: '1px solid #E5E7EB' }}>
                   <h3 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#111827', display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <Upload size={16} color="#0F4C5C" /> Uploaded By
+                    <Upload size={16} color="#0C2A47" /> Uploaded By
                   </h3>
                   <div style={{ display: 'grid', gap: 12 }}>
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Name</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.uploadedBy.name}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.uploadedBy.name}</p>
                     </div>
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Email</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.uploadedBy.email}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.uploadedBy.email}</p>
                     </div>
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Role</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.uploadedBy.role}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.uploadedBy.role}</p>
                     </div>
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Uploader Role</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.uploaderRole}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.uploaderRole}</p>
                     </div>
                   </div>
                 </div>
@@ -1272,36 +1272,36 @@ function UserGallery() {
               {/* File Information */}
               <div style={{ background: '#fff', borderRadius: 16, padding: 20, border: '1px solid #E5E7EB' }}>
                 <h3 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#111827', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <Image size={16} color="#0F4C5C" /> File Information
+                  <Image size={16} color="#0C2A47" /> File Information
                 </h3>
                 <div style={{ display: 'grid', gap: 12 }}>
                   <div>
                     <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>File Name</p>
-                    <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600, wordBreak: 'break-all' }}>{selectedItem.fileName || '-'}</p>
+                    <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600, wordBreak: 'break-all' }}>{selectedItem.fileName || '-'}</p>
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>File Size</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.fileSize ? `${(selectedItem.fileSize / 1024).toFixed(1)} KB` : '-'}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.fileSize ? `${(selectedItem.fileSize / 1024).toFixed(1)} KB` : '-'}</p>
                     </div>
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Mime Type</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.mimeType || '-'}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.mimeType || '-'}</p>
                     </div>
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Downloads</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{Number(selectedItem.downloadsCount || 0).toLocaleString()}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{Number(selectedItem.downloadsCount || 0).toLocaleString()}</p>
                     </div>
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Likes</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{Number(selectedItem.likesCount || 0).toLocaleString()}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{Number(selectedItem.likesCount || 0).toLocaleString()}</p>
                     </div>
                   </div>
                   <div>
                     <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Views</p>
-                    <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{Number(selectedItem.views || 0).toLocaleString()}</p>
+                    <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{Number(selectedItem.views || 0).toLocaleString()}</p>
                   </div>
                 </div>
               </div>
@@ -1310,12 +1310,12 @@ function UserGallery() {
               {(selectedItem.targetClasses && selectedItem.targetClasses.length > 0) || (selectedItem.targetParentIds && selectedItem.targetParentIds.length > 0) ? (
                 <div style={{ background: '#fff', borderRadius: 16, padding: 20, border: '1px solid #E5E7EB', gridColumn: '1 / -1' }}>
                   <h3 style={{ margin: '0 0 20px', fontSize: 15, fontWeight: 700, color: '#111827', display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <Users size={16} color="#0F4C5C" /> Target Audience
+                    <Users size={16} color="#0C2A47" /> Target Audience
                   </h3>
                   
                   {selectedItem.targetClasses && selectedItem.targetClasses.length > 0 && (
                     <div style={{ marginBottom: 24 }}>
-                      <h4 style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, color: '#0F4C5C', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                      <h4 style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, color: '#0C2A47', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                         Targeted Classes ({selectedItem.targetClasses.length})
                       </h4>
                       <div style={{ display: 'grid', gap: 14 }}>
@@ -1330,7 +1330,7 @@ function UserGallery() {
                                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                               }}>
                                 <span style={{ fontWeight: 700, color: '#4F46E5', fontSize: 14 }}>{classLookup[cid] || 'Unknown Class'}</span>
-                                <span style={{ padding: '4px 10px', borderRadius: 99, background: '#fff', color: '#0F4C5C', fontSize: 12, fontWeight: 700, border: '1px solid #C7D2FE' }}>
+                                <span style={{ padding: '4px 10px', borderRadius: 99, background: '#fff', color: '#0C2A47', fontSize: 12, fontWeight: 700, border: '1px solid #C7D2FE' }}>
                                   {parentCount} Parent{parentCount !== 1 ? 's' : ''}
                                 </span>
                               </div>
@@ -1338,7 +1338,7 @@ function UserGallery() {
                                 <div style={{ padding: '8px 0' }}>
                                   {parentEntries.map(([pid, pdata], pidx) => (
                                     <div key={pid} style={{ padding: '10px 16px', borderBottom: pidx < parentEntries.length - 1 ? '1px solid #F3F4F6' : 'none' }}>
-                                      <p style={{ margin: '0 0 4px', fontSize: 14, fontWeight: 600, color: '#051d24' }}>{pdata.name}</p>
+                                      <p style={{ margin: '0 0 4px', fontSize: 14, fontWeight: 600, color: '#030B15' }}>{pdata.name}</p>
                                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
                                         <span style={{ fontSize: 11, color: '#9CA3AF', fontWeight: 600 }}>Students:</span>
                                         {pdata.students.map((stu, sidx) => (
@@ -1362,7 +1362,7 @@ function UserGallery() {
 
                   {selectedItem.targetParentIds && selectedItem.targetParentIds.length > 0 && (
                     <div>
-                      <h4 style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, color: '#0F4C5C', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                      <h4 style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 700, color: '#0C2A47', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                         Targeted Parents ({selectedItem.targetParentIds.length})
                       </h4>
                       <div style={{ display: 'grid', gap: 10 }}>
@@ -1373,7 +1373,7 @@ function UserGallery() {
                           const studentList = pdata?.students || (pLookup?.children?.map(c => ({ name: c.name || 'Unknown'})) || []);
                           return (
                             <div key={idx} style={{ padding: '12px 16px', borderRadius: 10, border: '1px solid #E5E7EB', background: '#F8FAFC' }}>
-                              <p style={{ margin: '0 0 4px', fontSize: 14, fontWeight: 600, color: '#051d24' }}>{parentName}</p>
+                              <p style={{ margin: '0 0 4px', fontSize: 14, fontWeight: 600, color: '#030B15' }}>{parentName}</p>
                               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
                                 <span style={{ fontSize: 11, color: '#9CA3AF', fontWeight: 600 }}>Students:</span>
                                 {studentList.length > 0 ? studentList.map((stu, sidx) => (
@@ -1392,7 +1392,7 @@ function UserGallery() {
               ) : (
                 <div style={{ background: '#fff', borderRadius: 16, padding: 20, border: '1px solid #E5E7EB' }}>
                   <h3 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#111827', display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <Users size={16} color="#0F4C5C" /> Target Audience
+                    <Users size={16} color="#0C2A47" /> Target Audience
                   </h3>
                   <p style={{ margin: 0, color: '#9CA3AF', fontSize: 14 }}>No specific target audience set</p>
                 </div>
@@ -1401,38 +1401,38 @@ function UserGallery() {
               {/* Timeline */}
               <div style={{ background: '#fff', borderRadius: 16, padding: 20, border: '1px solid #E5E7EB', gridColumn: '1 / -1' }}>
                 <h3 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#111827', display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <Calendar size={16} color="#0F4C5C" /> Timeline
+                  <Calendar size={16} color="#0C2A47" /> Timeline
                 </h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16 }}>
                   <div>
                     <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Uploaded At</p>
-                    <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{fmtDate(selectedItem.uploadedAt)}</p>
+                    <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{fmtDate(selectedItem.uploadedAt)}</p>
                   </div>
                   {selectedItem.approvedAt && (
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Approved At</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{fmtDate(selectedItem.approvedAt)}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{fmtDate(selectedItem.approvedAt)}</p>
                     </div>
                   )}
                   {selectedItem.rejectedAt && (
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Rejected At</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{fmtDate(selectedItem.rejectedAt)}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{fmtDate(selectedItem.rejectedAt)}</p>
                     </div>
                   )}
                   {selectedItem.deletedAt && (
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Deleted At</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{fmtDate(selectedItem.deletedAt)}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{fmtDate(selectedItem.deletedAt)}</p>
                     </div>
                   )}
                   <div>
                     <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Created At</p>
-                    <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{fmtDate(selectedItem.createdAt)}</p>
+                    <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{fmtDate(selectedItem.createdAt)}</p>
                   </div>
                   <div>
                     <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Updated At</p>
-                    <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{fmtDate(selectedItem.updatedAt)}</p>
+                    <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{fmtDate(selectedItem.updatedAt)}</p>
                   </div>
                 </div>
               </div>
@@ -1441,43 +1441,43 @@ function UserGallery() {
               {(selectedItem.approvedBy || selectedItem.rejectedBy || selectedItem.deletedBy || selectedItem.rejectionReason) && (
                 <div style={{ background: '#fff', borderRadius: 16, padding: 20, border: '1px solid #E5E7EB', gridColumn: '1 / -1' }}>
                   <h3 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#111827', display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <Check size={16} color="#0F4C5C" /> Moderation
+                    <Check size={16} color="#0C2A47" /> Moderation
                   </h3>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
                     {selectedItem.approvedBy && (
                       <div>
                         <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Approved By</p>
-                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.approvedBy.name} ({selectedItem.approvedBy.role})</p>
+                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.approvedBy.name} ({selectedItem.approvedBy.role})</p>
                       </div>
                     )}
                     {selectedItem.rejectedBy && (
                       <div>
                         <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Rejected By</p>
-                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.rejectedBy.name} ({selectedItem.rejectedBy.role})</p>
+                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.rejectedBy.name} ({selectedItem.rejectedBy.role})</p>
                       </div>
                     )}
                     {selectedItem.rejectionReason && (
                       <div style={{ gridColumn: '1 / -1' }}>
                         <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Rejection Reason</p>
-                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.rejectionReason}</p>
+                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.rejectionReason}</p>
                       </div>
                     )}
                     {selectedItem.deletedBy && (
                       <div>
                         <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Deleted By</p>
-                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.deletedByName} ({selectedItem.deletedByRole})</p>
+                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.deletedByName} ({selectedItem.deletedByRole})</p>
                       </div>
                     )}
                     {selectedItem.deleteType && (
                       <div>
                         <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Delete Type</p>
-                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.deleteType}</p>
+                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.deleteType}</p>
                       </div>
                     )}
                     {selectedItem.deletedByInfo && (
                       <div style={{ gridColumn: '1 / -1' }}>
                         <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Delete Info</p>
-                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#051d24', fontWeight: 600 }}>{selectedItem.deletedByInfo}</p>
+                        <p style={{ margin: '4px 0 0', fontSize: 15, color: '#030B15', fontWeight: 600 }}>{selectedItem.deletedByInfo}</p>
                       </div>
                     )}
                   </div>
@@ -1502,12 +1502,12 @@ function UserGallery() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12 }}>
                   <div>
                     <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Photo ID</p>
-                    <p style={{ margin: '4px 0 0', fontSize: 13, color: '#051d24', fontWeight: 600, fontFamily: 'monospace' }}>{selectedItem._id || selectedItem.id}</p>
+                    <p style={{ margin: '4px 0 0', fontSize: 13, color: '#030B15', fontWeight: 600, fontFamily: 'monospace' }}>{selectedItem._id || selectedItem.id}</p>
                   </div>
                   {selectedItem.imageKey && (
                     <div>
                       <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Image Key</p>
-                      <p style={{ margin: '4px 0 0', fontSize: 13, color: '#051d24', fontWeight: 600 }}>{selectedItem.imageKey}</p>
+                      <p style={{ margin: '4px 0 0', fontSize: 13, color: '#030B15', fontWeight: 600 }}>{selectedItem.imageKey}</p>
                     </div>
                   )}
                 </div>

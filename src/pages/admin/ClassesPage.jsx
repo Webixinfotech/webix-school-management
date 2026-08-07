@@ -18,7 +18,7 @@ import ConfirmModal from '../../components/photos/ConfirmModal';
 
 // ─── Class Type Definitions ───────────────────────────────────────────────────
 export const CLASS_TYPES = {
-  FIXED_TIME:  { id: 'FIXED_TIME',  label: '1. Fixed Time',    desc: 'All students get the same fixed time',       color: '#0F4C5C', bg: '#EFF6FF', border: '#BFDBFE', solid: '#0F4C5C' },
+  FIXED_TIME:  { id: 'FIXED_TIME',  label: '1. Fixed Time',    desc: 'All students get the same fixed time',       color: '#0C2A47', bg: '#EFF6FF', border: '#BFDBFE', solid: '#0C2A47' },
   FLEX_TIME:   { id: 'FLEX_TIME',   label: '2. Flexible Time', desc: 'Admin picks exact time per student',          color: '#0F766E', bg: '#F0FDFA', border: '#99F6E4', solid: '#0D9488' },
   HOURS_BASED: { id: 'HOURS_BASED', label: '3. Hours Based',   desc: 'Admin assigns hours per student',             color: '#B45309', bg: '#FFFBEB', border: '#FCD34D', solid: '#D97706' },
 };
@@ -43,9 +43,9 @@ const fmt12 = (t) => {
 
 // ─── Design Tokens ────────────────────────────────────────────────────────────
 const T = {
-  blue:   { bg: '#EFF6FF', text: '#0F4C5C', border: '#BFDBFE', solid: '#0F4C5C' },
+  blue:   { bg: '#EFF6FF', text: '#0C2A47', border: '#BFDBFE', solid: '#0C2A47' },
   green:  { bg: '#F0FDF4', text: '#15803D', border: '#BBF7D0', solid: '#16A34A' },
-  red:    { bg: '#FFF1F2', text: '#D4AF37', border: '#FECDD3', solid: '#D4AF37' },
+  red:    { bg: '#FFF1F2', text: '#E2B94D', border: '#FECDD3', solid: '#E2B94D' },
   amber:  { bg: '#FFFBEB', text: '#B45309', border: '#FCD34D', solid: '#D97706' },
   teal:   { bg: '#F0FDFA', text: '#0F766E', border: '#99F6E4', solid: '#0D9488' },
   purple: { bg: '#FAF5FF', text: '#7E22CE', border: '#E9D5FF', solid: '#9333EA' },
@@ -56,7 +56,7 @@ const IS = {
   width: '100%', padding: '11px 14px', borderRadius: 12,
   border: '1.5px solid #E2E8F0', fontSize: 13, fontWeight: 500,
   outline: 'none', boxSizing: 'border-box', background: '#fff',
-  fontFamily: 'inherit', color: '#051d24', transition: 'border-color 0.15s',
+  fontFamily: 'inherit', color: '#030B15', transition: 'border-color 0.15s',
 };
 
 const LS = {
@@ -93,7 +93,7 @@ const Modal = ({ open, onClose, title, subtitle, children, maxWidth = 600 }) => 
       <div style={{ width: '100%', maxWidth, background: '#fff', borderRadius: 24, boxShadow: '0 32px 80px rgba(0,0,0,0.22)', display: 'flex', flexDirection: 'column', maxHeight: 'calc(100vh - 40px)', overflow: 'hidden' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 24px', borderBottom: '1px solid #F1F5F9', flexShrink: 0 }}>
           <div>
-            <h2 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#051d24' }}>{title}</h2>
+            <h2 style={{ margin: 0, fontSize: 18, fontWeight: 800, color: '#030B15' }}>{title}</h2>
             {subtitle && <p style={{ margin: '3px 0 0', fontSize: 12, color: '#94A3B8' }}>{subtitle}</p>}
           </div>
           <button onClick={onClose} style={{ width: 36, height: 36, borderRadius: 10, border: 'none', background: '#F1F5F9', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748B' }}>
@@ -172,11 +172,11 @@ const FullPageForm = ({ mode, initial, onSave, onCancel, saveLoading }) => {
         gap: 16
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{ width: 44, height: 44, borderRadius: 14, background: 'linear-gradient(135deg,#0F4C5C,#051d24)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 44, height: 44, borderRadius: 14, background: 'linear-gradient(135deg,#0C2A47,#030B15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {mode === 'create' ? <Plus size={22} color="#fff" /> : <Pencil size={20} color="#fff" />}
           </div>
           <div>
-            <h1 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: '#051d24' }}>
+            <h1 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: '#030B15' }}>
               {mode === 'create' ? 'Create New Class' : 'Edit Class'}
             </h1>
             <p style={{ margin: '2px 0 0', fontSize: 12, color: '#94A3B8' }}>
@@ -248,11 +248,11 @@ const FullPageDetail = ({ cls, onClose, onEdit }) => {
         gap: 16
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{ width: 44, height: 44, borderRadius: 14, background: 'linear-gradient(135deg,#0F4C5C,#051d24)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: 44, height: 44, borderRadius: 14, background: 'linear-gradient(135deg,#0C2A47,#030B15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Eye size={20} color="#fff" />
           </div>
           <div>
-            <h1 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: '#051d24' }}>Class Details</h1>
+            <h1 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: '#030B15' }}>Class Details</h1>
             <p style={{ margin: '2px 0 0', fontSize: 12, color: '#94A3B8' }}>View and manage class information</p>
           </div>
         </div>
@@ -278,7 +278,7 @@ const FullPageDetail = ({ cls, onClose, onEdit }) => {
               padding: '9px 18px',
               borderRadius: 10,
               border: 'none',
-              background: 'linear-gradient(135deg,#0F4C5C,#051d24)',
+              background: 'linear-gradient(135deg,#0C2A47,#030B15)',
               color: '#fff',
               fontWeight: 700,
               fontSize: 13,
@@ -552,7 +552,7 @@ const ClassForm = ({ initial, onSave, onCancel, saveLoading }) => {
           Cancel
         </button>
         <button onClick={() => onSave(form)} disabled={saveLoading || !form.name}
-          style={{ flex: 2, padding: '12px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg,#0F4C5C,#051d24)', color: '#fff', fontWeight: 700, fontSize: 13, cursor: (saveLoading || !form.name) ? 'not-allowed' : 'pointer', opacity: saveLoading || !form.name ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 4px 14px rgba(123,31,162,0.30)' }}>
+          style={{ flex: 2, padding: '12px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg,#0C2A47,#030B15)', color: '#fff', fontWeight: 700, fontSize: 13, cursor: (saveLoading || !form.name) ? 'not-allowed' : 'pointer', opacity: saveLoading || !form.name ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 4px 14px rgba(123,31,162,0.30)' }}>
           {saveLoading && <div style={{ width: 16, height: 16, borderRadius: '50%', border: '2px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', animation: 'spin 0.8s linear infinite' }} />}
           {initial ? 'Update Class' : 'Create Class'}
         </button>
@@ -627,57 +627,57 @@ const ClassDetail = ({ cls, onClose, onEdit }) => {
            {cls.classType === 'FIXED_TIME' && cls.startTime && (
              <div style={{ background: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '10px 14px' }}>
                <p style={{ margin: 0, fontSize: 10, color: typeConfig.color, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Start Time</p>
-               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#051d24' }}>{fmt12(cls.startTime)}</p>
+               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#030B15' }}>{fmt12(cls.startTime)}</p>
              </div>
            )}
            {cls.classType === 'FIXED_TIME' && cls.endTime && (
              <div style={{ background: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '10px 14px' }}>
                <p style={{ margin: 0, fontSize: 10, color: typeConfig.color, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>End Time</p>
-               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#051d24' }}>{fmt12(cls.endTime)}</p>
+               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#030B15' }}>{fmt12(cls.endTime)}</p>
              </div>
            )}
            {cls.baseFee > 0 && (
              <div style={{ background: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '10px 14px' }}>
                <p style={{ margin: 0, fontSize: 10, color: typeConfig.color, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Base Fee</p>
-               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#051d24' }}>₹{cls.baseFee}</p>
+               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#030B15' }}>₹{cls.baseFee}</p>
              </div>
            )}
            {cls.monthlyFreeHours > 0 && (
              <div style={{ background: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '10px 14px' }}>
                <p style={{ margin: 0, fontSize: 10, color: typeConfig.color, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Free Hours</p>
-               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#051d24' }}>{cls.monthlyFreeHours}</p>
+               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#030B15' }}>{cls.monthlyFreeHours}</p>
              </div>
            )}
            {cls.lateFineApplicable && (
              <div style={{ background: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '10px 14px' }}>
                <p style={{ margin: 0, fontSize: 10, color: typeConfig.color, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Late Fine</p>
-               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#051d24' }}>Applicable</p>
+               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#030B15' }}>Applicable</p>
              </div>
            )}
            <div style={{ background: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '10px 14px' }}>
              <p style={{ margin: 0, fontSize: 10, color: typeConfig.color, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Fee Type</p>
-             <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#051d24' }}>{cls.feeType}</p>
+             <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#030B15' }}>{cls.feeType}</p>
            </div>
            {cls.level !== undefined && cls.level !== null && (
              <div style={{ background: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '10px 14px' }}>
                <p style={{ margin: 0, fontSize: 10, color: typeConfig.color, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Level</p>
-               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#051d24' }}>{cls.level}</p>
+               <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: '#030B15' }}>{cls.level}</p>
              </div>
            )}
            <div style={{ background: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '10px 14px' }}>
              <p style={{ margin: 0, fontSize: 10, color: typeConfig.color, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Status</p>
-             <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: cls.status === 'Active' ? '#15803D' : '#D4AF37' }}>{cls.status || 'Active'}</p>
+             <p style={{ margin: '4px 0 0', fontSize: 15, fontWeight: 800, color: cls.status === 'Active' ? '#15803D' : '#E2B94D' }}>{cls.status || 'Active'}</p>
            </div>
            <div style={{ background: 'rgba(255,255,255,0.7)', borderRadius: 10, padding: '10px 14px', gridColumn: cls.classType !== 'FIXED_TIME' ? '1 / -1' : 'auto' }}>
              <p style={{ margin: 0, fontSize: 10, color: typeConfig.color, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Days</p>
-             <p style={{ margin: '4px 0 0', fontSize: 13, fontWeight: 700, color: '#051d24' }}>{formatDays(cls.days)}</p>
+             <p style={{ margin: '4px 0 0', fontSize: 13, fontWeight: 700, color: '#030B15' }}>{formatDays(cls.days)}</p>
            </div>
          </div>
       </div>
 
       {/* Teacher Assignment */}
       <div style={{ padding: '18px 20px', background: '#F8FAFC', borderRadius: 14, border: '1.5px solid #E2E8F0' }}>
-        <h4 style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 800, color: '#051d24', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <h4 style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 800, color: '#030B15', display: 'flex', alignItems: 'center', gap: 8 }}>
           <div style={{ width: 28, height: 28, borderRadius: 8, background: '#FAF5FF', border: '1.5px solid #E9D5FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <UserCheck size={14} color="#7B1FA2" />
           </div>
@@ -696,7 +696,7 @@ const ClassDetail = ({ cls, onClose, onEdit }) => {
           <button onClick={handleAssignTeacher} disabled={assignLoading}
             style={{
               padding: '10px 18px', borderRadius: 12, border: 'none',
-              background: 'linear-gradient(135deg,#0F4C5C,#051d24)',
+              background: 'linear-gradient(135deg,#0C2A47,#030B15)',
               color: '#fff', fontWeight: 700, fontSize: 12,
               cursor: assignLoading ? 'not-allowed' : 'pointer',
               display: 'flex', alignItems: 'center', gap: 6,
@@ -722,7 +722,7 @@ const ClassDetail = ({ cls, onClose, onEdit }) => {
 
       {/* Students List */}
       <div>
-        <h4 style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 800, color: '#051d24', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <h4 style={{ margin: '0 0 14px', fontSize: 13, fontWeight: 800, color: '#030B15', display: 'flex', alignItems: 'center', gap: 8 }}>
           <div style={{ width: 28, height: 28, borderRadius: 8, background: '#FAF5FF', border: '1.5px solid #E9D5FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Users size={14} color="#7B1FA2" />
           </div>
@@ -745,11 +745,11 @@ const ClassDetail = ({ cls, onClose, onEdit }) => {
           <div style={{ maxHeight: 280, overflowY: 'auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 8 }}>
             {students.slice(0, 10).map(student => (
               <div key={student._id} style={{ padding: '10px 14px', background: '#F8FAFC', borderRadius: 10, border: '1.5px solid #E2E8F0', display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg,#0F4C5C,#051d24)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: '#fff', flexShrink: 0 }}>
+                <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg,#0C2A47,#030B15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: '#fff', flexShrink: 0 }}>
                   {student.name?.charAt(0)?.toUpperCase() || '?'}
                 </div>
                 <div style={{ minWidth: 0 }}>
-                  <p style={{ margin: 0, fontSize: 12, fontWeight: 700, color: '#051d24', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{student.name}</p>
+                  <p style={{ margin: 0, fontSize: 12, fontWeight: 700, color: '#030B15', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{student.name}</p>
                   <p style={{ margin: '1px 0 0', fontSize: 10, color: '#94A3B8', fontWeight: 600 }}>{student.admissionNo}</p>
                 </div>
               </div>
@@ -770,7 +770,7 @@ const ClassDetail = ({ cls, onClose, onEdit }) => {
           <Pencil size={14} /> Edit Class
         </button>
         <button onClick={onClose}
-          style={{ flex: 1, padding: '11px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg,#0F4C5C,#051d24)', color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: '0 4px 14px rgba(123,31,162,0.25)' }}>
+          style={{ flex: 1, padding: '11px', borderRadius: 12, border: 'none', background: 'linear-gradient(135deg,#0C2A47,#030B15)', color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', boxShadow: '0 4px 14px rgba(123,31,162,0.25)' }}>
           Close
         </button>
       </div>
@@ -804,7 +804,7 @@ const ClassCard = ({ cls, onView, onEdit, onDelete }) => {
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
           <div style={{ minWidth: 0 }}>
-            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 800, color: '#051d24', lineHeight: 1.3 }}>
+            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 800, color: '#030B15', lineHeight: 1.3 }}>
               {cls.name}
             </h3>
             {cls.section && (
@@ -1027,14 +1027,14 @@ const AdminClassesPage = () => {
           {/* ── Header ── */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
             <div>
-              <h1 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: '#051d24' }}>Class Management</h1>
+              <h1 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: '#030B15' }}>Class Management</h1>
               <p style={{ margin: '4px 0 0', fontSize: 13, color: '#94A3B8' }}>Create classes · Assign teachers · Manage schedules</p>
             </div>
             <button onClick={() => { setEditCls(null); setShowAdd(true); }}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 padding: '11px 22px',
-                background: 'linear-gradient(135deg,#0F4C5C,#051d24)',
+                background: 'linear-gradient(135deg,#0C2A47,#030B15)',
                 color: '#fff', border: 'none', borderRadius: 14,
                 fontWeight: 800, fontSize: 14, cursor: 'pointer',
                 boxShadow: '0 6px 20px rgba(123,31,162,0.35)',
@@ -1050,17 +1050,17 @@ const AdminClassesPage = () => {
           {/* ── Error ── */}
           {error && (
             <div style={{ background: '#FFF1F2', border: '1.5px solid #FECDD3', borderRadius: 14, padding: '12px 18px', display: 'flex', gap: 10, alignItems: 'center' }}>
-              <AlertTriangle size={16} color="#D4AF37" style={{ flexShrink: 0 }} />
-              <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: '#D4AF37', flex: 1 }}>{error}</p>
-              <button onClick={() => setError('')} style={{ width: 26, height: 26, borderRadius: 7, border: 'none', background: '#FECDD3', color: '#D4AF37', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={13} /></button>
+              <AlertTriangle size={16} color="#E2B94D" style={{ flexShrink: 0 }} />
+              <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: '#E2B94D', flex: 1 }}>{error}</p>
+              <button onClick={() => setError('')} style={{ width: 26, height: 26, borderRadius: 7, border: 'none', background: '#FECDD3', color: '#E2B94D', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={13} /></button>
             </div>
           )}
 
           {/* ── Stats ── */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 14 }}>
             {[
-              { label: 'Total Classes', val: stats.total,      icon: BookOpen,   color: '#7B1FA2', bg: 'linear-gradient(135deg,#0F4C5C,#051d24)', light: '#FAF5FF', border: '#E9D5FF' },
-              { label: 'Fixed Time',    val: stats.fixed,      icon: AlarmClock, color: '#0F4C5C', bg: 'linear-gradient(135deg,#0F4C5C,#0F4C5C)',  light: '#EFF6FF', border: '#BFDBFE' },
+              { label: 'Total Classes', val: stats.total,      icon: BookOpen,   color: '#7B1FA2', bg: 'linear-gradient(135deg,#0C2A47,#030B15)', light: '#FAF5FF', border: '#E9D5FF' },
+              { label: 'Fixed Time',    val: stats.fixed,      icon: AlarmClock, color: '#0C2A47', bg: 'linear-gradient(135deg,#0C2A47,#0C2A47)',  light: '#EFF6FF', border: '#BFDBFE' },
               { label: 'Flex Time',     val: stats.flex,       icon: Clock,      color: '#0F766E', bg: 'linear-gradient(135deg,#0D9488,#0F766E)',  light: '#F0FDFA', border: '#99F6E4' },
               { label: 'Hours Based',   val: stats.hoursBased, icon: Hourglass,  color: '#B45309', bg: 'linear-gradient(135deg,#D97706,#B45309)',  light: '#FFFBEB', border: '#FCD34D' },
             ].map(({ label, val, icon: Icon, color, bg, light, border }) => (
@@ -1070,7 +1070,7 @@ const AdminClassesPage = () => {
                 </div>
                 <div>
                   <p style={{ margin: 0, fontSize: 11, fontWeight: 700, color: color, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{label}</p>
-                  <p style={{ margin: '3px 0 0', fontSize: 26, fontWeight: 900, color: '#051d24', lineHeight: 1 }}>{val}</p>
+                  <p style={{ margin: '3px 0 0', fontSize: 26, fontWeight: 900, color: '#030B15', lineHeight: 1 }}>{val}</p>
                 </div>
               </div>
             ))}
@@ -1139,7 +1139,7 @@ const AdminClassesPage = () => {
                 style={{ padding: '8px 18px', borderRadius: 10, border: '1.5px solid #E2E8F0', background: '#fff', color: '#64748B', fontWeight: 700, fontSize: 13, cursor: pagination.page === 1 ? 'not-allowed' : 'pointer', opacity: pagination.page === 1 ? 0.4 : 1 }}>
                 ← Prev
               </button>
-              <span style={{ padding: '8px 20px', borderRadius: 10, background: 'linear-gradient(135deg,#0F4C5C,#051d24)', color: '#fff', fontWeight: 800, fontSize: 13 }}>
+              <span style={{ padding: '8px 20px', borderRadius: 10, background: 'linear-gradient(135deg,#0C2A47,#030B15)', color: '#fff', fontWeight: 800, fontSize: 13 }}>
                 {pagination.page} / {pagination.pages}
               </span>
               <button

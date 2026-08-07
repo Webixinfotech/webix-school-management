@@ -24,7 +24,7 @@ const WhatsAppIcon = ({ size = 24, color = '#fff' }) => (
 
 // ─── Class Types ─────────────────────────────────────────────────────────────
 const CLASS_TYPES = {
-  FIXED_TIME:  { id: 'FIXED_TIME',  label: 'Fixed Time',    color: '#0F4C5C', bg: '#EFF6FF', border: '#BFDBFE' },
+  FIXED_TIME:  { id: 'FIXED_TIME',  label: 'Fixed Time',    color: '#0C2A47', bg: '#EFF6FF', border: '#BFDBFE' },
   FLEX_TIME:   { id: 'FLEX_TIME',   label: 'Flexible Time', color: '#0F766E', bg: '#F0FDFA', border: '#99F6E4' },
   HOURS_BASED: { id: 'HOURS_BASED', label: 'Hours Based',   color: '#B45309', bg: '#FFFBEB', border: '#FCD34D' },
 };
@@ -44,7 +44,7 @@ const fmt12 = (t) => {
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 const PALETTES = [
-  ['#0F4C5C', '#4338CA'], ['#8B5CF6', '#5B21B6'], ['#EC4899', '#9D174D'],
+  ['#0C2A47', '#4338CA'], ['#8B5CF6', '#5B21B6'], ['#EC4899', '#9D174D'],
   ['#0EA5E9', '#0369A1'], ['#10B981', '#065F46'], ['#F59E0B', '#92400E'],
   ['#EF4444', '#991B1B'], ['#06B6D4', '#0E7490'],
 ];
@@ -66,11 +66,11 @@ const C = {
   cardHover: '#F1F5F9',
   border: '#E2E8F0',
   borderGlow: '#BFDBFE',
-  text: '#051d24',
+  text: '#030B15',
   textMuted: '#475569',
   textDim: '#94A3B8',
-  accent: '#0F4C5C',
-  accentHover: '#0F4C5C',
+  accent: '#0C2A47',
+  accentHover: '#0C2A47',
   accentLight: '#EFF6FF',
   accentGlow: 'rgba(37, 99, 235, 0.2)',
   success: '#10B981',
@@ -106,7 +106,7 @@ const PERMISSION_DEFS = [
   { key: 'canViewBirthdays', label: 'View Birthdays', icon: Gift, color: C.pink },
   { key: 'canManageCertificates', label: 'Manage Certificates', icon: Award, color: '#C9A24B' },
   { key: 'canManageDailyActivity', label: 'Manage Daily Activity', icon: Activity, color: C.purple },
-  { key: 'canManageCalendar', label: 'Manage Event Scheduler', icon: Calendar, color: '#0F4C5C' },
+  { key: 'canManageCalendar', label: 'Manage Event Scheduler', icon: Calendar, color: '#0C2A47' },
 ];
 
 const VERIFICATION_DEFS = [

@@ -17,7 +17,7 @@ export default function TestimonialsSection() {
             <div key={t.name} className="bg-white rounded-xl p-5 sm:p-6 shadow-sm border border-slate-100">
               <p className="text-slate-600 italic">&ldquo;{t.quote}&rdquo;</p>
               <p className="font-semibold text-slate-800 mt-4">{t.name}</p>
-              <p className="text-sm text-[#0F4C5C]">{t.child}</p>
+              <p className="text-sm text-[#0C2A47]">{t.child}</p>
             </div>
           ))}
         </div>

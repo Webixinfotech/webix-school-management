@@ -14,7 +14,7 @@ import { getClassesAPI } from '../../api/classes';
 const T = {
   blue:   { bg: '#EFF6FF', text: '#1E88E5', border: '#BFDBFE' },
   green:  { bg: '#ECFDF5', text: '#059669', border: '#A7F3D0' },
-  red:    { bg: '#FFF1F2', text: '#D4AF37', border: '#FECDD3' },
+  red:    { bg: '#FFF1F2', text: '#E2B94D', border: '#FECDD3' },
   orange: { bg: '#FFF7ED', text: '#FB8C00', border: '#FED7AA' },
   purple: { bg: '#F5F3FF', text: '#7C3AED', border: '#DDD6FE' },
   gray:   { bg: '#F9FAFB', text: '#6B7280', border: '#E5E7EB' },
@@ -24,7 +24,7 @@ const T = {
 
 const PALETTES = [
   ['#1E88E5', '#1565C0'], ['#7B1FA2', '#4A148C'], ['#00897B', '#00695C'],
-  ['#D4AF37', '#B71C1C'], ['#FB8C00', '#E65100'], ['#0288D1', '#01579B'],
+  ['#E2B94D', '#B71C1C'], ['#FB8C00', '#E65100'], ['#0288D1', '#01579B'],
 ];
 const getPalette = (name = 'A') => PALETTES[(name.charCodeAt(0) || 65) % PALETTES.length];
 
@@ -187,7 +187,7 @@ const TeacherDetailView = () => {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F8FAFC' }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
-          <div style={{ width: 40, height: 40, borderRadius: '50%', border: '4px solid #E2E8F0', borderTopColor: '#0F4C5C', animation: 'spin 1s linear infinite' }} />
+          <div style={{ width: 40, height: 40, borderRadius: '50%', border: '4px solid #E2E8F0', borderTopColor: '#0C2A47', animation: 'spin 1s linear infinite' }} />
           <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: '#64748B' }}>Loading teacher details...</p>
         </div>
         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
@@ -199,10 +199,10 @@ const TeacherDetailView = () => {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F8FAFC', padding: 16 }}>
         <div style={{ textAlign: 'center', padding: 28, background: '#fff', borderRadius: 16, border: '1px solid #E2E8F0', maxWidth: 380, width: '100%' }}>
-          <AlertTriangle size={40} color="#D4AF37" style={{ margin: '0 auto 14px' }} />
-          <h2 style={{ margin: '0 0 8px', fontSize: 18, fontWeight: 800, color: '#051d24' }}>Error Loading Data</h2>
+          <AlertTriangle size={40} color="#E2B94D" style={{ margin: '0 auto 14px' }} />
+          <h2 style={{ margin: '0 0 8px', fontSize: 18, fontWeight: 800, color: '#030B15' }}>Error Loading Data</h2>
           <p style={{ margin: '0 0 20px', fontSize: 13, color: '#64748B' }}>{error || 'Teacher not found'}</p>
-          <button onClick={() => navigate('/admin/teachers')} style={{ padding: '10px 20px', borderRadius: 10, border: 'none', background: '#0F4C5C', color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: 13 }}>
+          <button onClick={() => navigate('/admin/teachers')} style={{ padding: '10px 20px', borderRadius: 10, border: 'none', background: '#0C2A47', color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: 13 }}>
             Back to Teachers
           </button>
         </div>
@@ -270,10 +270,10 @@ const TeacherDetailView = () => {
         .detail-card-content { padding: 16px; flex: 1; }
         .info-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; background: #F8FAFC; border-radius: 9px; gap: 10px; }
         .info-label { font-size: 11.5px; color: #64748B; font-weight: 600; flex-shrink: 0; }
-        .info-val { font-size: 12.5px; font-weight: 700; color: #051d24; word-break: break-word; text-align: right; }
+        .info-val { font-size: 12.5px; font-weight: 700; color: #030B15; word-break: break-word; text-align: right; }
         .basic-card { background: #F8FAFC; border-radius: 12px; padding: 12px; border: 1px solid #F1F5F9; }
         .basic-label { font-size: 10px; font-weight: 700; color: #64748B; text-transform: uppercase; margin-left: 5px; letter-spacing: 0.03em; }
-        .basic-val { font-size: 13px; font-weight: 800; color: #051d24; margin: 5px 0 0; word-break: break-word; }
+        .basic-val { font-size: 13px; font-weight: 800; color: #030B15; margin: 5px 0 0; word-break: break-word; }
         .empty-block { text-align: center; padding: 20px 0; }
         .perm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
 
@@ -307,7 +307,7 @@ const TeacherDetailView = () => {
             <ArrowLeft size={17} color="#64748B" />
           </button>
           <div>
-            <h1 style={{ margin: 0, fontSize: 19, fontWeight: 900, color: '#051d24', letterSpacing: '-0.02em' }}>Staff Details</h1>
+            <h1 style={{ margin: 0, fontSize: 19, fontWeight: 900, color: '#030B15', letterSpacing: '-0.02em' }}>Staff Details</h1>
             <p style={{ margin: '2px 0 0', fontSize: 12, color: '#64748B' }}>Complete profile and management information</p>
           </div>
         </div>
@@ -317,7 +317,7 @@ const TeacherDetailView = () => {
           <div className="profile-header-top">
             <Avatar name={displayName} photo={teacher.photo} size="lg" />
             <div style={{ flex: 1, minWidth: 200 }}>
-              <h2 style={{ margin: 0, fontSize: 19, fontWeight: 900, color: '#051d24' }}>{displayName}</h2>
+              <h2 style={{ margin: 0, fontSize: 19, fontWeight: 900, color: '#030B15' }}>{displayName}</h2>
               {hasVal(teacher.employeeId) && (
                 <p style={{ margin: '3px 0 0', fontSize: 12, color: '#64748B', fontFamily: 'monospace' }}>Employee ID: {teacher.employeeId}</p>
               )}
@@ -336,7 +336,7 @@ const TeacherDetailView = () => {
                 } else {
                   navigate(`/admin/teachers/edit/${teacher.employeeId || teacher._id || teacher.id}`);
                 }
-              }} className="action-btn" style={{ background: '#EFF6FF', color: '#0F4C5C' }}>
+              }} className="action-btn" style={{ background: '#EFF6FF', color: '#0C2A47' }}>
                 <Edit2 size={13} /> Edit
               </button>
               {hasVal(teacher.qrCode) && (
@@ -363,10 +363,10 @@ const TeacherDetailView = () => {
           {/* Contact Details */}
           <div className="detail-card">
             <div className="detail-card-header" style={{ background: 'linear-gradient(135deg, #EFF6FF, #DBEAFE)' }}>
-              <div style={{ width: 26, height: 26, borderRadius: 8, background: '#0F4C5C', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: 26, height: 26, borderRadius: 8, background: '#0C2A47', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <UserCircle2 size={13} color="#fff" />
               </div>
-              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Contact Details</h3>
+              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Contact Details</h3>
             </div>
             <div className="detail-card-content" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <InfoRow label="Email" value={teacher.email} />
@@ -390,7 +390,7 @@ const TeacherDetailView = () => {
               <div style={{ width: 26, height: 26, borderRadius: 8, background: '#7E22CE', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Briefcase size={13} color="#fff" />
               </div>
-              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Employment Details</h3>
+              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Employment Details</h3>
             </div>
             <div className="detail-card-content" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <InfoRow label="Employee ID" value={teacher.employeeId} />
@@ -411,7 +411,7 @@ const TeacherDetailView = () => {
                 <div style={{ width: 26, height: 26, borderRadius: 8, background: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <IndianRupee size={13} color="#fff" />
                 </div>
-                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Salary & Pay</h3>
+                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Salary & Pay</h3>
               </div>
               <div className="detail-card-content">
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10 }}>
@@ -439,7 +439,7 @@ const TeacherDetailView = () => {
                 <div style={{ width: 26, height: 26, borderRadius: 8, background: '#B45309', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Sunrise size={13} color="#fff" />
                 </div>
-                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Fixed Shift Timing</h3>
+                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Fixed Shift Timing</h3>
               </div>
               <div className="detail-card-content" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {shiftEntry && shiftExit && (
@@ -469,10 +469,10 @@ const TeacherDetailView = () => {
           {hasHoursData && (
             <div className="detail-card">
               <div className="detail-card-header" style={{ background: 'linear-gradient(135deg, #FFF1F2, #FECDD3)' }}>
-                <div style={{ width: 26, height: 26, borderRadius: 8, background: '#D4AF37', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 26, height: 26, borderRadius: 8, background: '#E2B94D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Timer size={13} color="#fff" />
                 </div>
-                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Fixed Hours Policy</h3>
+                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Fixed Hours Policy</h3>
               </div>
               <div className="detail-card-content" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 <InfoRow label="Minimum Hours" value={hasVal(teacher.fixedHours?.minimumHours) ? `${teacher.fixedHours.minimumHours} hrs` : null} />
@@ -492,7 +492,7 @@ const TeacherDetailView = () => {
                 <div style={{ width: 26, height: 26, borderRadius: 8, background: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Shield size={13} color="#fff" />
                 </div>
-                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Permissions & Access</h3>
+                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Permissions & Access</h3>
               </div>
               <div className="detail-card-content">
                 <div className="perm-grid">
@@ -514,7 +514,7 @@ const TeacherDetailView = () => {
               <div style={{ width: 26, height: 26, borderRadius: 8, background: '#0D9488', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <BookOpen size={13} color="#fff" />
               </div>
-              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Assigned Classes ({classIds.length})</h3>
+              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Assigned Classes ({classIds.length})</h3>
             </div>
             <div className="detail-card-content">
               {classIds.length === 0 ? (
@@ -542,7 +542,7 @@ const TeacherDetailView = () => {
                 <div style={{ width: 26, height: 26, borderRadius: 8, background: '#DC2626', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <FileText size={13} color="#fff" />
                 </div>
-                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Admin Notes</h3>
+                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Admin Notes</h3>
               </div>
               <div className="detail-card-content" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {adminNotesList.map((note, i) => (
@@ -560,7 +560,7 @@ const TeacherDetailView = () => {
               <div style={{ width: 26, height: 26, borderRadius: 8, background: '#64748B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Activity size={13} color="#fff" />
               </div>
-              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>System & Account Info</h3>
+              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>System & Account Info</h3>
             </div>
             <div className="detail-card-content" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {teacher.userId && (

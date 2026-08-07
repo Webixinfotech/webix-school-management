@@ -167,9 +167,9 @@ const S = `
   display:inline-flex;align-items:center;justify-content:center;cursor:pointer;
   transition:all 0.2s;
 }
-.btn-icon:hover{background:#e2e8f0;color:#051d24;}
-.btn-icon.view{background:#eff6ff;border-color:#bfdbfe;color:#0F4C5C;}
-.btn-icon.view:hover{background:#dbeafe;color:#0F4C5C;}
+.btn-icon:hover{background:#e2e8f0;color:#030B15;}
+.btn-icon.view{background:#eff6ff;border-color:#bfdbfe;color:#0C2A47;}
+.btn-icon.view:hover{background:#dbeafe;color:#0C2A47;}
 
 .view-toggle{display:flex;border:1.5px solid #e2e8f0;border-radius:10px;overflow:hidden;}
 .view-toggle button{
@@ -224,16 +224,16 @@ table.att-tbl tr:hover td{background:#f9fbff;}
   padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;border:1.5px solid;
 }
 .b-present{background:#ecfdf5;color:#059669;border-color:#a7f3d0;}
-.b-absent{background:#fff1f2;color:#D4AF37;border-color:#fecdd3;}
+.b-absent{background:#fff1f2;color:#E2B94D;border-color:#fecdd3;}
 .b-late{background:#fffbeb;color:#d97706;border-color:#fde68a;}
-.b-leave{background:#eff6ff;color:#0F4C5C;border-color:#bfdbfe;}
+.b-leave{background:#eff6ff;color:#0C2A47;border-color:#bfdbfe;}
 .b-default{background:#f8fafc;color:#64748b;border-color:#e2e8f0;}
-.b-qr{background:#eff6ff;color:#0F4C5C;border-color:#bfdbfe;}
+.b-qr{background:#eff6ff;color:#0C2A47;border-color:#bfdbfe;}
 .b-manual{background:#fff7ed;color:#ea580c;border-color:#fed7aa;}
 .b-system{background:#f5f3ff;color:#7c3aed;border-color:#ddd6fe;}
 .b-ontime{background:#ecfdf5;color:#059669;border-color:#a7f3d0;}
-.b-late-p{background:#fff1f2;color:#D4AF37;border-color:#fecdd3;}
-.b-early-p{background:#eff6ff;color:#0F4C5C;border-color:#bfdbfe;}
+.b-late-p{background:#fff1f2;color:#E2B94D;border-color:#fecdd3;}
+.b-early-p{background:#eff6ff;color:#0C2A47;border-color:#bfdbfe;}
 
 /* ── Mono ── */
 .mono{font-family:'JetBrains Mono',monospace;font-weight:500;}
@@ -261,7 +261,7 @@ table.att-tbl tr:hover td{background:#f9fbff;}
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;transition:all 0.2s;color:#475569;
 }
-.page-btn:hover:not(:disabled){background:#f0f4ff;border-color:#c7d6ff;color:#0F4C5C;}
+.page-btn:hover:not(:disabled){background:#f0f4ff;border-color:#c7d6ff;color:#0C2A47;}
 .page-btn:disabled{opacity:0.35;cursor:not-allowed;}
 .page-current{
   padding:0 14px;height:34px;border-radius:10px;
@@ -308,7 +308,7 @@ table.att-tbl tr:hover td{background:#f9fbff;}
 .modal-body-scroll{max-height:min(72vh,640px);overflow-y:auto;}
 .field-block{display:flex;flex-direction:column;gap:6px;}
 .field-hint{font-size:11px;color:#94a3b8;font-weight:500;margin-top:2px;}
-.field-error{font-size:11px;color:#D4AF37;font-weight:700;margin-top:2px;display:flex;align-items:center;gap:4px;}
+.field-error{font-size:11px;color:#E2B94D;font-weight:700;margin-top:2px;display:flex;align-items:center;gap:4px;}
 
 .student-picker{position:relative;}
 .student-picker-input-wrap{position:relative;display:flex;align-items:center;}
@@ -335,7 +335,7 @@ table.att-tbl tr:hover td{background:#f9fbff;}
 .selected-student-chip .chip-clear{
   margin-left:auto;background:rgba(255,255,255,0.7);border:1px solid #bfdbfe;
   border-radius:9px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:#0F4C5C;flex-shrink:0;
+  cursor:pointer;color:#0C2A47;flex-shrink:0;
 }
 
 .status-seg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
@@ -346,9 +346,9 @@ table.att-tbl tr:hover td{background:#f9fbff;}
 }
 .status-seg-btn:hover{background:#f8fafc;}
 .status-seg-btn.sel-present{border-color:#a7f3d0;background:#ecfdf5;color:#059669;}
-.status-seg-btn.sel-absent{border-color:#fecdd3;background:#fff1f2;color:#D4AF37;}
+.status-seg-btn.sel-absent{border-color:#fecdd3;background:#fff1f2;color:#E2B94D;}
 .status-seg-btn.sel-late{border-color:#fde68a;background:#fffbeb;color:#d97706;}
-.status-seg-btn.sel-leave{border-color:#bfdbfe;background:#eff6ff;color:#0F4C5C;}
+.status-seg-btn.sel-leave{border-color:#bfdbfe;background:#eff6ff;color:#0C2A47;}
 
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:420px){.two-col{grid-template-columns:1fr;}}
@@ -474,7 +474,7 @@ table.att-tbl tr:hover td{background:#f9fbff;}
 .dp-stat-card.good{border-color:#a7f3d0;background:linear-gradient(180deg,#f4fffb,#fff);}
 .dp-stat-card.good .dp-stat-val{color:#059669;}
 .dp-stat-card.info{border-color:#bfdbfe;background:linear-gradient(180deg,#f5f9ff,#fff);}
-.dp-stat-card.info .dp-stat-val{color:#0F4C5C;}
+.dp-stat-card.info .dp-stat-val{color:#0C2A47;}
 
 .dp-section{
   background:#fff;border:1px solid #e8ecf4;border-radius:20px;
@@ -486,7 +486,7 @@ table.att-tbl tr:hover td{background:#f9fbff;}
   color:#0f3460;display:flex;align-items:center;gap:9px;margin-bottom:16px;
 }
 .dp-section-title .ic-badge{
-  width:26px;height:26px;border-radius:8px;background:#eff6ff;color:#0F4C5C;
+  width:26px;height:26px;border-radius:8px;background:#eff6ff;color:#0C2A47;
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 
@@ -518,7 +518,7 @@ table.att-tbl tr:hover td{background:#f9fbff;}
 
 .view-more-btn{
   width:100%;padding:12px;border-radius:14px;border:1.5px dashed #c7d6ff;
-  background:#f7f9ff;color:#0F4C5C;font-weight:800;font-size:13px;
+  background:#f7f9ff;color:#0C2A47;font-weight:800;font-size:13px;
   display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s;
 }
 .view-more-btn:hover{background:#eff6ff;border-color:#93c5fd;}
@@ -528,7 +528,7 @@ table.att-tbl tr:hover td{background:#f9fbff;}
   display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:10px;
   font-size:11.5px;font-weight:700;
 }
-.source-chip.center_session{background:#eff6ff;color:#0F4C5C;}
+.source-chip.center_session{background:#eff6ff;color:#0C2A47;}
 .source-chip.cron_auto{background:#f5f3ff;color:#7c3aed;}
 .source-chip.manual{background:#fff7ed;color:#ea580c;}
 
@@ -618,9 +618,9 @@ table.att-tbl tr:hover td{background:#f9fbff;}
 }
 .mini-act-btn:hover{transform:translateY(-1px);}
 .mini-act-btn.present:hover, .mini-act-btn.present.on{background:#ecfdf5;border-color:#a7f3d0;color:#059669;}
-.mini-act-btn.absent:hover, .mini-act-btn.absent.on{background:#fff1f2;border-color:#fecdd3;color:#D4AF37;}
+.mini-act-btn.absent:hover, .mini-act-btn.absent.on{background:#fff1f2;border-color:#fecdd3;color:#E2B94D;}
 .mini-act-btn.late:hover, .mini-act-btn.late.on{background:#fffbeb;border-color:#fde68a;color:#d97706;}
-.mini-act-btn.leave:hover, .mini-act-btn.leave.on{background:#eff6ff;border-color:#bfdbfe;color:#0F4C5C;}
+.mini-act-btn.leave:hover, .mini-act-btn.leave.on{background:#eff6ff;border-color:#bfdbfe;color:#0C2A47;}
 .mini-act-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 .mk-checkinout-btn{
   width:100%;padding:9px;border-radius:11px;border:none;cursor:pointer;font-weight:800;font-size:12px;
@@ -760,7 +760,7 @@ const computeDeparturePunctuality = (rec, sessionMap = {}) => {
 };
 
 const StatusDot = ({ s }) => {
-  const col = { Present: '#059669', Absent: '#D4AF37', Late: '#d97706', Leave: '#0F4C5C' }[s] || '#94a3b8';
+  const col = { Present: '#059669', Absent: '#E2B94D', Late: '#d97706', Leave: '#0C2A47' }[s] || '#94a3b8';
   return <span style={{ width: 6, height: 6, borderRadius: '50%', background: col, display: 'inline-block', flexShrink: 0 }} />;
 };
 
@@ -795,7 +795,7 @@ const RateRing = ({ pct }) => {
 
 const Spinner = ({ small }) => (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: small ? 20 : 48 }}>
-    <div style={{ width: small ? 24 : 36, height: small ? 24 : 36, borderRadius: '50%', border: '3px solid #dbeafe', borderTopColor: '#0F4C5C' }} className="spin" />
+    <div style={{ width: small ? 24 : 36, height: small ? 24 : 36, borderRadius: '50%', border: '3px solid #dbeafe', borderTopColor: '#0C2A47' }} className="spin" />
   </div>
 );
 
@@ -972,7 +972,7 @@ const StudentDetailPage = ({ rec, history, historyVisible, historyLoading, onVie
       {/* Stat cards: stay / scheduled / extra / flexi */}
       <div className="dp-stat-grid">
         <div className="dp-stat-card info">
-          <div className="dp-stat-ic" style={{ background: '#eff6ff' }}><Hourglass size={18} color="#0F4C5C" /></div>
+          <div className="dp-stat-ic" style={{ background: '#eff6ff' }}><Hourglass size={18} color="#0C2A47" /></div>
           <div className="dp-stat-lbl">Stay Duration</div>
           <div className="dp-stat-val">{rec.stayMinutes != null ? fmtMinutes(rec.stayMinutes) : '—'}</div>
           <div className="dp-stat-sub">{recCheckIn ? fmtTime(recCheckIn) : '—'} → {recCheckOut ? fmtTime(recCheckOut) : 'still in'}</div>
@@ -1998,11 +1998,11 @@ const AdminAttendancePage = () => {
               </div>
             </div>
             <div className="stat-pill">
-              <div className="stat-icon" style={{ background: 'rgba(225,29,72,0.2)' }}><UserX size={20} color="#D4AF37" /></div>
+              <div className="stat-icon" style={{ background: 'rgba(225,29,72,0.2)' }}><UserX size={20} color="#E2B94D" /></div>
               <div style={{ flex: 1 }}>
                 <div className="stat-lbl">Absent</div>
                 <div className="stat-val">{absent}</div>
-                <div className="stat-bar-wrap"><div className="stat-bar" style={{ width: totalSt ? `${(absent / totalSt) * 100}%` : '0%', background: '#D4AF37' }} /></div>
+                <div className="stat-bar-wrap"><div className="stat-bar" style={{ width: totalSt ? `${(absent / totalSt) * 100}%` : '0%', background: '#E2B94D' }} /></div>
               </div>
             </div>
             <div className="stat-pill">
@@ -2065,8 +2065,8 @@ const AdminAttendancePage = () => {
 
               <div className="mk-stats-strip">
                 <div className="mk-stat-chip" style={{ background: '#eff6ff', borderColor: '#bfdbfe' }}>
-                  <Users size={16} color="#0F4C5C" />
-                  <div><div className="n" style={{ color: '#0F4C5C' }}>{filteredMarkStudents.length}</div><div className="l" style={{ color: '#0F4C5C' }}>Students</div></div>
+                  <Users size={16} color="#0C2A47" />
+                  <div><div className="n" style={{ color: '#0C2A47' }}>{filteredMarkStudents.length}</div><div className="l" style={{ color: '#0C2A47' }}>Students</div></div>
                 </div>
                 <div className="mk-stat-chip" style={{ background: '#ecfdf5', borderColor: '#a7f3d0' }}>
                   <CheckCircle2 size={16} color="#059669" />
@@ -2204,7 +2204,7 @@ const AdminAttendancePage = () => {
                       <p style={{ fontSize: 12, fontWeight: 600, marginTop: 8 }}>No recent actions yet</p>
                     </div>
                   ) : recentActions.map(action => (
-                    <div key={action.id} className="mk-recent-item" style={{ background: action.type === 'success' ? '#ecfdf5' : '#fff1f2', color: action.type === 'success' ? '#059669' : '#D4AF37' }}>
+                    <div key={action.id} className="mk-recent-item" style={{ background: action.type === 'success' ? '#ecfdf5' : '#fff1f2', color: action.type === 'success' ? '#059669' : '#E2B94D' }}>
                       {action.type === 'success' ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />}
                       <span style={{ flex: 1 }}>{action.message}</span>
                     </div>
@@ -2459,7 +2459,7 @@ const AdminAttendancePage = () => {
                         <div className="avatar">{(formData.studentDisplay || '?').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()}</div>
                         <div style={{ minWidth: 0 }}>
                           <div style={{ fontWeight: 800, fontSize: 13, color: '#16213e' }}>{formData.studentDisplay}</div>
-                          <div className="mono" style={{ fontSize: 11, color: '#0F4C5C' }}>{formData.studentAdm || '—'}</div>
+                          <div className="mono" style={{ fontSize: 11, color: '#0C2A47' }}>{formData.studentAdm || '—'}</div>
                         </div>
                         <button type="button" className="chip-clear" onClick={clearSelectedStudent} title="Change student">
                           <X size={14} />
@@ -2509,7 +2509,7 @@ const AdminAttendancePage = () => {
                     <div className="avatar">{(editRec.studentName || '?').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()}</div>
                     <div style={{ minWidth: 0 }}>
                       <div style={{ fontWeight: 800, fontSize: 13, color: '#16213e' }}>{editRec.studentName}</div>
-                      <div className="mono" style={{ fontSize: 11, color: '#0F4C5C' }}>{getAdmissionNo(editRec) || '—'} · {getDisplayClassName(editRec)}</div>
+                      <div className="mono" style={{ fontSize: 11, color: '#0C2A47' }}>{getAdmissionNo(editRec) || '—'} · {getDisplayClassName(editRec)}</div>
                     </div>
                   </div>
                 )}

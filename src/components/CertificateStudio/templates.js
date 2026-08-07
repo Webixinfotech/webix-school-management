@@ -36,7 +36,7 @@ export const ACHIEVEMENT_TEMPLATES = [
     id: 'emerald-elegance',
     name: 'Emerald Elegance',
     bg: '#fbfffb',
-    accent: '#d4af37',
+    accent: '#E2B94D',
     accentDark: '#8a6d1f',
     bandFrom: '#0b3d24',
     bandTo: '#1f7a4d',

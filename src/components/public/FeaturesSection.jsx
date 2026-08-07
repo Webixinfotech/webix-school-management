@@ -50,49 +50,49 @@ const features = [
     IconComp: FeatureIcons.Montessori,
     title: 'Powered By TalentGym',
     desc: "An integrated curriculum designed to naturally enhance cognitive and physical development through specialized early childhood practices.",
-    color: '#D4AF37',
+    color: '#E2B94D',
     bg: '#EFF9FF',
-    glow: '#D4AF3730',
+    glow: '#E2B94D30',
   },
   {
     IconComp: FeatureIcons.Safety,
     title: 'Safe & Secure Campus',
     desc: '24/7 CCTV surveillance and fully background-verified staff to ensure your child is always protected.',
-    color: '#D4AF37',
+    color: '#E2B94D',
     bg: '#FFF0F0',
-    glow: '#D4AF3730',
+    glow: '#E2B94D30',
   },
   {
     IconComp: FeatureIcons.Teachers,
     title: 'Qualified Educators',
     desc: 'Passionate, well-trained teachers dedicated to early childhood education and personalized attention.',
-    color: '#D4AF37',
+    color: '#E2B94D',
     bg: '#FFF8F0',
-    glow: '#D4AF3730',
+    glow: '#E2B94D30',
   },
   {
     IconComp: FeatureIcons.Hygiene,
     title: 'Strict Hygiene Standards',
     desc: 'Sparkling clean, sanitized daycare and classrooms providing a healthy, safe space for growing toddlers.',
-    color: '#D4AF37',
+    color: '#E2B94D',
     bg: '#F8FFE8',
-    glow: '#D4AF3730',
+    glow: '#E2B94D30',
   },
   {
     IconComp: FeatureIcons.Nurturing,
     title: 'Nurturing Environment',
     desc: 'A warm, engaging space that naturally fosters emotional resilience, creativity, and language growth.',
-    color: '#D4AF37',
+    color: '#E2B94D',
     bg: '#FFF0F0',
-    glow: '#D4AF3730',
+    glow: '#E2B94D30',
   },
   {
     IconComp: FeatureIcons.HandsOn,
     title: 'Activity-Based Learning',
     desc: 'Encouraging curiosity by touching, feeling, and exploring concepts practically rather than just watching.',
-    color: '#D4AF37',
+    color: '#E2B94D',
     bg: '#EFF9FF',
-    glow: '#D4AF3730',
+    glow: '#E2B94D30',
   },
 ];
 
@@ -150,7 +150,7 @@ export default function FeaturesSection() {
         }
 
         .section-title-shimmer {
-          background: linear-gradient(90deg, #D4AF37 0%, #D4AF37 30%, #D4AF37 60%, #D4AF37 80%, #D4AF37 100%);
+          background: linear-gradient(90deg, #E2B94D 0%, #E2B94D 30%, #E2B94D 60%, #E2B94D 80%, #E2B94D 100%);
           background-size: 200% auto;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -160,9 +160,9 @@ export default function FeaturesSection() {
 
         .zigzag-bg {
           background-image:
-            radial-gradient(circle at 20% 20%, #D4AF3715 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, #D4AF3715 0%, transparent 50%),
-            radial-gradient(circle at 50% 50%, #D4AF3708 0%, transparent 60%);
+            radial-gradient(circle at 20% 20%, #E2B94D15 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, #E2B94D15 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, #E2B94D08 0%, transparent 60%);
         }
 
         .feat-card-inner {
@@ -183,10 +183,10 @@ export default function FeaturesSection() {
         <div className="zigzag-bg absolute inset-0 pointer-events-none" aria-hidden="true" />
 
         {/* Top decorative dots */}
-        <div className="absolute top-6 left-8 w-3 h-3 rounded-full bg-[#D4AF37] opacity-40 feat-glow-dot" aria-hidden="true" />
-        <div className="absolute top-12 left-20 w-2 h-2 rounded-full bg-[#D4AF37] opacity-35 feat-glow-dot" style={{ animationDelay: '0.6s' }} aria-hidden="true" />
-        <div className="absolute top-8 right-16 w-3 h-3 rounded-full bg-[#D4AF37] opacity-35 feat-glow-dot" style={{ animationDelay: '1.2s' }} aria-hidden="true" />
-        <div className="absolute top-16 right-6 w-2 h-2 rounded-full bg-[#D4AF37] opacity-40 feat-glow-dot" style={{ animationDelay: '1.8s' }} aria-hidden="true" />
+        <div className="absolute top-6 left-8 w-3 h-3 rounded-full bg-[#E2B94D] opacity-40 feat-glow-dot" aria-hidden="true" />
+        <div className="absolute top-12 left-20 w-2 h-2 rounded-full bg-[#E2B94D] opacity-35 feat-glow-dot" style={{ animationDelay: '0.6s' }} aria-hidden="true" />
+        <div className="absolute top-8 right-16 w-3 h-3 rounded-full bg-[#E2B94D] opacity-35 feat-glow-dot" style={{ animationDelay: '1.2s' }} aria-hidden="true" />
+        <div className="absolute top-16 right-6 w-2 h-2 rounded-full bg-[#E2B94D] opacity-40 feat-glow-dot" style={{ animationDelay: '1.8s' }} aria-hidden="true" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -194,32 +194,32 @@ export default function FeaturesSection() {
           <header className="text-center mb-10 sm:mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-3 tag-pill shadow-sm">
               <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#0F4C5C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M9 22V12h6v10" stroke="#0F4C5C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#0C2A47" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M9 22V12h6v10" stroke="#0C2A47" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#0F4C5C' }}>
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#0C2A47' }}>
                 Zorix School
               </span>
             </div>
-            <h2 className="feat-display font-black text-2xl sm:text-3xl lg:text-4xl leading-tight" style={{ color: '#0F4C5C' }}>
+            <h2 className="feat-display font-black text-2xl sm:text-3xl lg:text-4xl leading-tight" style={{ color: '#0C2A47' }}>
               Why Parents Choose <span className="section-title-shimmer">Zorix School</span> in Indore
             </h2>
             <p className="mt-3 text-sm sm:text-base max-w-2xl mx-auto" style={{ color: '#5A7A96' }}>
               Our activity-based early childhood education blends play, love, and learning to give your child the best start. We provide a safe, nurturing environment where every toddler can thrive.
             </p>
             <div className="mt-3">
-              <Link to="/programs" className="text-sm font-medium text-[#D4AF37] hover:text-[#0F4C5C] hover:underline transition-colors focus:outline-none focus:ring-1 focus:ring-[#D4AF37] rounded">
+              <Link to="/programs" className="text-sm font-medium text-[#E2B94D] hover:text-[#0C2A47] hover:underline transition-colors focus:outline-none focus:ring-1 focus:ring-[#E2B94D] rounded">
                 Explore Our Programs &rarr;
               </Link>
             </div>
 
             {/* Decorative line */}
             <div className="mt-5 flex items-center justify-center gap-2" aria-hidden="true">
-              <div className="h-0.5 w-10 rounded-full bg-[#D4AF37] opacity-60" />
-              <div className="h-2 w-2 rounded-full bg-[#D4AF37]" />
-              <div className="h-0.5 w-16 rounded-full bg-[#D4AF37] opacity-60" />
-              <div className="h-2 w-2 rounded-full bg-[#D4AF37]" />
-              <div className="h-0.5 w-10 rounded-full bg-[#D4AF37] opacity-60" />
+              <div className="h-0.5 w-10 rounded-full bg-[#E2B94D] opacity-60" />
+              <div className="h-2 w-2 rounded-full bg-[#E2B94D]" />
+              <div className="h-0.5 w-16 rounded-full bg-[#E2B94D] opacity-60" />
+              <div className="h-2 w-2 rounded-full bg-[#E2B94D]" />
+              <div className="h-0.5 w-10 rounded-full bg-[#E2B94D] opacity-60" />
             </div>
           </header>
 
@@ -261,7 +261,7 @@ export default function FeaturesSection() {
                     <div>
                       <h3
                         className="feat-display font-bold text-base sm:text-lg leading-snug mb-1"
-                        style={{ color: '#0F4C5C' }}
+                        style={{ color: '#0C2A47' }}
                       >
                         {feat.title}
                       </h3>
@@ -289,7 +289,7 @@ export default function FeaturesSection() {
           <div
             className="mt-10 sm:mt-12 rounded-2xl px-6 py-5 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-4"
             style={{
-              background: 'linear-gradient(135deg, #0F4C5C 0%, #1A5A96 100%)',
+              background: 'linear-gradient(135deg, #0C2A47 0%, #1A5A96 100%)',
               boxShadow: '0 12px 40px rgba(11,58,100,0.28)',
             }}
           >
@@ -305,8 +305,8 @@ export default function FeaturesSection() {
             {/* Right: CTA */}
             <Link
               to="/enquiry"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-[#0F4C5C] shadow-lg hover:scale-105 active:scale-95 transition-transform whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-white"
-              style={{ background: 'linear-gradient(135deg, #D4AF37, #9BC41A)' }}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-[#0C2A47] shadow-lg hover:scale-105 active:scale-95 transition-transform whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-white"
+              style={{ background: 'linear-gradient(135deg, #E2B94D, #9BC41A)' }}
               aria-label="Book a School Visit for Admissions"
             >
               Book a School Visit
@@ -318,8 +318,8 @@ export default function FeaturesSection() {
         </div>
 
         {/* Bottom decorative dots */}
-        <div className="absolute bottom-8 left-6 w-2.5 h-2.5 rounded-full bg-[#D4AF37] opacity-40 feat-glow-dot" style={{ animationDelay: '0.3s' }} aria-hidden="true" />
-        <div className="absolute bottom-16 right-10 w-2 h-2 rounded-full bg-[#D4AF37] opacity-35 feat-glow-dot" style={{ animationDelay: '0.9s' }} aria-hidden="true" />
+        <div className="absolute bottom-8 left-6 w-2.5 h-2.5 rounded-full bg-[#E2B94D] opacity-40 feat-glow-dot" style={{ animationDelay: '0.3s' }} aria-hidden="true" />
+        <div className="absolute bottom-16 right-10 w-2 h-2 rounded-full bg-[#E2B94D] opacity-35 feat-glow-dot" style={{ animationDelay: '0.9s' }} aria-hidden="true" />
       </section>
     </>
   );

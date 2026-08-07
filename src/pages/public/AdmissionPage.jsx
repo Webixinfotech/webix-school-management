@@ -15,10 +15,10 @@ export default function AdmissionPage() {
   const [openFaq, setOpenFaq] = useState(0);
 
   const steps = [
-    { step: 1, title: 'Submit Enquiry', desc: 'Fill out our simple online form to express your interest.', icon: <FileText className="w-6 h-6 text-[#0F4C5C]" aria-hidden="true" /> },
+    { step: 1, title: 'Submit Enquiry', desc: 'Fill out our simple online form to express your interest.', icon: <FileText className="w-6 h-6 text-[#0C2A47]" aria-hidden="true" /> },
     { step: 2, title: 'School Visit', desc: 'Take a guided campus tour and meet our supportive admission team.', icon: <School className="w-6 h-6 text-[#F28E3A]" aria-hidden="true" /> },
     { step: 3, title: 'Document Verification', desc: 'Submit the required documents for a quick verification process.', icon: <CheckCircle2 className="w-6 h-6 text-[#BEDB39]" aria-hidden="true" /> },
-    { step: 4, title: 'Admission Confirmation', desc: 'Complete the fee payment to secure your child\'s seat.', icon: <CalendarDays className="w-6 h-6 text-[#D4AF37]" aria-hidden="true" /> },
+    { step: 4, title: 'Admission Confirmation', desc: 'Complete the fee payment to secure your child\'s seat.', icon: <CalendarDays className="w-6 h-6 text-[#E2B94D]" aria-hidden="true" /> },
   ];
 
   const documents = [
@@ -61,10 +61,10 @@ export default function AdmissionPage() {
           <nav className="flex text-sm text-slate-500" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2">
               <li>
-                <Link to="/" className="hover:text-[#0F4C5C] transition-colors focus:outline-none focus:ring-1 focus:ring-[#0F4C5C] rounded px-1">Home</Link>
+                <Link to="/" className="hover:text-[#0C2A47] transition-colors focus:outline-none focus:ring-1 focus:ring-[#0C2A47] rounded px-1">Home</Link>
               </li>
               <li><ChevronRight className="w-4 h-4" aria-hidden="true" /></li>
-              <li className="text-[#0F4C5C] font-medium px-1" aria-current="page">Admission</li>
+              <li className="text-[#0C2A47] font-medium px-1" aria-current="page">Admission</li>
             </ol>
           </nav>
         </div>
@@ -76,13 +76,13 @@ export default function AdmissionPage() {
               {/* Text Content */}
               <div className="order-2 lg:order-1">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EFF9FF] border border-[#BAE6FD] mb-6">
-                  <span className="text-xs font-bold tracking-wider uppercase text-[#0F4C5C]">
+                  <span className="text-xs font-bold tracking-wider uppercase text-[#0C2A47]">
                     Admissions Open 2026-27
                   </span>
                 </div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#0F4C5C] leading-tight mb-6 font-['Nunito',sans-serif]">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#0C2A47] leading-tight mb-6 font-['Nunito',sans-serif]">
                   Your Child's Journey <br className="hidden sm:block" />
-                  <span className="text-[#D4AF37]">Starts Here</span>
+                  <span className="text-[#E2B94D]">Starts Here</span>
                 </h1>
                 <p className="text-base sm:text-lg text-slate-600 mb-8 leading-relaxed max-w-xl">
                   Welcome to Zorix School. We offer a simple admission process, a supportive admission team, and parent guidance every step of the way to ensure your child enters a safe learning environment in Indore.
@@ -91,7 +91,7 @@ export default function AdmissionPage() {
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                   <Link 
                     to="/enquiry" 
-                    className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-4 bg-[#BEDB39] hover:bg-[#aacc2a] text-[#0F4C5C] font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all focus:outline-none focus:ring-2 focus:ring-[#0F4C5C]"
+                    className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-4 bg-[#BEDB39] hover:bg-[#aacc2a] text-[#0C2A47] font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all focus:outline-none focus:ring-2 focus:ring-[#0C2A47]"
                     aria-label="Book a School Visit for Admission"
                   >
                     Book a School Visit
@@ -107,7 +107,7 @@ export default function AdmissionPage() {
 
               {/* Hero Image */}
               <div className="order-1 lg:order-2 relative">
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#0F4C5C]/20 to-[#BEDB39]/20 rounded-[2rem] transform rotate-3 scale-105" aria-hidden="true"></div>
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#0C2A47]/20 to-[#BEDB39]/20 rounded-[2rem] transform rotate-3 scale-105" aria-hidden="true"></div>
                 <img 
                   src={heroImg} 
                   alt="Children and teacher at Zorix School during the admission process in Indore" 
@@ -131,7 +131,7 @@ export default function AdmissionPage() {
               {trustPoints.map((point, idx) => (
                 <div key={idx} className="flex flex-col items-center text-center p-4 rounded-xl bg-slate-50 border border-slate-100">
                   <div className="w-12 h-12 bg-[#EFF9FF] rounded-full flex items-center justify-center mb-3">
-                    <CheckCircle2 className="w-6 h-6 text-[#0F4C5C]" aria-hidden="true" />
+                    <CheckCircle2 className="w-6 h-6 text-[#0C2A47]" aria-hidden="true" />
                   </div>
                   <h3 className="font-semibold text-slate-800 text-sm sm:text-base">{point}</h3>
                 </div>
@@ -144,7 +144,7 @@ export default function AdmissionPage() {
         <section className="py-16 sm:py-20 bg-slate-50" aria-labelledby="timeline-heading">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 id="timeline-heading" className="text-3xl sm:text-4xl font-black text-[#0F4C5C] font-['Nunito',sans-serif] mb-4">
+              <h2 id="timeline-heading" className="text-3xl sm:text-4xl font-black text-[#0C2A47] font-['Nunito',sans-serif] mb-4">
                 4 Simple Steps to Enroll
               </h2>
               <p className="text-slate-600">
@@ -162,7 +162,7 @@ export default function AdmissionPage() {
                   
                   <div className="relative z-10 w-20 h-20 rounded-full bg-white shadow-lg border border-slate-100 flex items-center justify-center mb-6">
                     {s.icon}
-                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-[#0F4C5C] text-white font-bold flex items-center justify-center border-2 border-white text-sm" aria-hidden="true">
+                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-[#0C2A47] text-white font-bold flex items-center justify-center border-2 border-white text-sm" aria-hidden="true">
                       {s.step}
                     </div>
                   </div>
@@ -181,7 +181,7 @@ export default function AdmissionPage() {
               
               {/* Eligibility Criteria */}
               <div>
-                <h2 id="eligibility-heading" className="text-3xl font-black text-[#0F4C5C] font-['Nunito',sans-serif] mb-8">
+                <h2 id="eligibility-heading" className="text-3xl font-black text-[#0C2A47] font-['Nunito',sans-serif] mb-8">
                   Age Eligibility Criteria
                 </h2>
                 <div className="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100">
@@ -198,15 +198,15 @@ export default function AdmissionPage() {
                     ))}
                   </ul>
                   <p className="mt-6 text-xs text-slate-500 italic leading-relaxed">
-                    * Age is calculated as of the start of the academic session. Allowances can be made upon interaction. <Link to="/programs" className="text-[#0F4C5C] hover:underline focus:outline-none focus:ring-1 focus:ring-[#0F4C5C] rounded">Explore all programs</Link>.
+                    * Age is calculated as of the start of the academic session. Allowances can be made upon interaction. <Link to="/programs" className="text-[#0C2A47] hover:underline focus:outline-none focus:ring-1 focus:ring-[#0C2A47] rounded">Explore all programs</Link>.
                   </p>
                 </div>
               </div>
 
               {/* Documents Required */}
               <div>
-                <h2 className="text-3xl font-black text-[#0F4C5C] font-['Nunito',sans-serif] mb-8 flex items-center gap-3">
-                  <FileText className="w-8 h-8 text-[#D4AF37]" aria-hidden="true" />
+                <h2 className="text-3xl font-black text-[#0C2A47] font-['Nunito',sans-serif] mb-8 flex items-center gap-3">
+                  <FileText className="w-8 h-8 text-[#E2B94D]" aria-hidden="true" />
                   Documents Required
                 </h2>
                 <div className="space-y-4">
@@ -225,7 +225,7 @@ export default function AdmissionPage() {
         </section>
 
         {/* Local SEO & Trust Paragraph */}
-        <section className="py-12 bg-[#0F4C5C] text-white">
+        <section className="py-12 bg-[#0C2A47] text-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <MapPin className="w-8 h-8 text-[#BEDB39] mx-auto mb-4" aria-hidden="true" />
             <p className="text-lg sm:text-xl font-medium leading-relaxed opacity-95">
@@ -238,7 +238,7 @@ export default function AdmissionPage() {
         <section className="py-16 sm:py-20 bg-slate-50" aria-labelledby="faq-heading">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 id="faq-heading" className="text-3xl sm:text-4xl font-black text-[#0F4C5C] font-['Nunito',sans-serif] mb-4">
+              <h2 id="faq-heading" className="text-3xl sm:text-4xl font-black text-[#0C2A47] font-['Nunito',sans-serif] mb-4">
                 Frequently Asked Questions
               </h2>
               <p className="text-slate-600">Got questions about admissions? We've got answers.</p>
@@ -252,7 +252,7 @@ export default function AdmissionPage() {
                 >
                   <button 
                     onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
-                    className="w-full flex items-center justify-between p-5 text-left focus:outline-none focus:ring-2 focus:ring-[#0F4C5C]"
+                    className="w-full flex items-center justify-between p-5 text-left focus:outline-none focus:ring-2 focus:ring-[#0C2A47]"
                     aria-expanded={openFaq === idx}
                   >
                     <span className="font-semibold text-slate-800 pr-4">{faq.q}</span>
@@ -272,7 +272,7 @@ export default function AdmissionPage() {
         {/* CTA Section */}
         <section className="py-16 sm:py-24 bg-white border-t border-slate-100">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-black text-[#0F4C5C] font-['Nunito',sans-serif] mb-6">
+            <h2 className="text-3xl sm:text-4xl font-black text-[#0C2A47] font-['Nunito',sans-serif] mb-6">
               Ready to Begin the Journey?
             </h2>
             <p className="text-lg text-slate-600 mb-10">
@@ -281,13 +281,13 @@ export default function AdmissionPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
                 to="/enquiry" 
-                className="w-full sm:w-auto px-8 py-4 bg-[#BEDB39] hover:bg-[#aacc2a] text-[#0F4C5C] font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all focus:outline-none focus:ring-2 focus:ring-[#0F4C5C]"
+                className="w-full sm:w-auto px-8 py-4 bg-[#BEDB39] hover:bg-[#aacc2a] text-[#0C2A47] font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all focus:outline-none focus:ring-2 focus:ring-[#0C2A47]"
               >
                 Book a School Visit
               </Link>
               <Link 
                 to="/enquiry" 
-                className="w-full sm:w-auto px-8 py-4 bg-slate-100 hover:bg-slate-200 text-[#0F4C5C] font-bold rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-slate-300"
+                className="w-full sm:w-auto px-8 py-4 bg-slate-100 hover:bg-slate-200 text-[#0C2A47] font-bold rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-slate-300"
               >
                 Submit Enquiry
               </Link>

@@ -100,7 +100,7 @@ export default function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to={slide.ctaLink}
-                className="px-8 py-4 bg-accent text-primary font-bold rounded-full hover:bg-white hover:text-primary transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] transform hover:-translate-y-1"
+                className="px-8 py-4 bg-accent text-primary font-bold rounded-full hover:bg-white hover:text-primary transition-all duration-300 shadow-[0_0_20px_rgba(226,185,77,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] transform hover:-translate-y-1"
               >
                 {slide.cta}
               </Link>

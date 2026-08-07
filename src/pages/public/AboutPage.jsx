@@ -16,37 +16,37 @@ const AboutPage = () => {
       title: 'Cognitive Development', 
       desc: 'Fostering problem-solving skills, memory, and logical thinking through interactive puzzles and concept learning.', 
       icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>, 
-      color: '#D4AF37' 
+      color: '#E2B94D' 
     },
     { 
       title: 'Language & Communication', 
       desc: 'Building strong vocabulary, phonics, and expressive communication through daily storytelling and rhyme sessions.', 
       icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>, 
-      color: '#0F4C5C' 
+      color: '#0C2A47' 
     },
     { 
       title: 'Social Development', 
       desc: 'Teaching sharing, teamwork, and empathy in a collaborative peer environment.', 
       icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>, 
-      color: '#0F4C5C' 
+      color: '#0C2A47' 
     },
     { 
       title: 'Emotional Development', 
       desc: 'Creating a secure space where children learn to identify, express, and manage their feelings confidently.', 
       icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>, 
-      color: '#D4AF37' 
+      color: '#E2B94D' 
     },
     { 
       title: 'Physical Development', 
       desc: 'Enhancing gross and fine motor skills through guided outdoor play and structured indoor activities.', 
       icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, 
-      color: '#0F4C5C' 
+      color: '#0C2A47' 
     },
     { 
       title: 'Creative Development', 
       desc: 'Encouraging self-expression through art, music, role-play, and imaginative exploration.', 
       icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>, 
-      color: '#D4AF37' 
+      color: '#E2B94D' 
     },
   ];
 
@@ -80,12 +80,12 @@ const AboutPage = () => {
       <header className="relative pt-14 pb-10 sm:pt-16 sm:pb-12 md:pt-20 md:pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br bg-[#F8FAFC] overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
         <div className="max-w-4xl xl:max-w-5xl mx-auto text-center relative z-10">
-          <span className="inline-block px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold text-[#D4AF37] bg-[#D4AF37]/20 mb-4 tracking-wide uppercase">
+          <span className="inline-block px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold text-[#E2B94D] bg-[#E2B94D]/20 mb-4 tracking-wide uppercase">
             Our Identity
           </span>
           <h1 className="text-[1.75rem] leading-[1.2] sm:text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight sm:leading-[1.15] mb-4 px-1">
             About Zorix School <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#0F4C5C] to-[#0F4C5C]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E2B94D] via-[#0C2A47] to-[#0C2A47]">
               International Preschool
             </span>
           </h1>
@@ -95,7 +95,7 @@ const AboutPage = () => {
           <div className="flex flex-col xs:flex-row sm:flex-row gap-3 justify-center items-center px-2">
             <Link 
               to="/admission"
-              className="w-full sm:w-auto inline-flex justify-center items-center px-6 py-2.5 bg-gradient-to-r from-[#D4AF37] to-[#b59223] text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all text-sm"
+              className="w-full sm:w-auto inline-flex justify-center items-center px-6 py-2.5 bg-gradient-to-r from-[#E2B94D] to-[#b59223] text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all text-sm"
             >
               Book a School Visit
             </Link>
@@ -137,8 +137,8 @@ const AboutPage = () => {
             </p>
           </article>
           <article className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group hover:shadow-md transition-shadow">
-            <div className="absolute top-0 right-0 w-20 h-20 bg-[#D4AF37]/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
-            <div className="w-12 h-12 bg-[#D4AF37]/20 text-[#D4AF37] rounded-xl flex items-center justify-center mb-4 relative z-10">
+            <div className="absolute top-0 right-0 w-20 h-20 bg-[#E2B94D]/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+            <div className="w-12 h-12 bg-[#E2B94D]/20 text-[#E2B94D] rounded-xl flex items-center justify-center mb-4 relative z-10">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
             </div>
             <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-3 relative z-10">Our Vision</h2>
@@ -260,7 +260,7 @@ const AboutPage = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="bg-gradient-to-br from-[#D4AF37] to-[#0F4C5C] rounded-[1.5rem] sm:rounded-[2rem] p-[3px] shadow-lg">
+        <section className="bg-gradient-to-br from-[#E2B94D] to-[#0C2A47] rounded-[1.5rem] sm:rounded-[2rem] p-[3px] shadow-lg">
           <div className="bg-white rounded-[1.3rem] sm:rounded-[1.8rem] p-6 sm:p-8 md:p-12 text-center">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-800 mb-3">Ready to Begin the Journey?</h2>
             <p className="text-sm md:text-base text-slate-600 mb-6 max-w-xl mx-auto">

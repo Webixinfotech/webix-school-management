@@ -219,7 +219,7 @@ export default function LoginPage() {
           position: absolute;
           top: 0; left: 10%; right: 10%;
           height: 4px;
-          background: linear-gradient(90deg, #0F4C5C, #D4AF37, #0F4C5C);
+          background: linear-gradient(90deg, #0C2A47, #E2B94D, #0C2A47);
           border-radius: 0 0 6px 6px;
         }
 
@@ -238,7 +238,7 @@ export default function LoginPage() {
           font-family: 'Sora', sans-serif;
           font-size: clamp(1.4rem, 5vw, 1.8rem);
           font-weight: 800;
-          color: #0F4C5C;
+          color: #0C2A47;
           margin: 0 0 0.5rem;
           letter-spacing: -0.02em;
         }
@@ -267,9 +267,9 @@ export default function LoginPage() {
           font-weight: 700;
           letter-spacing: 0.03em;
         }
-        .lr-badge-blue   { background: rgba(15,76,92,0.1); color: #0F4C5C; border: 1px solid rgba(15,76,92,0.2); }
-        .lr-badge-green  { background: rgba(212,175,55,0.1); color: #0F4C5C; border: 1px solid rgba(212,175,55,0.2); }
-        .lr-badge-orange { background: #fffaf0; color: #D4AF37; border: 1px solid rgba(212,175,55,0.3); }
+        .lr-badge-blue   { background: rgba(12,42,71,0.1); color: #0C2A47; border: 1px solid rgba(12,42,71,0.2); }
+        .lr-badge-green  { background: rgba(226,185,77,0.1); color: #0C2A47; border: 1px solid rgba(226,185,77,0.2); }
+        .lr-badge-orange { background: #fffaf0; color: #E2B94D; border: 1px solid rgba(226,185,77,0.3); }
 
         .lr-divider {
           height: 1px;
@@ -298,7 +298,7 @@ export default function LoginPage() {
         .lr-label {
           font-size: 0.75rem;
           font-weight: 700;
-          color: #0F4C5C;
+          color: #0C2A47;
           letter-spacing: 0.05em;
           text-transform: uppercase;
         }
@@ -320,9 +320,9 @@ export default function LoginPage() {
         }
         .lr-input::placeholder { color: #b0bfd8; font-weight: 500; }
         .lr-input:focus {
-          border-color: #D4AF37;
+          border-color: #E2B94D;
           background: #fffdf5;
-          box-shadow: 0 0 0 3.5px rgba(212,175,55,0.15);
+          box-shadow: 0 0 0 3.5px rgba(226,185,77,0.15);
         }
         .lr-input:disabled { opacity: 0.55; cursor: not-allowed; background: #f0f4fa; }
         .lr-input-pass { padding-right: 3.2rem; }
@@ -341,12 +341,12 @@ export default function LoginPage() {
           align-items: center;
           transition: color 0.2s;
         }
-        .lr-eye:hover { color: #D4AF37; }
+        .lr-eye:hover { color: #E2B94D; }
 
         .lr-btn {
           width: 100%;
           padding: 0.9rem 1rem;
-          background: linear-gradient(135deg, #0F4C5C 0%, #0a3540 100%);
+          background: linear-gradient(135deg, #0C2A47 0%, #081A2E 100%);
           border: none;
           border-radius: 12px;
           color: #fff;
@@ -358,21 +358,21 @@ export default function LoginPage() {
           position: relative;
           overflow: hidden;
           transition: transform 0.2s, box-shadow 0.2s;
-          box-shadow: 0 6px 20px rgba(15,76,92,0.3);
+          box-shadow: 0 6px 20px rgba(12,42,71,0.3);
           margin-top: 0.5rem;
         }
         .lr-btn::after {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(135deg, #0a3540 0%, #051d24 100%);
+          background: linear-gradient(135deg, #081A2E 0%, #030B15 100%);
           opacity: 0;
           transition: opacity 0.25s;
         }
         .lr-btn:hover:not(:disabled)::after { opacity: 1; }
         .lr-btn:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: 0 10px 28px rgba(15,76,92,0.4);
+          box-shadow: 0 10px 28px rgba(12,42,71,0.4);
         }
         .lr-btn:active:not(:disabled) { transform: translateY(0); }
         .lr-btn:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -405,12 +405,12 @@ export default function LoginPage() {
         }
         .lr-forgot {
           font-size: 0.85rem;
-          color: #0F4C5C;
+          color: #0C2A47;
           font-weight: 600;
           text-decoration: none;
           transition: color 0.2s;
         }
-        .lr-forgot:hover { color: #D4AF37; }
+        .lr-forgot:hover { color: #E2B94D; }
         .lr-back {
           font-size: 0.8rem;
           color: #b0bfd8;
@@ -421,7 +421,7 @@ export default function LoginPage() {
           transition: color 0.2s;
           font-weight: 500;
          }
-        .lr-back:hover { color: #0F4C5C; }
+        .lr-back:hover { color: #0C2A47; }
 
         @media (max-width: 480px) {
           .lr-card { padding: 2rem 1.5rem; border-radius: 20px; }

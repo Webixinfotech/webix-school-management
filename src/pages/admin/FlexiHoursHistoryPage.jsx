@@ -12,9 +12,9 @@ import { getAttendanceList } from '../../api/attendance';
 
 // ─── Tokens ───────────────────────────────────────────────────────────────────
 const C = {
-  blue: { bg: '#EFF6FF', text: '#0F4C5C', border: '#BFDBFE', from: '#60A5FA', to: '#0F4C5C' },
+  blue: { bg: '#EFF6FF', text: '#0C2A47', border: '#BFDBFE', from: '#60A5FA', to: '#0C2A47' },
   green: { bg: '#ECFDF5', text: '#065F46', border: '#6EE7B7', from: '#4ADE80', to: '#16A34A' },
-  red: { bg: '#FFF1F2', text: '#D4AF37', border: '#FECDD3', from: '#D4AF37', to: '#D4AF37' },
+  red: { bg: '#FFF1F2', text: '#E2B94D', border: '#FECDD3', from: '#E2B94D', to: '#E2B94D' },
   orange: { bg: '#FFF7ED', text: '#C2410C', border: '#FED7AA', from: '#FB923C', to: '#EA580C' },
   teal: { bg: '#F0FDFA', text: '#0F766E', border: '#5EEAD4', from: '#2DD4BF', to: '#0D9488' },
   amber: { bg: '#FFFBEB', text: '#92400E', border: '#FCD34D', from: '#FBBF24', to: '#D97706' },
@@ -22,7 +22,7 @@ const C = {
 };
 
 const PALETTES = [
-  ['#3B82F6', '#0F4C5C'], ['#8B5CF6', '#6D28D9'], ['#10B981', '#065F46'],
+  ['#3B82F6', '#0C2A47'], ['#8B5CF6', '#6D28D9'], ['#10B981', '#065F46'],
   ['#EF4444', '#B91C1C'], ['#F97316', '#C2410C'], ['#06B6D4', '#0E7490'],
 ];
 const getPalette = (name = '?') => PALETTES[name.charCodeAt(0) % PALETTES.length];
@@ -77,7 +77,7 @@ const OverviewCard = ({ icon, label, value, color }) => (
     <IconBubble icon={icon} color={color} />
     <div>
       <p style={{ margin: 0, fontSize: 10.5, fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{label}</p>
-      <p style={{ margin: '2px 0 0', fontSize: 19, fontWeight: 900, color: '#051d24' }}>{value}</p>
+      <p style={{ margin: '2px 0 0', fontSize: 19, fontWeight: 900, color: '#030B15' }}>{value}</p>
     </div>
   </div>
 );
@@ -240,7 +240,7 @@ const FlexiHoursHistoryPage = () => {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F8FAFC' }}>
         <div style={{ textAlign: 'center' }}>
-          <Loader2 size={48} style={{ animation: 'spin 1s linear infinite', margin: '0 auto 16px', color: '#0F4C5C' }} />
+          <Loader2 size={48} style={{ animation: 'spin 1s linear infinite', margin: '0 auto 16px', color: '#0C2A47' }} />
           <p style={{ fontSize: 16, fontWeight: 600, color: '#64748B' }}>Loading flex hours history...</p>
         </div>
       </div>
@@ -276,10 +276,10 @@ const FlexiHoursHistoryPage = () => {
             width: 40, height: 40, borderRadius: 10, border: 'none', background: '#fff', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', transition: 'all .15s',
           }} onMouseEnter={e => e.currentTarget.style.background = '#EFF6FF'} onMouseLeave={e => e.currentTarget.style.background = '#fff'}>
-            <ChevronLeft size={20} color="#0F4C5C" />
+            <ChevronLeft size={20} color="#0C2A47" />
           </button>
           <div>
-            <h1 style={{ margin: 0, fontSize: 26, fontWeight: 900, color: '#051d24' }}>Flex Hours History</h1>
+            <h1 style={{ margin: 0, fontSize: 26, fontWeight: 900, color: '#030B15' }}>Flex Hours History</h1>
             <p style={{ margin: '4px 0 0', fontSize: 13, color: '#64748B' }}>{filteredStudents.length} students • Track exactly when flexi hours were consumed</p>
           </div>
         </div>
@@ -330,14 +330,14 @@ const FlexiHoursHistoryPage = () => {
           ].map(([key, label]) => (
             <button key={key} onClick={() => applyPreset(key)} style={{
               padding: '7px 12px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 700,
-              background: preset === key ? '#0F4C5C' : '#F1F5F9', color: preset === key ? '#fff' : '#475569', transition: 'all .15s',
+              background: preset === key ? '#0C2A47' : '#F1F5F9', color: preset === key ? '#fff' : '#475569', transition: 'all .15s',
             }}>{label}</button>
           ))}
           <span style={{ color: '#CBD5E1' }}>|</span>
           <input type="date" value={dateFrom} onChange={e => { setDateFrom(e.target.value); setPreset('custom'); }} style={dateInputStyle} />
           <span style={{ color: '#94A3B8', fontWeight: 600, fontSize: 12 }}>to</span>
           <input type="date" value={dateTo} onChange={e => { setDateTo(e.target.value); setPreset('custom'); }} style={dateInputStyle} />
-          {dateLoading && <Loader2 size={15} color="#0F4C5C" style={{ animation: 'spin 1s linear infinite' }} />}
+          {dateLoading && <Loader2 size={15} color="#0C2A47" style={{ animation: 'spin 1s linear infinite' }} />}
           <span style={{ fontSize: 11, color: '#94A3B8', marginLeft: 'auto' }}>
             {!dateFrom || !dateTo
               ? 'Showing all students'
@@ -368,7 +368,7 @@ const FlexiHoursHistoryPage = () => {
                   onMouseEnter={e => e.currentTarget.style.background = '#FAFAFC'} onMouseLeave={e => e.currentTarget.style.background = '#fff'}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <Avatar name={student.fullName} size={36} />
-                    <span style={{ fontWeight: 700, fontSize: 14, color: '#051d24' }}>{student.fullName}</span>
+                    <span style={{ fontWeight: 700, fontSize: 14, color: '#030B15' }}>{student.fullName}</span>
                   </div>
                   <div style={{ fontSize: 12, fontFamily: 'monospace', color: '#64748B' }}>{student.admissionNo}</div>
                   <div style={pillStyle(C.amber)}>{student.summary.totalPaid.toFixed(2)}</div>
@@ -396,7 +396,7 @@ const FlexiHoursHistoryPage = () => {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <Avatar name={student.fullName} size={38} />
                       <div>
-                        <p style={{ margin: 0, fontWeight: 800, fontSize: 14, color: '#051d24' }}>{student.fullName}</p>
+                        <p style={{ margin: 0, fontWeight: 800, fontSize: 14, color: '#030B15' }}>{student.fullName}</p>
                         <p style={{ margin: '2px 0 0', fontSize: 11, color: '#64748B', fontFamily: 'monospace' }}>{student.admissionNo}</p>
                       </div>
                     </div>
@@ -426,7 +426,7 @@ const FlexiHoursHistoryPage = () => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <Avatar name={s.fullName} size={38} />
                     <div>
-                      <p style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>{s.fullName}</p>
+                      <p style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>{s.fullName}</p>
                       <p style={{ margin: '2px 0 0', fontSize: 11, color: '#64748B' }}>{s.admissionNo}</p>
                     </div>
                   </div>

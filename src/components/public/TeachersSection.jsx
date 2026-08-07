@@ -16,12 +16,12 @@ export default function TeachersSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {teachers.map((t) => (
             <div key={t.name} className="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100 hover:shadow-md transition-shadow">
-              <div className="aspect-square bg-gradient-to-br from-[#D4AF37]/20 to-[#6B3C8E]/20 flex items-center justify-center">
+              <div className="aspect-square bg-gradient-to-br from-[#E2B94D]/20 to-[#6B3C8E]/20 flex items-center justify-center">
                 <span className="text-5xl sm:text-6xl">👩‍🏫</span>
               </div>
               <div className="p-4 text-center">
                 <h3 className="font-semibold text-slate-800">{t.name}</h3>
-                <p className="text-sm text-[#0F4C5C] mt-0.5">{t.role}</p>
+                <p className="text-sm text-[#0C2A47] mt-0.5">{t.role}</p>
                 <p className="text-xs text-slate-500 mt-1">{t.exp} experience</p>
               </div>
             </div>

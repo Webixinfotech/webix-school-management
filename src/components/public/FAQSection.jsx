@@ -46,7 +46,7 @@ export default function FAQSection() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-800 flex items-center justify-center gap-3">
-            <HelpCircle className="w-8 h-8 text-[#0F4C5C]" />
+            <HelpCircle className="w-8 h-8 text-[#0C2A47]" />
             Frequently Asked Questions
           </h2>
           <p className="mt-4 text-slate-600 text-lg">Everything you need to know about Zorix School's admission, curriculum, and facilities.</p>
@@ -60,7 +60,7 @@ export default function FAQSection() {
               onClick={() => { setActiveCategory(cat.category); setOpenIndex(null); }}
               className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeCategory === cat.category
-                  ? 'bg-[#0F4C5C] text-white shadow-lg transform scale-105'
+                  ? 'bg-[#0C2A47] text-white shadow-lg transform scale-105'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -75,7 +75,7 @@ export default function FAQSection() {
             <div 
               key={index} 
               className={`border rounded-2xl overflow-hidden transition-all duration-300 ${
-                openIndex === index ? 'border-[#0F4C5C] bg-slate-50 shadow-md' : 'border-slate-200 bg-white hover:border-slate-300'
+                openIndex === index ? 'border-[#0C2A47] bg-slate-50 shadow-md' : 'border-slate-200 bg-white hover:border-slate-300'
               }`}
               itemScope itemProp="mainEntity" itemType="https://schema.org/Question"
             >
@@ -83,10 +83,10 @@ export default function FAQSection() {
                 onClick={() => toggleFAQ(index)}
                 className="w-full flex justify-between items-center text-left p-5 sm:p-6 focus:outline-none"
               >
-                <h3 itemProp="name" className={`text-base sm:text-lg font-semibold pr-4 transition-colors ${openIndex === index ? 'text-[#0F4C5C]' : 'text-slate-800'}`}>
+                <h3 itemProp="name" className={`text-base sm:text-lg font-semibold pr-4 transition-colors ${openIndex === index ? 'text-[#0C2A47]' : 'text-slate-800'}`}>
                   {faq.q}
                 </h3>
-                <ChevronDown className={`w-5 h-5 flex-shrink-0 text-slate-400 transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-[#0F4C5C]' : ''}`} />
+                <ChevronDown className={`w-5 h-5 flex-shrink-0 text-slate-400 transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-[#0C2A47]' : ''}`} />
               </button>
               <div 
                 className={`transition-all duration-300 ease-in-out overflow-hidden ${openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}

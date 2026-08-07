@@ -14,7 +14,7 @@ import FeeManagement from './fee/FeeManagement';
 const T = {
   blue:   { bg: '#EFF6FF', text: '#1E88E5', border: '#BFDBFE' },
   green:  { bg: '#ECFDF5', text: '#059669', border: '#A7F3D0' },
-  red:    { bg: '#FFF1F2', text: '#D4AF37', border: '#FECDD3' },
+  red:    { bg: '#FFF1F2', text: '#E2B94D', border: '#FECDD3' },
   orange: { bg: '#FFF7ED', text: '#FB8C00', border: '#FED7AA' },
   purple: { bg: '#F5F3FF', text: '#7C3AED', border: '#DDD6FE' },
   gray:   { bg: '#F9FAFB', text: '#6B7280', border: '#E5E7EB' },
@@ -24,7 +24,7 @@ const T = {
 
 const PALETTES = [
   ['#1E88E5', '#1565C0'], ['#7B1FA2', '#4A148C'], ['#00897B', '#00695C'],
-  ['#D4AF37', '#B71C1C'], ['#FB8C00', '#E65100'], ['#0288D1', '#01579B'],
+  ['#E2B94D', '#B71C1C'], ['#FB8C00', '#E65100'], ['#0288D1', '#01579B'],
 ];
 const getPalette = (name = 'A') => PALETTES[(name.charCodeAt(0) || 65) % PALETTES.length];
 
@@ -155,7 +155,7 @@ const StudentDetailView = () => {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F8FAFC' }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
-          <div style={{ width: 40, height: 40, borderRadius: '50%', border: '4px solid #E2E8F0', borderTopColor: '#0F4C5C', animation: 'spin 1s linear infinite' }} />
+          <div style={{ width: 40, height: 40, borderRadius: '50%', border: '4px solid #E2E8F0', borderTopColor: '#0C2A47', animation: 'spin 1s linear infinite' }} />
           <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: '#64748B' }}>Loading student details...</p>
         </div>
         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
@@ -167,10 +167,10 @@ const StudentDetailView = () => {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F8FAFC', padding: 16 }}>
         <div style={{ textAlign: 'center', padding: 28, background: '#fff', borderRadius: 16, border: '1px solid #E2E8F0', maxWidth: 380, width: '100%' }}>
-          <AlertTriangle size={40} color="#D4AF37" style={{ margin: '0 auto 14px' }} />
-          <h2 style={{ margin: '0 0 8px', fontSize: 18, fontWeight: 800, color: '#051d24' }}>Error Loading Data</h2>
+          <AlertTriangle size={40} color="#E2B94D" style={{ margin: '0 auto 14px' }} />
+          <h2 style={{ margin: '0 0 8px', fontSize: 18, fontWeight: 800, color: '#030B15' }}>Error Loading Data</h2>
           <p style={{ margin: '0 0 20px', fontSize: 13, color: '#64748B' }}>{error || 'Student not found'}</p>
-          <button onClick={() => navigate(isTeacher ? '/teacher/manage-students' : '/admin/students')} style={{ padding: '10px 20px', borderRadius: 10, border: 'none', background: '#0F4C5C', color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: 13 }}>
+          <button onClick={() => navigate(isTeacher ? '/teacher/manage-students' : '/admin/students')} style={{ padding: '10px 20px', borderRadius: 10, border: 'none', background: '#0C2A47', color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: 13 }}>
             Back to Students
           </button>
         </div>
@@ -299,7 +299,7 @@ const StudentDetailView = () => {
         }
         .basic-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.04); }
         .basic-label { font-size: 11px; font-weight: 700; color: #64748B; text-transform: uppercase; margin-left: 6px; letter-spacing: 0.05em; }
-        .basic-val { font-size: 15px; font-weight: 800; color: #051d24; margin: 8px 0 0; word-break: break-word; }
+        .basic-val { font-size: 15px; font-weight: 800; color: #030B15; margin: 8px 0 0; word-break: break-word; }
 
         .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
         
@@ -336,7 +336,7 @@ const StudentDetailView = () => {
         }
         .info-row:hover { background: #F1F5F9; }
         .info-label { font-size: 12.5px; color: #475569; font-weight: 600; flex-shrink: 0; }
-        .info-val { font-size: 13.5px; font-weight: 700; color: #051d24; word-break: break-word; text-align: right; }
+        .info-val { font-size: 13.5px; font-weight: 700; color: #030B15; word-break: break-word; text-align: right; }
         
         .fee-management-card { grid-column: 1 / -1; }
         .empty-block { text-align: center; padding: 32px 0; }
@@ -366,7 +366,7 @@ const StudentDetailView = () => {
             <ArrowLeft size={17} color="#64748B" />
           </button>
           <div>
-            <h1 style={{ margin: 0, fontSize: 19, fontWeight: 900, color: '#051d24', letterSpacing: '-0.02em' }}>Student Details</h1>
+            <h1 style={{ margin: 0, fontSize: 19, fontWeight: 900, color: '#030B15', letterSpacing: '-0.02em' }}>Student Details</h1>
             <p style={{ margin: '2px 0 0', fontSize: 12, color: '#64748B' }}>Complete profile and management information</p>
           </div>
         </div>
@@ -376,7 +376,7 @@ const StudentDetailView = () => {
           <div className="profile-header-top">
             <Avatar name={displayName} size="lg" />
             <div style={{ flex: 1, minWidth: 200 }}>
-              <h2 style={{ margin: 0, fontSize: 19, fontWeight: 900, color: '#051d24' }}>{displayName}</h2>
+              <h2 style={{ margin: 0, fontSize: 19, fontWeight: 900, color: '#030B15' }}>{displayName}</h2>
               {hasVal(student.admissionNo) && (
                 <p style={{ margin: '3px 0 0', fontSize: 12, color: '#64748B', fontFamily: 'monospace' }}>Admission No: {student.admissionNo}</p>
               )}
@@ -389,7 +389,7 @@ const StudentDetailView = () => {
               </div>
             </div>
             <div className="profile-actions">
-              <button onClick={() => navigate(isTeacher ? `/teacher/manage-students/edit/${student.admissionNo || student._id || student.id}` : `/admin/students/edit/${student.admissionNo || student._id || student.id}`)} className="action-btn" style={{ background: '#EFF6FF', color: '#0F4C5C' }}>
+              <button onClick={() => navigate(isTeacher ? `/teacher/manage-students/edit/${student.admissionNo || student._id || student.id}` : `/admin/students/edit/${student.admissionNo || student._id || student.id}`)} className="action-btn" style={{ background: '#EFF6FF', color: '#0C2A47' }}>
                 <Edit2 size={13} /> Edit
               </button>
               {hasVal(student.qrCode) && (
@@ -416,10 +416,10 @@ const StudentDetailView = () => {
           {/* Parent Details */}
           <div className="detail-card">
             <div className="detail-card-header" style={{ background: 'linear-gradient(135deg, #EFF6FF, #DBEAFE)' }}>
-              <div style={{ width: 26, height: 26, borderRadius: 8, background: '#0F4C5C', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: 26, height: 26, borderRadius: 8, background: '#0C2A47', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Users size={13} color="#fff" />
               </div>
-              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Parent Details</h3>
+              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Parent Details</h3>
             </div>
             <div className="detail-card-content" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <InfoRow label="Primary Contact" value={student.parentDetails?.primaryName} />
@@ -444,7 +444,7 @@ const StudentDetailView = () => {
                 <div style={{ width: 26, height: 26, borderRadius: 8, background: '#B45309', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <MapPin size={13} color="#fff" />
                 </div>
-                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Address</h3>
+                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Address</h3>
               </div>
               <div className="detail-card-content" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 <InfoRow label="Street" value={student.address?.street} />
@@ -461,7 +461,7 @@ const StudentDetailView = () => {
               <div style={{ width: 26, height: 26, borderRadius: 8, background: '#BE185D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Star size={13} color="#fff" />
               </div>
-              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Referral Information</h3>
+              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Referral Information</h3>
             </div>
             <div className="detail-card-content" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <div className="info-row">
@@ -484,13 +484,13 @@ const StudentDetailView = () => {
                 <div style={{ width: 26, height: 26, borderRadius: 8, background: '#4F46E5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Baby size={13} color="#fff" />
                 </div>
-                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Siblings ({student.siblings.length})</h3>
+                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Siblings ({student.siblings.length})</h3>
               </div>
               <div className="detail-card-content" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {student.siblings.map((sib, i) => (
                   <div key={i} style={{ padding: '11px 12px', background: '#F8FAFC', borderRadius: 10, border: '1px solid #E2E8F0' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5, gap: 8, flexWrap: 'wrap' }}>
-                      <span style={{ fontSize: 13, fontWeight: 800, color: '#051d24' }}>{sib.name}</span>
+                      <span style={{ fontSize: 13, fontWeight: 800, color: '#030B15' }}>{sib.name}</span>
                       {hasVal(sib.relation) && <Badge color="purple">{sib.relation}</Badge>}
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 14px' }}>
@@ -511,7 +511,7 @@ const StudentDetailView = () => {
                 <div style={{ width: 26, height: 26, borderRadius: 8, background: '#DC2626', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <FileText size={13} color="#fff" />
                 </div>
-                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Admin Notes</h3>
+                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Admin Notes</h3>
               </div>
               <div className="detail-card-content">
                 <p style={{ margin: 0, fontSize: 12.5, color: '#475569', whiteSpace: 'pre-wrap', lineHeight: 1.6 }}>
@@ -527,7 +527,7 @@ const StudentDetailView = () => {
               <div style={{ width: 26, height: 26, borderRadius: 8, background: '#64748B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Activity size={13} color="#fff" />
               </div>
-              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>System & Account Info</h3>
+              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>System & Account Info</h3>
             </div>
             <div className="detail-card-content" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {student.parentUserId && (
@@ -552,7 +552,7 @@ const StudentDetailView = () => {
                 <div style={{ width: 26, height: 26, borderRadius: 8, background: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Shield size={13} color="#fff" />
                 </div>
-                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Document Verification</h3>
+                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Document Verification</h3>
               </div>
               <div className="detail-card-content">
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 8 }}>
@@ -576,7 +576,7 @@ const StudentDetailView = () => {
               <div style={{ width: 26, height: 26, borderRadius: 8, background: '#7E22CE', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <GraduationCap size={13} color="#fff" />
               </div>
-              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Enrolled Classes ({displayClasses.length})</h3>
+              <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Enrolled Classes ({displayClasses.length})</h3>
             </div>
             <div className="detail-card-content">
               {displayClasses.length === 0 ? (
@@ -596,8 +596,8 @@ const StudentDetailView = () => {
                     return (
                       <div key={cls._id} style={{ padding: 12, background: '#F8FAFC', borderRadius: 10, border: '1px solid #E2E8F0' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 7, gap: 8, flexWrap: 'wrap' }}>
-                          <h4 style={{ margin: 0, fontSize: 13.5, fontWeight: 800, color: '#051d24' }}>{cls.name}</h4>
-                          {hasVal(cls.section) && <span style={{ padding: '3px 9px', borderRadius: 99, fontSize: 10.5, fontWeight: 700, background: '#EFF6FF', color: '#0F4C5C', border: '1px solid #BFDBFE' }}>{cls.section}</span>}
+                          <h4 style={{ margin: 0, fontSize: 13.5, fontWeight: 800, color: '#030B15' }}>{cls.name}</h4>
+                          {hasVal(cls.section) && <span style={{ padding: '3px 9px', borderRadius: 99, fontSize: 10.5, fontWeight: 700, background: '#EFF6FF', color: '#0C2A47', border: '1px solid #BFDBFE' }}>{cls.section}</span>}
                         </div>
                         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: hasHoursData || cls.teacherId ? 7 : 0 }}>
                           {hasVal(cls.classType) && <span style={{ fontSize: 11, color: '#64748B', fontWeight: 600 }}>Type: {cls.classType.replace('_', ' ')}</span>}
@@ -638,7 +638,7 @@ const StudentDetailView = () => {
                 <div style={{ width: 26, height: 26, borderRadius: 8, background: '#B45309', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Clock size={13} color="#fff" />
                 </div>
-                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#051d24' }}>Flexi Hours Summary</h3>
+                <h3 style={{ margin: 0, fontSize: 14, fontWeight: 800, color: '#030B15' }}>Flexi Hours Summary</h3>
               </div>
               <div className="detail-card-content">
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10 }}>

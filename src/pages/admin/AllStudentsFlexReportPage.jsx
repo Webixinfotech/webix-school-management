@@ -19,7 +19,7 @@ const Toast = ({ message, type = 'error', onClose }) => {
   const styles = {
     error: { bg: '#FEF2F2', border: '#FECACA', text: '#B91C1C' },
     success: { bg: '#F0FDF4', border: '#BBF7D0', text: '#15803D' },
-    info: { bg: '#EFF6FF', border: '#BFDBFE', text: '#0F4C5C' },
+    info: { bg: '#EFF6FF', border: '#BFDBFE', text: '#0C2A47' },
   }[type] || {};
   return (
     <div style={{
@@ -43,9 +43,9 @@ const Toast = ({ message, type = 'error', onClose }) => {
 
 // ─── Tokens ───────────────────────────────────────────────────────────────────
 const T = {
-  blue: { bg: '#EFF6FF', text: '#0F4C5C', border: '#BFDBFE', solid: '#0F4C5C' },
+  blue: { bg: '#EFF6FF', text: '#0C2A47', border: '#BFDBFE', solid: '#0C2A47' },
   green: { bg: '#F0FDF4', text: '#15803D', border: '#BBF7D0', solid: '#16A34A' },
-  red: { bg: '#FFF1F2', text: '#D4AF37', border: '#FECDD3', solid: '#D4AF37' },
+  red: { bg: '#FFF1F2', text: '#E2B94D', border: '#FECDD3', solid: '#E2B94D' },
   amber: { bg: '#FFFBEB', text: '#B45309', border: '#FCD34D', solid: '#D97706' },
   orange: { bg: '#FFF7ED', text: '#C2410C', border: '#FED7AA', solid: '#EA580C' },
   slate: { bg: '#F8FAFC', text: '#475569', border: '#E2E8F0', solid: '#64748B' },
@@ -200,7 +200,7 @@ const AllStudentsFlexReportPage = () => {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F8FAFC' }}>
         <div style={{ textAlign: 'center' }}>
-          <Loader2 size={40} style={{ animation: 'spin 1s linear infinite', margin: '0 auto 16px', color: '#0F4C5C' }} />
+          <Loader2 size={40} style={{ animation: 'spin 1s linear infinite', margin: '0 auto 16px', color: '#0C2A47' }} />
           <p style={{ fontSize: 14, fontWeight: 600, color: '#64748B' }}>Loading flex reports...</p>
         </div>
       </div>
@@ -215,7 +215,7 @@ const AllStudentsFlexReportPage = () => {
       <div style={{ maxWidth: 1400, margin: '0 auto 20px' }}>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 20 }}>
           <div style={{ flex: 1 }}>
-            <h1 style={{ margin: 0, fontSize: 28, fontWeight: 900, color: '#051d24' }}>
+            <h1 style={{ margin: 0, fontSize: 28, fontWeight: 900, color: '#030B15' }}>
               📊 All Students Flex Report
             </h1>
             <p style={{ margin: '6px 0 0', fontSize: 12, color: '#64748B', fontWeight: 600 }}>
@@ -252,10 +252,10 @@ const AllStudentsFlexReportPage = () => {
               style={{
                 width: '100%', paddingLeft: 36, padding: '9px 12px', borderRadius: 8,
                 border: '1.5px solid #E2E8F0', fontSize: 12, fontFamily: 'inherit',
-                fontWeight: 600, color: '#051d24', boxSizing: 'border-box',
+                fontWeight: 600, color: '#030B15', boxSizing: 'border-box',
                 outline: 'none', transition: 'border-color .15s'
               }}
-              onFocus={e => { e.target.style.borderColor = '#0F4C5C'; }}
+              onFocus={e => { e.target.style.borderColor = '#0C2A47'; }}
               onBlur={e => { e.target.style.borderColor = '#E2E8F0'; }}
             />
           </div>
@@ -263,7 +263,7 @@ const AllStudentsFlexReportPage = () => {
           {/* Status Filter */}
           <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} style={{
             padding: '9px 12px', borderRadius: 8, border: '1.5px solid #E2E8F0',
-            fontSize: 12, fontWeight: 600, fontFamily: 'inherit', color: '#051d24',
+            fontSize: 12, fontWeight: 600, fontFamily: 'inherit', color: '#030B15',
             background: '#fff', cursor: 'pointer'
           }}>
             <option value="Active">Active Students</option>
@@ -274,7 +274,7 @@ const AllStudentsFlexReportPage = () => {
           {/* Hours Filter */}
           <select value={hoursFilter} onChange={e => setHoursFilter(e.target.value)} style={{
             padding: '9px 12px', borderRadius: 8, border: '1.5px solid #E2E8F0',
-            fontSize: 12, fontWeight: 600, fontFamily: 'inherit', color: '#051d24',
+            fontSize: 12, fontWeight: 600, fontFamily: 'inherit', color: '#030B15',
             background: '#fff', cursor: 'pointer'
           }}>
             <option value="all">All Students</option>
@@ -287,7 +287,7 @@ const AllStudentsFlexReportPage = () => {
           <div style={{ display: 'flex', gap: 6 }}>
             <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={{
               flex: 1, padding: '9px 12px', borderRadius: 8, border: '1.5px solid #E2E8F0',
-              fontSize: 12, fontWeight: 600, fontFamily: 'inherit', color: '#051d24',
+              fontSize: 12, fontWeight: 600, fontFamily: 'inherit', color: '#030B15',
               background: '#fff', cursor: 'pointer'
             }}>
               <option value="remaining">Sort: Remaining Hours</option>
@@ -298,7 +298,7 @@ const AllStudentsFlexReportPage = () => {
             <button onClick={() => setSortDir(sortDir === 'asc' ? 'desc' : 'asc')} style={{
               width: 38, height: 38, borderRadius: 8, border: '1.5px solid #E2E8F0',
               background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#0F4C5C', fontWeight: 700, transition: 'all .15s'
+              color: '#0C2A47', fontWeight: 700, transition: 'all .15s'
             }}
               onMouseEnter={e => { e.currentTarget.style.background = '#EFF6FF'; }}
               onMouseLeave={e => { e.currentTarget.style.background = '#fff'; }}>
@@ -346,7 +346,7 @@ const AllStudentsFlexReportPage = () => {
                 onMouseEnter={e => { e.currentTarget.style.background = '#F8FAFC'; }}
                 onMouseLeave={e => { e.currentTarget.style.background = '#fff'; }}>
                 {/* Student Name */}
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#051d24' }}>{item.name}</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#030B15' }}>{item.name}</div>
 
                 {/* Enrollment ID */}
                 <div style={{ fontSize: 11, fontWeight: 600, color: '#64748B', fontFamily: 'monospace' }}>{item.enrollmentId}</div>
@@ -417,12 +417,12 @@ const AllStudentsFlexReportPage = () => {
                 <div style={{ textAlign: 'center' }}>
                   <button onClick={() => navigate(window.location.pathname.includes('/teacher') ? `/teacher/flex-report/${item._id}` : `/admin/flex-report/${item._id}`)} style={{
                     width: 32, height: 32, borderRadius: 8, border: 'none',
-                    background: '#EFF6FF', color: '#0F4C5C', cursor: 'pointer',
+                    background: '#EFF6FF', color: '#0C2A47', cursor: 'pointer',
                     display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                     transition: 'all .15s'
                   }}
-                    onMouseEnter={e => { e.currentTarget.style.background = '#0F4C5C'; e.currentTarget.style.color = '#fff'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = '#EFF6FF'; e.currentTarget.style.color = '#0F4C5C'; }}
+                    onMouseEnter={e => { e.currentTarget.style.background = '#0C2A47'; e.currentTarget.style.color = '#fff'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = '#EFF6FF'; e.currentTarget.style.color = '#0C2A47'; }}
                     title="View detailed report">
                     <Eye size={16} />
                   </button>

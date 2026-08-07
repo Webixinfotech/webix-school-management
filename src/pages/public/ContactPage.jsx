@@ -19,10 +19,10 @@ export default function ContactPage() {
       title: 'Phone', 
       detail: '+91 00000-00000', 
       subDetail: 'Mon - Sat, 9:00 AM - 7:00 PM',
-      icon: <Phone className="w-7 h-7 text-[#D4AF37]" aria-hidden="true" />, 
+      icon: <Phone className="w-7 h-7 text-[#E2B94D]" aria-hidden="true" />, 
       actionLabel: 'Call Now',
       actionUrl: 'tel:+910000000000',
-      bgColor: 'bg-[#D4AF37]/10',
+      bgColor: 'bg-[#E2B94D]/10',
       iconBg: 'bg-white'
     },
     { 
@@ -39,10 +39,10 @@ export default function ContactPage() {
       title: 'Email', 
       detail: 'info@Zorix School.in', 
       subDetail: 'We respond within 24 hours',
-      icon: <Mail className="w-7 h-7 text-[#0F4C5C]" aria-hidden="true" />, 
+      icon: <Mail className="w-7 h-7 text-[#0C2A47]" aria-hidden="true" />, 
       actionLabel: 'Send Email',
       actionUrl: 'mailto:info@Zorix School.in',
-      bgColor: 'bg-[#0F4C5C]/10',
+      bgColor: 'bg-[#0C2A47]/10',
       iconBg: 'bg-white'
     }
   ];
@@ -122,10 +122,10 @@ export default function ContactPage() {
           <nav className="flex text-sm text-slate-500" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2">
               <li>
-                <Link to="/" className="hover:text-[#0F4C5C] transition-colors focus:outline-none focus:ring-1 focus:ring-[#0F4C5C] rounded px-1">Home</Link>
+                <Link to="/" className="hover:text-[#0C2A47] transition-colors focus:outline-none focus:ring-1 focus:ring-[#0C2A47] rounded px-1">Home</Link>
               </li>
               <li><ChevronRight className="w-4 h-4" aria-hidden="true" /></li>
-              <li className="text-[#0F4C5C] font-medium px-1" aria-current="page">Contact Us</li>
+              <li className="text-[#0C2A47] font-medium px-1" aria-current="page">Contact Us</li>
             </ol>
           </nav>
         </div>
@@ -133,8 +133,8 @@ export default function ContactPage() {
         {/* Hero Section */}
         <section className="bg-white border-b border-slate-100 py-12 lg:py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#0F4C5C] leading-tight mb-6 font-['Nunito',sans-serif]">
-              Get in <span className="text-[#D4AF37]">Touch</span> With Us
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#0C2A47] leading-tight mb-6 font-['Nunito',sans-serif]">
+              Get in <span className="text-[#E2B94D]">Touch</span> With Us
             </h1>
             <p className="text-base sm:text-lg text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto">
               We are here to provide friendly admission support and parent guidance. Whether you want to schedule a campus visit or need admission guidance, our team ensures an easy and supportive experience in a safe learning environment here in Indore.
@@ -143,7 +143,7 @@ export default function ContactPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a 
                 href="tel:+910000000000" 
-                className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-4 bg-[#D4AF37] hover:bg-[#b59223] text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+                className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-4 bg-[#E2B94D] hover:bg-[#b59223] text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all focus:outline-none focus:ring-2 focus:ring-[#E2B94D]"
                 aria-label="Call Now at +91 00000-00000"
               >
                 <Phone className="w-5 h-5" aria-hidden="true" />
@@ -160,12 +160,12 @@ export default function ContactPage() {
         </section>
 
         {/* Local Business Trust Points */}
-        <section className="py-8 bg-[#0F4C5C] border-b border-[#082a48]" aria-label="Trust Signals">
+        <section className="py-8 bg-[#0C2A47] border-b border-[#082a48]" aria-label="Trust Signals">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
               {trustPoints.map((point, idx) => (
                 <div key={idx} className="flex items-center gap-2 text-white/90 text-sm font-medium">
-                  <CheckCircle2 className="w-5 h-5 text-[#D4AF37]" aria-hidden="true" />
+                  <CheckCircle2 className="w-5 h-5 text-[#E2B94D]" aria-hidden="true" />
                   {point}
                 </div>
               ))}
@@ -179,7 +179,7 @@ export default function ContactPage() {
               
               {/* Left Column: Contact Cards */}
               <div className="lg:col-span-5 space-y-6">
-                <h2 className="text-2xl font-black text-[#0F4C5C] font-['Nunito',sans-serif] mb-6">Contact Information</h2>
+                <h2 className="text-2xl font-black text-[#0C2A47] font-['Nunito',sans-serif] mb-6">Contact Information</h2>
                 
                 {contactCards.map((card, idx) => (
                   <div key={idx} className={`p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-5 ${card.bgColor}`}>
@@ -194,7 +194,7 @@ export default function ContactPage() {
                         href={card.actionUrl}
                         target={card.title === 'WhatsApp' ? '_blank' : '_self'}
                         rel={card.title === 'WhatsApp' ? 'noopener noreferrer' : undefined}
-                        className="inline-flex items-center text-sm font-bold text-[#0F4C5C] hover:text-[#0F4C5C] transition-colors focus:outline-none focus:ring-1 focus:ring-[#0F4C5C] rounded px-1 -mx-1"
+                        className="inline-flex items-center text-sm font-bold text-[#0C2A47] hover:text-[#0C2A47] transition-colors focus:outline-none focus:ring-1 focus:ring-[#0C2A47] rounded px-1 -mx-1"
                       >
                         {card.actionLabel} &rarr;
                       </a>
@@ -204,7 +204,7 @@ export default function ContactPage() {
                 
                 {/* Official Address Card */}
                 <div className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm flex items-start gap-5">
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 shadow-sm bg-slate-100 text-[#0F4C5C]">
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 shadow-sm bg-slate-100 text-[#0C2A47]">
                     <MapPin className="w-7 h-7" aria-hidden="true" />
                   </div>
                   <div>
@@ -249,8 +249,8 @@ export default function ContactPage() {
                 {/* Areas We Serve & Local SEO */}
                 <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
                   <div className="flex items-center gap-3 mb-6">
-                    <Map className="w-6 h-6 text-[#0F4C5C]" aria-hidden="true" />
-                    <h2 className="text-2xl font-black text-[#0F4C5C] font-['Nunito',sans-serif]">Areas We Serve</h2>
+                    <Map className="w-6 h-6 text-[#0C2A47]" aria-hidden="true" />
+                    <h2 className="text-2xl font-black text-[#0C2A47] font-['Nunito',sans-serif]">Areas We Serve</h2>
                   </div>
                   
                   <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
@@ -260,7 +260,7 @@ export default function ContactPage() {
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     {serviceAreas.map((area, idx) => (
                       <div key={idx} className="flex items-center gap-2 px-3 py-2 bg-slate-50 rounded-lg border border-slate-100 text-sm font-medium text-slate-700">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" aria-hidden="true" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#E2B94D]" aria-hidden="true" />
                         {area}
                       </div>
                     ))}
@@ -275,7 +275,7 @@ export default function ContactPage() {
         <section className="py-16 bg-slate-100 border-t border-slate-200" aria-labelledby="faq-heading">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
-              <h2 id="faq-heading" className="text-3xl font-black text-[#0F4C5C] font-['Nunito',sans-serif] mb-4">
+              <h2 id="faq-heading" className="text-3xl font-black text-[#0C2A47] font-['Nunito',sans-serif] mb-4">
                 Frequently Asked Questions
               </h2>
             </div>
@@ -288,7 +288,7 @@ export default function ContactPage() {
                 >
                   <button 
                     onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
-                    className="w-full flex items-center justify-between p-5 text-left focus:outline-none focus:ring-2 focus:ring-[#0F4C5C]"
+                    className="w-full flex items-center justify-between p-5 text-left focus:outline-none focus:ring-2 focus:ring-[#0C2A47]"
                     aria-expanded={openFaq === idx}
                   >
                     <span className="font-semibold text-slate-800 pr-4">{faq.q}</span>
@@ -308,22 +308,22 @@ export default function ContactPage() {
         {/* CTA Section */}
         <section className="py-16 sm:py-20 bg-white border-t border-slate-100">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-black text-[#0F4C5C] font-['Nunito',sans-serif] mb-6">
+            <h2 className="text-3xl sm:text-4xl font-black text-[#0C2A47] font-['Nunito',sans-serif] mb-6">
               Start Your Child's Journey
             </h2>
             <p className="text-lg text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Ready to learn more about our <Link to="/programs" className="text-[#0F4C5C] font-semibold hover:underline focus:outline-none focus:ring-1 focus:ring-[#0F4C5C] rounded px-1 -mx-1">programs</Link> or <Link to="/admission" className="text-[#0F4C5C] font-semibold hover:underline focus:outline-none focus:ring-1 focus:ring-[#0F4C5C] rounded px-1 -mx-1">admission process</Link>? Our dedicated team is here to assist you with everything you need. Let's make your child's first school experience wonderful.
+              Ready to learn more about our <Link to="/programs" className="text-[#0C2A47] font-semibold hover:underline focus:outline-none focus:ring-1 focus:ring-[#0C2A47] rounded px-1 -mx-1">programs</Link> or <Link to="/admission" className="text-[#0C2A47] font-semibold hover:underline focus:outline-none focus:ring-1 focus:ring-[#0C2A47] rounded px-1 -mx-1">admission process</Link>? Our dedicated team is here to assist you with everything you need. Let's make your child's first school experience wonderful.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
                 to="/enquiry" 
-                className="w-full sm:w-auto px-8 py-4 bg-[#D4AF37] hover:bg-[#b59223] text-[#0F4C5C] font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all focus:outline-none focus:ring-2 focus:ring-[#0F4C5C]"
+                className="w-full sm:w-auto px-8 py-4 bg-[#E2B94D] hover:bg-[#b59223] text-[#0C2A47] font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all focus:outline-none focus:ring-2 focus:ring-[#0C2A47]"
               >
                 Book a School Visit
               </Link>
               <Link 
                 to="/enquiry" 
-                className="w-full sm:w-auto px-8 py-4 bg-slate-100 hover:bg-slate-200 text-[#0F4C5C] font-bold rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-slate-300"
+                className="w-full sm:w-auto px-8 py-4 bg-slate-100 hover:bg-slate-200 text-[#0C2A47] font-bold rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-slate-300"
               >
                 Submit Enquiry
               </Link>

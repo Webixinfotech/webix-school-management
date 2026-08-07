@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { getPublicItemsAPI, getMyLendingHistoryAPI, getMyWishlistAPI, removeFromWishlistAPI, addToWishlistAPI } from '../../api/inventoryApi';
 import Toast, { useToast } from '../../components/Toast';
 import ItemCatalogGrid from '../../components/ItemCatalogGrid';
+import { toMediaUrl } from '../../../../utils/photoUtils';
 
 // ---- small icon set (inline SVG, no new deps) -----------------------------
 const Icon = {
@@ -180,8 +181,7 @@ export default function ParentItemsPage() {
 
   const getImageUrl = (url) => {
     if (!url) return null;
-    if (url.startsWith('http')) return url;
-    return url;
+    return toMediaUrl(url);
   };
 
   const tabs = [

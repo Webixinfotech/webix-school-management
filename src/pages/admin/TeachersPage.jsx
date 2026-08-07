@@ -28,17 +28,17 @@ const WhatsAppIcon = ({ size = 24, color = '#fff' }) => (
 
 // ─── Class Types & Helpers ────────────────────────────────────────────────────
 const CLASS_TYPES = {
-  FIXED_TIME:  { id: 'FIXED_TIME',  label: 'Fixed Time',    color: '#0F4C5C', bg: '#EFF6FF', border: '#BFDBFE' },
+  FIXED_TIME:  { id: 'FIXED_TIME',  label: 'Fixed Time',    color: '#0C2A47', bg: '#EFF6FF', border: '#BFDBFE' },
   FLEX_TIME:   { id: 'FLEX_TIME',   label: 'Flexible Time', color: '#0F766E', bg: '#F0FDFA', border: '#99F6E4' },
   HOURS_BASED: { id: 'HOURS_BASED', label: 'Hours Based',   color: '#B45309', bg: '#FFFBEB', border: '#FCD34D' },
 };
 const EMPLOYEE_TYPES = {
-  FIXED_TIME:  { label: 'Fixed Time',  color: '#0F4C5C', bg: '#EFF6FF', border: '#BFDBFE' },
+  FIXED_TIME:  { label: 'Fixed Time',  color: '#0C2A47', bg: '#EFF6FF', border: '#BFDBFE' },
   FIXED_HOURS: { label: 'Fixed Hours', color: '#B45309', bg: '#FFFBEB', border: '#FCD34D' },
   FLEXIBLE:    { label: 'Flexible',    color: '#0F766E', bg: '#F0FDFA', border: '#99F6E4' },
 };
 const HOLIDAY_CALENDARS = {
-  TEACHING:     { label: 'Teaching',     color: '#0F4C5C' },
+  TEACHING:     { label: 'Teaching',     color: '#0C2A47' },
   NON_TEACHING: { label: 'Non-Teaching', color: '#8B5CF6' },
 };
 const WEEK_DAYS = [
@@ -856,7 +856,7 @@ const PERMISSION_DEFS = [
   { key: 'canManageDailyActivity', label: 'Manage Daily Activity', icon: Activity, color: '#A78BFA' },
   { key: 'canManageLibraryCatalog', label: 'Manage Library Catalog', icon: BookOpen, color: '#3B82F6' },
   { key: 'canManageLibraryIssue', label: 'Manage Library Issue', icon: List, color: '#10B981' },
-  { key: 'canViewLibraryReports', label: 'View Library Reports', icon: BarChart2, color: '#0F4C5C' },
+  { key: 'canViewLibraryReports', label: 'View Library Reports', icon: BarChart2, color: '#0C2A47' },
   { key: 'canManageInventoryCatalog', label: 'Manage Store Catalog', icon: LayoutGrid, color: '#F59E0B' },
   { key: 'canManageInventoryStockIn', label: 'Manage Stock In', icon: Plus, color: '#14B8A6' },
   { key: 'canManageInventoryStockOut', label: 'Manage Stock Out', icon: Minus, color: '#EF4444' },
@@ -1014,7 +1014,7 @@ const TeacherForm = ({ initial, onSave, onCancel, classesData = [], classesLoadi
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
             <div style={{ width: 28, height: 28, borderRadius: 8, background: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><BookOpen size={14} color="#4338CA" /></div>
-            <h3 style={{ margin: 0, fontSize: 13, fontWeight: 800, color: '#051d24' }}>Assign Classes</h3>
+            <h3 style={{ margin: 0, fontSize: 13, fontWeight: 800, color: '#030B15' }}>Assign Classes</h3>
           </div>
           {form.classIds.length > 0 && (
             <span style={{ fontSize: 11, fontWeight: 700, background: '#EEF2FF', color: '#4338CA', padding: '2px 9px', borderRadius: 99, border: '1px solid #C7D2FE' }}>
@@ -1061,7 +1061,7 @@ const TeacherForm = ({ initial, onSave, onCancel, classesData = [], classesLoadi
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', gap: 7, alignItems: 'center', flexWrap: 'wrap' }}>
-                        <span style={{ fontSize: 13, fontWeight: 700, color: '#051d24' }}>{cls.name}</span>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: '#030B15' }}>{cls.name}</span>
                         {cls.section && <span style={{ fontSize: 10, color: '#94A3B8' }}>§{cls.section}</span>}
                         {ct && (
                           <span style={{ fontSize: 10, fontWeight: 700, padding: '1px 7px', borderRadius: 99, background: CLASS_TYPES[cls.classType]?.bg || '#F1F5F9', color: CLASS_TYPES[cls.classType]?.text || '#64748B', border: `1px solid ${CLASS_TYPES[cls.classType]?.border || '#E2E8F0'}` }}>
@@ -1071,7 +1071,7 @@ const TeacherForm = ({ initial, onSave, onCancel, classesData = [], classesLoadi
                       </div>
                       {cls.days?.length > 0 && <p style={{ margin: '2px 0 0', fontSize: 10, color: '#64748B' }}>{formatDays(cls.days)}</p>}
                       {cls.classType === 'FIXED_TIME' && cls.startTime && cls.endTime && (
-                        <p style={{ margin: '2px 0 0', fontSize: 10, color: '#0F4C5C', fontWeight: 600 }}>{fmt12(cls.startTime)} – {fmt12(cls.endTime)}</p>
+                        <p style={{ margin: '2px 0 0', fontSize: 10, color: '#0C2A47', fontWeight: 600 }}>{fmt12(cls.startTime)} – {fmt12(cls.endTime)}</p>
                       )}
                     </div>
                     <TIcon size={14} color={selected ? '#7E22CE' : '#94A3B8'} style={{ flexShrink: 0 }} />
@@ -1753,16 +1753,16 @@ export default function TeachersPage() {
         {/* Error Banner */}
         {error && (
           <div style={{ background: '#FFF1F2', border: '1.5px solid #FECDD3', borderRadius: 14, padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-            <span style={{ color: '#D4AF37', fontSize: 18 }}>⚠️</span>
-            <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: '#D4AF37', flex: 1 }}>{error}</p>
-            <button onClick={() => setError('')} style={{ border: 'none', background: '#FECDD3', color: '#D4AF37', borderRadius: 7, width: 28, height: 28, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
+            <span style={{ color: '#E2B94D', fontSize: 18 }}>⚠️</span>
+            <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: '#E2B94D', flex: 1 }}>{error}</p>
+            <button onClick={() => setError('')} style={{ border: 'none', background: '#FECDD3', color: '#E2B94D', borderRadius: 7, width: 28, height: 28, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
           </div>
         )}
 
         {/* Loading Spinner */}
         {pageLoading && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '80px 0', gap: 16 }}>
-            <div style={{ width: 48, height: 48, borderRadius: '50%', border: '4px solid #EFF6FF', borderTopColor: '#0F4C5C', animation: 'spin 0.8s linear infinite' }} />
+            <div style={{ width: 48, height: 48, borderRadius: '50%', border: '4px solid #EFF6FF', borderTopColor: '#0C2A47', animation: 'spin 0.8s linear infinite' }} />
             <p style={{ margin: 0, fontSize: 14, color: '#94A3B8', fontWeight: 600 }}>Loading teachers…</p>
           </div>
         )}

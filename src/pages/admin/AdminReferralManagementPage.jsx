@@ -68,7 +68,7 @@ const AdminStatusBadge = ({ status }) => {
     pending: { bg: '#FEF3C7', text: '#D97706', label: 'Pending',  icon: Clock },
     joined:  { bg: '#DCFCE7', text: '#16A34A', label: 'Joined',   icon: Check },
     failed:  { bg: '#FEF2F2', text: '#EF4444', label: 'Failed',   icon: X },
-    rewarded: { bg: '#DBEAFE', text: '#0F4C5C', label: 'Rewarded', icon: Check },
+    rewarded: { bg: '#DBEAFE', text: '#0C2A47', label: 'Rewarded', icon: Check },
   }[status] || { bg: '#F3F4F6', text: '#6B7280', label: 'Unknown', icon: Clock };
 
   const Icon = config.icon;
@@ -492,10 +492,10 @@ export default function AdminReferralManagementPage() {
           padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16,
         }}>
           <span style={{ fontSize: 16 }}>⚠️</span>
-          <p style={{ margin: 0, flex: 1, color: '#D4AF37', fontSize: 13 }}>{error}</p>
+          <p style={{ margin: 0, flex: 1, color: '#E2B94D', fontSize: 13 }}>{error}</p>
           <button
             onClick={() => setError('')}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#D4AF37' }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#E2B94D' }}
           >
             <X size={14} />
           </button>

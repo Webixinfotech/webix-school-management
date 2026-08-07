@@ -7,16 +7,16 @@ const ProgramCard = ({ program, index, onKnowMore }) => {
   const [hovered, setHovered] = useState(false);
 
   // Override data colors with Zorix Theme
-  const themePrimary = '#0F4C5C';
-  const themeGold = '#D4AF37';
+  const themePrimary = '#0C2A47';
+  const themeGold = '#E2B94D';
   const isTealCard = index % 2 === 0;
 
-  const cardBorder = isTealCard ? 'rgba(15,76,92,0.1)' : 'rgba(212,175,55,0.2)';
+  const cardBorder = isTealCard ? 'rgba(12,42,71,0.1)' : 'rgba(226,185,77,0.2)';
   const cardBg = isTealCard ? '#F4F7F8' : '#FAF8F2';
   const cardAccent = isTealCard ? themePrimary : themeGold;
   const hoverGrad = isTealCard 
-    ? 'linear-gradient(135deg, #0F4C5C, #0a3540)' 
-    : 'linear-gradient(135deg, #D4AF37, #b59223)';
+    ? 'linear-gradient(135deg, #0C2A47, #081A2E)' 
+    : 'linear-gradient(135deg, #E2B94D, #b59223)';
 
   return (
     <div
@@ -28,7 +28,7 @@ const ProgramCard = ({ program, index, onKnowMore }) => {
         border: `2px solid ${hovered ? cardAccent : cardBorder}`,
         overflow: 'hidden',
         boxShadow: hovered
-          ? `0 20px 40px rgba(15,76,92,0.12), 0 4px 16px rgba(0,0,0,0.04)`
+          ? `0 20px 40px rgba(12,42,71,0.12), 0 4px 16px rgba(0,0,0,0.04)`
           : '0 2px 12px rgba(0,0,0,0.03)',
         transform: hovered ? 'translateY(-6px)' : 'none',
         transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
@@ -84,7 +84,7 @@ const ProgramCard = ({ program, index, onKnowMore }) => {
           </div>
         </div>
 
-        <h3 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: '#0F4C5C', lineHeight: 1.2 }}>
+        <h3 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: '#0C2A47', lineHeight: 1.2 }}>
           {program.name}
         </h3>
         <p style={{ margin: '6px 0 0', fontSize: 13, fontWeight: 600, color: cardAccent, letterSpacing: '0.01em' }}>
@@ -165,7 +165,7 @@ export default function ProgramsSection() {
 
       {/* ── Hero Section ── */}
       <div style={{
-        background: 'linear-gradient(135deg, #0F4C5C 0%, #0a3540 50%, #0F4C5C 100%)',
+        background: 'linear-gradient(135deg, #0C2A47 0%, #081A2E 50%, #0C2A47 100%)',
         padding: '80px 24px 100px',
         position: 'relative',
         overflow: 'hidden',
@@ -179,8 +179,8 @@ export default function ProgramsSection() {
         }} />
 
         {[
-          { size: 400, top: -150, left: -100, color: 'rgba(212,175,55,0.08)' },
-          { size: 250, top: -80,  right: -80, color: 'rgba(212,175,55,0.1)' },
+          { size: 400, top: -150, left: -100, color: 'rgba(226,185,77,0.08)' },
+          { size: 250, top: -80,  right: -80, color: 'rgba(226,185,77,0.1)' },
           { size: 200, bottom: -80, left: '40%', color: 'rgba(255,255,255,0.05)' },
         ].map((c, i) => (
           <div key={i} style={{
@@ -194,12 +194,12 @@ export default function ProgramsSection() {
           {/* Badge */}
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
-            background: 'rgba(212,175,55,0.15)', backdropFilter: 'blur(8px)',
-            border: '1px solid rgba(212,175,55,0.3)',
+            background: 'rgba(226,185,77,0.15)', backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(226,185,77,0.3)',
             borderRadius: 99, padding: '8px 20px', marginBottom: 24,
           }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#D4AF37', animation: 'pulse-ring 1.5s ease-out infinite', display: 'inline-block' }} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: '#D4AF37', letterSpacing: '0.08em' }}>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#E2B94D', animation: 'pulse-ring 1.5s ease-out infinite', display: 'inline-block' }} />
+            <span style={{ fontSize: 13, fontWeight: 700, color: '#E2B94D', letterSpacing: '0.08em' }}>
               EXCELLENCE IN EDUCATION
             </span>
           </div>
@@ -210,7 +210,7 @@ export default function ProgramsSection() {
             color: '#fff', lineHeight: 1.15, letterSpacing: '-0.5px',
           }}>
             Where Every Child{' '}
-            <span style={{ color: '#D4AF37' }}>
+            <span style={{ color: '#E2B94D' }}>
               Discovers
             </span>{' '}
             Their Spark
@@ -248,10 +248,10 @@ export default function ProgramsSection() {
 
         {/* Section header */}
         <div style={{ textAlign: 'center', marginBottom: 64 }}>
-          <h2 style={{ fontFamily: "'Outfit', sans-serif", margin: 0, fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, color: '#0F4C5C', letterSpacing: '-0.5px' }}>
+          <h2 style={{ fontFamily: "'Outfit', sans-serif", margin: 0, fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, color: '#0C2A47', letterSpacing: '-0.5px' }}>
             Our Programs
           </h2>
-          <div style={{ width: 80, height: 4, borderRadius: 99, background: '#D4AF37', margin: '16px auto 0' }} />
+          <div style={{ width: 80, height: 4, borderRadius: 99, background: '#E2B94D', margin: '16px auto 0' }} />
           <p style={{ margin: '16px 0 0', fontSize: 16, color: '#64748B', fontWeight: 400 }}>
             Click on any program to learn more — we're happy to guide you!
           </p>
@@ -271,19 +271,19 @@ export default function ProgramsSection() {
         {/* Bottom CTA banner */}
         <div style={{
           marginTop: 80,
-          background: 'linear-gradient(135deg, #0F4C5C, #0a3540)',
+          background: 'linear-gradient(135deg, #0C2A47, #081A2E)',
           borderRadius: 32,
           padding: '64px 40px',
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
-          boxShadow: '0 20px 40px rgba(15,76,92,0.2)'
+          boxShadow: '0 20px 40px rgba(12,42,71,0.2)'
         }}>
-          <div style={{ position: 'absolute', top: -100, right: -50, width: 300, height: 300, borderRadius: '50%', background: 'rgba(212,175,55,0.08)', pointerEvents: 'none' }} />
-          <div style={{ position: 'absolute', bottom: -50, left: 40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(212,175,55,0.08)', pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', top: -100, right: -50, width: 300, height: 300, borderRadius: '50%', background: 'rgba(226,185,77,0.08)', pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', bottom: -50, left: 40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(226,185,77,0.08)', pointerEvents: 'none' }} />
           
           <div style={{ position: 'relative' }}>
-            <p style={{ margin: 0, fontSize: 14, fontWeight: 700, color: '#D4AF37', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>
+            <p style={{ margin: 0, fontSize: 14, fontWeight: 700, color: '#E2B94D', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>
               Not sure which program?
             </p>
             <h3 style={{ fontFamily: "'Outfit', sans-serif", margin: 0, fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 800, color: '#fff', lineHeight: 1.2 }}>
@@ -295,16 +295,16 @@ export default function ProgramsSection() {
             <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginTop: 32 }}>
               <button onClick={() => navigate('/contact')} style={{
                 padding: '16px 36px', borderRadius: 16, border: 'none',
-                background: '#D4AF37', color: '#0F4C5C', fontWeight: 700, fontSize: 15,
+                background: '#E2B94D', color: '#0C2A47', fontWeight: 700, fontSize: 15,
                 cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.3s ease',
-                boxShadow: '0 10px 20px rgba(212,175,55,0.3)'
+                boxShadow: '0 10px 20px rgba(226,185,77,0.3)'
               }}>
                 Schedule a Visit →
               </button>
               <a href="tel:+910000000000" style={{
                 padding: '14px 36px', borderRadius: 16,
-                border: '2px solid rgba(212,175,55,0.5)',
-                background: 'transparent', color: '#D4AF37', fontWeight: 700, fontSize: 15,
+                border: '2px solid rgba(226,185,77,0.5)',
+                background: 'transparent', color: '#E2B94D', fontWeight: 700, fontSize: 15,
                 cursor: 'pointer', fontFamily: 'inherit', textDecoration: 'none', display: 'inline-block',
                 transition: 'all 0.3s ease'
               }}>

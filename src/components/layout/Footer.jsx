@@ -173,7 +173,7 @@ export default function Footer() {
             {/* Trust CTA */}
             <div className="mt-8 border-t border-secondary/10 pt-6">
               <p className="text-sm font-semibold text-secondary mb-3">Ready to visit?</p>
-              <Link to="/enquiry" className="inline-flex items-center justify-center bg-accent hover:bg-white text-primary hover:text-primary px-4 py-2.5 rounded-lg font-bold text-sm transition-colors w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent shadow-[0_4px_14px_rgba(212,175,55,0.3)]">
+              <Link to="/enquiry" className="inline-flex items-center justify-center bg-accent hover:bg-white text-primary hover:text-primary px-4 py-2.5 rounded-lg font-bold text-sm transition-colors w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent shadow-[0_4px_14px_rgba(226,185,77,0.3)]">
                 Book a School Visit
               </Link>
             </div>

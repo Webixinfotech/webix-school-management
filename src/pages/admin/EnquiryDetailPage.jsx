@@ -33,12 +33,12 @@ const serviceMap = {
 // Full Service Display Map - with multicolour gradient for kids, grey for adults
 const fullServiceDisplayMap = {
   // KIDS services - Multicolour tags (Gradient rainbow colors)
-  school:           { label: 'School',           color: 'linear-gradient(135deg,#D4AF37,#B8860B)', icon: '🏫', isKids: true },
+  school:           { label: 'School',           color: 'linear-gradient(135deg,#E2B94D,#B8860B)', icon: '🏫', isKids: true },
   daycare:          { label: 'Daycare',          color: 'linear-gradient(135deg, #F28E3A, #FBBF24)', icon: '🧸', isKids: true },
-  evening_club:     { label: 'Evening Kids Club',color: 'linear-gradient(135deg,#0F4C5C,#051d24)', icon: '🎨', isKids: true },
+  evening_club:     { label: 'Evening Kids Club',color: 'linear-gradient(135deg,#0C2A47,#030B15)', icon: '🎨', isKids: true },
   book_writing:     { label: 'Book Writing',     color: 'linear-gradient(135deg, #16a34a, #10B981)', icon: '📖', isKids: true },
   drawing:          { label: 'Drawing/Art & Craft',color: 'linear-gradient(135deg, #8B5CF6, #A855F7)', icon: '✏️', isKids: true },
-  english_speaking_kids: { label: 'English Speaking Course', color: 'linear-gradient(135deg,#0F4C5C,#051d24)', icon: '🗣️', isKids: true },
+  english_speaking_kids: { label: 'English Speaking Course', color: 'linear-gradient(135deg,#0C2A47,#030B15)', icon: '🗣️', isKids: true },
   phonics_vocab:    { label: 'Phonics and English Vocab', color: 'linear-gradient(135deg, #10B981, #34D399)', icon: '🔤', isKids: true },
   personality_dev:   { label: 'Personality Development', color: 'linear-gradient(135deg, #F59E0B, #FBBF24)', icon: '🌟', isKids: true },
   workshops_kids:   { label: 'Workshops',        color: 'linear-gradient(135deg, #EC4899, #F472B6)', icon: '🎭', isKids: true },
@@ -56,7 +56,7 @@ const fullServiceDisplayMap = {
 
 // Status config
 const statusConfig = {
-  New:       { bg: '#dbeafe', color: '#0F4C5C', dot: '#3b82f6', gradient: 'linear-gradient(135deg,#0F4C5C,#051d24)' },
+  New:       { bg: '#dbeafe', color: '#0C2A47', dot: '#3b82f6', gradient: 'linear-gradient(135deg,#0C2A47,#030B15)' },
   Contacted: { bg: '#fef9c3', color: '#92400e', dot: '#f59e0b', gradient: 'linear-gradient(135deg, #f59e0b, #d97706)' },
   Visited:   { bg: '#dcfce7', color: '#166534', dot: '#22c55e', gradient: 'linear-gradient(135deg, #22c55e, #16a34a)' },
   Admitted:  { bg: '#f0fdf4', color: '#14532d', dot: '#16a34a', gradient: 'linear-gradient(135deg, #16a34a, #15803d)' },
@@ -141,7 +141,7 @@ function InfoCard({ icon, title, children, className = '' }) {
           gap: '10px'
         }}>
           <span style={{ fontSize: '20px' }}>{icon}</span>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#051d24', margin: 0 }}>{title}</h3>
+          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#030B15', margin: 0 }}>{title}</h3>
         </div>
       )}
       <div style={{ padding: '20px' }}>
@@ -152,7 +152,7 @@ function InfoCard({ icon, title, children, className = '' }) {
 }
 
 // Info Row Component
-function InfoRow({ label, value, icon, color = '#051d24' }) {
+function InfoRow({ label, value, icon, color = '#030B15' }) {
   if (!value || value === '—') return null;
   return (
     <div style={{ 
@@ -294,13 +294,13 @@ export default function EnquiryDetailPage() {
       }}>
         <div style={{ textAlign: 'center', background: 'white', padding: '48px 32px', borderRadius: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', maxWidth: '480px', width: '100%' }}>
           <div style={{ fontSize: '64px', marginBottom: '16px' }}>❌</div>
-          <h2 style={{ fontSize: '22px', fontWeight: '900', color: '#051d24', marginBottom: '8px' }}>Error Loading Enquiry</h2>
+          <h2 style={{ fontSize: '22px', fontWeight: '900', color: '#030B15', marginBottom: '8px' }}>Error Loading Enquiry</h2>
           <p style={{ fontSize: '14px', color: '#64748b', marginBottom: '24px' }}>{error || 'Enquiry not found'}</p>
           <button 
             onClick={() => navigate('/admin/user-enquiry')}
             style={{ 
               padding: '14px 28px', 
-              background: 'linear-gradient(135deg,#D4AF37,#B8860B)', 
+              background: 'linear-gradient(135deg,#E2B94D,#B8860B)', 
               border: 'none', 
               borderRadius: '12px', 
               color: 'white', 
@@ -322,10 +322,10 @@ export default function EnquiryDetailPage() {
   const showChildInfo = enquiry.type === 'child' || enquiry.type === 'both';
   const showCourseInfo = enquiry.type === 'course';
   const typeConfig = {
-    child: { icon: '🧒', label: 'Child Enquiry', gradient: 'linear-gradient(135deg,#D4AF37,#B8860B)' },
-    job: { icon: '💼', label: 'Job Enquiry', gradient: 'linear-gradient(135deg,#0F4C5C,#051d24)' },
+    child: { icon: '🧒', label: 'Child Enquiry', gradient: 'linear-gradient(135deg,#E2B94D,#B8860B)' },
+    job: { icon: '💼', label: 'Job Enquiry', gradient: 'linear-gradient(135deg,#0C2A47,#030B15)' },
     both: { icon: '🎯', label: 'Child + Job Enquiry', gradient: 'linear-gradient(135deg, #E82928, #8B5CF6)' },
-    course: { icon: '📚', label: 'Course Enquiry', gradient: 'linear-gradient(135deg, #0ea5e9, #0F4C5C)' },
+    course: { icon: '📚', label: 'Course Enquiry', gradient: 'linear-gradient(135deg, #0ea5e9, #0C2A47)' },
   };
   const tc = typeConfig[enquiry.type] || typeConfig.child;
 
@@ -383,7 +383,7 @@ export default function EnquiryDetailPage() {
                 </svg>
               </button>
               <div>
-                <h1 style={{ fontSize: '20px', fontWeight: '900', color: '#051d24', margin: 0 }}>Enquiry Details</h1>
+                <h1 style={{ fontSize: '20px', fontWeight: '900', color: '#030B15', margin: 0 }}>Enquiry Details</h1>
                 <p style={{ fontSize: '12px', color: '#94a3b8', margin: '4px 0 0' }}>ID: {enquiry.enquiryId}</p>
               </div>
             </div>
@@ -457,7 +457,7 @@ export default function EnquiryDetailPage() {
                     {showChildInfo ? (enquiry.childName || enquiry.applicantName || 'N').charAt(0).toUpperCase() : (enquiry.applicantName || 'N').charAt(0).toUpperCase()}
                   </div>
                   <div style={{ flex: 1 }}>
-                    <h2 style={{ fontSize: '22px', fontWeight: '900', color: '#051d24', margin: '0 0 4px' }}>
+                    <h2 style={{ fontSize: '22px', fontWeight: '900', color: '#030B15', margin: '0 0 4px' }}>
                       {showChildInfo ? (enquiry.childName || 'N/A') : (enquiry.applicantName || 'N/A')}
                     </h2>
                     <p style={{ fontSize: '13px', color: '#64748b', margin: 0, fontWeight: '600' }}>
@@ -524,7 +524,7 @@ export default function EnquiryDetailPage() {
 
               {/* Contact Information */}
               <InfoCard icon="📞" title="Contact Information">
-                <InfoRow label="Mobile" value={enquiry.mobile} icon="📱" color="#051d24" />
+                <InfoRow label="Mobile" value={enquiry.mobile} icon="📱" color="#030B15" />
                 {(showChildInfo || enquiry.fatherEmail) && (
                   <>
                     {enquiry.fatherName && <InfoRow label="Father's Name" value={enquiry.fatherName} icon="👨" />}
@@ -606,7 +606,7 @@ export default function EnquiryDetailPage() {
                   background: enquiry.adminNotes ? '#f8fafc' : '#f1f5f9', 
                   borderRadius: '10px',
                   fontSize: '14px', 
-                  color: enquiry.adminNotes ? '#051d24' : '#94a3b8', 
+                  color: enquiry.adminNotes ? '#030B15' : '#94a3b8', 
                   fontWeight: '600',
                   lineHeight: '1.6'
                 }}>
@@ -627,7 +627,7 @@ export default function EnquiryDetailPage() {
                       }}>
                         {/* Entry header */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                          <span style={{ fontSize: '13px', fontWeight: '800', color: '#051d24' }}>
+                          <span style={{ fontSize: '13px', fontWeight: '800', color: '#030B15' }}>
                             {entry.note || 'Updated'}
                           </span>
                           <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: '600' }}>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getMyStockOutRequestsAPI, getMyStockOutItemsAPI, getItemsAPI } from '../../api/inventoryApi';
+import { toMediaUrl } from '../../../../utils/photoUtils';
 import { Link } from 'react-router-dom';
 
 export default function TeacherMyRequestsPage() {
@@ -53,8 +54,7 @@ export default function TeacherMyRequestsPage() {
 
   const getImageUrl = (url) => {
     if (!url) return null;
-    if (url.startsWith('http')) return url;
-    return url;
+    return toMediaUrl(url);
   };
 
   return (

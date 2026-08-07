@@ -16,7 +16,7 @@ export default function CertificationsSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {certifications.map((c) => (
             <div key={c.name} className="bg-white rounded-xl p-5 sm:p-6 shadow-sm border border-slate-100 text-center">
-              <div className="w-14 sm:w-16 h-14 sm:h-16 mx-auto rounded-full bg-[#0F4C5C]/10 flex items-center justify-center">
+              <div className="w-14 sm:w-16 h-14 sm:h-16 mx-auto rounded-full bg-[#0C2A47]/10 flex items-center justify-center">
                 <span className="text-2xl">📜</span>
               </div>
               <h3 className="font-semibold text-slate-800 mt-3 sm:mt-4">{c.name}</h3>

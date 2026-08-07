@@ -118,9 +118,9 @@ const deriveStudentBasics = (s = {}) => ({
 
 // ─── Design Tokens ────────────────────────────────────────────────────────────
 const C = {
-  blue:   { bg: '#EFF6FF', text: '#0F4C5C', border: '#BFDBFE', light: '#DBEAFE' },
+  blue:   { bg: '#EFF6FF', text: '#0C2A47', border: '#BFDBFE', light: '#DBEAFE' },
   green:  { bg: '#ECFDF5', text: '#065F46', border: '#6EE7B7', light: '#D1FAE5' },
-  red:    { bg: '#FFF1F2', text: '#D4AF37', border: '#FECDD3', light: '#FFE4E6' },
+  red:    { bg: '#FFF1F2', text: '#E2B94D', border: '#FECDD3', light: '#FFE4E6' },
   orange: { bg: '#FFF7ED', text: '#C2410C', border: '#FED7AA', light: '#FFEDD5' },
   purple: { bg: '#F5F3FF', text: '#6D28D9', border: '#DDD6FE', light: '#EDE9FE' },
   gray:   { bg: '#F9FAFB', text: '#374151', border: '#E5E7EB', light: '#F3F4F6' },
@@ -130,7 +130,7 @@ const C = {
 };
 
 const PALETTES = [
-  ['#3B82F6','#0F4C5C'],['#8B5CF6','#6D28D9'],['#10B981','#065F46'],
+  ['#3B82F6','#0C2A47'],['#8B5CF6','#6D28D9'],['#10B981','#065F46'],
   ['#EF4444','#B91C1C'],['#F97316','#C2410C'],['#06B6D4','#0E7490'],
   ['#EC4899','#9D174D'],['#84CC16','#3F6212'],
 ];
@@ -170,7 +170,7 @@ const StatCard = ({ label, value, icon: Icon, color = 'blue', sub }) => {
       </div>
       <div>
         <p style={{ fontSize:12, fontWeight:600, color:'#94A3B8', textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:4 }}>{label}</p>
-        <p style={{ fontSize:28, fontWeight:800, color:'#051d24', lineHeight:1 }}>{value}</p>
+        <p style={{ fontSize:28, fontWeight:800, color:'#030B15', lineHeight:1 }}>{value}</p>
         {sub && <p style={{ fontSize:11, color:'#94A3B8', marginTop:4 }}>{sub}</p>}
       </div>
     </div>
@@ -223,7 +223,7 @@ const ViewButton = ({ onClick, variant = 'icon' }) => {
   return (
     <button
       onClick={(e) => { e.stopPropagation(); onClick(); }}
-      style={{ padding:'7px 12px', borderRadius:8, border:'1.5px solid #BFDBFE', background:'#EFF6FF', color:'#0F4C5C', cursor:'pointer', display:'flex', alignItems:'center', gap:6, fontSize:12, fontWeight:700 }}
+      style={{ padding:'7px 12px', borderRadius:8, border:'1.5px solid #BFDBFE', background:'#EFF6FF', color:'#0C2A47', cursor:'pointer', display:'flex', alignItems:'center', gap:6, fontSize:12, fontWeight:700 }}
     >
       <Eye size={13} /> View
     </button>
@@ -239,7 +239,7 @@ const ContactButtons = ({ phone, size = 'md' }) => {
   return (
     <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
       <a href={`tel:${phone}`} onClick={e => e.stopPropagation()}
-        style={{ display:'inline-flex', alignItems:'center', gap:7, padding:pad, borderRadius:10, background:'linear-gradient(135deg,#0F4C5C,#051d24)', color:'#fff', textDecoration:'none', fontSize:fs, fontWeight:700, boxShadow:'0 2px 8px rgba(59,130,246,0.3)' }}>
+        style={{ display:'inline-flex', alignItems:'center', gap:7, padding:pad, borderRadius:10, background:'linear-gradient(135deg,#0C2A47,#030B15)', color:'#fff', textDecoration:'none', fontSize:fs, fontWeight:700, boxShadow:'0 2px 8px rgba(59,130,246,0.3)' }}>
         <Phone size={14} /> Call
       </a>
       {wa && (
@@ -263,14 +263,14 @@ const DetailRow = ({ icon: Icon, label, value, color = 'gray' }) => {
       </div>
       <div style={{ flex:1, minWidth:0 }}>
         <p style={{ fontSize:10.5, color:'#94A3B8', fontWeight:700, marginBottom:3, textTransform:'uppercase', letterSpacing:'0.06em' }}>{label}</p>
-        <p style={{ fontSize:14, fontWeight:700, color:'#051d24', wordBreak:'break-word', margin:0 }}>{value}</p>
+        <p style={{ fontSize:14, fontWeight:700, color:'#030B15', wordBreak:'break-word', margin:0 }}>{value}</p>
       </div>
     </div>
   );
 };
 
 const SectionTitle = ({ children }) => (
-  <p style={{ fontSize:12.5, fontWeight:800, color:'#051d24', textTransform:'uppercase', letterSpacing:'0.05em', margin:'24px 0 4px', display:'flex', alignItems:'center', gap:8 }}>
+  <p style={{ fontSize:12.5, fontWeight:800, color:'#030B15', textTransform:'uppercase', letterSpacing:'0.05em', margin:'24px 0 4px', display:'flex', alignItems:'center', gap:8 }}>
     {children}
   </p>
 );
@@ -308,10 +308,10 @@ const DetailPage = ({ record, onBack }) => {
   const flexiDetails = flexi?.details || [];
 
   const headerGradient = type === 'teacher'
-    ? 'linear-gradient(135deg,#0F4C5C,#051d24)'
+    ? 'linear-gradient(135deg,#0C2A47,#030B15)'
     : type === 'parent'
       ? 'linear-gradient(135deg,#F59E0B,#C2410C)'
-      : 'linear-gradient(135deg,#0F4C5C,#051d24)';
+      : 'linear-gradient(135deg,#0C2A47,#030B15)';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
@@ -434,7 +434,7 @@ const DetailPage = ({ record, onBack }) => {
                     <tbody>
                       {flexiDetails.map(f => (
                         <tr key={f.classId} style={{ borderTop: '1px solid #F1F5F9' }}>
-                          <td style={{ padding: '8px 12px', fontSize: 13, fontWeight: 700, color: '#051d24' }}>{f.className}</td>
+                          <td style={{ padding: '8px 12px', fontSize: 13, fontWeight: 700, color: '#030B15' }}>{f.className}</td>
                           <td style={{ padding: '8px 12px', fontSize: 11.5, color: '#64748B' }}>{f.classType.replace('_', ' ')}</td>
                           <td style={{ padding: '8px 12px', fontSize: 13, textAlign: 'center', color: C.blue.text, fontWeight: 700 }}>{f.paid}</td>
                           <td style={{ padding: '8px 12px', fontSize: 13, textAlign: 'center', color: C.green.text, fontWeight: 700 }}>{f.free}</td>
@@ -686,7 +686,7 @@ export const PresentStudentsReport = () => {
       {/* Header */}
       <div style={{ display:'flex', flexWrap:'wrap', alignItems:'center', justifyContent:'space-between', gap:12 }}>
         <div>
-          <h1 style={{ fontSize:22, fontWeight:800, color:'#051d24', margin:0 }}>Present Students</h1>
+          <h1 style={{ fontSize:22, fontWeight:800, color:'#030B15', margin:0 }}>Present Students</h1>
           <p style={{ fontSize:13, color:'#94A3B8', marginTop:4 }}>Real-time attendance for <strong style={{color:'#475569'}}>{date}</strong></p>
         </div>
         <div style={{ display:'flex', gap:10, flexWrap:'wrap', alignItems:'center' }}>
@@ -762,7 +762,7 @@ export const PresentStudentsReport = () => {
               <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:14 }}>
                 <Avatar name={s.name} photo={s.photo} type="student" size="lg" />
                 <div style={{ flex:1, minWidth:0 }}>
-                  <p style={{ fontWeight:800, fontSize:15, color:'#051d24', marginBottom:2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{s.name}</p>
+                  <p style={{ fontWeight:800, fontSize:15, color:'#030B15', marginBottom:2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{s.name}</p>
                   <p style={{ fontSize:11, color:'#94A3B8', fontFamily:'monospace' }}>{s.enrollmentId}</p>
                 </div>
                 <Badge color={s.isCritical ? 'red' : 'green'}>{s.remainingFlexi}h</Badge>
@@ -812,7 +812,7 @@ export const PresentStudentsReport = () => {
                     <td style={{ padding:'12px 16px' }}>
                       <div style={{ display:'flex', alignItems:'center', gap:10 }}>
                         <Avatar name={s.name} photo={s.photo} type="student" size="sm" />
-                        <span style={{ fontWeight:700, fontSize:14, color:'#051d24' }}>{s.name}</span>
+                        <span style={{ fontWeight:700, fontSize:14, color:'#030B15' }}>{s.name}</span>
                       </div>
                     </td>
                     <td style={{ padding:'12px 16px' }}>
@@ -1010,7 +1010,7 @@ export const FlexiHoursReport = () => {
       {/* Header */}
       <div style={{ display:'flex', flexWrap:'wrap', alignItems:'center', justifyContent:'space-between', gap:12 }}>
         <div>
-          <h1 style={{ fontSize:22, fontWeight:800, color:'#051d24', margin:0 }}>Flexi Hours Report</h1>
+          <h1 style={{ fontSize:22, fontWeight:800, color:'#030B15', margin:0 }}>Flexi Hours Report</h1>
           <p style={{ fontSize:13, color:'#94A3B8', marginTop:4 }}>All students with flexi hours — Paid & Free hours, across every class they're enrolled in</p>
         </div>
         <div style={{ display:'flex', gap:10 }}>
@@ -1071,7 +1071,7 @@ export const FlexiHoursReport = () => {
               <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:14 }}>
                 <Avatar name={s.name} photo={s.photo} type="student" size="md" />
                 <div style={{ flex:1, minWidth:0 }}>
-                  <p style={{ fontWeight:800, fontSize:14, color:'#051d24', marginBottom:2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{s.name}</p>
+                  <p style={{ fontWeight:800, fontSize:14, color:'#030B15', marginBottom:2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{s.name}</p>
                   <p style={{ fontSize:11, color:'#94A3B8', fontFamily:'monospace' }}>{s.enrollmentId}</p>
                 </div>
                 {s.isCritical ? (
@@ -1130,7 +1130,7 @@ export const FlexiHoursReport = () => {
                         <div style={{ display:'flex', alignItems:'center', gap:10 }}>
                           <Avatar name={s.name} photo={s.photo} type="student" size="sm" />
                           <div>
-                            <p style={{ fontWeight:700, fontSize:14, color:'#051d24' }}>{s.name}</p>
+                            <p style={{ fontWeight:700, fontSize:14, color:'#030B15' }}>{s.name}</p>
                             {s.className && <p style={{ fontSize:11, color:'#94A3B8' }}>{s.className}</p>}
                           </div>
                         </div>
@@ -1148,7 +1148,7 @@ export const FlexiHoursReport = () => {
                         <span style={{ fontSize:14, fontWeight:700, color:C.green.text }}>{s.freeFlexiHours}</span>
                       </td>
                       <td style={{ padding:'12px 16px', textAlign:'center' }}>
-                        <span style={{ fontSize:14, fontWeight:800, color:'#051d24' }}>{s.totalFlexiHours}</span>
+                        <span style={{ fontSize:14, fontWeight:800, color:'#030B15' }}>{s.totalFlexiHours}</span>
                       </td>
                       <td style={{ padding:'12px 16px', textAlign:'center' }}>
                         <span style={{ fontSize:14, fontWeight:700, color:C.orange.text }}>{s.consumedFlexiHours}</span>
@@ -1352,14 +1352,14 @@ export const AllUsersDirectory = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 800, color: '#051d24', margin: 0 }}>Unified Directory</h1>
+          <h1 style={{ fontSize: 22, fontWeight: 800, color: '#030B15', margin: 0 }}>Unified Directory</h1>
           <p style={{ fontSize: 13, color: '#94A3B8', marginTop: 4 }}>Manage all students, teachers, and parents in one place</p>
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
           <button onClick={loadData} style={{ padding: '9px 14px', border: '1.5px solid #E2E8F0', borderRadius: 10, background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: '#64748B' }}>
             <RefreshCw size={15} /> Refresh
           </button>
-          <button onClick={handleExport} style={{ padding: '9px 16px', background: 'linear-gradient(135deg,#0F4C5C,#051d24)', color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700 }}>
+          <button onClick={handleExport} style={{ padding: '9px 16px', background: 'linear-gradient(135deg,#0C2A47,#030B15)', color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700 }}>
             <Download size={15} /> Export CSV
           </button>
         </div>
@@ -1407,7 +1407,7 @@ export const AllUsersDirectory = () => {
                 <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', marginBottom: 14 }}>
                   <Avatar name={u.name} photo={u.avatar} type={u.type} size="md" />
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: '#051d24', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{u.name}</p>
+                    <p style={{ margin: 0, fontSize: 15, fontWeight: 800, color: '#030B15', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{u.name}</p>
                     <p style={{ margin: '2px 0 0', fontSize: 11, color: '#94A3B8', fontFamily: 'monospace' }}>{u.identifier}</p>
                   </div>
                   <ViewButton onClick={() => handlePreview(u)} />
@@ -1458,7 +1458,7 @@ export const AllUsersDirectory = () => {
                       <td style={{ padding: '12px 16px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                           <Avatar name={u.name} photo={u.avatar} type={u.type} size="sm" />
-                          <span style={{ fontWeight: 700, fontSize: 13, color: '#051d24', whiteSpace: 'nowrap' }}>{u.name}</span>
+                          <span style={{ fontWeight: 700, fontSize: 13, color: '#030B15', whiteSpace: 'nowrap' }}>{u.name}</span>
                         </div>
                       </td>
                       <td style={{ padding: '12px 16px' }}>

@@ -44,9 +44,13 @@ export const toMediaUrl = (filePath) => {
   if (!filePath) return '';
   if (/^https?:\/\//i.test(filePath)) return filePath;
 
-  const normalized = String(filePath)
+  let normalized = String(filePath)
     .replace(/\\/g, '/')
     .replace(/^\/+/, '');
+
+  if (normalized.startsWith('uploads/')) {
+    normalized = 'api/' + normalized;
+  }
 
   return `${API_ORIGIN}/${normalized}`;
 };

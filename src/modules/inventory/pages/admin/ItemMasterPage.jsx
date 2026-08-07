@@ -7,6 +7,7 @@ import {
   getCategoriesAPI 
 } from '../../api/inventoryApi';
 import api from '../../../../api/axios'; // For base URL if needed for images
+import { toMediaUrl } from '../../../../utils/photoUtils';
 import Toast, { useToast } from '../../components/Toast';
 import ConfirmModal from '../../components/ConfirmModal';
 
@@ -230,8 +231,7 @@ export default function ItemMasterPage() {
   // Helper for image URL
   const getImageUrl = (url) => {
     if (!url) return null;
-    if (url.startsWith('http')) return url;
-    return `${api.defaults.baseURL.replace('/api', '')}${url}`;
+    return toMediaUrl(url);
   };
 
   const isLendable = formData.itemTypes.includes('lendable');

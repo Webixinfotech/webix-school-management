@@ -3,6 +3,7 @@ import { getPublicItemsAPI, addToWishlistAPI, getMyWishlistAPI, removeFromWishli
 import api from '../../../../api/axios';
 import { useAuth } from '../../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { toMediaUrl } from '../../../../utils/photoUtils';
 import Toast, { useToast } from '../../components/Toast';
 import ItemCatalogGrid from '../../components/ItemCatalogGrid';
 
@@ -55,8 +56,7 @@ export default function PublicCatalogPage() {
 
   const getImageUrl = (url) => {
     if (!url) return null;
-    if (url.startsWith('http')) return url;
-    return `${api.defaults.baseURL.replace('/api', '')}${url}`;
+    return toMediaUrl(url);
   };
 
   const handleAddWishlist = async (item) => {

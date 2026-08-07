@@ -107,7 +107,9 @@ const logsDir = path.join(__dirname, '..', 'logs');
 });
 
 // Security middleware
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
 app.use(
   cors({
     origin: "*",

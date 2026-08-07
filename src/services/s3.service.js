@@ -13,8 +13,8 @@ if (!fs.existsSync(UPLOADS_DIR)) {
 }
 
 // Generate the base URL for uploaded files
-// In a real app, this might come from env var like BACKEND_URL
-const baseUrl = process.env.BACKEND_URL || `http://localhost:${process.env.PORT || 5000}/uploads/`;
+// Using a relative path allows the frontend to dynamically prepend the correct API_ORIGIN
+const baseUrl = process.env.BACKEND_URL || `/uploads/`;
 
 // ==================== HELPER FUNCTIONS ====================
 

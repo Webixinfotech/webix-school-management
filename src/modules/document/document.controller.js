@@ -225,8 +225,12 @@ exports.getPrefillData = async (req, res, next) => {
 // POST /api/documents
 exports.createDocument = async (req, res, next) => {
   try {
-    const { docType, templateName, sourceType, sourceId, fieldValues, assignedTo, signatureUrl } =
+    let { docType, templateName, sourceType, sourceId, fieldValues, assignedTo, signatureUrl } =
       req.body;
+
+    if (typeof assignedTo === 'object' && assignedTo !== null) {
+      assignedTo = assignedTo._id || assignedTo.id;
+    }
 
     if (!docType || !["achievement", "leaving", "experience"].includes(docType)) {
       return next(
@@ -298,7 +302,11 @@ exports.updateDocument = async (req, res, next) => {
       return next(new ErrorResponse("Not authorized to edit this document", 403));
     }
 
-    const { fieldValues, templateName, assignedTo } = req.body;
+    let { fieldValues, templateName, assignedTo } = req.body;
+
+    if (typeof assignedTo === 'object' && assignedTo !== null) {
+      assignedTo = assignedTo._id || assignedTo.id;
+    }
 
     if (fieldValues !== undefined) doc.fieldValues = fieldValues;
     if (templateName !== undefined) doc.templateName = templateName;

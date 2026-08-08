@@ -30,8 +30,14 @@ exports.createDocumentValidation = [
     .withMessage("fieldValues must be an object"),
   body("assignedTo")
     .optional({ nullable: true })
-    .isMongoId()
-    .withMessage("Invalid assignedTo user id"),
+    .custom((value) => {
+      if (!value) return true;
+      const id = typeof value === 'object' ? (value._id || value.id) : value;
+      if (!require('mongoose').Types.ObjectId.isValid(id)) {
+        throw new Error("Invalid assignedTo user id");
+      }
+      return true;
+    }),
   body("signatureUrl")
     .optional({ nullable: true })
     .isString()
@@ -54,6 +60,12 @@ exports.updateDocumentValidation = [
     .withMessage("templateName cannot exceed 100 characters"),
   body("assignedTo")
     .optional({ nullable: true })
-    .isMongoId()
-    .withMessage("Invalid assignedTo user id"),
+    .custom((value) => {
+      if (!value) return true;
+      const id = typeof value === 'object' ? (value._id || value.id) : value;
+      if (!require('mongoose').Types.ObjectId.isValid(id)) {
+        throw new Error("Invalid assignedTo user id");
+      }
+      return true;
+    }),
 ];

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams, Link } from 'react-router-dom';
 import {
   ArrowLeft, Wallet, CreditCard, Receipt, GraduationCap, Zap, Plus, X, Loader2,
@@ -353,6 +353,7 @@ const EnrollModal = ({ studentId, availableClasses, defaultClassId, onClose, onS
   const [step, setStep] = useState('select'); // 'select' | 'pay'
   const [classId, setClassId] = useState(() => defaultClassId || (availableClasses[0] ? (availableClasses[0]._id || availableClasses[0].id) : ''));
   const [hoursAssigned, setHoursAssigned] = useState('');
+  const [agreedFee, setAgreedFee] = useState('');
   const [saving, setSaving] = useState(false);
   const [enrolledLabel, setEnrolledLabel] = useState('');
   const [newPayables, setNewPayables] = useState([]);
@@ -365,12 +366,21 @@ const EnrollModal = ({ studentId, availableClasses, defaultClassId, onClose, onS
   const meta = selected ? feeTypeMetaFor(selected) : null;
   const flexFeePreview = isFlexTime ? (Number(selected?.baseFee) || 0) * (Number(hoursAssigned) || 0) : 0;
 
+  // Auto-fill agreedFee when class changes
+  useEffect(() => {
+    if (selected && !isFlexTime) {
+      setAgreedFee(selected.baseFee || '');
+    } else {
+      setAgreedFee('');
+    }
+  }, [classId, availableClasses, selected, isFlexTime]);
+
   const doEnroll = async () => {
     if (!classId) { onError('Please select a class to enroll in.'); return; }
     if (isFlexTime && !(Number(hoursAssigned) > 0)) { onError('Please enter how many hours to assign for this Flexible Time class.'); return; }
     setSaving(true);
     try {
-      const res = await feeService.createEnrollment(studentId, classId, isFlexTime ? hoursAssigned : undefined);
+      const res = await feeService.createEnrollment(studentId, classId, isFlexTime ? hoursAssigned : undefined, agreedFee);
       const newEnrollmentId = res?.data?._id || res?.data?.id;
       setEnrolledLabel(selected?.name || 'the class');
 
@@ -380,7 +390,7 @@ const EnrollModal = ({ studentId, availableClasses, defaultClassId, onClose, onS
       try {
         const instRes = await feeService.getInstallmentsByStudent(studentId);
         payables = (instRes?.data || [])
-          .filter((i) => (i.enrollmentId === newEnrollmentId) && Number(i.netDue) > 0)
+          .filter((i) => (String(i.enrollmentId) === String(newEnrollmentId)) && Number(i.netDue) > 0)
           .map((i) => ({ key: `INSTALLMENT:${i._id}`, billType: 'INSTALLMENT', billId: i._id, max: Number(i.netDue), label: i.label, subLabel: i.installmentNo }));
       } catch { /* non-fatal — payables stays empty, Skip is still available */ }
 
@@ -1077,6 +1087,10 @@ const StudentFeeManagement = () => {
   // modal can be grouped/labelled per program instead of a flat bill list.
   const payableItems = useMemo(() => {
     const items = [];
+    invoices.filter((i) => Number(i.netDue) > 0 && !['CANCELLED'].includes(i.status)).forEach((i) => {
+      const clsName = i.tuitionLines?.[0]?.className || 'Monthly Tuition';
+      items.push({ key: `INVOICE:${i._id}`, billType: 'INVOICE', billId: i._id, max: Number(i.netDue), label: `Invoice ${i.invoiceNo}`, subLabel: `${i.billingMonth}/${i.billingYear}`, className: clsName });
+    });
     installments.filter((i) => Number(i.netDue) > 0 && !['CANCELLED', 'WAIVED'].includes(i.status)).forEach((i) => {
       items.push({ key: `INSTALLMENT:${i._id}`, billType: 'INSTALLMENT', billId: i._id, max: Number(i.netDue), label: i.label, subLabel: i.installmentNo, className: i.className || 'Other' });
     });
@@ -1084,17 +1098,18 @@ const StudentFeeManagement = () => {
       items.push({ key: `FLEXI_CARD:${p._id}`, billType: 'FLEXI_CARD', billId: p._id, max: Number(p.amountDue), label: p.className || 'Flexi Card', subLabel: p.purchaseNo, className: p.className || 'Flexi Card' });
     });
     return items;
-  }, [installments, flexiBalance]);
+  }, [invoices, installments, flexiBalance]);
 
   // Resolve a payment allocation's billId back to a human class name, so the
   // Payments tab can say *which program* a receipt was collected for instead
   // of just showing an opaque bill number.
   const billClassLookup = useMemo(() => {
     const map = {};
+    invoices.forEach((i) => { map[`INVOICE:${i._id}`] = i.tuitionLines?.[0]?.className || 'Monthly Tuition'; });
     installments.forEach((i) => { map[`INSTALLMENT:${i._id}`] = i.className; });
     (flexiBalance?.purchases || []).forEach((p) => { map[`FLEXI_CARD:${p._id}`] = p.className; });
     return map;
-  }, [installments, flexiBalance]);
+  }, [invoices, installments, flexiBalance]);
 
   const duesByClass = useMemo(() => {
     const groups = groupByClass(payableItems);
@@ -1301,7 +1316,7 @@ const StudentFeeManagement = () => {
                         </div>
                       )}
                       {p.totalDue === 0 ? (
-                        <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-emerald-600"><CheckCircle2 size={13} /> Fully paid</p>
+                        <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-emerald-600"><CheckCircle2 size={13} /> No Dues</p>
                       ) : (
                         <button
                           onClick={() => openCollectFor(matchedInstallment ? `INSTALLMENT:${matchedInstallment._id}` : null)}
@@ -1536,6 +1551,11 @@ const StudentFeeManagement = () => {
                           <td className="px-5 py-3 text-emerald-600">{money(inv.amountPaid)}</td>
                           <td className="px-5 py-3 font-bold">{money(inv.netDue)}</td>
                           <td className="px-5 py-3"><StatusPill status={inv.status} /></td>
+                          <td className="px-5 py-3 text-right">
+                            {Number(inv.netDue) > 0 && !['CANCELLED'].includes(inv.status) && (
+                              <button onClick={() => openCollectFor(`INVOICE:${inv._id}`)} className="rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-white hover:bg-primary">Pay</button>
+                            )}
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -1556,6 +1576,11 @@ const StudentFeeManagement = () => {
                         <div><p className="text-slate-400">Paid</p><p className="font-semibold text-emerald-600">{money(inv.amountPaid)}</p></div>
                         <div><p className="text-slate-400">Net Due</p><p className="font-bold text-slate-900">{money(inv.netDue)}</p></div>
                       </div>
+                      {Number(inv.netDue) > 0 && !['CANCELLED'].includes(inv.status) && (
+                        <div className="mt-3 pt-3 border-t border-slate-100 text-right">
+                          <button onClick={() => openCollectFor(`INVOICE:${inv._id}`)} className="w-full rounded-xl bg-primary px-3 py-2 text-xs font-bold text-white hover:bg-primary">Pay Due - {money(inv.netDue)}</button>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

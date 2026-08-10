@@ -23,10 +23,13 @@ const feeService = {
   // hoursAssigned is required for FLEX_TIME classes — backend computes
   // amount = class.baseFee * hoursAssigned and bills it as an UNPAID
   // installment; it's ignored (and unnecessary) for other class types.
-  createEnrollment: async (studentId, classId, hoursAssigned, opts) => {
+  createEnrollment: async (studentId, classId, hoursAssigned, agreedFee, opts) => {
     const body = { studentId, classId };
     if (hoursAssigned !== undefined && hoursAssigned !== null && hoursAssigned !== '') {
       body.hoursAssigned = Number(hoursAssigned);
+    }
+    if (agreedFee !== undefined && agreedFee !== null && agreedFee !== '') {
+      body.agreedFee = Number(agreedFee);
     }
     const { data } = await api.post('/fee/enrollments', body, asOpts(opts));
     return data;

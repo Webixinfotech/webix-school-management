@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   AlertTriangle, GraduationCap, Zap, CheckCircle2, Loader2, ArrowRight,
@@ -9,6 +9,7 @@ import feeService from '../../../services/feeService';
 const money = (n) => `₹${Number(n || 0).toLocaleString('en-IN')}`;
 
 const FEE_TYPE_META = {
+  MONTHLY: { label: 'Monthly', color: 'text-blue-600', bg: 'bg-blue-50' },
   INSTALLMENT: { label: 'Installment', color: 'text-primary', bg: 'bg-primary/10' },
   ONE_TIME: { label: 'One-Time', color: 'text-purple-600', bg: 'bg-purple-50' },
   FREE: { label: 'Free / Hours', color: 'text-emerald-600', bg: 'bg-emerald-50' },
@@ -112,7 +113,7 @@ const FeeManagement = ({ studentId, studentName }) => {
                 {p.totalDue > 0 ? (
                   <span className="whitespace-nowrap text-sm font-bold text-rose-600">{money(p.totalDue)}</span>
                 ) : (
-                  <span className="flex items-center gap-1 whitespace-nowrap text-xs font-semibold text-emerald-600"><CheckCircle2 size={12} /> Paid</span>
+                  <span className="flex items-center gap-1 whitespace-nowrap text-xs font-semibold text-emerald-600"><CheckCircle2 size={12} /> No Dues</span>
                 )}
               </div>
             );
